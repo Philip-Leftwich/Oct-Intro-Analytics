@@ -55,7 +55,7 @@ The numbers in the square brackets are not part of the vector itself; they are m
 
 > Note that the : operator is used to create integer sequences
 
-### Operators
+### Operators {#sec-operators}
 
 There are a few different types of operators to consider in R
 
@@ -500,7 +500,7 @@ as.character(x)
 ```
 
 
-` r unhide()`
+`r unhide()`
 
 Sometimes, R can’t figure out how to coerce an object and this can result in `NA`s being produced
 
@@ -1414,6 +1414,6 @@ cat("You should use the form `package::function`, for example `dplyr::select`. R
 
 **Question 6.** The job of `<-` is to send the output from the function to a/an `r mcq(sample(c("assignment", "argument", answer = "object")))`.
 
-**Question 7.** A vector must always contain elements of the same data type (e.g logical, character, numeric) `r mcq(sample(c(answer = "TRUE", "FALSE")))`.
+**Question 7.** A vector must always contain elements of the same data type (e.g logical, character, numeric) `r torf(TRUE)`.
 
-**Question 8.** A dataframe/tibble must always contain elements of the same data t
+**Question 8.** A dataframe/tibble must always contain elements of the same data `r torf(FALSE)`

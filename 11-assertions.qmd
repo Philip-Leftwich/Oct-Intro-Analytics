@@ -1,0 +1,80 @@
+## Data validation {#sec-validate}
+
+https://docs.ropensci.org/assertr/articles/assertr.html#verify-vs--assert
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(janitor)
+library(here)
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
+```
+
+
+```{r}
+library(dplyr)
+library(assertr)
+
+set.seed(123)
+n <- 20
+
+# Step 1: create dataset
+df <- tibble(
+  female_id = 1:n,
+  age_days = sample(1:30, n, replace = TRUE),
+  eggs_laid = rpois(n, lambda = 50),
+  eggs_hatched = pmin(eggs_laid, rpois(n, lambda = 45))
+)
+
+# Step 2: Introduce some deliberate issues
+df$age_days[1] <- 0                     # invalid age
+df$eggs_laid[2] <- mean(df$eggs_laid) + 10*sd(df$eggs_laid)  # extreme eggs_laid
+df$eggs_hatched[3] <- df$eggs_laid[3] + 5  # eggs_hatched > eggs_laid
+
+df
+
+
+```
+
+
+
+```{r}
+library(assertr)
+
+df |>
+  verify(age_days > 0)                      # hatched ≤ laid
+
+
+```
+
+## assert, insist, validate
+
+https://docs.ropensci.org/assertr/articles/assertr.html
+
+
+```{r}
+df |> 
+  assert(within_bounds(1,30), age_days)
+
+```
+
+```{r}
+df |>   
+  assert(within_bounds(1,30), age_days, error_fun = just_warn) |> # age must be positive
+  insist(within_n_sds(3), eggs_laid,  error_fun = just_warn) |>                 # eggs laid within 3 SDs
+  verify(eggs_laid > 0,  error_fun = just_warn) |>                               # eggs laid > 0
+  verify(eggs_hatched <= eggs_laid,  error_fun = just_warn)  
+
+```
+
+```{r}
+df |> 
+  insist(within_n_sds(3), eggs_laid, error_fun = error_df_return)
+```
+
+```{r}
+df |> 
+  insist(within_n_sds(3), eggs_laid, error_fun = just_warn) 
+
+```

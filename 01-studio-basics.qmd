@@ -29,19 +29,19 @@ You will learn more about how to use the features included in R Studio throughou
 
 The video lasts \~30 minutes and gives a tour of the main parts of R Studio.
 
-### Consoles vs. scripts
+### Source and console
 
-* The *script* window is the place to enter and run code so that it is easily edited and saved for future use. Usually the Script Window is shown at the top left in RStudio. If this window is not shown, it will be visible *if* you open a previously saved R script, *or* if you create a new R Script. You create new R Script by clicking on File > New File > R Script in the RStudio menu bar.
+* The *source* window is the place to enter and run code so that it is easily edited and saved for future use. Often this is a .R script and it is shown at the top left in RStudio. If this window is not shown, it will be visible *if* you open a previously saved R script, *or* if you create a new R Script. You create new R Script by clicking on File > New File > R Script in the RStudio menu bar.
 
 * To execute your code in the R script, you can either highlight the code and click on Run, or you can highlight the code and press CTRL + Enter on your keyboard.
 
 * The *console*: you can enter code directly in the Console Window and click Enter. The commands that you run will be shown in the History Window on the top right of RStudio. Though it is much more difficult to keep track of your work this way.
 
-### Environment
+### Environments
 
 The Environment tab (top right) allows you to see what objects are in the workspace. If you create variables or data frames, you have a visual listing of everything in the current workspace. When you start a new project this should be completely empty.
 
-### Plots, files, packages, help
+### Outputs: Plots, files, packages, help
 
 1. Plots - The Plots panel, shows all your plots. There are buttons for opening the plot in a separate window and exporting the plot as a pdf or jpeg (though you can also do this with code.)
 
@@ -54,11 +54,17 @@ The Environment tab (top right) allows you to see what objects are in the worksp
 
 ```{r labelled, echo=FALSE, fig.cap="RStudio interface labelled"}
 
-knitr::include_graphics("images/RStudio_Screenshot_Labels.png")
+knitr::include_graphics("images/rstudio-panes-labeled.jpeg")
 
 ```
 
 ## Make RStudio your own
+
+```{r themed, echo=FALSE, fig.show = "hold"}
+
+knitr::include_graphics("images/global-options.png")
+
+```
 
 ### Themes
 
@@ -70,13 +76,50 @@ knitr::include_graphics(c("images/dark_mode.png", "images/classic_mode.png"))
 
 ```
 
+## Add-ins
 
+```{r labelled, echo=FALSE, fig.cap="Add-ins toolbar"}
+
+knitr::include_graphics("images/rstudio-addins-toolbar.png")
+
+```
+
+**RStudio Add-ins** are extensions that provide extra functionality directly within RStudio. They allow you to perform tasks more efficiently via a user-friendly interface, without writing repetitive code. Add-ins can help with data manipulation, styling code, visual exploration, and much more.
+
+Add-ins are installed like any other R package 
+
+```{r, eval = FALSE}
+# Install from CRAN
+install.packages("datapasta")
+install.packages("styler")
+install.packages("esquisse")
+install.packages("ggthemeassist")
+
+```
+
+> After installing, the add-ins become available in RStudio under Addins → Browse Addins. You can then select the tool you want to use, and a small GUI will open inside RStudio.
+
+### Overview of our three add-ins
+
+| Add-in        | Purpose                                                                             | How it Helps                                                             |
+| ------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| **datapasta** | Quickly copy and paste data from spreadsheets, tables, or CSV files into R as code. | Saves time converting tables into R-friendly formats.                    |
+| **styler**    | Automatically formats your R code according to a consistent style guide.            | Makes code clean and readable, following tidyverse style.                |
+| **esquisse**  | Provides a drag-and-drop interface for creating ggplot2 plots.                      | Enables interactive visualization without writing complex plotting code. |
+|
+
+```{r labelled, echo=FALSE, fig.cap="Add-in outline"}
+
+knitr::include_graphics("images/demo-add-in.png")
+
+```
 
 ## Get Help!
 
-There are a lot of sources of information about using R out there. Here are a few helpful places to get help when you have an issue, or just to learn more
 
--   The R help system itself - type `help()` and put the name of the package or function you are querying inside the brackets
+<!-- There are a lot of sources of information about using R out there. Here are a few helpful places to get help when you have an issue, or just to learn more -->
+
+-   The R help system itself - type `help()`, or `??functionname` and put the name of the package or function you are querying inside the brackets
 
 -   Vignettes - type `browseVignettes()` into the console and hit Enter, a list of available vignettes for all the packages we have will be displayed
 
@@ -85,12 +128,5 @@ There are a lot of sources of information about using R out there. Here are a fe
 -   Google - I use Google constantly, because I continually forget how to do even basic tasks. If I want to remind myself how to round a number, I might type something like R round number - if I am using a particular package I should include that in the search term as well
 
 -   Ask for help - If you are stuck, getting an error message, can't think what to do next, then ask someone. It could be me, it could be a classmate. When you do this it is very important that you show the code, include the error message. "This doesn't work" is not helpful. "Here is my code, this is the data I am using, I want it to do X, and here's the problem I get."
-
-```{block, type = "info"}
-It may be daunting to send your code to someone for help. 
-
-
-It is natural and common to feel apprehensive, or to think that your code is really bad. I still feel the same! But we learn when we share our mistakes, and eventually you will find it funny when you look back on your early mistakes, or laugh about the mistakes you still occasionally make!
-```
 
 
