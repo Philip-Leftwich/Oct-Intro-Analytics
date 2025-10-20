@@ -48,6 +48,15 @@ df |>
 
 ```
 
+```{r}
+df |>
+  verify(age_days > 0,
+         error_fun = just_warn)                      # hatched ≤ laid
+
+
+```
+
+
 ## assert, insist, validate
 
 https://docs.ropensci.org/assertr/articles/assertr.html
@@ -59,14 +68,50 @@ df |>
 
 ```
 
+
+:::{.panel-tabset}
+# Assertr
 ```{r}
 df |>   
+  verify(age_days > 0, error_fun = just_warn) |> 
   assert(within_bounds(1,30), age_days, error_fun = just_warn) |> # age must be positive
   insist(within_n_sds(3), eggs_laid,  error_fun = just_warn) |>                 # eggs laid within 3 SDs
   verify(eggs_laid > 0,  error_fun = just_warn) |>                               # eggs laid > 0
   verify(eggs_hatched <= eggs_laid,  error_fun = just_warn)  
 
 ```
+
+
+# dplyr
+
+
+```{r}
+# Step 1: Get summary stats for eggs_laid
+df_summary <- df |> 
+  summarise(
+    mean_eggs_laid = mean(eggs_laid, na.rm = TRUE),
+    sd_eggs_laid   = sd(eggs_laid, na.rm = TRUE)
+  )
+
+df_report <- df |>
+  mutate(
+    age_invalid           = age_days <= 0,
+    eggs_laid_invalid     = eggs_laid <= 0,
+    eggs_laid_outlier     = eggs_laid < (df_summary$mean_eggs_laid - 3*df_summary$sd_eggs_laid) |
+                             eggs_laid > (df_summary$mean_eggs_laid + 3*df_summary$sd_eggs_laid),
+    eggs_hatched_invalid  = eggs_hatched > eggs_laid
+  )
+
+# Step 3: view rows with any issues filter == TRUE
+df_report |> 
+  filter(age_invalid | eggs_laid_invalid | eggs_laid_outlier | eggs_hatched_invalid)
+
+```
+
+
+
+:::
+
 
 ```{r}
 df |> 
