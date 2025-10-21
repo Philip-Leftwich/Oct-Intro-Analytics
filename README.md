@@ -71,6 +71,8 @@ Example: r data %>% verify(nrow(.) > 0) %>% assert(in_set(c("control","treatment
 Themes, fonts and accessibility
 https://www.cararthompson.com/talks/on-brand-accessibility/
 
+https://gge-ucd.github.io/R-DAVIS/lesson_09_data_viz_pt1.html
+
 4:15 – 4:45	Mini-practice
 
 4:45 – 5:00	Wrap-Up & Discussion	Reflect on workflow: “Set assignment"

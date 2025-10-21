@@ -202,7 +202,7 @@ ggplot(plot_df, aes(x = sim, y = emmean, color = model)) +
   facet_wrap(~ group, nrow = 2, scales = "fixed") +
   geom_hline(yintercept = c(0, 1), linetype = "dotted", color = "gray40") +
   scale_color_manual(
-    values = c("lm_proportion" = "blue", "glm_binomial" = "red"),
+    values = c("lm_proportion" = "#0072B2", "glm_binomial" = "#D55E00"),
     labels = c("Linear model on proportions", "Binomial GLM")
   ) +
   labs(
@@ -252,7 +252,7 @@ OR <- 1.8
 beta_trt <- log(OR)
 
 # Sweep parameters
-n_reps_vals    <- c(3, 5, 10)              # number of replicate experiments
+n_reps_vals    <- c(3, 5, 10,20,40)              # number of replicate experiments
 sigma_rep_vals <- c(0.0,0.5, 1.0,2.0,3.0)   # between-replicate SD on logit scale
 
 # ---- Helper: simulate one experiment ----
