@@ -1,0 +1,224 @@
+# ggplot {#sec-ggplot}
+
+```{r, include = FALSE}
+library(tidyverse)
+library(here)
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+#source("R/clean_penguins.R")
+
+#___________________________----
+# SET UP ----
+# An analysis of the bill dimensions of male and female 
+# Adelie, Gentoo and Chinstrap penguins
+
+# Data first published in  Gorman, KB, TD Williams, and WR Fraser. 
+# 2014. 
+# “Ecological Sexual Dimorphism and Environmental Variability 
+# Within a Community of Antarctic Penguins (Genus Pygoscelis).” 
+# PLos One 9 (3): e90081.
+# https://doi.org/10.1371/journal.pone.0090081. 
+#__________________________----
+
+# PACKAGES ----
+library(tidyverse) # tidy data packages
+library(here) # organised file paths
+library(janitor) # cleans variable names
+#__________________________----
+
+# IMPORT DATA ----
+penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
+
+# check the data has loaded, prints first 10 rows of dataframe
+penguins_raw
+#__________________________----
+# CLEAN DATA ----
+
+# clean all variable names to snake_case
+# using the clean_names function from the janitor package
+# note we are using assign <-
+# to overwrite the old version of penguins
+# with a version that has updated names
+# this changes the data in our R workspace
+# but NOT the original csv file
+
+# clean the column names
+# assign to new R object
+penguins_clean <- janitor::clean_names(penguins_raw)
+
+# quickly check the new variable names
+colnames(penguins_clean)
+
+# shorten the variable names for N and C isotope blood samples
+
+penguins_clean <- rename(penguins_clean,
+  "delta_15n" = "delta_15_n_o_oo", # use rename from the dplyr package
+  "delta_13c" = "delta_13_c_o_oo"
+)
+
+# use mutate and case_when for a statement that conditionally changes the names of the values in a variable
+penguins <- penguins_clean |>
+  mutate(species = case_when(
+    species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
+    species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
+    species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"
+  ))
+
+# use mutate and if_else
+# for a statement that conditionally changes
+# the names of the values in a variable
+penguins <- penguins |>
+  mutate(sex = if_else(
+    sex == "MALE", "Male", "Female"
+  ))
+
+# use lubridate to format date and extract the year
+penguins <- penguins |>
+  mutate(date_egg = lubridate::dmy(date_egg))
+
+penguins <- penguins |>
+  mutate(year = lubridate::year(date_egg))
+
+
+
+```
+
+
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- Prepare and summarise data for advanced plotting.
+
+- Control aesthetics and grouping behaviour in multilayered plots.
+
+- Use and combine a broad range of geoms, including line, text, and label.
+
+- Customise and extend colours, palettes, scales, axes, and legends.
+
+- Use facets effectively for multi-dimensional comparisons.
+
+- Arrange and enhance plots using patchwork and marginal plots.
+
+- Export and enhance visualisations with camcorder and plotly.
+
+## Grouping logic and plots
+
+`ggplot2` automatically groups data based on discrete variables in your aesthetics (like colour or fill). 
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+geom_line(aes(group = species), linewidth = 1.2) +
+theme_minimal()
+```
+
+- **Implicit grouping**: When colour or fill is mapped to a categorical variable.
+
+- **Explicit grouping**: When you use group = inside aes().
+
+```{r}
+ggplot(penguins, aes(x = year, y = body_mass_g, color = species)) +
+geom_line(linewidth = 1.2) +
+scale_x_continuous(breaks = c(2007:2008), limits = c(2007,2008))+
+theme_minimal()
+
+```
+
+```{r}
+
+
+ggplot(penguins, aes(x = year, y = body_mass_g, color = species)) +
+geom_line(aes(group = individual_id), linewidth = 1.2) +
+scale_x_continuous(breaks = c(2007:2008), limits = c(2007,2008))+
+theme_minimal()
+```
+
+## Exploring Common Geom Types
+
+We’ve seen scatterplots, boxplots, and histograms—but ggplot offers many more geoms for storytelling.
+
+| Data type              | Example geom                                  | Purpose              |
+|------------------------|-----------------------------------------------|----------------------|
+| Continuous–continuous  | `geom_point()`, `geom_line()`, `geom_smooth()` | Relationships/trends |
+| Categorical–continuous | `geom_boxplot()`, `geom_violin()`, `geom_col()` | Comparisons          |
+| Continuous             | `geom_histogram()`, `geom_density()`           | Distributions        |
+
+
+### Combining geoms and layers
+
+## Understanding Aesthetics
+
+Aesthetics declared in ggplot(aes()) apply to all layers unless overridden. This is known as aesthetic inheritance.
+
+```{r}
+ggplot(penguins, aes(bill_length_mm, bill_depth_mm)) +
+geom_point(aes(color = species)) +
+geom_smooth(aes(color = species), se = FALSE)
+```
+
+```{r}
+ggplot(penguins, aes(bill_length_mm, bill_depth_mm)) +
+geom_point(aes(color = species)) +
+geom_smooth(color = "black", se = FALSE)
+```
+
+## Colours, palettes and extensions
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g, fill = species)) +
+geom_histogram(bins = 20, alpha = 0.7, position = "identity") +
+scale_fill_manual(values = c("Adelie" = "#1b9e77", "Chinstrap" = "#d95f02", "Gentoo" = "#7570b3")) +
+theme_minimal()
+```
+
+
+```{r}
+library(colorspace)
+
+ggplot(penguins, aes(x = body_mass_g, fill = species)) +
+geom_histogram(bins = 20, alpha = 0.7, position = "identity") +
+scale_fill_discrete_qualitative(palette = "Dark2") +
+theme_minimal()
+
+
+```
+
+Wes Anderson palettes
+
+https://www.datanovia.com/en/blog/easy-way-to-expand-color-palettes-in-r/
+
+https://www.cararthompson.com/talks/nhsr2022-palatable-palettes/index.html
+
+
+
+## Scales, Axes and Ordering
+
+
+## Legend Mastery
+
+## Fonts
+
+## Add labels to plots - 5027A
+
+The labs() function allows you to add and customize various labels in your plot, including:
+
+Title: A main heading that summarizes the plot’s purpose.
+
+Axis Labels: Descriptive labels for the x- and y-axes.
+
+Caption: An optional caption to provide additional context or credit.
+
+Legend Title: A title for the legend if you’re using color, shape, or fill aesthetics.
+
+## Facets
+
+## Patchwork
+
+
+## Marginal plots
+
+
+## Plotly
+
+
+## Exporting safely

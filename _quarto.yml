@@ -49,14 +49,17 @@ book:
     - 04-penguin-project.qmd
     - summarise.qmd
   - part: "Dplyr"
+    chapters:
     - 05-dplyr.qmd
   - part: "Data Cleaning"
+    chapters:
     - 06-data-names.qmd
     - 07-duplicates.qmd
     - 08-missing-values.qmd
     - 09-strings.qmd
     - 10-dates.qmd
   - part: "Data Validation"
+    chapters:
     - 11-assertions.qmd
 
 

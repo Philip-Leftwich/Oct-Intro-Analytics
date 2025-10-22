@@ -12,12 +12,18 @@ Time	Topic	Key Learning Goals	Notes / Integration
 
 ✓ 9:00 – 9:30	Welcome & RStudio Setup	Workshop overview. Create an RStudio Project. Explore panes, scripts, and the working directory.
 Make RStudio feel like home.
+
+# Script organisation and fun shortcut keys?
  
 
 9:30 – 10:15	Organizing Projects & Data Management Planning	
 - spreadsheets -  & data dictionaries
 - what if my data isn't tidy?
-- project structure and folders
+- project structure and folders (fs)
+- library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R. 
+dir_create("data")
+dir_create("data_output")
+dir_create("fig_output")
 - Participants create a simple project template (data/, scripts/, outputs/).
 - Reproducibility mindset. (.data, styler, commenting and shortcut keys?)
 
@@ -58,7 +64,6 @@ missing values (drop_na(), replace_na()),
 text standardization (str_to_lower()), 
 parse dates (lubridate)..
 
-
 ??? Possibility - clean a messy dataset???
 
 2:30 – 2:45	☕ Break		
@@ -67,11 +72,15 @@ parse dates (lubridate)..
 Key functions: verify(), assert(), insist().
 Example: r data %>% verify(nrow(.) > 0) %>% assert(in_set(c("control","treatment")), group) %>% insist(within_bounds(0,100), percent_yield)	Show what happens when assertions fail; emphasize reproducibility.
 
-3:15 – 4:15	Introduction to ggplot2 - https://www.cararthompson.com/talks/on-brand-accessibility/
-Themes, fonts and accessibility
+3:15 – 4:15	Introduction to ggplot2 - 
+
+Themes, fonts and accessibility + my earlier stuff 5023B
+
+# https://www.cararthompson.com/talks/nhsr2022-ggplot-themes/
+
 https://www.cararthompson.com/talks/on-brand-accessibility/
 
-https://gge-ucd.github.io/R-DAVIS/lesson_09_data_viz_pt1.html
+https://albert-rapp.de/posts/ggplot2-tips/12_a_few_gg_packages/12_a_few_gg_packages.html
 
 4:15 – 4:45	Mini-practice
 
@@ -88,6 +97,7 @@ Time	Topic	Key Learning Goals	Notes / Integration
 10:15 – 10:30	☕ Break		
 
 10:30-1100 Visualizing Model Predictions	broom + ggplot2 for fitted vs. observed.
+stat_summary()
 
 11-11.45	GLMs for Binary Data
 # Why cant we use t-tests?
