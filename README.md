@@ -5,6 +5,8 @@
 - https://www.dataquest.io/blog/rstudio-tips-tricks-shortcuts/#:~:text=Another%20way%20to%20access%20RStudio,%2B%20%2D%20on%20Linux%20and%20Windows.
 
 
+https://www.markhw.com/blog/logos
+
 🗓️ Updated Two-Day Schedule (v3 – Emphasizing Inspect → Summarize → Clean → Assert)
 
 Day 1 – From Raw Data to Clean, Reproducible Datasets

@@ -151,13 +151,13 @@ We’ve seen scatterplots, boxplots, and histograms—but ggplot offers many mor
 Aesthetics declared in ggplot(aes()) apply to all layers unless overridden. This is known as aesthetic inheritance.
 
 ```{r}
-ggplot(penguins, aes(bill_length_mm, bill_depth_mm)) +
+ggplot(penguins, aes(culmen_length_mm, culmen_depth_mm)) +
 geom_point(aes(color = species)) +
 geom_smooth(aes(color = species), se = FALSE)
 ```
 
 ```{r}
-ggplot(penguins, aes(bill_length_mm, bill_depth_mm)) +
+ggplot(penguins, aes(culmen_length_mm, culmen_depth_mm)) +
 geom_point(aes(color = species)) +
 geom_smooth(color = "black", se = FALSE)
 ```
