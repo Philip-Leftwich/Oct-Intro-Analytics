@@ -1,4 +1,4 @@
-# ggplot {#sec-ggplot}
+# ggplot2 {#sec-ggplot2}
 
 ```{r, include = FALSE}
 library(tidyverse)
@@ -102,6 +102,67 @@ By the end of this chapter, you will be able to:
 
 - Export and enhance visualisations with camcorder and plotly.
 
+## Comparing groups with Facets
+
+Faceting creates small multiples — one plot per subgroup — using `facet_wrap()` or `facet_grid()`.
+
+```{r}
+ggplot(penguins, aes(x = culmen_length_mm, y = culmen_depth_mm, color = species)) +
+geom_point() +
+facet_wrap(~ species) +
+theme_minimal()
+
+```
+
+### Minichallenge
+
+Try faceting by sex instead of species. What do you notice?
+
+## Going further
+
+Once you're comfortable with scatterplots you can explore other *geoms*
+
+- `geom_histogram()` for distributions
+
+- `geom_density()` for density distributions
+
+- `geom_boxplot()` for comparisons
+
+- `geom_smooth()` for trend lines
+
+For example:
+
+```{r}
+ggplot(penguins, aes(x = culmen_length_mm, fill = species)) +
+geom_histogram(bins = 20, alpha = 0.7, position = "identity") +
+theme_minimal()
+
+```
+
+:::{.callout-tip}
+# Bins
+
+A histogram is a type of bar plot used to display the distribution of a continuous variable by grouping data into intervals, or "bins," along the x-axis. Each bin represents a range of values, and the height of the bar shows how many observations fall within that range, providing a visual summary of the frequency distribution of the data.
+:::
+
+### Mini challenge
+
+Try changing the number of bins for the histogram, how does it change?
+
+
+## Summary
+
+In this section, you learned how to:
+
+- Build a ggplot layer by layer
+
+- Map variables to aesthetics
+
+- Customise plots with labels, themes, and colour
+
+- Use facets for subgroup comparisons
+
+
 ## Grouping logic and plots
 
 `ggplot2` automatically groups data based on discrete variables in your aesthetics (like colour or fill). 
@@ -133,34 +194,6 @@ scale_x_continuous(breaks = c(2007:2008), limits = c(2007,2008))+
 theme_minimal()
 ```
 
-## Exploring Common Geom Types
-
-We’ve seen scatterplots, boxplots, and histograms—but ggplot offers many more geoms for storytelling.
-
-| Data type              | Example geom                                  | Purpose              |
-|------------------------|-----------------------------------------------|----------------------|
-| Continuous–continuous  | `geom_point()`, `geom_line()`, `geom_smooth()` | Relationships/trends |
-| Categorical–continuous | `geom_boxplot()`, `geom_violin()`, `geom_col()` | Comparisons          |
-| Continuous             | `geom_histogram()`, `geom_density()`           | Distributions        |
-
-
-### Combining geoms and layers
-
-## Understanding Aesthetics
-
-Aesthetics declared in ggplot(aes()) apply to all layers unless overridden. This is known as aesthetic inheritance.
-
-```{r}
-ggplot(penguins, aes(culmen_length_mm, culmen_depth_mm)) +
-geom_point(aes(color = species)) +
-geom_smooth(aes(color = species), se = FALSE)
-```
-
-```{r}
-ggplot(penguins, aes(culmen_length_mm, culmen_depth_mm)) +
-geom_point(aes(color = species)) +
-geom_smooth(color = "black", se = FALSE)
-```
 
 ## Colours, palettes and extensions
 
@@ -193,24 +226,454 @@ https://www.cararthompson.com/talks/nhsr2022-palatable-palettes/index.html
 
 ## Scales, Axes and Ordering
 
+### Axes limits
 
-## Legend Mastery
+Now, we'll utilize "scale_x_continuous()" and "scale_y_continuous()" for setting our desired values on the axes. The key parameters in both functions are "limits" (defined as "limits = c(value, value)") and "breaks" (which represent the tick marks, specified as "breaks = value:value"). It's important to note that "limits" comprise only two values (the minimum and maximum), while "breaks" consists of a range of values (for instance, from 0 to 100).
+
+For this plot, let’s say we want the x and y origin to be set at 0. To do this we can add in `xlim()` and `ylim()` functions, which define the limits of the axes:
+
+```{r}
+## Set axis limits ----
+penguins |> 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  scale_color_brewer(palette="Set1")+
+  scale_x_continuous(limits = c(0,240), breaks = c(30,60,90,120,150,180,210,240))+
+  scale_y_continuous(limits = c(0,7000), breaks = (0:7000))
+ 
+
+```
+
+```{r}
+## Set axis limits ----
+penguins |> 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  scale_color_brewer(palette="Set1")+
+  scale_x_continuous(limits = c(0,240), breaks = seq(0,240,30))+
+  scale_y_continuous(limits = c(0,7000), breaks = seq(0,7000, 1000))
+ 
+
+```
+
+Further, we can control the coordinate space using `coord()` functions. Say we want to flip the x and y axes, we add `coord_flip()`:
+
+```{r}
+penguins |> 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  scale_color_brewer(palette="Set1")+
+  scale_x_continuous(limits = c(0,240), breaks = seq(0,240,30))+
+  scale_y_continuous(limits = c(0,7000), breaks = seq(0,7000, 1000))+
+  coord_flip()
+```
+
+
+
+### Zooming in and out
+
+We have seen how we can set the parameters for the axes for both continuous and discrete scales.
+
+It can be very beneficial to be able to zoom in and out of figures, mainly to focus the frame on a given section. One function we can use to do this is the `coord_cartesian()`, in ggplot2. The main arguments are the limits on the x-axis `(xlim = c(value, value))`, the limits on the y-axis `(ylim = c(value, value))`, and whether to add a small expansion to those limits or not `(expand = TRUE/FALSE)`.
+
+```{r}
+penguins |> 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  scale_color_brewer(palette="Set1")+
+  coord_cartesian(xlim = c(180,210), ylim = c(3000,4000), expand = FALSE)
+  
+```
+
+
+
+### Axis ordering
+
+Axis ordering plays a crucial role in helping viewers interpret data quickly and accurately. Proper ordering, whether alphabetical, numerical, or by a specific criterion (like size or frequency), creates a logical flow that guides the viewer’s eye and reveals patterns that might otherwise be missed. For example, ordering categories by value can emphasize trends, such as showing which groups have the highest or lowest measurements, while random or inconsistent ordering can make comparisons confusing and obscure key insights. Thoughtful axis ordering improves readability, enhances pattern recognition, and ensures that the data tells a clear, compelling story.
+
+By default R will order categories along the axis in alphabetical order: 
+
+```{r}
+penguins |> 
+ggplot(aes(x = species)) +
+  geom_bar()
+
+```
+
+If we wanted to switch the order we would use the `scale_x_discrete()` function and set the limits within it (limits = c("category","category")) as follows:
+
+```{r}
+penguins |> 
+  ggplot(aes(x = species)) +
+  geom_bar()+
+  scale_x_discrete(limits = c("Adelie", "Gentoo","Chinstrap")) 
+```
+
+Or by using features in the `forcats` package such as `forcats::fct_infreq()` we can automate ordering by frequency
+
+```{r}
+penguins |> 
+  mutate(species = forcats::fct_infreq(species)) |> 
+  ggplot(aes(x = species)) +
+  geom_bar()
+```
+
+
+### Rotation
+
+```{r}
+penguins |> 
+  mutate(species = forcats::fct_infreq(species)) |> 
+  ggplot(aes(x = species)) +
+  geom_bar()+
+  coord_flip()
+```
+
+### Transforming scales
+
+#### When to Use Transformed Scales and How to Present Them Clearly
+
+Transformed scales, like log or square root scales, are helpful for visualizing data that spans a wide range of values or grows non-linearly.
+
+For example, exponential growth: Log scales are ideal for displaying data with exponential growth patterns, such as bacterial populations, or viral spread rates. A log scale allows us to see early growth patterns and later stages on the same axis.
+
+:::{.callout-warning}
+While transformed scales can improve interpretability, they can also be misleading if not communicated clearly. Viewers may interpret values linearly without realizing they’re on a log or other transformed scale. Always include:
+
+Axis Labels: Indicate the transformation used (e.g., "Log-Scaled Bacterial Count" or "Square Root of Population").
+
+Legend or Caption: Explain why a transformation was applied and how it affects data interpretation.
+
+Clear communication helps ensure that readers interpret the transformed data accurately and understand why it enhances the visualization.
+:::
+
+
+You can use use the argument `scales::cut_si()` for SI labels:
+
+```{r}
+library(scales)
+
+penguins |>  
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ ### now colour is set here it will be inherited by ALL layers
+  geom_point()+
+  geom_smooth(method="lm",    #add another layer of data representation.
+              se=FALSE)+
+  labs(x = "Flipper length",
+       y = "Body mass")+
+  scale_x_continuous(labels = label_number(scale_cut = cut_si("mm")))+
+  scale_y_continuous(labels = label_number(scale_cut = cut_si("g")))
+
+
+```
+
+:::{.callout-note collapse = "true"}
+## Logarithms
+
+In this example we take some bacterial plates with colony forming units (CFU) grown on them. This is an example from the BIO-5009A genetics labs - looking at number of colonies as a measure of the frequency of antibiotic resistance.
+
+```{r, include = FALSE}
+LData <- read_csv("files/LD-assay data.csv", na = "-")
+
+```
+
+```{r, eval = FALSE}
+
+LData <- read_csv("data/LD-assay data.csv", na = "-")
+
+```
+
+```{r}
+
+# Data tidying
+LData_long <- LData |> 
+  pivot_longer(cols = WT:`Mut H`) 
+
+```
+
+
+#### Linear scale
+
+When we first make this plot it is difficult to see the scale of difference between WT and MutS strains, because the difference between them and the other two strains is so big. However because bacteria grow exponentially - it might make more sense to compare the differences on a log scale (the inverse of exponential growth):
+
+
+```{r}
+
+# Data visualisation
+bacteria_plot <- LData_long |> 
+  ggplot(aes(x = name,
+             y = value+1))+
+  geom_boxplot(width = .1,
+               position = position_nudge(x= .2),
+               outlier.shape = NA,
+               fill = "lightblue")+
+  geom_jitter(shape = 21,
+              width = .1,
+                fill = "lightblue",
+                colour = "black",
+                cex = .5)+
+  theme_minimal()+
+  labs(x = "Bacterial Strain + plasmid pRB318",
+       y = "Colony Forming Units+1")
+
+bacteria_plot
+```
+
+#### Log scale
+
+A log scale is very effective for visualizing data that grows exponentially, such as population increases or certain biological processes, as it allows both small and large values to be displayed clearly on the same axis. In a log scale, each step represents a multiplicative increase (e.g., by 10x), making exponential growth patterns easier to interpret.
+
+In ggplot2, you can apply a log scale easily with `scale_x_log10()` or `scale_y_log10()`, which are shorthand for setting `trans = "log10"` in `scale_x_continuous()` or `scale_y_continuous()`. For a natural log scale (base 𝑒), you can use `scale_x_continuous(trans = log_trans(base = exp(1)))` or `scale_y_continuous(trans = log_trans(base = exp(1)))`  .
+
+When we apply this to our data - it is much clearer that there are differences in the frequency of antibiotic mutants in the MutS strain compared to WT.
+
+```{r}
+
+# Data visualisation
+bacteria_plot+
+  scale_y_log10() +
+  labs(x = "Bacterial Strain + plasmid pRB318",
+       y = "Log10 Colony Forming Units+1")
+
+```
+
+### Pretty scales
+
+The `scales` package provides additional tools to customize log scales, letting you format labels as standard numbers instead of scientific notation, which improves readability, especially for general audiences.
+
+```{r}
+library(scales)
+
+# Data visualisation
+bacteria_plot+
+  scale_y_log10(labels = scales::label_log()) +
+  labs(x = "Bacterial Strain + plasmid pRB318",
+       y = "Log10 Colony Forming Units+1")
+
+```
+
+:::
+
+
+## Labels 
+
+```{r}
+## Add titles ----
+penguins |> 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g,
+             colour=species))+ 
+  geom_point()+
+  geom_smooth(method="lm",    
+              se=FALSE)+
+  scale_color_brewer(palette="Set1")+
+  labs(x = "Flipper length (mm)",
+       y = "Body mass (g)",
+       title= "Penguin Size, Palmer Station LTER",
+       subtitle= "Flipper length and body mass for three penguin species",
+       legend.title = "Species of penguins")
+```
+
+
+
+## Annotations
+
+## Text
+
+Annotating a chart with text is a common and valuable practice in data visualization for several important reasons:
+
+- Provide Context: Text annotations help to provide context and background information for the data. They explain what the chart represents, the variables involved, and the meaning of various data points or patterns. This context is crucial for viewers who may not be familiar with the data or the chart.
+
+- Highlight Key Points: Text annotations can be used to emphasize and draw attention to important findings or insights in the data. You can use annotations to highlight specific data points, trends, outliers, or other notable features in the chart.
+
+- Label Data: Annotating a chart with labels helps to identify individual data points, data series, or categories. This is especially useful in scatterplots, bar charts, and other types of visualizations where labeling individual elements is important.
+
+- Clarify Relationships: Annotations can be used to clarify relationships between data points or groups. For example, you can add arrows and labels to indicate which data points are related or what causes certain patterns.
+
+- Provide Sources and Citations: In cases where the data comes from external sources or studies, annotations can be used to provide proper attribution and citations to give credit to the data sources.
+
+- Explain Methodology: Annotations can also explain the methodology or statistical techniques used to generate the chart, which is important for transparency and trust in data analysis.
+
+Below I provide some packages that help with text annotation:
+
+### ggforce
+
+```{r, warning = F, message = F}
+
+penguins |> 
+    ggplot(
+        aes(x = culmen_length_mm,
+            y= body_mass_g,
+            colour = species)) +
+    geom_point(aes(fill = species), shape = 21, colour = "white") +
+    geom_smooth(method = "lm", se = FALSE,linetype = "dashed", alpha = .4)+
+ggforce::geom_mark_ellipse(aes(
+    label = species,
+    filter = species == 'Adelie'),
+    con.colour  = "#526A83",
+    con.cap = 0,
+    con.arrow = arrow(ends = "last",
+                      length = unit(0.5, "cm")),
+    show.legend = FALSE) +
+    gghighlight(species == "Adelie")+
+  scale_colour_manual(values = c("darkorange", "purple", "cyan"))+
+  scale_fill_manual(values = c("darkorange", "purple", "cyan"))
+
+```
+
+### textpaths
+
+```{r}
+
+library(geomtextpath)
+
+penguins |> 
+    ggplot(aes(x = culmen_length_mm, 
+               colour = species,
+               label = species))+
+  geom_textdensity( hjust = 0.35, vjust = .1)+ # use hjust and vjust to position text
+  theme(legend.position = "none")
+
+
+``` 
+
+### ggtext
+
+```{r, warning = FALSE, message = FALSE, out.width = "80%"}
+
+library(ggtext)
+
+
+penguins |> 
+  mutate(species = fct_relevel(species, "Chinstrap", "Gentoo", "Adelie")) |> 
+  group_by(species) |> 
+    summarise(n=n()) |> 
+ggplot(aes(x = species,
+           y = n,
+           fill = species))+
+        geom_col()+
+  geom_label(aes(label = n),
+            fill = "white",
+            nudge_y = 1,
+            colour = "black",
+            fontface = "bold")+
+  labs(x = "",
+       y = "Count",
+       title = 
+         'There are almost half the observations on Chinstrap penguins, as there are on Adelie and Gentoo penguins'
+       )+
+  scale_fill_manual(
+    # when reordering levels - be careful about keeping colours consistent!!! May need manually sorting
+    values = c("darkorange", "purple", "cyan"))+
+  coord_flip()+
+  scale_y_continuous(limits = c(0, 200))+
+  theme(legend.position = "none",
+        axis.text.y = element_text(
+      color = c("darkorange", "purple", "cyan")),
+      plot.title = element_textbox_simple())
+
+```
+
 
 ## Fonts
 
-## Add labels to plots - 5027A
+You can customise the fonts used in themes. All computers should be able to recognise the families "sans", "serif", and "mono", and some computers will be able to access other installed fonts by name.
 
-The labs() function allows you to add and customize various labels in your plot, including:
+The easiest way to add lots of custom fonts is with `showtext`. 
 
-Title: A main heading that summarizes the plot’s purpose.
+The second argument, family, is optional. It gives the family name of the font that will be used in R. In other words, it means that the name used to refer to the font in R does not need to be the same than the original name of the font. In this case, the font Special Elite is going to be the special family.
 
-Axis Labels: Descriptive labels for the x- and y-axes.
+`showtext_auto()` must be called to indicate that showtext is going to be automatically invoked to draw text whenever a plot is created.
 
-Caption: An optional caption to provide additional context or credit.
+```{r, eval = F}
+library(showtext)
+font_add_google("Special Elite", family = "special")
+showtext_auto()
 
-Legend Title: A title for the legend if you’re using color, shape, or fill aesthetics.
+```
 
 ## Facets
+
+
+### Nested Facets
+
+The `facet_nested()` function in the `ggh4x` package is used for creating nested or hierarchical faceting in ggplot2 plots. Faceting is the process of breaking down a data visualization into multiple subplots or panels based on one or more categorical variables, allowing you to see how the data behaves within different categories. Nested faceting allows you to further subdivide these panels into smaller panels, creating a hierarchy of facets.
+
+```{r, warning = F}
+library(ggh4x)
+
+penguins |> 
+  mutate(Nester = ifelse(species=="Gentoo", "Crustaceans", "Fish & Krill")) |> 
+  ggplot(aes(x = culmen_length_mm,
+             y = culmen_depth_mm,
+             colour = species))+
+  geom_point()+
+  facet_nested(~ Nester + species)+
+  scale_colour_manual(values = c("darkorange", "purple", "cyan"))+
+  theme(legend.position = "none")
+
+```
+
+## Highlighting
+
+Using plot highlighting, such as the gghighlight package in R, can be beneficial in data visualization for several reasons:
+
+- Emphasizing Key Information: Plot highlighting allows you to draw attention to specific data points or groups of interest. This can be helpful when you want to highlight outliers, key observations, or certain categories that are important in your data.
+
+- Enhanced Interpretation: Highlighting specific elements in a plot can make it easier for viewers to interpret and understand the data. By reducing visual clutter and emphasizing relevant information, you can improve the effectiveness of your data visualization.
+
+- Storytelling: Plot highlighting is a useful tool for storytelling in data visualization. You can use it to guide the viewer's attention and convey the main message or story behind the data.
+
+- Comparative Analysis: Highlighting allows you to compare specific data points or groups more easily. For example, you can highlight one group against others to demonstrate differences or trends.
+
+```{r, message = F}
+library(gghighlight)
+
+penguins |> 
+  ggplot(aes(body_mass_g,
+             fill = species),
+         position = "identity")+
+  geom_histogram()+
+  gghighlight()+
+  scale_fill_manual(values = c("darkorange", "purple", "cyan"))+
+  facet_wrap(~ species)
+
+
+```
+
+
+```{r, warning = F, message = F}
+library(ggbeeswarm)
+library(gghighlight)
+penguins |> 
+    ggplot(aes(x = species,
+               y = body_mass_g,
+               fill = species))+
+    geom_beeswarm(shape = 21, 
+                  colour = "white")+
+    scale_fill_manual(values = c("darkorange", "purple", "cyan"))+
+    gghighlight(body_mass_g > 4000)
+
+
+```
+
 
 ## Patchwork
 
@@ -219,6 +682,21 @@ Legend Title: A title for the legend if you’re using color, shape, or fill aes
 
 
 ## Plotly
+
+```{r}
+library(plotly)
+ggplotly(
+penguins |> 
+    ggplot(
+        aes(x = culmen_length_mm,
+            y= body_mass_g,
+            colour = species)) +
+    geom_point(aes(fill = species), shape = 21, colour = "white") +
+    geom_smooth(method = "lm", se = FALSE,linetype = "dashed", alpha = .4)+
+  scale_colour_manual(values = c("darkorange", "purple", "cyan"))+
+  scale_fill_manual(values = c("darkorange", "purple", "cyan"))
+)
+```
 
 
 ## Exporting safely

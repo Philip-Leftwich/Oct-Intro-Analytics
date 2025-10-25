@@ -1,0 +1,300 @@
+#  Reading data {#sec-read-data}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+library(tidyverse)
+library(here)
+```
+
+
+
+## Learning Objectives
+
+This chapter covers different methods for importing and exporting data in R, by the end of this chapter you will be able to:
+
+- Import CSV and Excel files using base R, `readr`, and `readxl`.
+
+- Explain the difference between `data frames` and `tibbles`.
+
+- Use the here package for reproducible file paths (no `setwd()`!).
+
+- Paste small tables using `datapasta`.
+
+- Save and reload R-specific file formats (`.RDS`, `.RData`).
+
+- Use `purrr::map()` to read many data files automatically.
+
+
+## `readr`
+
+If you’ve used R before, you might wonder why we’re not using `read.csv()`. There are a few good reasons to favour `readr` functions over the base equivalents:
+
+- They are typically much faster (~10x) than their base equivalents. Long running jobs have a progress bar, so you can see what’s happening. If you’re looking for raw speed, try `data.table::fread()`. It doesn’t fit quite so well into the tidyverse, but it can be quite a bit faster.
+
+- They produce `tibbles`, they don’t convert character vectors to factors, use row names, or munge the column names. These are common sources of frustration with the base R functions.
+
+| Feature    | Base `data.frame`    | Tidyverse `tibble`         |
+| ---------- | -------------------- | -------------------------- |
+| Printing   | Prints all rows      | Prints compactly           |
+| Strings    | Become factors       | Stay as characters         |
+| Subsetting | May simplify results | Keeps consistent structure |
+| Created by | `read.csv()`         | `read_csv()`               |
+
+
+
+### useful options
+
+```{r, eval =FALSE}
+readr::read_csv("files/penguins_raw.csv",
+         col_types = cols(`Body Mass (g)` = col_double(),
+                          `Sex` = readr::col_factor(levels = c("MALE", "FEMALE")),
+                          `Date Egg` = readr::col_date("%d/%m/%Y")))
+
+# Fixing character strings as factors
+# Fixing dates at import requires you to specify date orders and separators
+```
+
+## Importing from excel
+
+```{r, eval = FALSE}
+
+library(readxl)
+penguins_rawxl <- read_excel("data/raw/penguins_raw.xlsx", sheet = "Sheet1")
+
+
+```
+
+
+### useful options
+
+| Argument    | Use                       | Example                                     |
+| ----------- | ------------------------- | ------------------------------------------- |
+| `sheet`     | Select by name or number  | `sheet = 2`                                 |
+| `range`     | Import only part of sheet | `range = "A1:D20"`                          |
+| `skip`      | Ignore header rows        | `skip = 2`                                  |
+| `col_names` | Set your own names        | `col_names = c("id", "age", "group")`       |
+| `col_types` | Set column types manually | `col_types = c("text", "numeric", "guess")` |
+| `na`        | Define missing values     | `na = c("", "NA", "missing")`               |
+
+
+
+
+## Filepaths
+
+To maintain a clean and efficient workflow in R, it's advisable to avoid using `setwd()` at the beginning of each script. This practice promotes the use of safe file paths and is particularly important for projects with multiple collaborators or when working across different computers.
+
+:::{.callout-important}
+
+[Why we use projects](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+
+:::
+
+### Absolute vs. Relative Paths:
+
+While absolute file paths provide an explicit way to locate resources, they have significant drawbacks, such as incompatibility and reduced reproducibility. Relative file paths, on the other hand, are relative to the current working directory, making them shorter, more portable, and more reproducible.
+
+An **Absolute file path** is a path that contains the entire path to a file or directory starting from your Home directory and ending at the file or directory you wish to access e.g.
+
+```
+C:/home/your-username/project/data/penguins_raw.csv
+```
+
+- If you share files, another user won’t have the same directory structure as you, so they will need to recreate the file paths
+
+- If you alter your directory structure, you’ll need to rewrite the paths
+
+- An absolute file path will likely be longer than a relative path, more of the backslashes will need to be edited, so there is more scope for error.
+
+A **Relative filepath** is the path that is relative to the working directory location on your computer.
+
+When you use RStudio Projects, wherever the `.Rproj` file is located is set to the working directory. This means that if the `.Rproj` file is located in your project folder then the relative path to your data is:
+
+```
+data/penguins_raw.csv
+```
+
+This filepath is shorter and it means you could share your project with someone else and the script would run without any editing.
+
+### The `here` Package:
+
+To further enhance this organization and ensure that file paths are independent of specific working directories, the here package comes into play. The [`here::here()`](https://github.com/jennybc/here_here) function provided by this package @R-here builds file paths relative to the top-level directory of your project.
+
+In the above project example you have raw data files in the data/raw directory, scripts in the scripts directory, and you want to save processed data in the data/processed directory.
+
+To access this data using a relative filepath we need:
+
+```{r, eval = F}
+
+raw_data <- read.csv("data/raw/penguins_raw.csv")
+
+```
+
+To access this data with `here` we provide the directories and desired file, and `here()` builds the required filepath starting at the top level of our project each time
+
+```{r, eval = F}
+
+library(here)
+
+raw_data <- read.csv(here("data", "raw", "penguins.csv"))
+
+```
+
+
+
+
+
+
+## `datapasta`
+
+The datapasta package lets you paste small tables directly into R — perfect for quick tests or examples.
+
+```{r, eval = FALSE}
+library(datapasta)
+# Copy a small table (e.g. from Excel), then run:
+dpasta()
+```
+
+It automatically pastes code like this:
+
+```
+tribble(
+  ~id, ~age, ~group,
+  1, 23, "control",
+  2, 27, "treatment"
+)
+```
+
+## R data types
+
+`.RDS` files, or **R Data Serialization** file, is a binary file format in R used to save *individual* R objects. 
+
+```{r, eval = FALSE}
+# Create some sample data
+my_data <- data.frame(
+  ID = 1:3,
+  Name = c("Alice", "Bob", "Charlie"),
+  Score = c(95, 87, 92)
+)
+
+# Save the data frame to an .RDS file
+saveRDS(my_data, file = "data/clean/my_data.RDS")
+
+# Clear the current workspace
+rm(list = ls())
+
+# Load the data frame from the .RDS file
+loaded_data <- readRDS("data/clean/my_data.RDS")
+
+# Access the loaded data
+print(loaded_data)
+```
+
+### Your turn 
+
+* [ ] Run the code above 
+
+* [ ] Check your `data/clean` subdir
+
+### Question
+
+When might saving data to RDS file format be useful?
+
+
+## Reading multiple files
+
+:::{.callout-important}
+
+This section uses several concepts we haven't really been introduced to yet. Including writing functions, iterative programming and string matching. 
+
+:::
+
+Here we actually start with a complete dataframe - and first iterate to split into 25 equally sized dataframes.
+
+`walk2` operates in the same way as `map2` - but is the preferred option here as it is "silent" 
+
+```{r, eval = F}
+
+fs::dir_create("data/many_files")
+
+unique_species <- penguins_raw |> 
+  distinct(Species) |> 
+  pull()
+
+peng_samples <- map(unique_species, 
+                    ~ filter(penguins_raw, `Species`==.x)
+                    )
+
+map2(peng_samples, unique_species, 
+     ~ write_csv(.x, paste0(glue::glue("data/many_files/{.y}.csv")))
+     )
+
+
+```
+
+### Create a vector of file paths
+
+Now, to create a vector of file paths, we'll use the list.files function in R. This function allows us to identify and list all the files with a specific extension in a directory. In this example, we're looking for CSV files in the "data/many_files" directory.
+
+```{r, eval = F}
+
+list_files <- dir_ls(path = "data/many_files",
+                                    pattern = "csv", full.names = TRUE)
+
+
+```
+
+```
+data/many_files/Adelie Penguin (Pygoscelis adeliae).csv
+data/many_files/Chinstrap penguin (Pygoscelis antarctica).csv
+data/many_files/Gentoo penguin (Pygoscelis papua).csv
+```
+
+
+
+### Read multiple files
+
+Now that we have obtained the file paths, we can proceed to load the files into R. The preferred method in the tidyverse is to use the `map_dfr` function from the `purrr` package. This function iterates through all the file paths and combines the data frames into a single, unified data frame. In the following code, `.x` represents the file name or path. To read and output the actual content of the CSV files (not just the filenames), you should include `.x` (the path) within a `readr` function. While this example deals with CSV files, this approach works similarly for other rectangular file formats.
+
+```{r, eval = F}
+
+penguins_data_test <- map_dfr(list_files,
+              ~ read_csv(.x))
+
+
+```
+
+
+### Selecting files
+
+Now, to filter and choose specific files for reading, we'll use the `str_detect()` function from the `stringr` package in R. This function allows us to search for specific patterns within our vector of file paths and select files that match our criteria. 
+
+The `negate` argument ensures that we only select files that either **do** or **don't** match the pattern. This work is made easier when we have good naming conventions.
+
+
+```{r, eval = F}
+
+list_files[str_detect(list_files, pattern = "Gentoo",
+negate = TRUE)]
+
+
+```
+
+```
+data/many_files/Adelie Penguin (Pygoscelis adeliae).csv
+data/many_files/Chinstrap penguin (Pygoscelis antarctica).csv"
+```
+
+
+
+## Summary
+
+- Import data using `readr` and `readxl`.
+
+- Understand `tibbles` vs `data frames`.
+
+- Keep file paths reproducible with `here()`.
+
+- Paste, save, and reload data flexibly.
+
+- Automate imports with `purrr::map()`.
