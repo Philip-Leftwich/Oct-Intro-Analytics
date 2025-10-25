@@ -11,7 +11,7 @@ library(here)
 
 ## Learning Objectives
 
-This chapter covers different methods for importing and exporting data in R, by the end of this chapter you will be able to:
+This section covers different methods for importing and exporting data in R, by the end of this chapter you will be able to:
 
 - Import CSV and Excel files using base R, `readr`, and `readxl`.
 

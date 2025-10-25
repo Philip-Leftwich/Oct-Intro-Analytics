@@ -12,7 +12,7 @@ penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
 ```
 
 
-```{r}
+```{r, include = FALSE}
 library(dplyr)
 library(assertr)
 
@@ -20,36 +20,93 @@ set.seed(123)
 n <- 20
 
 # Step 1: create dataset
-df <- tibble(
+female_egg_data <- tibble(
   female_id = 1:n,
+  treatment = rep(c("A","B"), times =10),
   age_days = sample(1:30, n, replace = TRUE),
   eggs_laid = rpois(n, lambda = 50),
   eggs_hatched = pmin(eggs_laid, rpois(n, lambda = 45))
 )
 
 # Step 2: Introduce some deliberate issues
-df$age_days[1] <- 0                     # invalid age
-df$eggs_laid[2] <- mean(df$eggs_laid) + 10*sd(df$eggs_laid)  # extreme eggs_laid
-df$eggs_hatched[3] <- df$eggs_laid[3] + 5  # eggs_hatched > eggs_laid
+female_egg_data$age_days[1] <- 0                     # invalid age
+female_egg_data$eggs_laid[2] <- mean(female_egg_data$eggs_laid) + 10*sd(female_egg_data$eggs_laid)  # extreme eggs_laid
+female_egg_data$eggs_hatched[3] <- female_egg_data$eggs_laid[3] + 5  # eggs_hatched > eggs_laid
 
-df
+female_egg_data
 
 
 ```
 
+## Learning Objectives:
 
+This section covers different methods for validating the assumptions about our data in R, by the end of this chapter you will be able to:
+
+- Explain why data validation matters for reproducible research.
+
+- Use `assertr` functions (`assertr::verify()` , `asserrr::assert()`, `assertr::insist()`) to check data.
+
+- Write automated checks for numeric ranges and categorical values.
+
+- Combine validation checks into a simple, readable pipeline.
+
+- Interpret errors and handle validation failures gracefully.
+
+
+## Why validate data
+
+Before we analyse data we need to trust it
+
+Think about the assumptions we build into or data:
+
+- Counts are always positive
+
+- Column B is always < than Column A
+
+- Measurements are within acceptable ranges
+
+> Remember Garbage in = Garbage out
+
+
+## the dataset
+
+Here’s our experimental dataset: each row is a female insect, with basic life-cycle and reproduction data
 
 ```{r}
+
+female_egg_data
+
+```
+
+### Question
+
+If this were your dataset, what checks would you want to include?
+
+
+`r hide("Solution")`
+
+| Column         | What we want to ensure               | assertr check                                                                      |
+| -------------- | ------------------------------------ | ---------------------------------------------------------------------------------- |
+| `female_id`    | No missing, unique, positive integer | `assert(not_na, female_id)`, `assert(is_uniq, female_id)`                          |
+| `treatment`    | Only “A” or “B”                      | `verify(treatment %in% c("A","B"))`                                                |
+| `age_days`     | >0 and reasonable range              | `assert(within_bounds(1, 30), age_days)`                                           |
+| `eggs_laid`    | >0, within 3 SDs                     | `assert(within_bounds(1, Inf), eggs_laid)`, `insist(within_n_sds(3), eggs_laid)`   |
+| `eggs_hatched` | ≥0 and ≤ eggs_laid                   | `assert(within_bounds(0, Inf), eggs_hatched)`, `verify(eggs_hatched <= eggs_laid)` |
+
+
+`r unhide()`
+
+```{r, eval = FALSE}
 library(assertr)
 
-df |>
+female_egg_data |>
   verify(age_days > 0)                      # hatched ≤ laid
 
 
 ```
 
 ```{r}
-df |>
+female_egg_data |>
   verify(age_days > 0,
          error_fun = just_warn)                      # hatched ≤ laid
 
@@ -57,14 +114,28 @@ df |>
 ```
 
 
-## assert, insist, validate
+## assert, insist, verify
 
-https://docs.ropensci.org/assertr/articles/assertr.html
+The assertr package (@R-assertr) has three main functions:
+
+- `verify()` - **is this statement true for the whole data?**
+
+```{r}
+df %>% verify(has_all_names("female_id","treatment","age_days","eggs_laid","eggs_hatched"))
+
+```
+
+- `assert()` - **applies a prediction row-by-row to the specified columns**
+
+```{r}
+df %>% assert(is.numeric, female_id, age_days, eggs_laid, eggs_hatched)
+```
+
+- `insist()` - **Flag values using a rule that depends on the whole column**
 
 
 ```{r}
-df |> 
-  assert(within_bounds(1,30), age_days)
+df %>% insist(within_n_sds(3), eggs_laid)
 
 ```
 
@@ -72,12 +143,19 @@ df |>
 :::{.panel-tabset}
 # Assertr
 ```{r}
-df |>   
-  verify(age_days > 0, error_fun = just_warn) |> 
-  assert(within_bounds(1,30), age_days, error_fun = just_warn) |> # age must be positive
-  insist(within_n_sds(3), eggs_laid,  error_fun = just_warn) |>                 # eggs laid within 3 SDs
-  verify(eggs_laid > 0,  error_fun = just_warn) |>                               # eggs laid > 0
-  verify(eggs_hatched <= eggs_laid,  error_fun = just_warn)  
+female_egg_data  |> 
+    verify(has_all_names("female_id", "treatment",
+                         "age_days", "eggs_laid", "eggs_hatched"),
+           error_fun = just_warn) |>
+    assert(is.numeric, female_id, age_days, eggs_laid, eggs_hatched,
+           error_fun = just_warn) |>
+    assert(is.character, treatment, error_fun = just_warn) |>
+    assert(is_uniq, female_id, error_fun = just_warn) |>
+    assert(not_na, female_id, treatment, age_days,
+           eggs_laid, eggs_hatched, error_fun = just_warn) |>
+    assert(within_bounds(1, 30), age_days, error_fun = just_warn) |>
+    verify(eggs_hatched <= eggs_laid, error_fun = just_warn) |>
+    insist(within_n_sds(3), eggs_laid, error_fun = just_warn)
 
 ```
 
@@ -87,39 +165,83 @@ df |>
 
 ```{r}
 # Step 1: Get summary stats for eggs_laid
-df_summary <- df |> 
+female_egg_data_summary <- female_egg_data |> 
   summarise(
     mean_eggs_laid = mean(eggs_laid, na.rm = TRUE),
     sd_eggs_laid   = sd(eggs_laid, na.rm = TRUE)
   )
 
-df_report <- df |>
+# Check column classes
+female_egg_data |> 
+  summarise(across(everything(), ~ class(.)[1])) %>%
+  tidyr::pivot_longer(everything(),
+                      names_to = "column",
+                      values_to = "type")
+
+female_egg_data |> 
+  duplicated(female_id)
+
+female_egg_data_report <- female_egg_data |>
   mutate(
     age_invalid           = age_days <= 0,
     eggs_laid_invalid     = eggs_laid <= 0,
-    eggs_laid_outlier     = eggs_laid < (df_summary$mean_eggs_laid - 3*df_summary$sd_eggs_laid) |
-                             eggs_laid > (df_summary$mean_eggs_laid + 3*df_summary$sd_eggs_laid),
+    eggs_laid_outlier     = eggs_laid < (female_egg_data_summary$mean_eggs_laid - 3*female_egg_data_summary$sd_eggs_laid) |
+                             eggs_laid > (female_egg_data_summary$mean_eggs_laid + 3*female_egg_data_summary$sd_eggs_laid),
     eggs_hatched_invalid  = eggs_hatched > eggs_laid
   )
 
 # Step 3: view rows with any issues filter == TRUE
-df_report |> 
+female_egg_data_report |> 
   filter(age_invalid | eggs_laid_invalid | eggs_laid_outlier | eggs_hatched_invalid)
 
 ```
 
-
-
 :::
 
 
+## Options for data pipelines
+
+All functions accept different arguments for what to do when an error is found: 
+
 ```{r}
-df |> 
+female_egg_data |> 
   insist(within_n_sds(3), eggs_laid, error_fun = error_df_return)
 ```
 
 ```{r}
-df |> 
+female_egg_data |> 
   insist(within_n_sds(3), eggs_laid, error_fun = just_warn) 
 
 ```
+
+## Options for within group datachecks
+
+`assertr` is designed for whole dataset validation, but it can make sense for some `assertr::insist()` rules that these are applied in a group specific way
+
+### Question
+
+Why might we want to consider groups for some data validations?
+
+
+### Group specific checks
+
+```{r}
+female_egg_data |> 
+  group_by(treatment) |> 
+dplyr::group_modify(~ .x |> insist(within_n_sds(3), eggs_laid, error_fun = just_warn))
+
+```
+
+## Summary
+
+You now know how to:
+
+- Use assertr to check data integrity before analysis.
+
+- Validate numeric and categorical variables.
+
+- Combine checks into a tidy pipeline.
+
+- Control what happens when checks fail.
+
+Automated validation transforms your scripts into self-auditing workflows — they document and test your assumptions each time the data changes.

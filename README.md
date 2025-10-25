@@ -12,7 +12,7 @@ https://www.markhw.com/blog/logos
 ## Set up one folder on computer for workshop materials.
 
 Day 1 – From Raw Data to Clean, Reproducible Datasets
-Time	Topic	Key Learning Goals	Notes / Integration
+
 
 ✓ 9:00 – 9:30	Welcome & RStudio Setup	Workshop overview. Create an RStudio Project. Explore panes, scripts, and the working directory.
 Make RStudio feel like home.
@@ -21,8 +21,7 @@ Make RStudio feel like home.
 # 9:30 – 10:15	Organizing Projects & Data Management Planning	
 - spreadsheets -  & data dictionaries
     - what if my data isn't tidy?
-    
-    Penguins data dictionary! 
+    - Penguins data dictionary! 
 
 # ✓ Using projects
 - project structure and folders (fs)
@@ -51,7 +50,6 @@ readr vs baser - speed and tibbles vs dataframe
 # ??? Calculate means, SDs, counts.	Keep it lightweight and exploratory; visual reward via ggplot2::geom_point() or geom_bar().
 
 # 11:45 – 12:30	General Data Cleaning I – Structure & Consistency	
-
 
 ✓  Factors! reorder variables.
 
