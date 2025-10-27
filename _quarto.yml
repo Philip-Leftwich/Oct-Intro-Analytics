@@ -6,14 +6,14 @@ project:
 execute:
   freeze: auto
 book:
-  title: 5027A
+  title: Data Analysis in R
   subtitle: ''
   author: Philip Leftwich
   doi: ''
   license: CC-BY
-  description: Statistical skills for Biologists
-  cover-image: images/logos/logo.png
-  image: images/logos/logo.png
+  description: Analytical skills for Biologists
+#  cover-image: images/logos/logo.png
+#  image: images/logos/logo.png
   favicon: images/logos/logo.png
   cookie-consent: false
   google-analytics: ''
@@ -29,7 +29,7 @@ book:
     foreground: dark
     border: true
     alignment: left
-    collapse-level: 3
+    collapse-level: 1
     pinned: true
     header: ''
     footer: ''
@@ -42,8 +42,8 @@ book:
     - 01-studio-basics.qmd
   - part: "Project & Data Management"
     chapters:
-    - spreadsheets.qmd
-    - data dictionaries.qmd
+#    - spreadsheets.qmd
+#    - data dictionaries.qmd
     - tidy-data.qmd
     - projects.qmd
     - 04-penguin-project.qmd
@@ -53,30 +53,25 @@ book:
     - 05-dplyr.qmd
   - part: "Data Cleaning"
     chapters:
-    - 06-data-names.qmd
-    - 07-duplicates.qmd
-    - 08-missing-values.qmd
-    - 09-strings.qmd
-    - 10-dates.qmd
+    - columns.qmd
+    - strings.qmd
+    - duplicates.qmd
+    - dates.qmd
+    - factors.qmd
+    - Summary.qmd
   - part: "Data Validation"
     chapters:
     - 11-assertions.qmd
-
-
-  - part: "Summary tables"
-    chapters:
-    - summary-table.qmd
   - part: "Data Visualisation"
     chapters:
     - ggplot.qmd
-  - part: "Reproducible Reports"
+    - ggplot2.qmd
+    - ggplot3.qmd
+  - part: "Summary tables"
     chapters:
-    - quarto.qmd
+    - summary-table.qmd
   appendices:
   - r-basics.qmd
-  - tidy-data.qmd
-  - join.qmd
-  - advanced_ggplot.qmd
   - references.qmd
 bibliography:
   - include/packages.bib

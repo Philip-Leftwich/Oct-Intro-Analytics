@@ -1,0 +1,159 @@
+## Data validation {#sec-validate}
+
+https://docs.ropensci.org/assertr/articles/assertr.html#verify-vs--assert
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(janitor)
+library(here)
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
+```
+
+
+```{r, include = FALSE}
+library(dplyr)
+library(assertr)
+
+set.seed(123)
+n <- 20
+
+# Step 1: create dataset
+female_egg_data <- tibble(
+  female_id = 1:n,
+  treatment = rep(c("A","B"), times =10),
+  age_days = sample(1:30, n, replace = TRUE),
+  eggs_laid = rpois(n, lambda = 50),
+  eggs_hatched = pmin(eggs_laid, rpois(n, lambda = 45))
+)
+
+# Step 2: Introduce some deliberate issues
+female_egg_data$age_days[1] <- 0                     # invalid age
+female_egg_data$eggs_laid[2] <- mean(female_egg_data$eggs_laid) + 10*sd(female_egg_data$eggs_laid)  # extreme eggs_laid
+female_egg_data$eggs_hatched[3] <- female_egg_data$eggs_laid[3] + 5  # eggs_hatched > eggs_laid
+
+female_egg_data
+
+
+```
+
+## Learning Objectives:
+
+
+```{r}
+library(assertr)
+library(dplyr)
+library(rlang)
+
+data_checks <- function(data,
+                        metadata_path = NULL,
+                        numeric_cols = NULL,
+                        character_cols = NULL,
+                        unique_cols = NULL,
+                        bounded_cols = NULL,
+                        bounds = c(1, 30),
+                        treatment_levels = c("A", "B"),
+                        just_warn = TRUE) {
+  
+  # Define error handler
+  handler <- if (just_warn) assertr::just_warn else assertr::error_stop
+  
+  metadata <- readxl::read_excel(metadata_path, sheet = "Data Dictionary")
+    
+  required_cols <- metadata |>
+      pull(`Name`)
+  
+  # Start pipeline
+  out <- data |>
+    verify(has_all_names(required_cols), error_fun = handler)
+  
+  # Numeric checks
+  if (!is.null(numeric_cols)) {
+    out <- out |>
+      assert(is.numeric, !!!syms(numeric_cols), error_fun = handler)
+  }
+  
+  # Character checks
+  if (!is.null(character_cols)) {
+    out <- out |>
+      assert(is.character, !!!syms(character_cols), error_fun = handler)
+  }
+  
+  # Unique checks
+  if (!is.null(unique_cols)) {
+    out <- out |>
+      assert(is_uniq, !!!syms(unique_cols), error_fun = handler)
+  }
+  
+  # Non-missing checks
+  all_cols <- names(data)
+  
+  if (!is.null(all_cols)) {
+    out <- out |>
+      assert(not_na, !!!syms(all_cols), error_fun = handler)
+  }
+  
+  # Treatment in set
+  if ("treatment" %in% names(data)) {
+    pred_treatment <- assertr::in_set(treatment_levels)
+    out <- out |>
+      assert(pred_treatment, treatment, error_fun = handler)
+  }
+  
+  # Bounded numeric checks
+  if (!is.null(bounded_cols)) {
+    out <- out |>
+      assert(within_bounds(bounds[1], bounds[2]), !!!syms(bounded_cols),
+             error_fun = handler)
+  }
+  
+  # Eggs logic check if present
+  if (all(c("eggs_hatched", "eggs_laid") %in% names(out))) {
+    out <- out |>
+      verify(eggs_hatched <= eggs_laid, error_fun = handler)
+  }
+  
+  return(out)
+}
+
+
+```
+
+
+```{r}
+load_and_clean_data <- function(path, 
+                                date_col = NULL,
+                                delim = ",",
+                                show_skim = TRUE) {
+  # Read data using readr
+  df <- readr::read_delim(path, delim = delim, show_col_types = FALSE) |>
+    janitor::clean_names()
+  
+  # Convert date column if provided
+  if (!is.null(date_col) && date_col %in% names(df)) {
+    df <- df |>
+      dplyr::mutate({{ date_col }} := lubridate::dmy(.data[[date_col]]))
+  } else if (!is.null(date_col)) {
+    warning(paste("Column", date_col, "not found in data — skipping date conversion"))
+  }
+  
+  # Optionally skim summary
+  if (show_skim) {
+    cat("\n📊 Quick data summary:\n")
+    print(skimr::skim(df))
+  }
+  
+  return(df)
+}
+
+
+```
+
+
+```{r}
+  egg_data <- 
+  load_and_clean_data("data dictionary/female_egg_data.csv") |> 
+  data_checks(metadata_path = "data dictionary/insect_egg_metadata.xlsx")
+
+```

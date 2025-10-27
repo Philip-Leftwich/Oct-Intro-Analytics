@@ -70,7 +70,7 @@ knitr::include_graphics("images/global-options.png")
 
 You can [personalise the RStudio GUI](https://support.rstudio.com/hc/en-us/articles/115011846747-Using-Themes-in-the-RStudio-IDE) as much as you like. 
 
-```{r themed, echo=FALSE, fig.show = "hold", out.width = "50%"}
+```{r themes, echo=FALSE, fig.show = "hold", out.width = "50%"}
 
 knitr::include_graphics(c("images/dark_mode.png", "images/classic_mode.png"))
 
@@ -78,7 +78,7 @@ knitr::include_graphics(c("images/dark_mode.png", "images/classic_mode.png"))
 
 ## Add-ins
 
-```{r labelled, echo=FALSE, fig.cap="Add-ins toolbar"}
+```{r add, echo=FALSE, fig.cap="Add-ins toolbar"}
 
 knitr::include_graphics("images/rstudio-addins-toolbar.png")
 
@@ -108,7 +108,7 @@ install.packages("ggthemeassist")
 | **esquisse**  | Provides a drag-and-drop interface for creating ggplot2 plots.                      | Enables interactive visualization without writing complex plotting code. |
 |
 
-```{r labelled, echo=FALSE, fig.cap="Add-in outline"}
+```{r overview, echo=FALSE, fig.cap="Add-in outline"}
 
 knitr::include_graphics("images/demo-add-in.png")
 

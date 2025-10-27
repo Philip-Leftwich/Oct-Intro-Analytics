@@ -1,4 +1,4 @@
-# Summarise{#sec-summarise}
+# Summarise {#sec-summarise}
 
 ```{r, echo = F, warning = F, message = F}
 library(tidyverse)

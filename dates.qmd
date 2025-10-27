@@ -1,0 +1,100 @@
+# Dates {#sec-dates}
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(janitor)
+library(here)
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+penguins <- readRDS("data/penguin_clean_names.RDS")
+```
+
+
+
+Working with dates can be tricky, treating date as strictly numeric is problematic, it won't account for number of days in months or number of months in a year. 
+
+Additionally there's a lot of different ways to write the same date:
+
+* 13-10-2019
+
+* 10-13-2019
+
+* 13-10-19
+
+* 13th Oct 2019
+
+* 2019-10-13
+
+This variability makes it difficult to tell our software how to read the information, luckily we can use the functions in the `lubridate` package. 
+
+
+```{block, type = "warning"}
+If you get a warning that some dates could not be parsed, then you might find the date has been inconsistently entered into the dataset.
+
+Pay attention to warning and error messages
+```
+
+Depending on how we interpret the date ordering in a file, we can use `ymd()`, `ydm()`, `mdy()`, `dmy()` 
+
+## Reformat
+
+## Extract
+
+## Excel date formats
+
+```{r}
+library(janitor)
+
+excel_numeric_to_date(42370)
+```
+
+## Examples
+
+* **Question** What is the appropriate function from the above to use on the `date_egg` variable in the penguins dataset?
+
+
+`r longmcq(c("ymd()", "ydm()", "mdy()", answer="dmy()"))`
+
+
+`r hide("Solution")`
+
+
+```{r, eval = T, warning = F, message = F}
+
+penguins <- penguins |>
+  mutate(date_egg = lubridate::dmy(date_egg))
+
+```
+
+`r unhide()`
+
+
+Here we use the `mutate` function from `dplyr` to create a *new variable* called `date_egg_proper` based on the output of converting the characters in `date_egg` to date format. The original variable is left intact, if we had specified the "new" variable was also called `date_egg` then it would have overwritten the original variable. 
+
+
+Once we have established our date data, we are able to perform calculations or extract information. Such as the date range across which our data was collected.  
+
+### Calculations with dates
+
+```{r, eval = F}
+penguins |> 
+  summarise(min_date=min(date_egg),
+            max_date=max(date_egg))
+```
+
+We can also extract and make new columns from our date column - such as a simple column of the year when each observation was made:
+
+```{r, eval = F}
+penguins <- penguins |> 
+  mutate(year = lubridate::year(date_egg))
+
+```
+
+### Filter dates
+
+```{r, eval = FALSE}
+# return records after 2008
+plants |>
+  filter(date_egg >= ymd("2008-01-01"))
+```
+

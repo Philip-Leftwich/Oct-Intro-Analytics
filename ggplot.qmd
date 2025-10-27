@@ -509,6 +509,7 @@ ggplot(data = penguins, aes(x=culmen_length_mm, y=culmen_depth_mm, colour = spec
 
 :::
 
+
 ::: {.callout-note icon="false"} 
 
 ## Your Turn
@@ -530,7 +531,6 @@ If you are experiencing issues with the legend position and theme, try modifying
 
 :::
 
-:::
 
 ::: {.callout-caution collapse="true" icon="false"} 
 

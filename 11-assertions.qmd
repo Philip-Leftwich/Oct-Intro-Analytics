@@ -120,21 +120,21 @@ The assertr package (@R-assertr) has three main functions:
 
 - `verify()` - **is this statement true for the whole data?**
 
-```{r}
+```{r, eval = F}
 df %>% verify(has_all_names("female_id","treatment","age_days","eggs_laid","eggs_hatched"))
 
 ```
 
 - `assert()` - **applies a prediction row-by-row to the specified columns**
 
-```{r}
+```{r, eval = F}
 df %>% assert(is.numeric, female_id, age_days, eggs_laid, eggs_hatched)
 ```
 
 - `insist()` - **Flag values using a rule that depends on the whole column**
 
 
-```{r}
+```{r, eval = F}
 df %>% insist(within_n_sds(3), eggs_laid)
 
 ```
@@ -143,19 +143,22 @@ df %>% insist(within_n_sds(3), eggs_laid)
 :::{.panel-tabset}
 # Assertr
 ```{r}
-female_egg_data  |> 
-    verify(has_all_names("female_id", "treatment",
-                         "age_days", "eggs_laid", "eggs_hatched"),
-           error_fun = just_warn) |>
-    assert(is.numeric, female_id, age_days, eggs_laid, eggs_hatched,
-           error_fun = just_warn) |>
-    assert(is.character, treatment, error_fun = just_warn) |>
-    assert(is_uniq, female_id, error_fun = just_warn) |>
-    assert(not_na, female_id, treatment, age_days,
-           eggs_laid, eggs_hatched, error_fun = just_warn) |>
-    assert(within_bounds(1, 30), age_days, error_fun = just_warn) |>
-    verify(eggs_hatched <= eggs_laid, error_fun = just_warn) |>
-    insist(within_n_sds(3), eggs_laid, error_fun = just_warn)
+data_checks <- function(female_egg_data, just_warn, is.numeric, female_id, age_days, eggs_laid, eggs_hatched, is.character, treatment, is_uniq, not_na) {
+  female_egg_data  |> 
+      verify(has_all_names("female_id", "treatment",
+                           "age_days", "eggs_laid", "eggs_hatched"),
+             error_fun = just_warn) |>
+      assert(is.numeric, female_id, age_days, eggs_laid, eggs_hatched,
+             error_fun = just_warn) |>
+      assert(is.character, treatment, error_fun = just_warn) |>
+      assert(is_uniq, female_id, error_fun = just_warn) |>
+      assert(not_na, female_id, treatment, age_days,
+             eggs_laid, eggs_hatched, error_fun = just_warn) |>
+      assert(in_set("A", "B"), treatment) |> 
+      assert(within_bounds(1, 30), age_days, error_fun = just_warn) |>
+      verify(eggs_hatched <= eggs_laid, error_fun = just_warn) |>
+      insist(within_n_sds(3), eggs_laid, error_fun = just_warn)
+}
 
 ```
 
@@ -179,7 +182,7 @@ female_egg_data |>
                       values_to = "type")
 
 female_egg_data |> 
-  duplicated(female_id)
+  filter(duplicated(female_id))
 
 female_egg_data_report <- female_egg_data |>
   mutate(
@@ -245,3 +248,26 @@ You now know how to:
 - Control what happens when checks fail.
 
 Automated validation transforms your scripts into self-auditing workflows — they document and test your assumptions each time the data changes.
+
+
+
+
+```{r}
+data_checks <- function(female_egg_data, just_warn, is.numeric, female_id, age_days, eggs_laid, eggs_hatched, is.character, treatment, is_uniq, not_na) {
+  female_egg_data  |> 
+      verify(has_all_names("female_id", "treatment",
+                           "age_days", "eggs_laid", "eggs_hatched"),
+             error_fun = just_warn) |>
+      assert(is.numeric, female_id, age_days, eggs_laid, eggs_hatched,
+             error_fun = just_warn) |>
+      assert(is.character, treatment, error_fun = just_warn) |>
+      assert(is_uniq, female_id, error_fun = just_warn) |>
+      assert(not_na, female_id, treatment, age_days,
+             eggs_laid, eggs_hatched, error_fun = just_warn) |>
+      assert(in_set("A", "B"), treatment) |> 
+      assert(within_bounds(1, 30), age_days, error_fun = just_warn) |>
+      verify(eggs_hatched <= eggs_laid, error_fun = just_warn) |>
+      insist(within_n_sds(3), eggs_laid, error_fun = just_warn)
+}
+
+```

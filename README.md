@@ -5,14 +5,11 @@
 - https://www.dataquest.io/blog/rstudio-tips-tricks-shortcuts/#:~:text=Another%20way%20to%20access%20RStudio,%2B%20%2D%20on%20Linux%20and%20Windows.
 
 
-https://www.markhw.com/blog/logos
-
 🗓️ Updated Two-Day Schedule (v3 – Emphasizing Inspect → Summarize → Clean → Assert)
 
-## Set up one folder on computer for workshop materials.
+## Note: Set up one folder on computer for workshop materials.
 
 Day 1 – From Raw Data to Clean, Reproducible Datasets
-
 
 ✓ 9:00 – 9:30	Welcome & RStudio Setup	Workshop overview. Create an RStudio Project. Explore panes, scripts, and the working directory.
 Make RStudio feel like home.
@@ -22,6 +19,8 @@ Make RStudio feel like home.
 - spreadsheets -  & data dictionaries
     - what if my data isn't tidy?
     - Penguins data dictionary! 
+    
+    SEE CHAT
 
 # ✓ Using projects
 - project structure and folders (fs)
@@ -46,6 +45,8 @@ readr vs baser - speed and tibbles vs dataframe
 10:45 – 11:00	☕ Break		
 
 # ✓  11:00 – 11:45	First Steps with tidyverse: Simple Summaries	Introduce filter(), select(), count(), summarise(), group_by(). 
+## Check flow
+
 
 # ??? Calculate means, SDs, counts.	Keep it lightweight and exploratory; visual reward via ggplot2::geom_point() or geom_bar().
 
@@ -71,7 +72,7 @@ parse dates (lubridate)..
 
 2:30 – 2:45	☕ Break		
 
-# 2:45 – 3:15	Assertions and Automated Checks	✅ Introduce assertr. Teach the idea of embedding expectations after cleaning.
+# ✓ 2:45 – 3:15	Assertions and Automated Checks	✅ Introduce assertr. Teach the idea of embedding expectations after cleaning.
 Key functions: verify(), assert(), insist().
 Example: r data %>% verify(nrow(.) > 0) %>% assert(in_set(c("control","treatment")), group) %>% insist(within_bounds(0,100), percent_yield)	Show what happens when assertions fail; emphasize reproducibility.
 
@@ -103,6 +104,9 @@ Time	Topic	Key Learning Goals	Notes / Integration
 
 9:15 – 10:15	Introduction to Statistical Models	Linear model logic, fit with lm(), visualize predictions.	Show that modeling depends on verified, clean data.
 # SD and SE?
+
+
+
 
 # Use Intro lm bodyweight insects line and sex? 
 

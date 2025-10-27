@@ -516,6 +516,8 @@ Below I provide some packages that help with text annotation:
 ### ggforce
 
 ```{r, warning = F, message = F}
+library(gghighlight)
+library(ggforce)
 
 penguins |> 
     ggplot(

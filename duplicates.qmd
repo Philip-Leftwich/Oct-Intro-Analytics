@@ -1,0 +1,92 @@
+# Duplicates {#sec-duplicate}
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(janitor)
+library(here)
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+penguins <- readRDS("data/penguin_clean_names.RDS")
+```
+
+
+
+It is very easy when inputting data to make mistakes, copy something in twice for example, or if someone did a lot of copy-pasting to assemble a spreadsheet (yikes!). We can check this pretty quickly
+
+
+## Duplicated rows
+
+
+::: {.panel-tabset}
+
+## dplyr
+
+```{r, eval = F}
+# check for whole duplicate 
+# rows in the data
+penguins |> 
+  filter(duplicated(across(everything())))
+  sum() 
+
+```
+
+```
+[1] 0
+```
+
+
+## janitor
+
+```{r}
+library(janitor)
+
+penguins |> 
+  get_dupes()
+
+```
+
+:::
+
+Great! 
+
+If I did have duplications I could investigate further and extract these exact rows: 
+
+```{r, eval = F}
+
+# Inspect duplicated rows
+penguins |> 
+  filter(duplicated(across(everything())))
+
+```
+
+```
+A tibble:0 × 17
+0 rows | 1-8 of 17 columns
+```
+
+```{r, eval = F}
+
+# Keep only unduplicated data with !
+penguins |> 
+  filter(!duplicated(across(everything())))
+
+```
+
+```{r, eval = T, echo = F}
+
+# Keep only unduplicated data
+penguins |> 
+  filter(duplicated(across(everything()))) |> 
+  head()
+
+```
+
+
+### Duplicates within columns
+
+
+### Counting unique entries
+
+
+
+
