@@ -13,13 +13,13 @@ Day 1 – From Raw Data to Clean, Reproducible Datasets
 
 ✓ 9:00 – 9:30	Welcome & RStudio Setup	Workshop overview. Create an RStudio Project. Explore panes, scripts, and the working directory.
 Make RStudio feel like home.
+## Add more shortcuts??? See above
 
 
 # 9:30 – 10:15	Organizing Projects & Data Management Planning	
 - spreadsheets -  & data dictionaries
-    - what if my data isn't tidy?
+#     - what if my data isn't tidy? Move to appendix???
     - Penguins data dictionary! 
-    
     SEE CHAT
 
 # ✓ Using projects
@@ -37,49 +37,41 @@ Read excel options?
 Read delim
 readr vs baser - speed and tibbles vs dataframe
 
-# Basic inspection of data: counts by groups and times. distinct counts? n_distinct?
-??? Review column types (str(), as.numeric(), etc.), rename columns (janitor::clean_names()),
+# ✓  Basic inspection of data: counts by groups and times. distinct counts? n_distinct?
 
-### Mostly written below but needs reorganising and checking!!!
+## Check from strings onwards
 
 10:45 – 11:00	☕ Break		
 
 # ✓  11:00 – 11:45	First Steps with tidyverse: Simple Summaries	Introduce filter(), select(), count(), summarise(), group_by(). 
-## Check flow
 
-
-# ??? Calculate means, SDs, counts.	Keep it lightweight and exploratory; visual reward via ggplot2::geom_point() or geom_bar().
 
 # 11:45 – 12:30	General Data Cleaning I – Structure & Consistency	
 
-✓  Factors! reorder variables.
 
 12:30 – 1:30	🍽️ Lunch		
 
 # 1:30 – 2:30	General Data Cleaning II 
 
-– Duplicates - n and n_distinct? duplicated, get_dupes
-Missing Values, 
-Strings, 
-Dates	
-Identify and handle duplicates (distinct()), 
-missing values (drop_na(), replace_na()), 
-text standardization (str_to_lower()), 
-parse dates (lubridate)..
+##  Duplicates - n and n_distinct? duplicated, get_dupes
+## Missing Values, 
+## Strings, 
+## Dates	
+## Factors
 
 # Writing scripts
 - Reproducibility mindset. (.data, styler, commenting and shortcut keys?)
 
 2:30 – 2:45	☕ Break		
 
-# ✓ 2:45 – 3:15	Assertions and Automated Checks	✅ Introduce assertr. Teach the idea of embedding expectations after cleaning.
+#  2:45 – 3:15	Assertions and Automated Checks	✅ Introduce assertr. Teach the idea of embedding expectations after cleaning.
+
 Key functions: verify(), assert(), insist().
 Example: r data %>% verify(nrow(.) > 0) %>% assert(in_set(c("control","treatment")), group) %>% insist(within_bounds(0,100), percent_yield)	Show what happens when assertions fail; emphasize reproducibility.
 
 # 3:15 – 4:15	Introduction to ggplot2 - 
 
 Make it FLOW: 
-
 Original: Facets and patchwork
 Design & Clarity - Annotate, labs, colours, ink to data, showtext, themes
 Export - camcorder

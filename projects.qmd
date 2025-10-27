@@ -17,26 +17,26 @@ By the end of this chapter, you will be able to:
 
 - Explain why tidy, well-structured projects make your R work more reproducible and easier to share.
 
-- Use the fs package to create and navigate folders within an R project.
+- Use the `fs` @R-fs package to create and navigate folders within an R project.
 
 - Set up a basic project structure with directories for data, scripts, and outputs.
 
 - Set project settings for a script-oriented workflow
 
-## Why using projects matters
-
 :::{.callout-tip}
 
-## How do you organise your R workflow?
+## **Question:** How do you organise your R workflow?
 
-Do your different analyses sit in different organised folders?
+- Do your different analyses sit in different organised folders?
 
-Do you *actively* use R projects or know what they are for?
+- Do you *actively* use R projects or know what they are for?
 
 :::
 
 
-In RStudio, a project is a way to organize your work . It's a fundamental concept designed to enhance your workflow by providing a structured and efficient means of managing your R-related tasks and files. Here's why R projects are useful:
+In RStudio, a project is a way to organize your work . It's a fundamental concept designed to enhance your workflow by providing a structured and efficient means of managing your R-related tasks and files. 
+
+## Why R projects are useful:
 
 **1. Organized File Structure:** R projects encourage you to maintain a well-organized file structure for your work. Instead of having scattered R scripts, data files, and figures, you create a dedicated folder for each project. This folder typically contains all project-related materials, including data, code, figures, notes, and any other relevant files.
 
@@ -53,19 +53,26 @@ In RStudio, a project is a way to organize your work . It's a fundamental concep
 
 You should start a new R project when you begin working on a distinct task, research project, or analysis. This ensures that your work is well-organized, and it's especially beneficial when you need to collaborate, share, or revisit the project later.
 
-To create and open an R project in RStudio:
 
-1. Go to "File" in the RStudio menu.
+::: {.callout-note icon="false"} 
 
-2. Select "New Project..."
+## Your Turn
 
-3. Choose a project type or create a new directory for the project.
+Set up our first R Project: 
 
-4. Click "Create Project."
+* [ ] 1. Go to "File" in the RStudio menu.
 
-5. Give it a name "Penguins"
+* [ ] 2. Select "New Project..."
+
+* [ ] 3. Choose a project type or create a new directory for the project.
+
+* [ ] 4. Click "Create Project."
+
+* [ ] 5. Give it a name "Penguins"
 
 The new project will be created with a .Rproj file. You can open it by double-clicking on this file or by using the "File" menu in RStudio.
+
+:::
 
 :::{.callout-warning}
 
@@ -73,13 +80,17 @@ It is very important to NEVER to move the .Rproj file, this may prevent your wor
 
 :::
 
-More on projects can be found in the [R4DS]((https://r4ds.had.co.nz/workflow-projects.html) book. 
+More on projects can be found in the [R4DS](https://r4ds.had.co.nz/workflow-projects.html) book. 
 
 
 
 ## Build a Project Structure
 
 Let's create a clean folder structure - we can do this in several ways:
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap = "An example of a typical R project set-up"}
+knitr::include_graphics("images/project.png")
+```
 
 
 :::{.panel-tabset}
@@ -92,18 +103,22 @@ Let's create a clean folder structure - we can do this in several ways:
   * data/processed
   * scripts
   * outputs
-  
+
+![RStudio IDE]("images/new-folders.png")
 
 :::{.callout-warning}
-R is case-sensitive so type everything EXACTLY as printed here
+R is case-sensitive and whitespace-sensitive so type everything EXACTLY as printed here
 :::
 
 ## Base R
 
 ```{r, eval = F}
 
+# dir.create makes directories
+# unless specified it is not "recursive"
+
 dir.create("data/raw",
-           recursive = TRUE)
+           recursive = TRUE) 
 
 dir.create("data/processed",
            recursive = TRUE)
@@ -128,7 +143,7 @@ dir_create("outputs")    # for figures and plots
 
 ```
 
-Run `dir_tree()` to generate a nicely formatted directory tree and is a great sanity check before and after file manipulation
+Run `fs::dir_tree()` to generate a nicely formatted directory tree and is a great sanity check before and after file manipulation
 
 The `fs` @R-fs package is a great OS agnostic package and one that works safely (it will not overwrite files or folders unless explicitly asked).
 
@@ -138,9 +153,7 @@ Having these separate subfolders within our project helps keep things tidy, mean
 
 You might want also want to keep any information (wider reading) you have gathered that is relevant to your project.
 
-```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap = "An example of a typical R project set-up"}
-knitr::include_graphics("images/project.png")
-```
+
 
 ### Mini challenge
 
@@ -172,7 +185,9 @@ For example many data analysis scripts start with the command `rm(list = ls())`.
 
 - **Working Directory:** The working directory is not affected, potentially causing path-related problems in future scripts.
 
-### Your turn 
+::: {.callout-note icon="false"} 
+
+## Your Turn
 
 * [ ] Run some simple R code in your console:
 
@@ -199,6 +214,7 @@ a <- b + c
 
 > You should see that this did nothing to the state of your packages
 
+:::
 
 ### Restart R sessions
 
@@ -214,7 +230,19 @@ RStudio projects can handle a clean workspace automatically.
 knitr::include_graphics("images/rstudio-workspace.png")
 ```
 
-### Question
+::: {.callout-note icon="false"} 
+
+## Your Turn
+
+* [ ] Set your Project up with the settings above.
+
+## Question
 
 Which feels safer and more reproducible for long-term work?
 
+* `rm(list=ls())`
+
+* Setting up a Blank Slate R Environment
+
+
+:::

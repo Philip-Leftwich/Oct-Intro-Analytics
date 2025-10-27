@@ -42,11 +42,12 @@ book:
     - 01-studio-basics.qmd
   - part: "Project & Data Management"
     chapters:
-#    - spreadsheets.qmd
-#    - data dictionaries.qmd
+#   - spreadsheets.qmd
     - tidy-data.qmd
     - projects.qmd
-    - 04-penguin-project.qmd
+    - import_penguins_data.qmd
+    - import_data.qmd
+#   - data dictionaries.qmd
     - summarise.qmd
   - part: "Dplyr"
     chapters:

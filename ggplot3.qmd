@@ -376,7 +376,7 @@ ggplot(    aes(x = species,
            y = body_mass_g, 
            fill = sex))+
   geom_violin(position = position_dodge(width = dodge), alpha = .4)+
-  geom_boxplot(position = position_dodge(width = dodge), width = .5, outlier.shape = NULL, show.legend = "FALSE")+
+  geom_boxplot(position = position_dodge(width = dodge), width = .5, outliers = FALSE, show.legend = FALSE)+
   geom_point(position = position_jitterdodge(jitter.width = .4, dodge.width = dodge),
              shape = 21,
              colour = "white", show.legend = FALSE, alpha = .7)+

@@ -5,13 +5,14 @@ source("R/booktem_setup.R")
 source("R/my_setup.R")
 library(tidyverse)
 library(here)
+penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
 ```
-
 
 
 ## Learning Objectives
 
-This chapter covers an ideal workflow for importing data into R
+- This chapter covers an ideal workflow for importing data into R
+
 
 ## Access our data
 
@@ -33,7 +34,15 @@ downloadthis::download_link(
 )
 ```
 
+## Meet the Penguins
 
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "Photo of three penguin species, Chinstrap, Gentoo, Adelie"}
+knitr::include_graphics("images/gorman-penguins.jpg")
+```
+
+This data, taken from the `palmerpenguins` package was originally published by @Antarctic.
+
+The palmer penguins data contains size measurements, clutch observations, and blood isotope ratios for three penguin species observed on three islands in the Palmer Archipelago, Antarctica over a study period of three years.
 
 ```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "excel view, csv view", fig.cap = "Top image: Penguins data viewed in Excel, Bottom image: Penguins data in native csv format"}
 knitr::include_graphics("images/excel_csv.png")
@@ -56,9 +65,17 @@ knitr::include_graphics("images/upload.png")
 
 ## Make a script
 
-Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. Use the `File > New Script` menu item and select an R Script. 
+Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. 
 
-Add the following:
+::: {.callout-note icon="false"} 
+
+## Your Turn
+
+Set your Rstudio theme to something that works for you: 
+
+* [ ] Use the `File > New Script` menu item and select an R Script. 
+
+* [ ] Add the following:
 
 ```{r}
 #___________________________----
@@ -76,6 +93,8 @@ Add the following:
 
 ```
 
+:::
+
 :::{.callout-tip collapse = "true"}
 # Organising a script
 
@@ -87,9 +106,16 @@ Well organised scripts are useful in that provide a reference for what you did -
 
 :::
 
+## Add Packages
+
 Next load the following add-on package to the R script, just underneath these comments. Tidyverse isn't actually one package, but a bundle of many different packages that play well together - for example it *includes* `ggplot2` a package for making figures (@R-tidyverse).
 
-Add the following to your script:
+::: {.callout-note icon="false"} 
+
+## Your Turn
+
+
+* [ ] Add the following to your script:
 
 > Note you may need to run `install.packages()` to download and set up packages the first time you make a new project.
 
@@ -101,7 +127,9 @@ library(janitor) # cleans variable names
 #__________________________----
 ```
 
-Save this file inside the **scripts** folder and call it `01_import_penguins_data.R`
+* [ ] Save this file inside the **scripts** folder and call it `01_import_penguins_data.R`
+
+:::
 
 :::{.callout-tip}
 Click on the document outline button (top right of script pane). This will show you how the use of the visual outline
@@ -118,8 +146,11 @@ We are also using `here::here()`, @R-here. The here package helps you load and s
 
 * First, we will create an object called `penguins_raw` that contains the data in the `penguins_raw.csv` file. 
 
-* Add the following to your script, and check the document outline:
+::: {.callout-note icon="false"} 
 
+## Your Turn
+
+* [ ] Add the following to your script, and check the document outline:
 
 ```{r, eval = F}
 # IMPORT DATA ----
@@ -131,6 +162,7 @@ penguins_raw
 #__________________________----
 ```
 
+
 ```{r, echo = FALSE}
 
 # check the data has loaded
@@ -138,8 +170,7 @@ head(penguins_raw)
 
 ```
 
-
-## Check your script
+* [ ] Check your script
 
 `r hide("Solution")`
 
@@ -174,3 +205,17 @@ penguins_raw
 ```
 
 `r unhide()`
+
+:::
+
+## Summary
+
+In this chapter we have:
+
+- Set up our raw data in an organised subdirectory
+
+- Made safe filepaths to our data
+
+- Imported into R
+
+- Checked basic data import

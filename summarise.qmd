@@ -9,21 +9,35 @@ source("R/my_setup.R")
 penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
 ```
 
+## Learning Objectives
 
+- Use summary functions to explore the structure and completeness of a dataset.
 
-::: {.callout-warning}
+- Create simple summaries and grouped summaries using `count()`, `group_by()`, and `summarise()`.
 
-Re-open your `01_import_penguins_data.R` started in @sec-penguins and start to add these commands to your data importing and cleaning script:
+- Calculate descriptive statistics (mean, SD) across groups.
 
-:::
+- Use `janitor` tools @R-janitor to quickly tabulate and summarise categorical data.
 
+## A first glimpse
 
-### Activity 1: Explore data structure
+When starting with a new dataset, we want to get an initial idea:
 
-Before working with your data, it's essential to understand its underlying structure and content. In this section, we'll use powerful functions like `glimpse()`, `str()`, `summary()`, `head`()`, `tail()` and the add-on function `skimr::skim()` to thoroughly examine your dataset. These tools provide insights into data types, variable distributions, and sample records, helping you identify initial issues such as missing values or inconsistent data types. By gaining a clear understanding of your data's structure, you'll be better equipped to address any problems and proceed confidently with data cleaning and analysis.
+- How many rows and columns are there?
 
-When we run `glimpse()` we get several lines of output. The number of observations "rows", the number of variables "columns". Check this against the csv file you have - they should be the same. In the next lines we see variable names and the type of data. 
+- What are the column names?
 
+- What types of data are in each column?
+
+- What are their possible values or ranges?
+
+- These answers are useful to know before jumping into wrangling and cleaning data.
+
+There are several ways to return an overview of your data, ranging in how comprehensively you wish to summarise your data’s structure.
+
+::: {.panel-tabset}
+
+## glimpse
 
 ```{r, eval = T}
 
@@ -31,30 +45,38 @@ glimpse(penguins_raw)
 
 ```
 
-We can see a dataset with 345 rows (including the headers) and 17 variables
+## `str()`
+
+```{r, eval = T}
+
+str(penguins_raw)
+
+```
+
+## skim
+
+```{r, eval = T}
+library(skimr)
+
+skim(penguins_raw)
+
+```
+
+:::
+
+At this early stage, it’s helpful to assess whether your dataset meets your expectations. Consider if the data appear as anticipated. Are the values in each column reasonable? Are there any noticeable gaps or errors that might need to be corrected, or that could potentially render the data unusable?
+
+::: {.callout-note icon="false"} 
+
+## Your Turn
+
+The dataset has `r fitb(345)` rows (including the headers) and `r fitb(17)` 17 columns.
+
 It also provides information on the *type* of data in each column
 
 * `<chr>` - means character or text data
 
 * `<dbl>` - means numerical data
-
-
-When we run `summary()` we get similar information, in addition for any numerical values we get summary statistics such as mean, median, min, max, quartile ranges and any missing (`NA`) values
-
-```{r, eval = T}
-
-summary(penguins_raw)
-
-```
-
-Finally the add-on package `skimr` provides the function `skimr::skim()` provides an easy to view set of summaries including column types, completion rate, number of unique variables in each column and similar statistical summaries along with a small histogram for each numeric variable. 
-
-```{r}
-library(skimr)
-skim(penguins_raw)
-
-```
-
 
 **Q Based on our summary functions are any variables assigned to the wrong data type (should be character when numeric or vice versa)?**
 
@@ -78,5 +100,178 @@ Although some columns like date might not be correctly treated as character vari
 No, they are 2 missing data points for body measurements (culmen, flipper, body mass), 11 missing data points for sex, 13/14 missing data points for blood isotopes (Delta N/C) and 290 missing data points for comments
 
 `r unhide()`
+
+:::
+
+## Next Steps
+
+We have just learned some ways to initially inspect our dataset. Keep in mind, we don’t expect everything to be perfect. This initial inspection is a good opportunity to identify where these issues might be and assess their severity.
+
+When you are confident that the dataset is largely as expected, you are ready to start summarising your data.
+
+## Summarise
+
+In the previous section, we learned how to get an overview of our data’s structure, including the number of rows, the columns present, and any missing data. In this section, we will focus on summarising the data. Summarising data can provide insight into the scope and variation in our dataset, and help in evaluating its suitability for our analysis.
+
+With our data we can count the total number of occurrences for different groups:
+
+```{r}
+penguins_raw |> 
+  filter(`Species` == "Adelie Penguin (Pygoscelis adeliae)") |> 
+  count()
+
+```
+
+Or grouped by another variable such as sex:
+
+```{r}
+penguins_raw |> 
+  filter(`Species` == "Adelie Penguin (Pygoscelis adeliae)") |> 
+  group_by(Sex) |> 
+  count()
+```
+
+
+:::{.panel-tabset}
+
+## Dplyr
+
+```{r}
+
+penguins_raw |> 
+  group_by(Species,Sex) |> 
+  count() |> 
+  arrange(desc(n))
+
+```
+
+
+## Janitor
+
+```{r}
+penguins_raw |>
+  tabyl(Sex, Species) |> 
+  adorn_percentages("all") |>
+  adorn_totals(c("row", "col")) |>
+  adorn_pct_formatting(digits = 1)
+
+```
+
+:::
+
+### Visualising Frequencies
+
+Graphs make summaries easier to interpret at a glance.
+
+:::{.panel-tabset}
+
+## Geom_col
+
+```{r}
+
+penguins_raw |> 
+  group_by(Species,Sex) |> 
+  count() |> 
+  arrange(desc(n)) |> 
+  ggplot(aes(x = Species,
+             y = n,
+             fill = Sex))+
+  geom_col(position=position_dodge2(preserve="single"))+
+  coord_flip()+
+  labs(x = "")+
+  theme(legend.position = "bottom")
+
+```
+
+## Geom_bar
+
+```{r}
+
+penguins_raw |> 
+  ggplot(aes(x = Species,
+             fill = Sex))+
+  geom_bar(position=position_dodge2(preserve="single"))+
+  coord_flip()+
+  labs(x = "")+
+  theme(legend.position = "bottom")
+
+```
+
+
+
+### Summarising with Mean and SD
+
+We can extend our summaries to show not just counts, but also measures of central tendency (mean) and spread (standard deviation).
+
+These are powerful ways to understand variation within groups.
+
+```{r, eval = T, message = F, warning = F}
+
+penguins_raw |>
+group_by(Species) |> 
+summarise(
+mean_mass = mean(`Body Mass (g)`, na.rm = TRUE),
+sd_mass = sd(`Body Mass (g)`, na.rm = TRUE),
+n = n()
+)
+
+```
+
+::: {.callout-note icon="false"} 
+
+## Your Turn
+
+* [ ] Add Sex to the `group_by()` function to see how mean and SD of body mass differ by sex within species.
+
+`r hide("Solution")`
+
+
+```{r, eval = T, message = F, warning = F}
+
+penguins_raw |>
+group_by(Species, Sex) |> 
+drop_na(Sex) |> # Optional remove rows where Sex is unknown
+summarise(
+mean_mass_g = mean(`Body Mass (g)`, na.rm = TRUE),
+sd_mass_g = sd(`Body Mass (g)`, na.rm = TRUE),
+n = n()
+)
+
+```
+
+
+`r unhide()`
+
+## Interpreting Mean and SD
+
+- Mean gives the central (average) value.
+
+- Standard deviation (SD) shows how spread out the values are — a large SD means more variability.
+
+- Missing values are removed with `na.rm = TRUE`.
+
+:::
+
+## Summary
+
+In this section we learned to:
+
+- Inspect structure and completeness
+
+    - Use `glimpse()`, `str()`, and `skim()` to understand column types, missing data, and variable ranges.
+
+    - Confirm that variables are stored in appropriate formats (e.g. numeric vs character).
+
+- Summarise counts and categories
+
+    Count observations using `count()` and `group_by()` to explore dataset composition.
+
+    Use `janitor::tabyl()` for fast, readable cross-tabulations and percentages.
+
+- Calculate descriptive statistics
+
+    - Compute group-wise summaries with `summarise()` such as means, SDs, and counts.
+
+- Visualise summaries
 
 

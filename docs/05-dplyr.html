@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.8.24">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Analytical skills for Biologists">
-<title>6&nbsp; Introduction to dplyr – Data Analysis in R</title>
+<title>7&nbsp; Introduction to dplyr – Data Analysis in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -53,7 +53,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -280,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-dplyr.html">Dplyr</a></li><li class="breadcrumb-item"><a href="./05-dplyr.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-dplyr.html">Dplyr</a></li><li class="breadcrumb-item"><a href="./05-dplyr.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -352,14 +372,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-penguin-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Meet the Penguins</span></span></a>
+  <a href="./import_penguins_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Reading data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summarise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
   </div>
 </li>
       </ul>
@@ -376,7 +402,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
   </div>
 </li>
       </ul>
@@ -393,37 +419,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./columns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./strings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
       </ul>
@@ -440,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-assertions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data validation</span></span></a>
   </div>
 </li>
       </ul>
@@ -457,19 +483,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
   </div>
 </li>
       </ul>
@@ -486,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary-table.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Summary tables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary tables</span></span></a>
   </div>
 </li>
       </ul>
@@ -522,22 +548,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">6.1</span> Overview</a></li>
-  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="header-section-number">6.2</span> Select</a></li>
-  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">6.3</span> Filter</a></li>
-  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><span class="header-section-number">6.4</span> Arrange</a></li>
-  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><span class="header-section-number">6.5</span> Mutate</a></li>
+<li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
+  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr"><span class="header-section-number">7.2</span> dplyr</a></li>
+  <li><a href="#overview-of-key-functions" id="toc-overview-of-key-functions" class="nav-link" data-scroll-target="#overview-of-key-functions"><span class="header-section-number">7.3</span> Overview of Key Functions</a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="header-section-number">7.4</span> Select</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">7.5</span> Filter</a></li>
+  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">7.6</span> Your Turn</a></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><span class="header-section-number">7.7</span> Arrange</a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><span class="header-section-number">7.8</span> Mutate</a></li>
+  <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes"><span class="header-section-number">7.9</span> Pipes</a></li>
   <li>
-<a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes"><span class="header-section-number">6.6</span> Pipes</a>
+<a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by"><span class="header-section-number">7.10</span> Group by</a>
   <ul class="collapse">
-<li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task"><span class="header-section-number">6.6.1</span> Task</a></li>
+<li><a href="#grouping-by-multiple-variables" id="toc-grouping-by-multiple-variables" class="nav-link" data-scroll-target="#grouping-by-multiple-variables"><span class="header-section-number">7.10.1</span> Grouping by multiple variables</a></li>
   </ul>
 </li>
+  <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary"><span class="header-section-number">7.11</span> Glossary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-dplyr.html">Dplyr</a></li><li class="breadcrumb-item"><a href="./05-dplyr.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-dplyr" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-dplyr.html">Dplyr</a></li><li class="breadcrumb-item"><a href="./05-dplyr.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-dplyr" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></h1>
 </div>
 
 
@@ -551,8 +582,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>In this chapter you will learn how to use tidyverse functions to data clean and wrangle <a class="glossary">tidy data<span class="def">Tidy data refers to a specific format for organizing datasets that makes data easier to work with for analysis and visualization in R, especially using the tidyverse. The concept was popularized by Hadley Wickham in his paper “Tidy Data” and is an essential principle for effective data manipulation.</span></a> introduced in <a href="tidy-data.html" class="quarto-xref"><span>Chapter 2</span></a></p>
-<p>In this section we will be introduced to some of the most commonly used data wrangling functions, these come from the <code>dplyr</code> package (part of the <code>tidyverse</code>). These are functions you are likely to become <em>very</em> familiar with.</p>
+</header><section id="learning-objectives" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="learning-objectives">
+<span class="header-section-number">7.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you will be able to:</p>
+<ul>
+<li><p>Explain what the <code>dplyr</code> <span class="citation" data-cites="R-dplyr">(<a href="references.html#ref-R-dplyr" role="doc-biblioref"><strong>R-dplyr?</strong></a>)</span> package is and why it’s central to data wrangling.</p></li>
+<li><p>Use the six core verbs of dplyr (<code>select</code>, <code>filter</code>, <code>arrange</code>, <code>mutate</code>, <code>summarise</code>, and <code>group_by</code>).</p></li>
+<li><p>Chain multiple operations together using the pipe operator (<code>|&gt;</code>).</p></li>
+<li><p>Apply <code>group_by()</code> with <code>summarise()</code> to generate grouped summaries.</p></li>
+</ul></section><section id="dplyr" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="dplyr">
+<span class="header-section-number">7.2</span> dplyr</h2>
+<p>The <code>dplyr</code> package (part of the <code>tidyverse</code> <span class="citation" data-cites="R-tidyverse">Wickham (<a href="references.html#ref-R-tidyverse" role="doc-biblioref">2023</a>)</span>) provides simple, consistent functions for cleaning and transforming data. These are the building blocks for almost every data workflow in R. Once you understand these verbs, you can read and write tidy R code fluently.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -563,11 +603,11 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Try running the following functions directly in your <a class="glossary">console<span class="def">The R console is the interactive interface within the R environment where users can type and execute R code. It is the place where you can directly enter commands, see their output, and interact with the R programming language in real-time.</span></a> <em>or</em> make a <code>scraps.R</code> scrappy file to mess around in.</p>
+<p>Try running the following functions directly in your <a class="glossary">console<span class="def">The R console is the interactive interface within the R environment where users can type and execute R code. It is the place where you can directly enter commands, see their output, and interact with the R programming language in real-time.</span></a></p>
 </div>
 </div>
-<section id="overview" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="overview">
-<span class="header-section-number">6.1</span> Overview</h2>
+</section><section id="overview-of-key-functions" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="overview-of-key-functions">
+<span class="header-section-number">7.3</span> Overview of Key Functions</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="kable-table">
@@ -606,8 +646,8 @@ Important
 </div>
 </div>
 </div>
-</section><section id="select" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="select">
-<span class="header-section-number">6.2</span> Select</h2>
+</section><section id="select" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="select">
+<span class="header-section-number">7.4</span> Select</h2>
 <p>If we wanted to create a dataset that only includes certain variables, we can use the <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code> function from the <code>dplyr</code> package.</p>
 <p>For example I might wish to create a simplified dataset that only contains <code>species</code>, <code>sex</code>, <code>flipper_length_mm</code> and <code>body_mass_g</code>.</p>
 <p>Run the below code to select only those columns</p>
@@ -625,13 +665,30 @@ Important
 </div>
 <p>Note that <code>select()</code> does <strong>not</strong> change the original <code>penguins</code> tibble. It spits out the new tibble directly into your console.</p>
 <p>If you don’t <strong>save</strong> this new tibble, it won’t be stored. If you want to keep it, then you must create a new object.</p>
-<p>When you run this new code, you will not see anything in your console, but you will see a new object appear in your Environment pane.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Your Turn
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a new tibble containing only species, sex, flipper length and body mass.</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> penguins_raw, </span>
 <span id="cb3-2"><a href="#cb3-2"></a>       <span class="st">`</span><span class="at">Species</span><span class="st">`</span>, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Body Mass (g)</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="filter" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="filter">
-<span class="header-section-number">6.3</span> Filter</h2>
+</div>
+</div>
+</div>
+</section><section id="filter" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="filter">
+<span class="header-section-number">7.5</span> Filter</h2>
 <p>Having previously used <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code> to select certain variables, we will now use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code> to select only certain rows or observations. For example only Adelie penguins.</p>
 <p>We can do this with the equivalence operator <code>==</code></p>
 <div class="cell" data-layout-align="center">
@@ -692,15 +749,23 @@ Important
 <span id="cb6-3"><a href="#cb6-3"></a>                      <span class="st">"Gentoo penguin (Pygoscelis papua)"</span>)</span>
 <span id="cb6-4"><a href="#cb6-4"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>You can include multiple expressions within <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> and it will pull out only those rows that evaluate to <code>TRUE</code> for all of your conditions.</p>
-<p>For example the below code will pull out only those observations of Adelie penguins where flipper length was measured as greater than 190mm.</p>
+<p>You can include multiple expressions within <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> and it will pull out only those rows that evaluate to <code>TRUE</code> for all of your conditions. ::: {.callout-note icon=“false”}</p>
+</section><section id="your-turn-1" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="your-turn-1">
+<span class="header-section-number">7.6</span> Your Turn</h2>
+<p>Filter the data so that it contains <em>only</em> Adelie penguins where flipper length was measured as greater than 190mm.</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> new_penguins, </span>
 <span id="cb7-2"><a href="#cb7-2"></a>       <span class="st">`</span><span class="at">Species</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Adelie Penguin (Pygoscelis adeliae)"</span>, </span>
 <span id="cb7-3"><a href="#cb7-3"></a>       <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">190</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="arrange" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="arrange">
-<span class="header-section-number">6.4</span> Arrange</h2>
+</div>
+<p>:::</p>
+</section><section id="arrange" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="arrange">
+<span class="header-section-number">7.7</span> Arrange</h2>
 <p>The function <code>arrange()</code> sorts the rows in the table according to the columns supplied. For example</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">arrange</span>(<span class="at">.data =</span> new_penguins, </span>
@@ -712,24 +777,36 @@ Important
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">arrange</span>(<span class="at">.data =</span> new_penguins, </span>
 <span id="cb9-2"><a href="#cb9-2"></a>        <span class="fu">desc</span>(<span class="st">`</span><span class="at">Sex</span><span class="st">`</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>You can also sort by more than one column, what do you think the code below does?</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">arrange</span>(<span class="at">.data =</span> new_penguins,</span>
-<span id="cb10-2"><a href="#cb10-2"></a>        <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>,</span>
-<span id="cb10-3"><a href="#cb10-3"></a>        <span class="fu">desc</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span>),</span>
-<span id="cb10-4"><a href="#cb10-4"></a>        <span class="fu">desc</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section><section id="mutate" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="mutate">
-<span class="header-section-number">6.5</span> Mutate</h2>
+</section><section id="mutate" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="mutate">
+<span class="header-section-number">7.8</span> Mutate</h2>
 <p>Sometimes we need to create a new variable that doesn’t exist in our dataset. For example we might want to figure out what the flipper length is when factoring in body mass.</p>
 <p>To create new variables we use the function <code>mutate()</code>.</p>
 <p>Note that as before, if you want to save your new column you must save it as an object. Here we are mutating a new column and attaching it to the <code>new_penguins</code> data oject.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> new_penguins,</span>
-<span id="cb11-2"><a href="#cb11-2"></a>                     <span class="at">body_mass_kg =</span> <span class="st">`</span><span class="at">Body Mass (g)</span><span class="st">`</span><span class="sc">/</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> new_penguins,</span>
+<span id="cb10-2"><a href="#cb10-2"></a>                     <span class="at">body_mass_kg =</span> <span class="st">`</span><span class="at">Body Mass (g)</span><span class="st">`</span><span class="sc">/</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="pipes" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="pipes">
-<span class="header-section-number">6.6</span> Pipes</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What happens to your data if you forget to assign the new object?</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>If you do not assign the output to an R object using <code>&lt;-</code> (either a new name or overwriting the old tibble) then the output will just print into the console and will not be saved</p>
+</div>
+</div>
+</div>
+</section><section id="pipes" class="level2" data-number="7.9"><h2 data-number="7.9" class="anchored" data-anchor-id="pipes">
+<span class="header-section-number">7.9</span> Pipes</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -740,63 +817,85 @@ Important
 </div>
 <p>Pipes look like this: <code>|&gt;</code> , a <a class="glossary">pipe<span class="def">An operator that allows you to chain multiple functions together in a sequence.</span></a> allows you to send the output from one function straight into another function. Specifically, they send the result of the function before <code>|&gt;</code> to be the <strong>first</strong> argument of the function after <code>|&gt;</code>. As usual, it’s easier to show, rather than tell so let’s look at an example.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># this example uses brackets to nest and order functions</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">arrange</span>(<span class="at">.data =</span> <span class="fu">filter</span>(</span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="at">.data =</span> <span class="fu">select</span>(</span>
-<span id="cb12-4"><a href="#cb12-4"></a>  <span class="at">.data =</span> penguins_raw, </span>
-<span id="cb12-5"><a href="#cb12-5"></a>  species, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>), </span>
-<span id="cb12-6"><a href="#cb12-6"></a>  <span class="st">`</span><span class="at">Sex</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"MALE"</span>), </span>
-<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">desc</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># this example uses brackets to nest and order functions</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">arrange</span>(<span class="at">.data =</span> <span class="fu">filter</span>(</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">.data =</span> <span class="fu">select</span>(</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="at">.data =</span> penguins_raw, </span>
+<span id="cb11-5"><a href="#cb11-5"></a>  species, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>), </span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="st">`</span><span class="at">Sex</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"MALE"</span>), </span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">desc</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># this example uses sequential R objects </span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>object_1 <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> penguins_raw, </span>
-<span id="cb13-3"><a href="#cb13-3"></a>                   <span class="st">`</span><span class="at">Species</span><span class="st">`</span>, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>)</span>
-<span id="cb13-4"><a href="#cb13-4"></a>object_2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> object_1, </span>
-<span id="cb13-5"><a href="#cb13-5"></a>                   <span class="st">`</span><span class="at">Sex</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"MALE"</span>)</span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">arrange</span>(object_2, </span>
-<span id="cb13-7"><a href="#cb13-7"></a>        <span class="fu">desc</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># this example uses sequential R objects </span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>object_1 <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> penguins_raw, </span>
+<span id="cb12-3"><a href="#cb12-3"></a>                   <span class="st">`</span><span class="at">Species</span><span class="st">`</span>, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>object_2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> object_1, </span>
+<span id="cb12-5"><a href="#cb12-5"></a>                   <span class="st">`</span><span class="at">Sex</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"MALE"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">arrange</span>(object_2, </span>
+<span id="cb12-7"><a href="#cb12-7"></a>        <span class="fu">desc</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># this example is human readable without intermediate objects</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>penguins_raw <span class="sc">|&gt;</span>  </span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span>, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Sex</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"MALE"</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>)<span class="er">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># this example is human readable without intermediate objects</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>penguins_raw <span class="sc">|&gt;</span>  </span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span>, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Sex</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"MALE"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>)<span class="er">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The reason that this function is called a pipe is because it ‘pipes’ the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes it will automatically take the data from the previous line of code so you don’t need to specify it again.</p>
-<section id="task" class="level3" data-number="6.6.1"><h3 data-number="6.6.1" class="anchored">
-<span class="header-section-number">6.6.1</span> Task</h3>
-<p>Try and write out as plain English what the |&gt; above is doing? You can read the |&gt; as THEN</p>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-<p>Take the penguins data AND THEN Select only the species, sex and flipper length columns AND THEN Filter to keep only those observations labelled as sex equals male AND THEN Arrange the data from HIGHEST to LOWEST flipper lengths.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Your turn
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Take any command you wrote earlier and rewrite it using pipes.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Base pipe |&gt; and Magrittr %&gt;%
+<span class="screen-reader-only">Note</span>Native pipe |&gt; and Magrittr %&gt;%
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>From R version 4 onwards there is now a “native pipe” <code>|&gt;</code></p>
 <p>This doesn’t require the tidyverse <code>magrittr</code> package and the “old pipe” <code>%&gt;%</code> or any other packages to load and use.</p>
 <p>You may be familiar with the magrittr pipe or see it in other tutorials, and website usages. The native pipe works equivalntly in most situations but if you want to read about some of the operational differences, <a href="https://www.infoworld.com/article/3621369/use-the-new-r-pipe-built-into-r-41.html">this site</a> does a good job of explaining .</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Your Turn
 </div>
 </div>
-<section id="group-by" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="group-by">
-<span class="header-section-number">6.7</span> Group by</h2>
+<div class="callout-body-container callout-body">
+<p>Check your RStudio settings to see if you are using the Native Pipe</p>
+<ul>
+<li><p><label><input type="checkbox">Tools &gt; Project Options &gt; Code Editing &gt; Use Native Pipe</label></p></li>
+<li><p>The Shortcut key is (Ctrl/Cmd) + Shift + M</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section><section id="group-by" class="level2" data-number="7.10"><h2 data-number="7.10" class="anchored" data-anchor-id="group-by">
+<span class="header-section-number">7.10</span> Group by</h2>
 <p>The <code>group_by()</code> function is used to tell R that you want to perform operations <strong>within groups</strong> of your data rather than across the whole dataset.</p>
 <p>Think of it as adding a “temporary label” to each row that says which group it belongs to. Then, when you use functions like <code>summarise()</code>, R performs the summary for each group separately.</p>
 <p>Let’s say you want to find the average flipper length for each penguin species.</p>
 <p>Without grouping we get a single value:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>penguins_raw <span class="sc">|&gt;</span>  </span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">summarise</span>(<span class="at">mean_flipper =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>penguins_raw <span class="sc">|&gt;</span>  </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">summarise</span>(<span class="at">mean_flipper =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -813,10 +912,10 @@ Solution
 <p><strong>With grouping</strong>:</p>
 <p>Gives one number <strong>per species</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>penguins_raw <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span>) <span class="sc">|&gt;</span> <span class="co"># select our variable that contains the groups</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_flipper =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb16-4"><a href="#cb16-4"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span> ) <span class="co"># remove groups after calculation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>penguins_raw <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span>) <span class="sc">|&gt;</span> <span class="co"># select our variable that contains the groups</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_flipper =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-4"><a href="#cb15-4"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span> ) <span class="co"># remove groups after calculation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -842,13 +941,13 @@ Solution
 </div>
 </div>
 </div>
-<section id="grouping-by-multiple-variables" class="level3" data-number="6.7.1"><h3 data-number="6.7.1" class="anchored" data-anchor-id="grouping-by-multiple-variables">
-<span class="header-section-number">6.7.1</span> Grouping by multiple variables</h3>
+<section id="grouping-by-multiple-variables" class="level3" data-number="7.10.1"><h3 data-number="7.10.1" class="anchored" data-anchor-id="grouping-by-multiple-variables">
+<span class="header-section-number">7.10.1</span> Grouping by multiple variables</h3>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>penguins_raw <span class="sc">|&gt;</span> </span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span>, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_flipper =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb17-4"><a href="#cb17-4"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>penguins_raw <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span>, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_flipper =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-4"><a href="#cb16-4"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -916,8 +1015,8 @@ Note
 <p>You can think of <code>group_by()</code> as sorting your dataset into bins, one bin per group. Then, when you <code>summarise()</code> or <code>mutate()</code>, you’re performing that operation inside each bin.</p>
 </div>
 </div>
-</section></section><section id="glossary" class="level2" data-number="6.8"><h2 data-number="6.8" class="anchored" data-anchor-id="glossary">
-<span class="header-section-number">6.8</span> Glossary</h2>
+</section></section><section id="glossary" class="level2" data-number="7.11"><h2 data-number="7.11" class="anchored" data-anchor-id="glossary">
+<span class="header-section-number">7.11</span> Glossary</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table class="table caption-top table-sm table-striped small">
@@ -934,19 +1033,18 @@ Note
 <td style="text-align: left;">pipe</td>
 <td style="text-align: left;">An operator that allows you to chain multiple functions together in a sequence.</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">tidy data</td>
-<td style="text-align: left;">Tidy data refers to a specific format for organizing datasets that makes data easier to work with for analysis and visualization in R, especially using the tidyverse. The concept was popularized by Hadley Wickham in his paper "Tidy Data" and is an essential principle for effective data manipulation.</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
 
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-R-tidyverse" class="csl-entry" role="listitem">
+Wickham, H. (2023). <em>Tidyverse: Easily install and load the tidyverse</em>. <a href="https://tidyverse.tidyverse.org">https://tidyverse.tidyverse.org</a>
 </div>
-</section></section></main><!-- /main --><script>
+</div>
+</section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
@@ -1592,12 +1690,12 @@ window.onresize = move_sidebar;
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./summarise.html" class="pagination-link" aria-label="Summarise">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Summarise</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./columns.html" class="pagination-link" aria-label="Column classes &amp; names">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

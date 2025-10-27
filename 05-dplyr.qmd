@@ -10,17 +10,31 @@ source("R/my_setup.R")
 penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
 ```
 
-In this chapter you will learn how to use tidyverse functions to data clean and wrangle `r glossary("tidy data")` introduced in @sec-tidy 
+## Learning Objectives
 
-In this section we will be introduced to some of the most commonly used data wrangling functions, these come from the `dplyr` package (part of the `tidyverse`). These are functions you are likely to become *very* familiar with. 
+By the end of this chapter, you will be able to:
+
+- Explain what the `dplyr` @R-dplyr package is and why it’s central to data wrangling.
+
+- Use the six core verbs of dplyr (`select`, `filter`, `arrange`, `mutate`, `summarise`, and `group_by`).
+
+- Chain multiple operations together using the pipe operator (`|>`).
+
+- Apply `group_by()` with `summarise()` to generate grouped summaries.
+
+## dplyr
+
+The `dplyr` package (part of the `tidyverse` @R-tidyverse) provides simple, consistent functions for cleaning and transforming data.
+These are the building blocks for almost every data workflow in R.
+Once you understand these verbs, you can read and write tidy R code fluently.
 
 ::: {.callout-important}
 
-Try running the following functions directly in your `r glossary("console")` *or* make a `scraps.R` scrappy file to mess around in. 
+Try running the following functions directly in your `r glossary("console")`
 
 :::
 
-## Overview
+## Overview of Key Functions
 
 ```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
 library(kableExtra)
@@ -66,12 +80,22 @@ Note that `select()` does **not** change the original `penguins` tibble. It spit
 
 If you don't **save** this new tibble, it won't be stored. If you want to keep it, then you must create a new object. 
 
-When you run this new code, you will not see anything in your console, but you will see a new object appear in your Environment pane.
+::: {.callout-note icon="false"} 
+
+## Your Turn
+
+Create a new tibble containing only species, sex, flipper length and body mass.
+
+`r hide("Solution")`
 
 ```{r, eval = F}
 new_penguins <- select(.data = penguins_raw, 
        `Species`, `Sex`, `Flipper Length (mm)`, `Body Mass (g)`)
 ```
+
+`r unhide()`
+
+:::
 
 ## Filter
 
@@ -120,8 +144,13 @@ filter(.data = new_penguins,
 ```
 
 You can include multiple expressions within `filter()` and it will pull out only those rows that evaluate to `TRUE` for all of your conditions. 
+::: {.callout-note icon="false"} 
 
-For example the below code will pull out only those observations of Adelie penguins where flipper length was measured as greater than 190mm. 
+## Your Turn
+
+Filter the data so that it contains *only* Adelie penguins where flipper length was measured as greater than 190mm. 
+
+`r hide("Solution")`
 
 ```{r, eval =F}
 
@@ -130,6 +159,11 @@ filter(.data = new_penguins,
        `Flipper Length (mm)` > 190)
 
 ```
+
+
+`r unhide()`
+
+:::
 
 ## Arrange
 
@@ -140,7 +174,6 @@ The function `arrange()` sorts the rows in the table according to the columns su
 arrange(.data = new_penguins, 
         `Sex`)
 ```
-
 
 
 The data is now arranged in alphabetical order by sex. So all of the observations of female penguins are listed before males. 
@@ -154,14 +187,6 @@ arrange(.data = new_penguins,
 
 ```
 
-You can also sort by more than one column, what do you think the code below does?
-
-```{r, eval = F}
-arrange(.data = new_penguins,
-        `Sex`,
-        desc(`Species`),
-        desc(`Flipper Length (mm)`))
-```
 
 ## Mutate
 
@@ -176,6 +201,21 @@ Note that as before, if you want to save your new column you must save it as an 
 new_penguins <- mutate(.data = new_penguins,
                      body_mass_kg = `Body Mass (g)`/1000)
 ```
+
+::: {.callout-note icon="false"}
+
+## Question
+
+What happens to your data if you forget to assign the new object?
+
+`r hide("Solution")`
+
+If you do not assign the output to an R object using `<-` (either a new name or overwriting the old tibble) then the output will just print into the console and will not be saved
+
+`r unhide()`
+
+:::
+
 
 ## Pipes
 
@@ -217,21 +257,18 @@ penguins_raw |>
 
 The reason that this function is called a pipe is because it 'pipes' the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes it will automatically take the data from the previous line of code so you don't need to specify it again.
 
-### Task
+::: {.callout-note icon="false"}
 
-Try and write out as plain English what the |>  above is doing? You can read the |>  as THEN
+## Your turn
 
+Take any command you wrote earlier and rewrite it using pipes.
 
-`r hide("Solution")`
-
-Take the penguins data AND THEN
-Select only the species, sex and flipper length columns AND THEN
-Filter to keep only those observations labelled as sex equals male AND THEN
-Arrange the data from HIGHEST to LOWEST flipper lengths.
+:::
 
 
 :::{.callout-note}
-# Base pipe |> and Magrittr %>%
+
+# Native pipe |> and Magrittr %>%
 
 From R version 4 onwards there is now a "native pipe" `|>`
 
@@ -239,6 +276,17 @@ This doesn't require the tidyverse `magrittr` package and the "old pipe" ` %>% `
 
 You may be familiar with the magrittr pipe or see it in other tutorials, and website usages. The native pipe works equivalntly in most situations but if you want to read about some of the operational differences, [this site](https://www.infoworld.com/article/3621369/use-the-new-r-pipe-built-into-r-41.html) does a good job of explaining .
 
+::: {.callout-note icon="false"} 
+
+## Your Turn
+
+Check your RStudio settings to see if you are using the Native Pipe 
+
+* [ ] Tools > Project Options > Code Editing > Use Native Pipe
+
+* The Shortcut key is (Ctrl/Cmd) + Shift + M
+
+:::
 
 :::
 

@@ -9,14 +9,19 @@ source("R/my_setup.R")
 penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
 ```
 
+## Learning Outcomes
 
 This chapter explains how to check the class of each column and edit column names so that they are consistent and ready to use for analyses.
 
-::: {.callout-warning}
+By the end of this section, you will be able to:
 
-Re-open your `01_import_penguins_data.R` started in @sec-penguins and start to add these commands to your data importing and cleaning script:
+- Identify the data class (type) of each column in a dataset.
 
-:::
+- Use functions to inspect and confirm column names and formats.
+
+- Apply `janitor::clean_names()` to make variable names consistent and machine-readable.
+
+- Rename columns manually using `dplyr::rename()` when needed.
 
 ## Column classes
 
@@ -66,6 +71,7 @@ penguins_raw
 ```
 
 :::{.callout-note}
+
 ## Data classes
 
 From these data overviews we've learned:
@@ -117,6 +123,21 @@ When we run `colnames()` we get the identities of each column in our dataframe
 
 * **Delta 13C**: the ratio of stable Carbon isotopes 13C:12C from blood sample
 
+### Problems:
+
+- Spaces and brackets make names awkward to reference.
+
+- R is case-sensitive — Mass ≠ mass.
+
+- You need backticks (```) around names with spaces or symbols.
+
+::: {.callout-note icon="false"} 
+
+## Your Turn
+
+Identify two columns in `penguins_raw` that could cause errors if used without backticks: `r fitb(c("Culmen Length (mm)", "Culmen Depth (mm)", "Flipper Length (mm)", "Body Mass (g)", "Delta 15 N (o/oo)", "Delta 13 C (o/oo)"), ignore_case = TRUE)`
+
+:::
 
 #### Clean column names
 
@@ -192,6 +213,17 @@ penguins_clean <- rename(penguins_clean,
 
 ```
 
+```{r snake, echo=FALSE, fig.cap="Snake case"}
+
+knitr::include_graphics("images/snake_case.png")
+
+```
+
+
+
+## Save Cleaned Data
+
+Saving as `.RDS` ensures you can load the cleaned version quickly next time.
 
 ```{r, eval = FALSE}
 
