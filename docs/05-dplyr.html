@@ -553,17 +553,15 @@ div.csl-indent {
   <li><a href="#overview-of-key-functions" id="toc-overview-of-key-functions" class="nav-link" data-scroll-target="#overview-of-key-functions"><span class="header-section-number">7.3</span> Overview of Key Functions</a></li>
   <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="header-section-number">7.4</span> Select</a></li>
   <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">7.5</span> Filter</a></li>
-  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">7.6</span> Your Turn</a></li>
-  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><span class="header-section-number">7.7</span> Arrange</a></li>
-  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><span class="header-section-number">7.8</span> Mutate</a></li>
-  <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes"><span class="header-section-number">7.9</span> Pipes</a></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><span class="header-section-number">7.6</span> Arrange</a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><span class="header-section-number">7.7</span> Mutate</a></li>
+  <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes"><span class="header-section-number">7.8</span> Pipes</a></li>
   <li>
-<a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by"><span class="header-section-number">7.10</span> Group by</a>
+<a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by"><span class="header-section-number">7.9</span> Group by</a>
   <ul class="collapse">
-<li><a href="#grouping-by-multiple-variables" id="toc-grouping-by-multiple-variables" class="nav-link" data-scroll-target="#grouping-by-multiple-variables"><span class="header-section-number">7.10.1</span> Grouping by multiple variables</a></li>
+<li><a href="#grouping-by-multiple-variables" id="toc-grouping-by-multiple-variables" class="nav-link" data-scroll-target="#grouping-by-multiple-variables"><span class="header-section-number">7.9.1</span> Grouping by multiple variables</a></li>
   </ul>
 </li>
-  <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary"><span class="header-section-number">7.11</span> Glossary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -586,7 +584,7 @@ div.csl-indent {
 <span class="header-section-number">7.1</span> Learning Objectives</h2>
 <p>By the end of this chapter, you will be able to:</p>
 <ul>
-<li><p>Explain what the <code>dplyr</code> <span class="citation" data-cites="R-dplyr">(<a href="references.html#ref-R-dplyr" role="doc-biblioref"><strong>R-dplyr?</strong></a>)</span> package is and why it’s central to data wrangling.</p></li>
+<li><p>Explain what the <code>dplyr</code> <span class="citation" data-cites="R-dplyr">Wickham et al. (<a href="references.html#ref-R-dplyr" role="doc-biblioref">2023</a>)</span> package is and why it’s central to data wrangling.</p></li>
 <li><p>Use the six core verbs of dplyr (<code>select</code>, <code>filter</code>, <code>arrange</code>, <code>mutate</code>, <code>summarise</code>, and <code>group_by</code>).</p></li>
 <li><p>Chain multiple operations together using the pipe operator (<code>|&gt;</code>).</p></li>
 <li><p>Apply <code>group_by()</code> with <code>summarise()</code> to generate grouped summaries.</p></li>
@@ -749,9 +747,17 @@ Solution
 <span id="cb6-3"><a href="#cb6-3"></a>                      <span class="st">"Gentoo penguin (Pygoscelis papua)"</span>)</span>
 <span id="cb6-4"><a href="#cb6-4"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>You can include multiple expressions within <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> and it will pull out only those rows that evaluate to <code>TRUE</code> for all of your conditions. ::: {.callout-note icon=“false”}</p>
-</section><section id="your-turn-1" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="your-turn-1">
-<span class="header-section-number">7.6</span> Your Turn</h2>
+<p>You can include multiple expressions within <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> and it will pull out only those rows that evaluate to <code>TRUE</code> for all of your conditions.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Your Turn
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Filter the data so that it contains <em>only</em> Adelie penguins where flipper length was measured as greater than 190mm.</p>
 <div class="webex-solution">
 <button>
@@ -763,9 +769,10 @@ Solution
 <span id="cb7-3"><a href="#cb7-3"></a>       <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">190</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<p>:::</p>
-</section><section id="arrange" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="arrange">
-<span class="header-section-number">7.7</span> Arrange</h2>
+</div>
+</div>
+</section><section id="arrange" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="arrange">
+<span class="header-section-number">7.6</span> Arrange</h2>
 <p>The function <code>arrange()</code> sorts the rows in the table according to the columns supplied. For example</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">arrange</span>(<span class="at">.data =</span> new_penguins, </span>
@@ -777,8 +784,8 @@ Solution
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">arrange</span>(<span class="at">.data =</span> new_penguins, </span>
 <span id="cb9-2"><a href="#cb9-2"></a>        <span class="fu">desc</span>(<span class="st">`</span><span class="at">Sex</span><span class="st">`</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="mutate" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="mutate">
-<span class="header-section-number">7.8</span> Mutate</h2>
+</section><section id="mutate" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="mutate">
+<span class="header-section-number">7.7</span> Mutate</h2>
 <p>Sometimes we need to create a new variable that doesn’t exist in our dataset. For example we might want to figure out what the flipper length is when factoring in body mass.</p>
 <p>To create new variables we use the function <code>mutate()</code>.</p>
 <p>Note that as before, if you want to save your new column you must save it as an object. Here we are mutating a new column and attaching it to the <code>new_penguins</code> data oject.</p>
@@ -805,8 +812,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="pipes" class="level2" data-number="7.9"><h2 data-number="7.9" class="anchored" data-anchor-id="pipes">
-<span class="header-section-number">7.9</span> Pipes</h2>
+</section><section id="pipes" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="pipes">
+<span class="header-section-number">7.8</span> Pipes</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -887,8 +894,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="group-by" class="level2" data-number="7.10"><h2 data-number="7.10" class="anchored" data-anchor-id="group-by">
-<span class="header-section-number">7.10</span> Group by</h2>
+</section><section id="group-by" class="level2" data-number="7.9"><h2 data-number="7.9" class="anchored" data-anchor-id="group-by">
+<span class="header-section-number">7.9</span> Group by</h2>
 <p>The <code>group_by()</code> function is used to tell R that you want to perform operations <strong>within groups</strong> of your data rather than across the whole dataset.</p>
 <p>Think of it as adding a “temporary label” to each row that says which group it belongs to. Then, when you use functions like <code>summarise()</code>, R performs the summary for each group separately.</p>
 <p>Let’s say you want to find the average flipper length for each penguin species.</p>
@@ -941,8 +948,8 @@ Solution
 </div>
 </div>
 </div>
-<section id="grouping-by-multiple-variables" class="level3" data-number="7.10.1"><h3 data-number="7.10.1" class="anchored" data-anchor-id="grouping-by-multiple-variables">
-<span class="header-section-number">7.10.1</span> Grouping by multiple variables</h3>
+<section id="grouping-by-multiple-variables" class="level3" data-number="7.9.1"><h3 data-number="7.9.1" class="anchored" data-anchor-id="grouping-by-multiple-variables">
+<span class="header-section-number">7.9.1</span> Grouping by multiple variables</h3>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>penguins_raw <span class="sc">|&gt;</span> </span>
 <span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span>, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
@@ -1015,36 +1022,17 @@ Note
 <p>You can think of <code>group_by()</code> as sorting your dataset into bins, one bin per group. Then, when you <code>summarise()</code> or <code>mutate()</code>, you’re performing that operation inside each bin.</p>
 </div>
 </div>
-</section></section><section id="glossary" class="level2" data-number="7.11"><h2 data-number="7.11" class="anchored" data-anchor-id="glossary">
-<span class="header-section-number">7.11</span> Glossary</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="table caption-top table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">definition</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">console</td>
-<td style="text-align: left;">The R console is the interactive interface within the R environment where users can type and execute R code. It is the place where you can directly enter commands, see their output, and interact with the R programming language in real-time.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">pipe</td>
-<td style="text-align: left;">An operator that allows you to chain multiple functions together in a sequence.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-R-tidyverse" class="csl-entry" role="listitem">
 Wickham, H. (2023). <em>Tidyverse: Easily install and load the tidyverse</em>. <a href="https://tidyverse.tidyverse.org">https://tidyverse.tidyverse.org</a>
 </div>
+<div id="ref-R-dplyr" class="csl-entry" role="listitem">
+Wickham, H., François, R., Henry, L., Müller, K., &amp; Vaughan, D. (2023). <em>Dplyr: A grammar of data manipulation</em>. <a href="https://dplyr.tidyverse.org">https://dplyr.tidyverse.org</a>
 </div>
-</section></main><!-- /main --><script>
+</div>
+</section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {

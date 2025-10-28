@@ -144,6 +144,7 @@ filter(.data = new_penguins,
 ```
 
 You can include multiple expressions within `filter()` and it will pull out only those rows that evaluate to `TRUE` for all of your conditions. 
+
 ::: {.callout-note icon="false"} 
 
 ## Your Turn
@@ -266,7 +267,7 @@ Take any command you wrote earlier and rewrite it using pipes.
 :::
 
 
-:::{.callout-note}
+::: {.callout-note}
 
 # Native pipe |> and Magrittr %>%
 
@@ -275,6 +276,8 @@ From R version 4 onwards there is now a "native pipe" `|>`
 This doesn't require the tidyverse `magrittr` package and the "old pipe" ` %>% ` or any other packages to load and use. 
 
 You may be familiar with the magrittr pipe or see it in other tutorials, and website usages. The native pipe works equivalntly in most situations but if you want to read about some of the operational differences, [this site](https://www.infoworld.com/article/3621369/use-the-new-r-pipe-built-into-r-41.html) does a good job of explaining .
+
+
 
 ::: {.callout-note icon="false"} 
 
@@ -287,9 +290,7 @@ Check your RStudio settings to see if you are using the Native Pipe
 * The Shortcut key is (Ctrl/Cmd) + Shift + M
 
 :::
-
 :::
-
 
 ## Group by
 
@@ -334,8 +335,4 @@ You can think of `group_by()` as sorting your dataset into bins, one bin per gro
 
 :::
 
-## Glossary
 
-```{r, echo = FALSE}
-glossary_table()
-```

@@ -86,23 +86,140 @@ penguins <- penguins |>
 
 ## Learning Objectives
 
-Using consistent themes: 
-https://www.cararthompson.com/talks/nhsr2022-ggplot-themes/
+By the end of this workshop, you will be able to:
 
-Font size
+- Evaluate and improve the clarity of data visualisations using visual hierarchy and layout principles.
 
-Captions and context
+- Apply accessibility guidelines to ensure visualisations are readable, interpretable, and inclusive.
 
-5027A Accessible colours and hierarchy & redundancy
+- Use tools and R functions to test colour contrast, grayscale readability, and font legibility.
 
-Data-to-ink ratios:
-https://jtr13.github.io/cc19/tuftes-principles-of-data-ink.html
-https://rpubs.com/Konstantin_Xo/Visualization#:~:text=Data%2Dto%2Dink%20ratio%20is,conveying%20the%20important%20data%20effectively.
-https://cct-datascience.quarto.pub/crafting-publication-quality-data-visualizations-with-ggplot2/
+- Reflect critically on how design decisions influence interpretation and audience trust.
+
+## Summary
+
+Accessible visualisation is not about making plots prettier — it’s about making them clearer, fairer, and easier to understand for everyone.
+Even small tweaks in text size, colour, spacing, or annotation can transform comprehension and prevent misinterpretation.
+
+Throughout this session, you’ll assess plots for clarity and accessibility, then apply improvements step by step.
+
+## Text Hierarchy
+
+Text guides the reader through your story — titles tell what matters, axes describe structure, captions clarify meaning.
+A clear text hierarchy ensures the reader’s eye moves naturally from title → subtitle → axes → ticks.
+
+Use visual contrast (size, boldness, weight) to emphasize importance. Avoid decorative or serif fonts.
 
 
-5023B visual cues
+```{r}
 
+basic_plot <- 
+  penguins |> 
+  drop_na(flipper_length_mm) |> 
+  ggplot(aes(x = island, y = flipper_length_mm)) +
+  ggbeeswarm::geom_beeswarm(aes(fill = species,
+                                size = body_mass_g),
+                            shape = 21,
+                            colour = "#FFFFFF",
+                            alpha = 0.7) +
+  colorspace::scale_fill_discrete_qualitative(palette = "Dark2") +
+  guides(size = "none") +
+  labs(title = "Only on Dream do penguins of different species share\nsimilar flipper lengths",
+       subtitle = "Each column represents the penguin population of an island. Each dot is a penguin;
+the larger the dot, the heavier the penguin. The Adelie penguins live on all three
+islands. They share Biscoe with the longer-flippered Gentoos, and Dream with 
+the equally-flippered Chinstraps.",
+       caption = "Data from {palmerpenguins}",
+       x = "Island",
+       y = "Flipper length", 
+       fill = "")+#
+  theme_minimal()
+
+```
+
+```{r}
+basic_plot
+```
+
+
+```{r}
+mono_palette <- function(base_col = "#2c4977", n = 5) {
+  colorRampPalette(c(base_col, "white"))(n)
+}
+
+# Example use
+mono_blue <- mono_palette( "#2c4977", n = 5)
+
+dark_text <- mono_blue[1]
+
+mid_text <- mono_blue[2]
+
+light_text <- mono_blue[3]
+
+```
+
+```{r}
+library(showtext)
+
+font_add_google("Open Sans", "Open Sans")
+
+showtext::showtext_auto()
+
+basic_plot +
+  theme_minimal()+
+  theme(
+    text = element_text(colour = mid_text,
+                        family = "Open Sans"),
+    plot.title = element_text(colour = dark_text,
+                              family = "Open Sans",
+                              size = rel(1.6)),
+    plot.subtitle = element_text(size = rel(1.1)),
+    axis.text.y = element_text(colour = light_text, 
+                               size = rel(0.8)),
+    axis.title.y = element_text(size = 12),
+    axis.text.x = element_text(colour = mid_text,
+                               size = 12),
+    plot.caption = element_text(size = rel(0.8))
+  )
+
+showtext::showtext_auto(enable = FALSE)
+
+```
+
+```{r}
+
+showtext::showtext_auto()
+
+basic_plot +
+  theme_minimal(base_size = 11) +
+  theme(
+    text = element_text(colour = mid_text,
+                        family = "Open Sans",
+                        lineheight = 1.1),
+    plot.title = element_text(colour = dark_text,
+                              family = "Open Sans",
+                              size = rel(1.6),
+                              margin = margin(12, 0, 8, 0)),
+    plot.subtitle = element_text(size = rel(1.1),
+                                 margin = margin(4, 0, 0, 0)),
+    axis.text.y = element_text(colour = light_text, 
+                               size = rel(0.8)),
+    axis.title.y = element_text(size = 12,
+                                margin = margin(0, 4, 0, 0)),
+    axis.text.x = element_text(colour = mid_text,
+                               size = 12),
+    axis.title.x = element_blank(),
+    panel.grid = element_line(colour = "#dedddd"),
+    legend.position = "top",
+    legend.justification = 1,
+    plot.caption = element_text(size = rel(0.8),
+                                margin = margin(8, 0, 0, 0)),
+    plot.margin = margin(0.25, 0.25, 0.25, 0.25, "cm")
+  )
+
+showtext::showtext_auto(enable = FALSE)
+
+```
 
 ```{r}
 
@@ -377,12 +494,46 @@ ggplot(    aes(x = species,
            fill = sex))+
   geom_violin(position = position_dodge(width = dodge), alpha = .4)+
   geom_boxplot(position = position_dodge(width = dodge), width = .5, outliers = FALSE, show.legend = FALSE)+
-  geom_point(position = position_jitterdodge(jitter.width = .4, dodge.width = dodge),
-             shape = 21,
-             colour = "white", show.legend = FALSE, alpha = .7)+
   labs(title= "Boxplot", 
        subtitle = "A comparison of Body Mass (g) by Sex and Species", 
        caption = "made by Philip Leftwich") +
     theme_ox(axis_type  = "categorical")
 
 ```
+
+```{r}
+library(gghalves)
+dodge <- 0.8
+
+penguins |> 
+  drop_na(sex) |> 
+ggplot(    aes(x = species, 
+           y = body_mass_g, 
+           fill = sex))+
+    geom_half_violin(alpha = .4, aes(split = sex),
+                   position = "identity")+
+  geom_half_boxplot(data = subset(penguins, sex == "Male"),
+                    side = "l") +
+  geom_half_boxplot(data = subset(penguins, sex == "Female"),
+                    side = "r")+
+
+  labs(title= "Boxplot", 
+       subtitle = "A comparison of Body Mass (g) by Sex and Species", 
+       caption = "made by Philip Leftwich") +
+    theme_ox(axis_type  = "categorical")
+
+```
+
+Using consistent themes: 
+https://www.cararthompson.com/talks/nhsr2022-ggplot-themes/
+
+Font size
+
+Captions and context
+
+5027A Accessible colours and hierarchy & redundancy
+
+Data-to-ink ratios:
+https://jtr13.github.io/cc19/tuftes-principles-of-data-ink.html
+https://rpubs.com/Konstantin_Xo/Visualization#:~:text=Data%2Dto%2Dink%20ratio%20is,conveying%20the%20important%20data%20effectively.
+https://cct-datascience.quarto.pub/crafting-publication-quality-data-visualizations-with-ggplot2/
