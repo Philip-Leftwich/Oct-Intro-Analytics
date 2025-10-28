@@ -1,4 +1,4 @@
-# Power analysis{#sec-power}
+# Power analysis {#sec-power}
 
 ```{r, echo = F, warning = F, message = F}
 library(tidyverse)
@@ -10,287 +10,318 @@ source("R/my_setup.R")
 
 ```
 
+## Effect size
 
-## Motivation
-
-## Setup
-
-```{r, eval = FALSE}
-library(simr)
-
-library(tidyverse)
-library(lme4)
-```
+Researchers often have been trained to think in standardized effect sizes, such as Cohen’s 
 
 
-## A simple linear model
+- d, 
 
-Detect a mean difference delta on the original scale. We vary per-group sample size.
+-a correlation r
 
-### Explanation of approach:
-
-- For each n (per group) we simulate nsim datasets with n observations per group.
-
-- Data generating model: y ~ N(mu_control, sd) and y ~ N(mu_control + delta, sd) for treatment.
-
-- Fit lm(y ~ group), extract p-value for the treatment coefficient, compute power.
-
-```{r}
-# Parameters
-delta <- 5         # raw mean difference you want to detect
-sd_pop <- 10       # residual SD
-alpha <- 0.05
-nsim <- 200        # simulations per sample size (increase for smoother curve)
-n_grid <- seq(10, 200, by = 10)  # sample sizes per group
-
-# Function: simulate power at one sample size
-power_lm_at_n <- function(n, nsim, delta, sd_pop, alpha) {
-  pvals <- replicate(nsim, {
-    dat <- tibble(
-      group = rep(c("control", "treat"), each = n),
-      y = c(rnorm(n, mean = 50, sd = sd_pop),
-            rnorm(n, mean = 50 + delta, sd = sd_pop))
-    )
-    coef_p <- summary(lm(y ~ group, data = dat))$coefficients["grouptreat","Pr(>|t|)"]
-    coef_p
-  })
-  mean(pvals < alpha, na.rm = TRUE)
-}
-
-# Compute power curve using purrr
-power_lm_df <- tibble(n = n_grid)  |> 
-  mutate(power = map_dbl(n, ~ power_lm_at_n(.x, nsim, delta, sd_pop, alpha)))
-
-# Plot
-ggplot(power_lm_df, aes(x = n, y = power)) +
-  geom_line() + geom_point() +
-  geom_hline(yintercept = 0.8, linetype = "dashed", color = "red") +
-  labs(title = "Power curve: simple two-group linear model",
-       subtitle = paste0("Detect raw mean difference = ", delta, ", SD = ", sd_pop),
-       x = "Sample size per group", y = "Estimated power") +
-  theme_minimal()
-
-```
-
-## A multicovariate model
-
-Detect treatment effect while adjusting for covariates.
-
-### Explanation:
-
-- Data generating model: y = β0 + β_trt*trt + β_sex*sex + β_age*age + ε.
-
-- We simulate sex (binary) and age (continuous). We fit lm(y ~ trt + sex + age) and test the trt coefficient.
-
-- Use same simulation pattern as (1).
-
-```{r}
-# Parameters
-delta <- 5            # treatment effect to detect on original scale
-beta_sex <- 2         # effect of sex (male vs female)
-beta_age <- 0.3       # effect per year of age
-sd_error <- 10
-nsim <- 200
-n_grid <- seq(20, 200, by = 20)   # per-group n
-
-power_lm_cov_at_n <- function(n_per_group, nsim, delta, beta_sex, beta_age, sd_error, alpha) {
-  pvals <- replicate(nsim, {
-    N <- 2 * n_per_group
-    trt <- rep(c(0,1), each = n_per_group)
-    sex <- rbinom(N, 1, 0.5)                  # 0/1
-    age <- rnorm(N, mean = 40, sd = 12)      # continuous covariate
-    mu <- 50 + delta*trt + beta_sex*sex + beta_age*age
-    y <- rnorm(N, mean = mu, sd = sd_error)
-    dat <- tibble(y = y, trt = factor(trt), sex = factor(sex), age = age)
-    pval <- summary(lm(y ~ trt + sex + age, data = dat))$coefficients["trt1","Pr(>|t|)"]
-    pval
-  })
-  mean(pvals < alpha, na.rm = TRUE)
-}
-
-power_lm_cov_df <- tibble(n = n_grid) |> 
-  mutate(power = map_dbl(n, ~ power_lm_cov_at_n(.x, nsim, delta, beta_sex, beta_age, sd_error, alpha)))
-
-ggplot(power_lm_cov_df, aes(x = n, y = power)) +
-  geom_line() + geom_point() +
-  geom_hline(yintercept = 0.8, linetype = "dashed", color = "red") +
-  labs(title = "Power curve: linear model with covariates",
-       subtitle = "Model: y ~ trt + sex + age; detect treatment effect on raw scale",
-       x = "Sample size per group", y = "Estimated power") +
-  theme_minimal()
+- or other indices such as f^2 or eta^2
 
 
-```
+In the simulation approach, we typical work on the raw scale of variables.
+
+The raw effect size is simply the treatment effect on the original BDI scale (i.e., the group difference in the outcome variable). In our case we assume that the treatment lowers the BDI score by 6 points, on average. Defining the raw effect requires some domain knowledge – you need to know your measurement scale, and you need to know what the values (and differences between values) mean. In our example, a reduction of 6 BDI points means that the average patient moves from a moderate depression (23 points) to a mild depression (17 points). Working with raw effect sizes forces you to think about your actual data (instead of plugging in content-free default standardized effect sizes) and enables you to do plausibility checks on your simulation.
+
+The standardized effect size relates the raw effect size to the unexplained error variance. In the two-group example, this can be expressed as Cohen’s d, which is the mean difference divided by the standard deviation (SD):
+
+
+The standardized effect size always relates two components: The raw effect size (here: 6 points difference) and the error variance. Hence, you can increase the standardized effect size by (a) increasing the raw treatment effect, or (b) reducing the error variance.
+
+$$
+d = \frac{M_{\text{treat}} - M_{\text{control}}}{SD} 
+= \frac{17 - 23}{117} 
+= -0.55
+$$
+
+
+## Simulate! 
+
+Once we committed to an equation with concrete parameter values, we can simulate data for a sample of, say `n = 100` samples
+
+
+Simply write down the equation and add random normal noise with the `rnorm()` function. 
 
 :::{.callout-note}
+Note that the `rnorm` function takes the standard deviation (not the variance).
 
-Including covariates that explain outcome variance usually increases power compared to an unadjusted analysis (if covariates are correlated with outcome).
+## Variance
 
-You must simulate covariates realistically (prevalence, distribution) because they affect power.
+For sensible measures of variance we really *need* some ground truthing data - pilot studies or measures from non-treatment populations
 
+Finally, set a `seed` so that the generated random numbers are reproducible:
 :::
 
-## A binomial model
-
-Detect a change in probability from p0 to p1 (or set via OR).
-
-### Explanation:
-
-- For each n per group simulate binary outcomes rbinom(n,1,p0) and rbinom(n,1,p1).
-
-- Fit glm(y ~ group, family = binomial), extract p-value (Wald z for group).
-
-- Compute power as fraction p < α.
-
 ```{r}
-# Parameters
-p0 <- 0.30
-p1_values <- seq(0.35, 0.7, by = 0.05)  # sweep treatment probabilities to produce curves
-nsim <- 200
-n_grid <- seq(20, 200, by = 20)
-alpha <- 0.05
+set.seed(38596)
 
-# Function: power for one (n, p1)
-power_glm_at_n_p1 <- function(n, p0, p1, nsim, alpha) {
-  pvals <- replicate(nsim, {
-    y0 <- rbinom(n, 1, p0)
-    y1 <- rbinom(n, 1, p1)
-    dat <- tibble(y = c(y0, y1), group = factor(rep(c(0,1), each = n)))
-    fit <- glm(y ~ group, data = dat, family = binomial)
-    summary(fit)$coefficients["group1","Pr(>|z|)"]
-  })
-  mean(pvals < alpha, na.rm = TRUE)
-}
+# Sample size and factors
+n <- 100
+treatment <- factor(rep(c("A", "B"), each = n/2))      # 50 A, 50 B
+sex       <- factor(rep(c("Male","Female"), times = n/2))
 
-# Build data frame of power values for plotting (grid over n and p1)
-power_grid <- expand_grid(n = n_grid, p1 = p1_values) |> 
-  mutate(power = map2_dbl(n, p1, ~ power_glm_at_n_p1(.x, p0, .y, nsim, alpha)))
+# --- Specify the true model on the MEAN scale ---
+# Using default treatment (dummy) coding with baseline = treatment A, sex Male
+beta_0      <- 400   # mean for (A, Male)
+beta_trtB   <- -20    # difference (B - A) among Males when no interaction in the true DGP
+beta_male <-  -200    # difference (Female - Male) in A when no interaction
+beta_int    <-  0    # interaction: extra effect for (B,Female) beyond main effects
 
-# Plot one facet per p1
-ggplot(power_grid, aes(x = n, y = power, color = as.factor(p1))) +
-  geom_line() + geom_point() +
-  facet_wrap(~ p1) +
-  labs(title = "Power curves: logistic regression (binary outcome)",
-       subtitle = paste0("Baseline p0 = ", p0, "; lines show p1 values"),
-       x = "Sample size per group", y = "Estimated power") +
-  theme_minimal()
+# Build the model matrix for ~ treatment * sex (includes intercept, both mains, and interaction)
+X <- model.matrix(~ treatment + sex)
 
+# Pack coefficients in the order of colnames(X)
+coef_true <- c(beta_0, beta_trtB, beta_male)
+names(coef_true) <- colnames(X)
+
+# Mean for each observation implied by predictors
+mu <- as.vector(X %*% coef_true)
+
+# --- Residual SD goes here (this is where you include sd) ---
+sigma <- 50
+body_mass <- rnorm(n, mean = mu, sd = sigma)
+
+dat <- data.frame(body_mass, treatment, sex)
+
+# Fit models
+m_main <- lm(body_mass ~ treatment + sex, data = dat)   # main effects only
 
 ```
 
-:::{.callout-note}
+```{r}
 
-- `pwr::power.prop.test()` gives an analytic approximation for two-proportion tests — good as cross-check. Simulating the exact `glm()` is best if you plan to use a logistic regression in analysis.
+saveRDS(dat, file = "body_mass.RDS")
 
-- Use larger `nsim` (1000–5000) for higher-grade precision.
+```
 
-:::
 
-## GLMM
-
-Power in clustered data (e.g., replicates, subjects) where observations are nested; detect fixed treatment effect while allowing between-cluster variance.
-
-### Explanation / steps:
-
-- Make a realistic template dataset that reflects cluster structure (clusters, observations per cluster).
-
-- Fit a `glmer` (for binary) or `lmer` (for continuous) model to that template.
-
-- Set the fixed effect (if needed) to the raw effect you want to detect (for example, by adjusting the fitted model coefficients via `fixef()` — but easier is to simulate the template so it already contains the desired effect).
-
-- Use `simr::powerSim()` on the fitted model to estimate power. To explore larger numbers of clusters use `extend(..., along = "cluster", n = desired_clusters)` and then `powerSim()` again.
+Let’s plot our simulated data:
 
 ```{r}
-# --- Define simulation parameters ---
-n_clusters <- 10              # number of clusters (random intercepts)
-n_per_cluster <- 2            # 2 rows per cluster: control & treatment
-n_trials <- 20                # number of trials per treatment per cluster
+ggplot(dat, aes(x=treatment, 
+               y=body_mass, 
+               fill = sex)) + 
+  gghalves::geom_half_violin(aes(split = treatment)) + 
+  geom_boxplot(width = .1, 
+               outlier.shape = NA,
+               show.legend = FALSE) 
+ # gghalves::geom_half_point(side = "l", range_scale = .4, 
+   #     alpha = .5)
 
-# Define baseline probabilities and treatment effect
-p_control <- 0.9              # baseline success probability
-p_treat   <- 0.8              # treated success probability
-sd_cluster <- .6               # between-cluster logit SD
+```
 
-# --- Compute on logit scale ---
-logit <- function(p) log(p / (1 - p))
-inv_logit <- function(x) plogis(x)
 
-beta0 <- logit(p_control)     # intercept for control
-beta_treat <- logit(p_treat) - beta0  # treatment effect on logit scale
 
-# --- Build the data frame ---
-your_data <- tibble(
-  cluster = factor(rep(1:n_clusters, each = n_per_cluster)),
-  treat   = rep(c(0, 1), times = n_clusters)
-)
+Let’s assume that we collected and analyzed this specific sample – what would have been the results?
 
-# --- Add random effects and simulate binomial outcomes ---
-cluster_effects <- rnorm(n_clusters, mean = 0, sd = sd_cluster)
+```{r}
+summary(m_main)
+```
 
-your_data <- your_data |> 
-  mutate(
-    eta = beta0 + beta_treat * treat + cluster_effects[as.numeric(cluster)],
-    prob = inv_logit(eta),
-    successes = rbinom(n(), size = n_trials, prob = prob),
-    failures = n_trials - successes
+As you can see, in this simulated sample (based on a specific seed), the treatment effect is marginally significant (p < .05). But how likely are we to detect an effect with a sample of this size?
+
+
+## Doing the power analysis
+
+Now we need to repeatedly draw many samples and see how many of the analyses would have detected the existing effect. To do this, we put the code from above into a function called `sim`. We coded the function to either return the focal p-value (as default) or to print a model summary (helpful for debugging and testing the function). This function takes two parameters:
+
+- `n` defines the required sample size
+treatment_effect defines the treatment effect in the raw scale (i.e., reduction in body mass)
+
+- We then use the `replicate` function to repeatedly call the `sim` function for 1000 iterations.
+
+
+```{r}
+set.seed(38596)
+
+iterations <- 1000 # the number of Monte Carlo repetitions
+n <- 100 # the size of our simulated sample
+
+sim1 <- function(n=100, treatment_effect=-20, print=FALSE) {
+# Sample size and factors
+n <- n
+treatment <- factor(rep(c("A", "B"), each = n/2))      # 50 A, 50 B
+sex       <- factor(rep(c("Male","Female"), times = n/2))
+
+# --- Specify the true model on the MEAN scale ---
+# Using default treatment (dummy) coding with baseline = treatment A, sex Male
+beta_0      <- 400   
+beta_trtB   <- treatment_effect    # argument of interest
+beta_male <-  -200    
+beta_int    <-  0    
+
+# Build the model matrix for ~ treatment * sex (includes intercept, both mains, and interaction)
+X <- model.matrix(~ treatment + sex)
+
+# Pack coefficients in the order of colnames(X)
+coef_true <- c(beta_0, beta_trtB, beta_male)
+names(coef_true) <- colnames(X)
+
+# Mean for each observation implied by predictors
+mu <- as.vector(X %*% coef_true)
+
+# --- Residual SD goes here (this is where you include sd) ---
+sigma <- 50
+body_mass <- rnorm(n, mean = mu, sd = sigma)
+
+dat <- data.frame(body_mass, treatment, sex)
+
+# Fit models
+m_main <- lm(body_mass ~ treatment + sex, data = dat)   # main effects only
+  
+  # this lm() call should be exactly the function that you use
+  # to analyse your real data set
+  p_value <- summary(m_main)$coefficients["treatmentB", "Pr(>|t|)"]
+  
+  if (print==TRUE) print(summary(res))
+  else return(p_value)
+}
+
+# now run the sim() function a 1000 times and store the p-values in a vector:
+p_values <- replicate(iterations, sim1(n=100))
+```
+
+How many of our 1000 virtual samples would have found the effect?
+
+```{r}
+table(p_values < .05)
+```
+
+Only **52%** of samples with the same size of n=100 result in a significant p-value.
+
+## Sample size planning
+
+Now we know that a sample size of 100 does not lead to a sufficient power. But what sample size would we need to achieve a power of at least 80%? In the simulation approach you need to test different n until you find the necessary sample size. We do this by wrapping the simulation code into a loop that continuously increases the n. We then store the computed power for each n.
+
+```{r}
+set.seed(38596)
+
+# define all predictor and simulation variables.
+iterations <- 1000
+ns <- seq(100, 300, by=20) # test ns between 100 and 300
+
+
+result <- map_dfr(ns, ~{
+  p_values <- replicate(iterations, sim1(n = .x))
+  tibble(
+    n = .x,
+    power = mean(p_values < 0.05)
   )
-
-
+})
+  
+  # show the result after each run (not shown here in the tutorial)
+  print(result)
 
 
 ```
+
+Let's plot the result:
 
 ```{r}
-# Fit a random-intercept logistic regression
-# Fit a mixed-effects logistic regression on grouped data
-glmm_model <- glmer(
-  cbind(successes, failures) ~ treat + (1 | cluster),
-  data = your_data,
-  family = binomial
-)
-
-summary(glmm_model)
-
-
+ggplot(result, 
+       aes(x=n, y=power)) + 
+  geom_point() + 
+  geom_line()+
+  theme_bw()
 ```
 
+Hence, with n = 200, (100 in each group), we have an 80% chance to detect the effect.
+
+## Safe power analysis
+
+As sensitivity analysis, we will apply a safeguard power analysis ([Perugini et al., 2014](https://doi.org/10.1177/1745691614528519)) that aims for the lower end of a two-sided 60% CI around the parameter of the treatment effect (the intercept is irrelevant). (Of course you can use any other value than 60%, but this is the value (tentatively) mentioned by the inventors of the safeguard power analysis.)
 
 ```{r}
+beta_hat <- -21.819      # estimate
+se <- 10.607            # standard error from model
 
-# Estimate power for current design (10 clusters)
-ps_current <- powerSim(glmm_model, test = fixed("treat", "z"), nsim = 20) # 200
-summary(ps_current)
+z60 <- qnorm(1 - (1 - 0.60)/2)
 
+ci_60_lower <- beta_hat - z60 * se
+ci_60_upper <- beta_hat + z60 * se
+
+c(ci_60_lower, ci_60_upper)
 
 ```
 
+The *conservative* treatment difference to plan for is -12.89
 
 ```{r}
-# Extend along the cluster dimension to simulate more sites
-glmm_extended <- extend(glmm_model, along = "cluster", n = 30)
+set.seed(38596)
 
-# Generate a power curve varying number of clusters
-p_curve_treat <- powerCurve(
-  fit = glmm_extended,
-  test = fixed("treat"),   # test for the fixed treatment effect
-  along = "cluster",            # vary number of clusters
-  nsim = 50                    # number of simulation replicates per size 100!!!
-)
+# define all predictor and simulation variables.
+iterations <- 1000
+ns <- seq(100, 500, by=20) # test ns between 100 and 300
 
+
+result <- map_dfr(ns, ~{
+  p_values <- replicate(iterations, sim1(n = .x, treatment_effect = -12.89))
+  tibble(
+    n = .x,
+    power = mean(p_values < 0.05)
+  )
+})
+  
+ggplot(result, 
+       aes(x=n, y=power)) + 
+  geom_point() + 
+  geom_line()+
+  theme_bw()
 
 ```
 
+With that more conservative effect size assumption, we would need around 450 individuals, i.e., 225 per group.
+
+
+## Smallest Effect of Interest
+
+Many methodologists argue that we should not power for the expected effect size, but rather for the smallest effect size of interest (SESOI). In this case, a non-significant result can be interpreted as “We accept the H0, and even if a real effect existed, it most likely is too small to be relevant”.
+
+We have to decide for ourselves what we value as the smallest effect size of interest:
 
 ```{r}
-# Visualize the power curve
-plot(p_curve_treat) +
-  ggtitle("Power curve for treatment effect (GLMM)") +
-  xlab("Number of clusters") +
-  ylab("Estimated Power (p < 0.05)") +
-  theme_minimal(base_size = 13)
+set.seed(38596)
 
+# define all predictor and simulation variables.
+iterations <- 1000
+ns <- seq(50, 300, by=20) # 
+
+
+result <- map_dfr(ns, ~{
+  p_values <- replicate(iterations, sim1(n = .x, treatment_effect = -40))
+  tibble(
+    n = .x,
+    power = mean(p_values < 0.05)
+  )
+})
+  
+ggplot(result, 
+       aes(x=n, y=power)) + 
+  geom_point() + 
+  geom_line()+
+  theme_bw()
 
 ```
 
+If we decide that we are happy ignoring any difference that has <10% effect on body mass across treatments, then we can produce a reasonably powered experiment with only 50 individuals (25 per treatment). 
 
+1. Define the statistical model that you will use to analyze your data (in our case: a linear regression). This sometimes is called the data generating mechanism or the data generating model.
 
+2. Find empirical information about the parameters in the model. These are typically mean values, variances, group differences, regression coefficients, or correlations (in our case: a mean value (before treatment), a group difference, and an error variance). These numbers define the assumed state of the population.
+
+3. Program your regression equation, which consists of a systematic (i.e., deterministic) part and (one or more) random error terms.
+
+4. Do the simulation:
+
+    a. Repeatedly sample data from your equation (only the random error changes in each run, the deterministic part stays the same).
+
+    b. Compute the index of interest (typically: the p-value of a focal effect).
+
+    c. Count how many samples would have detected the effect (i.e., the statistical power).
+
+    d. Tune your simulation parameters until the desired level of power is achieved.
+    
+    Typically we would aim to change experimental sample numbers until we reach desired power, but we could also imagine making changes to measurement accuracy, or perhaps insect rearing parameters that will reduce variance?

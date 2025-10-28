@@ -82,10 +82,18 @@ penguins |>
 ```
 
 
-### Duplicates within columns
-
 
 ### Counting unique entries
+
+
+```{r}
+penguins |> 
+  summarise(
+  n = n(),
+  n_distinct(individual_id)
+  )
+
+```
 
 
 

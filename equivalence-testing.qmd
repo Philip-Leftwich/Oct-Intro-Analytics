@@ -1,0 +1,237 @@
+# Equivalence testing {#sec-equivalence}
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(janitor)
+library(here)
+library(easystats)
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+
+```
+
+
+## Motivation
+
+Imagine we’re running an experiment comparing **different insect lines or treatments** — for example, testing whether two genetic strains, or two rearing conditions, lead to *different body masses or survival rates*.
+
+### The standard question
+
+Traditionally, we analyze such data using null-hypothesis significance testing (NHST) and design our studies with power analysis.
+
+- The null hypothesis (H₀) says there’s no difference between treatments (e.g., mean body mass difference = 0).
+
+- A significant p-value (p < 0.05) leads us to conclude that there is a difference.
+
+- Power analysis tells us how many samples we need to detect a given difference (e.g., a 5% or 10% change in mass).
+
+This framework is excellent when our goal is to find differences — for example, when we hope a new treatment improves performance relative to a control.
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(ggplot2)
+
+set.seed(123)
+
+# Define parameters
+x <- seq(-4, 8, length.out = 1000)
+y_null <- dnorm(x, mean = 0, sd = 1)      # H0 distribution
+y_alt  <- dnorm(x, mean = 3, sd = 1)      # H1 distribution (true effect)
+
+# Observed effect (e.g., from an experiment)
+obs <- 1.8
+
+# Build data frame
+df <- data.frame(x, y_null, y_alt)
+
+gg_nhst <- ggplot(df, aes(x)) +
+    # --- Null distribution ---
+    geom_area(aes(y = y_null), fill = "grey80", color = "grey50", alpha = 0.7) +
+    # Acceptance region (typical central 95% of H0)
+    stat_function(fun = dnorm, args = list(mean = 0, sd = 1),
+                  geom = "area", fill = "lightblue", alpha = 0.4,
+                  xlim = c(-1.96, 1.96)) +
+    # --- Alternative distribution ---
+    geom_line(aes(y = y_alt), color = "darkorange3", linewidth = 1.2) +
+    geom_area(aes(y = y_alt), fill = "orange", alpha = 0.2) +
+    # Observed effect
+    geom_vline(xintercept = obs, color = "red", linewidth = 1.1, linetype = "solid") +
+    annotate("text", x = obs, y = 0.05, label = "Observed effect", color = "red", hjust = -0.1) +
+    # Labels for H0 and H1
+    annotate("text", x = 0, y = 0.42, label = "H[0]", size = 6, color = "grey30") +
+    annotate("text", x = 3, y = 0.42, label = "H[1]", size = 6, color = "darkorange3") +
+    annotate("segment", x = -1.96, xend = 1.96, y = 0.02, yend = 0.02,
+             arrow = arrow(length = unit(0.15, "cm")), color = "steelblue") +
+    annotate("segment", x = 1.96, xend = -1.96, y = 0.02, yend = 0.02,
+             arrow = arrow(length = unit(0.15, "cm")), color = "steelblue") +
+    labs(
+        title = "Classic Null Hypothesis Testing (NHST)",
+        subtitle = "Observed effect falls inside the null acceptance region\n→ fail to reject H₀, but effect is more consistent with H₁",
+        x = "Test statistic / Effect size",
+        y = "Density"
+    ) +
+    theme_minimal(base_size = 14) +
+    theme(panel.grid.minor = element_blank())
+
+gg_nhst
+
+```
+
+### Testing for no difference
+
+In many biological and applied contexts, the question isn’t “Are they different?” but rather:
+
+> “Are they effectively the same?”
+
+For example:
+
+- We’ve developed a new insect diet and want to ensure it performs as well as the standard one.
+
+- We’re testing whether two breeding lines have equivalent fitness before merging them in a production colony.
+
+- We want to confirm that a new pesticide formulation is no worse than the established product within a biologically acceptable margin.
+
+In these cases, a *non-significant* result from a classical test (p > 0.05) does not prove equivalence 
+
+> it merely means we don’t have enough evidence to detect a difference.
+
+The true difference could still be large; we just might not have had enough power.
+
+## Equivalence testing
+
+Equivalence testing inverts the logic:
+
+- We define a Region of Practical Equivalence (ROPE) — a range of differences so small they are biologically or practically negligible (e.g., ±5% in body mass).
+
+- The null hypothesis becomes:
+
+    𝐻0: The true difference lies outside the ROPE (i.e., not equivalent)
+
+
+- The alternative hypothesis:
+
+    𝐻1: The true difference lies entirely within the ROPE (i.e., equivalent)
+
+
+If the confidence interval for our treatment difference lies completely inside this equivalence range, we can *accept practical equivalence*.
+
+```{r, echo = FALSE, message = F, warning = F}
+# Simulated estimate distribution (like a posterior or sampling dist)
+x2 <- seq(-4, 4, length.out = 1000)
+y2 <- dnorm(x2, mean = 0.4, sd = 0.8)
+
+rope <- c(-1, 1)
+
+df2 <- data.frame(x2, y2)
+
+gg_rope <- ggplot(df2, aes(x2, y2)) +
+  # ROPE region
+  annotate("rect", xmin = rope[1], xmax = rope[2],
+           ymin = -Inf, ymax = Inf, fill = "orange", alpha = 0.2) +
+  geom_area(fill = "steelblue", alpha = 0.5, color = "steelblue") +
+  geom_vline(xintercept = 0, color = "red", linetype = "dashed") +
+  annotate("text", x = 0, y = 0.4, label = "0 (no effect)", color = "red", vjust = -1) +
+  annotate("text", x = 0, y = 0.18, label = "ROPE\n(negligible range)", color = "orange3") +
+  labs(
+    title = "Equivalence Testing (ROPE principle)",
+    subtitle = "Most of the effect distribution lies within the ROPE → evidence for practical equivalence",
+    x = "Effect size",
+    y = "Density"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid.minor = element_blank())
+
+gg_rope
+
+
+```
+
+### What we can do with this
+
+Equivalence testing allows us to:
+
+- Formally conclude that two treatments perform “the same” within a tolerance, rather than merely failing to find a difference.
+
+- Incorporate biological relevance (what counts as a meaningful difference) directly into the statistical test.
+
+- Quantify how much of the observed uncertainty (the CI) lies inside or outside that practical range — via measures like the **Second-Generation p-Value (SGPV)**.
+
+- Design experiments for “sufficient evidence of sameness” (safeguard power or TOST power), not just “evidence of difference.”
+
+## Example:
+
+```{r}
+body_mass_data <- readRDS("body_mass.RDS")
+m_main <- lm(body_mass ~ treatment + sex, data = dat)
+```
+
+Let’s say a difference smaller than 40 g is biologically negligible.
+We define a ROPE (Region of Practical Equivalence) as ±40 g.
+
+equivalence_test(m, range = c(-40, 0))
+
+
+Output example:
+
+```{r}
+
+broom::tidy(m_main)
+
+```
+
+```{r}
+library(effectsize)
+equivalence_test(m_main, range = c(0,-40))
+
+```
+
+Interpretation:
+
+- The treatment effect (−21.8 g) lies completely within the ROPE of ±40 g → practically equivalent.
+
+- The sex effect (−203 g) lies far outside the ROPE → meaningful biological difference.
+
+- The SGPV (Second-Generation p-value) quantifies how much of the CI overlaps the ROPE (1 = fully inside, 0 = outside).
+
+So:
+
+- Even though the treatment effect was “statistically significant” (p = 0.04), the equivalence test says it’s practically negligible in biological terms.
+
+###  Visualize your equivalence results
+
+You can use the see package to visualize the CI and ROPE region.
+
+```{r}
+library(see)
+plot(equivalence_test(m_main, range = c(0,-40)))
+```
+
+This shows: 
+
+- Each coefficient and its 90% CI
+
+- The ROPE zone (here, ±40 g)
+
+- A colour-coded decision (“Accepted”, “Rejected”, “Undecided”)
+
+## Reporting
+
+A linear model predicting insect body mass revealed a small treatment effect (−21.8 g, 90% CI [−39.4, −4.2]), and a strong effect of sex (−202.9 g, 90% CI [−220.5, −185.3]).
+Equivalence testing using a ROPE of ±40g (A 10% difference in mass) indicated that the treatment difference was practically equivalent to zero, whereas the sex difference was meaningful.
+
+
+## Glossary
+
+| **Term**                                   | **Definition**                                                                                                                                                                                                                                  |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Null Hypothesis (H₀)**                   | The default assumption that there is *no true difference* between groups or treatments (e.g., mean body mass difference = 0).                                                                                                                   |
+| **Alternative Hypothesis (H₁)**            | The competing claim that there *is* a true difference (e.g., H₁: difference ≠ 0).                                                                                                                                                               |
+| **Region of Practical Equivalence (ROPE)** | A range of effect sizes (e.g., −5% to +5%) considered *biologically or practically negligible*. If the CI of an effect lies entirely within this region, the treatments are deemed practically equivalent.                                      |
+| **Equivalence Testing**                    | A statistical approach that tests whether an observed effect is *small enough* to be considered negligible. Instead of asking “is there a difference?”, it asks “is any difference practically zero?”.                                          |
+| **TOST (Two One-Sided Tests)**             | A frequentist method for equivalence testing that performs two one-sided hypothesis tests—one for each bound of the ROPE—to check whether the effect is significantly greater than the lower bound and smaller than the upper bound.            |
+| **Second-Generation p-Value (SGPV)**       | A measure of how much of the confidence interval lies within the ROPE. Values: 1 → entirely inside (strong evidence for equivalence); 0 → entirely outside (strong evidence against equivalence); between 0–1 → partial overlap (inconclusive). |
+| **Confidence Interval (CI)**               | A range that likely contains the true parameter value with a specified probability (e.g., 90% or 95%). In equivalence testing, the CI is compared directly to the ROPE.                                                                         |
+| **Effect Size**                            | A quantitative measure of the magnitude of a treatment effect (e.g., *Cohen’s d*, *η²*, or regression coefficient). Equivalence testing uses effect size thresholds to define what is “small enough” to be negligible.                          |
+| **Statistical Significance (p-value)**     | The probability of observing an effect as extreme as the current result if H₀ were true. A small p-value (< 0.05) implies evidence against H₀, but does *not* imply equivalence when non-significant.                                           |
+| **Power (1 − β)**                          | The probability that a test correctly rejects a false null hypothesis — i.e., detects a true effect of a specified size. Classic power analysis is designed for detecting differences, not for confirming equivalence.                          |
+| **Practical Equivalence**                  | The conclusion that two treatments perform similarly enough that any difference is negligible for practical or biological purposes.                                                                                                             |
+| **Undecided Region**                       | When the CI overlaps both the ROPE and values outside it, indicating insufficient evidence to conclude either equivalence or difference.                                                                                                        |

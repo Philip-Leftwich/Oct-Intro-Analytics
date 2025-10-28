@@ -18,7 +18,7 @@ Make RStudio feel like home.
 
 # 9:30 – 10:15	Organizing Projects & Data Management Planning	
 - spreadsheets -  & data dictionaries
-#     - what if my data isn't tidy? Move to appendix???
+#   - what if my data isn't tidy? Move to appendix???
     - Penguins data dictionary! 
     SEE CHAT
 
@@ -46,16 +46,16 @@ readr vs baser - speed and tibbles vs dataframe
 # ✓  11:00 – 11:45	First Steps with tidyverse: Simple Summaries	Introduce filter(), select(), count(), summarise(), group_by(). 
 
 
-# 11:45 – 12:30	General Data Cleaning I – Structure & Consistency	
+# ✓11:45 – 12:30	General Data Cleaning I – Structure & Consistency	
 
 
 12:30 – 1:30	🍽️ Lunch		
 
 # 1:30 – 2:30	General Data Cleaning II 
 
+## Make interactive: 
 ##  Duplicates - n and n_distinct? duplicated, get_dupes
-## Missing Values, 
-## Strings, 
+## Missing Values
 ## Dates	
 ## Factors
 
@@ -69,25 +69,15 @@ readr vs baser - speed and tibbles vs dataframe
 Key functions: verify(), assert(), insist().
 Example: r data %>% verify(nrow(.) > 0) %>% assert(in_set(c("control","treatment")), group) %>% insist(within_bounds(0,100), percent_yield)	Show what happens when assertions fail; emphasize reproducibility.
 
-# 3:15 – 4:15	Introduction to ggplot2 - 
+# ✓ 3:15 – 4:15	Introduction to ggplot2 - 
 
-Make it FLOW: 
-Original: Facets and patchwork
-Design & Clarity - Annotate, labs, colours, ink to data, showtext, themes
-Export - camcorder
-Brand theming
 
-Themes, fonts and accessibility + my earlier stuff 5023B
-
-# https://www.cararthompson.com/talks/nhsr2022-ggplot-themes/
-
-https://www.cararthompson.com/talks/on-brand-accessibility/
-
-https://albert-rapp.de/posts/ggplot2-tips/12_a_few_gg_packages/12_a_few_gg_packages.html
+## Themes, fonts and accessibility + my earlier stuff 5023B
 
 4:15 – 4:45	Mini-practice
 
-4:45 – 5:00	Wrap-Up & Discussion	Reflect on workflow: “Set assignment"
+## 4:45 – 5:00	Wrap-Up & Discussion	Reflect on workflow: “Set assignment"
+
 
 Day 2 – Modeling, Interpretation, and Reproducibility
 
@@ -97,15 +87,12 @@ Time	Topic	Key Learning Goals	Notes / Integration
 9:15 – 10:15	Introduction to Statistical Models	Linear model logic, fit with lm(), visualize predictions.	Show that modeling depends on verified, clean data.
 # SD and SE?
 
-
-
-
 # Use Intro lm bodyweight insects line and sex? 
 
 10:15 – 10:30	☕ Break		
 
 10:30-1100 Visualizing Model Predictions	broom + ggplot2 for fitted vs. observed.
-stat_summary()
+stat_summary() ggpubr???
 
 11-11.45	GLMs for Binary Data
 # Why cant we use t-tests?
@@ -116,9 +103,11 @@ stat_summary()
 
 13.30 - 14.15 Random Effects (Conceptual)	Explain why batch/plate/subject vary.	Visual demonstration.
 
+# 14:15 – 15.00	Power and Sample Size via Simulation	Intuitive demonstration of power.	
 
-14:15 – 15.00	Power and Sample Size via Simulation	Intuitive demonstration of power.	
-Errors and simulation of p-values?
+- Intro section
+- Add think, discuss, your turn sections
+- Errors, Effect sizes and simulation of p-values?
 
 3:00 – 3:15	☕ Break		
 
@@ -128,6 +117,5 @@ Errors and simulation of p-values?
 Include a chunk showing QC with assertr.
 
 Simple slides vs html vs pdf???
-
 
 4:30 – 5:00	Wrap-Up & Next Steps	Reflection, feedback, resources.	
