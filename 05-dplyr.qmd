@@ -80,9 +80,11 @@ Note that `select()` does **not** change the original `penguins` tibble. It spit
 
 If you don't **save** this new tibble, it won't be stored. If you want to keep it, then you must create a new object. 
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Create a new tibble containing only species, sex, flipper length and body mass.
 
@@ -95,6 +97,7 @@ new_penguins <- select(.data = penguins_raw,
 
 `r unhide()`
 
+::::
 :::
 
 ## Filter
@@ -145,9 +148,11 @@ filter(.data = new_penguins,
 
 You can include multiple expressions within `filter()` and it will pull out only those rows that evaluate to `TRUE` for all of your conditions. 
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Filter the data so that it contains *only* Adelie penguins where flipper length was measured as greater than 190mm. 
 
@@ -164,6 +169,7 @@ filter(.data = new_penguins,
 
 `r unhide()`
 
+::::
 :::
 
 ## Arrange
@@ -258,12 +264,15 @@ penguins_raw |>
 
 The reason that this function is called a pipe is because it 'pipes' the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes it will automatically take the data from the previous line of code so you don't need to specify it again.
 
-::: {.callout-note icon="false"}
-
-## Your turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Take any command you wrote earlier and rewrite it using pipes.
 
+::::
 :::
 
 
@@ -279,9 +288,11 @@ You may be familiar with the magrittr pipe or see it in other tutorials, and web
 
 
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Check your RStudio settings to see if you are using the Native Pipe 
 
@@ -289,6 +300,7 @@ Check your RStudio settings to see if you are using the Native Pipe
 
 * The Shortcut key is (Ctrl/Cmd) + Shift + M
 
+::::
 :::
 :::
 

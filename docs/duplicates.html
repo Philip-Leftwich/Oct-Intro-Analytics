@@ -517,6 +517,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">References</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -530,8 +536,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>
 <a href="#duplicated-rows" id="toc-duplicated-rows" class="nav-link active" data-scroll-target="#duplicated-rows"><span class="header-section-number">10.1</span> Duplicated rows</a>
   <ul class="collapse">
-<li><a href="#duplicates-within-columns" id="toc-duplicates-within-columns" class="nav-link" data-scroll-target="#duplicates-within-columns"><span class="header-section-number">10.1.1</span> Duplicates within columns</a></li>
-  <li><a href="#counting-unique-entries" id="toc-counting-unique-entries" class="nav-link" data-scroll-target="#counting-unique-entries"><span class="header-section-number">10.1.2</span> Counting unique entries</a></li>
+<li><a href="#counting-unique-entries" id="toc-counting-unique-entries" class="nav-link" data-scroll-target="#counting-unique-entries"><span class="header-section-number">10.1.1</span> Counting unique entries</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -689,10 +694,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="duplicates-within-columns" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="duplicates-within-columns">
-<span class="header-section-number">10.1.1</span> Duplicates within columns</h3>
-</section><section id="counting-unique-entries" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="counting-unique-entries">
-<span class="header-section-number">10.1.2</span> Counting unique entries</h3>
+<section id="counting-unique-entries" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="counting-unique-entries">
+<span class="header-section-number">10.1.1</span> Counting unique entries</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">n_distinct</span>(individual_id)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">n_distinct(individual_id)</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">344</td>
+<td style="text-align: right;">190</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</div>
 
 
 </section></section></main><!-- /main --><script>

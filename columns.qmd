@@ -131,12 +131,15 @@ When we run `colnames()` we get the identities of each column in our dataframe
 
 - You need backticks (```) around names with spaces or symbols.
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Identify two columns in `penguins_raw` that could cause errors if used without backticks: `r fitb(c("Culmen Length (mm)", "Culmen Depth (mm)", "Flipper Length (mm)", "Body Mass (g)", "Delta 15 N (o/oo)", "Delta 13 C (o/oo)"), ignore_case = TRUE)`
 
+::::
 :::
 
 #### Clean column names

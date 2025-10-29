@@ -510,9 +510,11 @@ ggplot(data = penguins, aes(x=culmen_length_mm, y=culmen_depth_mm, colour = spec
 :::
 
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 All other layers remain exactly the same as in other plots. Try adding layers to make the plot above prettier:
 
@@ -554,6 +556,7 @@ ggplot(data = penguins, aes(x=culmen_length_mm, y=culmen_depth_mm, colour = spec
 
 :::
 
+::::
 :::
 
 
@@ -650,9 +653,11 @@ ggplot(penguins, aes(x = species, y = body_mass_g, fill = species))+
   geom_violin()
 ```
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Adjusting the violin plot would be exactly the same as the boxplot. Try to add layers to the base plot above to
 
@@ -686,6 +691,7 @@ ggplot(penguins, aes(x = species, y = body_mass_g, fill = species))+
 ```
 :::
 
+::::
 :::
 
 
@@ -757,9 +763,11 @@ ggplot(penguins, aes(x = species, y = body_mass_g, fill = species))+
 
 :::
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 * [ ] Change the x- and y-axis labels
 * [ ] Remove the legend
@@ -790,6 +798,7 @@ ggplot(penguins, aes(x = species, y = body_mass_g, fill = species))+
 ```
 :::
 
+::::
 :::
 
 

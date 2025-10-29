@@ -538,6 +538,12 @@ div.csl-indent {
  <span class="menu-text">References</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -663,16 +669,11 @@ Important
 </div>
 <p>Note that <code>select()</code> does <strong>not</strong> change the original <code>penguins</code> tibble. It spits out the new tibble directly into your console.</p>
 <p>If you don’t <strong>save</strong> this new tibble, it won’t be stored. If you want to keep it, then you must create a new object.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your Turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="task-container">
 <p>Create a new tibble containing only species, sex, flipper length and body mass.</p>
 <div class="webex-solution">
 <button>
@@ -748,16 +749,11 @@ Solution
 <span id="cb6-4"><a href="#cb6-4"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You can include multiple expressions within <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> and it will pull out only those rows that evaluate to <code>TRUE</code> for all of your conditions.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your Turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="task-container">
 <p>Filter the data so that it contains <em>only</em> Adelie penguins where flipper length was measured as greater than 190mm.</p>
 <div class="webex-solution">
 <button>
@@ -849,16 +845,11 @@ Solution
 <span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>)<span class="er">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The reason that this function is called a pipe is because it ‘pipes’ the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes it will automatically take the data from the previous line of code so you don’t need to specify it again.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="task-container">
 <p>Take any command you wrote earlier and rewrite it using pipes.</p>
 </div>
 </div>
@@ -875,16 +866,11 @@ Solution
 <p>From R version 4 onwards there is now a “native pipe” <code>|&gt;</code></p>
 <p>This doesn’t require the tidyverse <code>magrittr</code> package and the “old pipe” <code>%&gt;%</code> or any other packages to load and use.</p>
 <p>You may be familiar with the magrittr pipe or see it in other tutorials, and website usages. The native pipe works equivalntly in most situations but if you want to read about some of the operational differences, <a href="https://www.infoworld.com/article/3621369/use-the-new-r-pipe-built-into-r-41.html">this site</a> does a good job of explaining .</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your Turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="task-container">
 <p>Check your RStudio settings to see if you are using the Native Pipe</p>
 <ul>
 <li><p><label><input type="checkbox">Tools &gt; Project Options &gt; Code Editing &gt; Use Native Pipe</label></p></li>

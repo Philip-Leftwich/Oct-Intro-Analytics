@@ -66,9 +66,11 @@ skim(penguins_raw)
 
 At this early stage, it’s helpful to assess whether your dataset meets your expectations. Consider if the data appear as anticipated. Are the values in each column reasonable? Are there any noticeable gaps or errors that might need to be corrected, or that could potentially render the data unusable?
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 The dataset has `r fitb(345)` rows (including the headers) and `r fitb(17)` 17 columns.
 
@@ -101,6 +103,7 @@ No, they are 2 missing data points for body measurements (culmen, flipper, body 
 
 `r unhide()`
 
+::::
 :::
 
 ## Next Steps
@@ -217,9 +220,11 @@ n = n()
 
 ```
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 * [ ] Add Sex to the `group_by()` function to see how mean and SD of body mass differ by sex within species.
 
@@ -250,6 +255,7 @@ n = n()
 
 - Missing values are removed with `na.rm = TRUE`.
 
+::::
 :::
 
 ## Summary

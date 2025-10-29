@@ -74,6 +74,7 @@ book:
   appendices:
   - r-basics.qmd
   - references.qmd
+  - 06-complex-models.qmd
 bibliography:
   - include/packages.bib
   - include/references.bib

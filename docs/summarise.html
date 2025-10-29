@@ -537,6 +537,12 @@ div.csl-indent {
  <span class="menu-text">References</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -549,6 +555,13 @@ div.csl-indent {
   <ul>
 <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">6.1</span> Learning Objectives</a></li>
   <li><a href="#a-first-glimpse" id="toc-a-first-glimpse" class="nav-link" data-scroll-target="#a-first-glimpse"><span class="header-section-number">6.2</span> A first glimpse</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">6.3</span> Next Steps</a></li>
+  <li>
+<a href="#summarise" id="toc-summarise" class="nav-link" data-scroll-target="#summarise"><span class="header-section-number">6.4</span> Summarise</a>
+  <ul class="collapse">
+<li><a href="#visualising-frequencies" id="toc-visualising-frequencies" class="nav-link" data-scroll-target="#visualising-frequencies"><span class="header-section-number">6.4.1</span> Visualising Frequencies</a></li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -964,16 +977,11 @@ $ Comments              &lt;chr&gt; "Not enough blood for isotopes.", NA, NA, "A
 </div>
 </div>
 <p>At this early stage, it’s helpful to assess whether your dataset meets your expectations. Consider if the data appear as anticipated. Are the values in each column reasonable? Are there any noticeable gaps or errors that might need to be corrected, or that could potentially render the data unusable?</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your Turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="task-container">
 <p>The dataset has <input class="webex-solveme nospaces" size="3" data-answer="[&quot;345&quot;]"> rows (including the headers) and <input class="webex-solveme nospaces" size="2" data-answer="[&quot;17&quot;]"> 17 columns.</p>
 <p>It also provides information on the <em>type</em> of data in each column</p>
 <ul>
@@ -1000,7 +1008,9 @@ Explanation
 </button>
 <p>No, they are 2 missing data points for body measurements (culmen, flipper, body mass), 11 missing data points for sex, 13/14 missing data points for blood isotopes (Delta N/C) and 290 missing data points for comments</p>
 </div>
-<section id="next-steps" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="next-steps">
+</div>
+</div>
+</section><section id="next-steps" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="next-steps">
 <span class="header-section-number">6.3</span> Next Steps</h2>
 <p>We have just learned some ways to initially inspect our dataset. Keep in mind, we don’t expect everything to be perfect. This initial inspection is a good opportunity to identify where these issues might be and assess their severity.</p>
 <p>When you are confident that the dataset is largely as expected, you are ready to start summarising your data.</p>
@@ -1276,16 +1286,11 @@ Explanation
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Your Turn
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="task-container">
 <ul class="task-list">
 <li><label><input type="checkbox">Add Sex to the <code>group_by()</code> function to see how mean and SD of body mass differ by sex within species.</label></li>
 </ul>
@@ -1407,15 +1412,12 @@ Solution
 </div>
 </div>
 </div>
-</section></section>
-</div>
-</div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-R-janitor" class="csl-entry" role="listitem">
 Firke, S. (2024). <em>Janitor: Simple tools for examining and cleaning dirty data</em>. <a href="https://github.com/sfirke/janitor">https://github.com/sfirke/janitor</a>
 </div>
 </div>
-</section></main><!-- /main --><script>
+</section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {

@@ -54,9 +54,11 @@ In RStudio, a project is a way to organize your work . It's a fundamental concep
 You should start a new R project when you begin working on a distinct task, research project, or analysis. This ensures that your work is well-organized, and it's especially beneficial when you need to collaborate, share, or revisit the project later.
 
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Set up our first R Project: 
 
@@ -72,6 +74,7 @@ Set up our first R Project:
 
 The new project will be created with a .Rproj file. You can open it by double-clicking on this file or by using the "File" menu in RStudio.
 
+::::
 :::
 
 :::{.callout-warning}
@@ -185,9 +188,11 @@ For example many data analysis scripts start with the command `rm(list = ls())`.
 
 - **Working Directory:** The working directory is not affected, potentially causing path-related problems in future scripts.
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 * [ ] Run some simple R code in your console:
 
@@ -214,6 +219,7 @@ a <- b + c
 
 > You should see that this did nothing to the state of your packages
 
+::::
 :::
 
 ### Restart R sessions
@@ -230,9 +236,11 @@ RStudio projects can handle a clean workspace automatically.
 knitr::include_graphics("images/rstudio-workspace.png")
 ```
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 * [ ] Set your Project up with the settings above.
 
@@ -245,4 +253,5 @@ Which feels safer and more reproducible for long-term work?
 * Setting up a Blank Slate R Environment
 
 
+::::
 :::

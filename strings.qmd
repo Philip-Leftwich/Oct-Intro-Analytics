@@ -202,12 +202,15 @@ penguins |>
 
 ```
 
-::: {.callout-note icon="false"} 
-
-## Your turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Convert all species names to uppercase using `str_to_upper()`.
 
+::::
 :::
 
 

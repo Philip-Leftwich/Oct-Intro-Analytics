@@ -158,9 +158,11 @@ penguins |>
 
 ```
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 All other layers remain exactly the same as in other plots. Try adding layers to make the plot above prettier:
 
@@ -182,6 +184,7 @@ penguins |>
 
 `r unhide()`
 
+::::
 :::
 
 
@@ -231,9 +234,11 @@ theme_minimal()
 
 ```
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 All other layers remain exactly the same as in other plots. Try adding layers to make the plot above prettier:
 
@@ -255,6 +260,7 @@ theme_minimal()
 
 `r unhide()`
 
+::::
 :::
 
 
@@ -366,9 +372,11 @@ penguins |>
 
 ```
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Pick a more appropriate set of axis breaks:
 
@@ -397,6 +405,7 @@ penguins |>
 
 `r unhide()`
 
+::::
 :::
 
 Further, we can control the coordinate space using `coord()` functions. Say we want to flip the x and y axes, we add `coord_flip()`:
@@ -522,9 +531,11 @@ penguins |>
   geom_bar()
 ```
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 How could we improve the readability of this plot even further?
 
@@ -546,6 +557,7 @@ penguins |>
 ```
 `r unhide()`
 
+::::
 :::
 
 ## Facets

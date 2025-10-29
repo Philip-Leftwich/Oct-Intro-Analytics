@@ -39,7 +39,6 @@ readr vs baser - speed and tibbles vs dataframe
 
 # ✓  Basic inspection of data: counts by groups and times. distinct counts? n_distinct?
 
-## Check from strings onwards
 
 10:45 – 11:00	☕ Break		
 
@@ -59,19 +58,19 @@ readr vs baser - speed and tibbles vs dataframe
 ## Dates	
 ## Factors
 
-# Writing scripts
+# Writing scripts-Summarise!
 - Reproducibility mindset. (.data, styler, commenting and shortcut keys?)
 
 2:30 – 2:45	☕ Break		
 
 #  2:45 – 3:15	Assertions and Automated Checks	✅ Introduce assertr. Teach the idea of embedding expectations after cleaning.
-
+## Make it interactive
 Key functions: verify(), assert(), insist().
 Example: r data %>% verify(nrow(.) > 0) %>% assert(in_set(c("control","treatment")), group) %>% insist(within_bounds(0,100), percent_yield)	Show what happens when assertions fail; emphasize reproducibility.
 
 # ✓ 3:15 – 4:15	Introduction to ggplot2 - 
 
-
+## Lines and grouping
 ## Themes, fonts and accessibility + my earlier stuff 5023B
 
 4:15 – 4:45	Mini-practice

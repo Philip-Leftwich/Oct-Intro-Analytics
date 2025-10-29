@@ -90,14 +90,17 @@ knitr::include_graphics("images/dark_mode.png")
 
 :::
 
-::: {.callout-note icon="false"} 
-
-## Your Turn
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Set your Rstudio theme to something that works for you: 
 
 * [ ] Go to Tools > Select Global Options > Appearance > Editor Theme
 
+::::
 :::
 
 ### Add-ins
