@@ -203,9 +203,6 @@ Question
 ::::{.task-container}
 Can we think of any ways this code could *potentially* be abstracted/improved further?
 
-`r hide("Solution")`
-
-`r unhide()`
 
 ::::
 :::

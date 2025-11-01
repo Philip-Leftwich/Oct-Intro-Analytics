@@ -629,8 +629,6 @@ So far, we’ve only added one `geom_?` layer to our plots. However, thanks to g
 
 Remember, the order of the layers can sometimes make a difference. We've seen this already - adding a theme at the end can override earlier arguments like the legend position. Similarly, `ggplot + violinplot + boxplot` will look different from `ggplot + boxplot + violinplot`.
 
-Let's use the example of QRPs at timepoint 2 and a grouping variable of Second-year Grade.
-
 
 ```{r eval=FALSE}
 ggplot(penguins, aes(x = species, y = body_mass_g, fill = species))+

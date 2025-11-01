@@ -163,67 +163,6 @@ source("scripts/01_import_penguins_data.R") # must specify dir
 ::::
 :::
 
-
-## Activity: Test yourself
-
-
-**Question 1.** In order to subset a data by **rows** I should use the function `r mcq(c("select()", answer = "filter()", "group_by()"))`
-
-**Question 2.** In order to subset a data by **columns** I should use the function `r mcq(c(answer = "select()", "filter()", "group_by()"))`
-
-**Question 3.** In order to make a new column I should use the function `r mcq(c("group_by()", "select()", answer = "mutate()", "arrange()")) `
-
-**Question 4.** Which operator should I use to send the output from line of code into the next line? `r mcq(c("+", "<-)", answer = "|>", "%in%"))`
-
-**Question 5.** What will be the outcome of the following line of code?
-
-```{r, eval = F}
-penguins |> 
-  filter(species == "Adelie")
-
-```
-
-
-`r mcq(c("The penguins dataframe object is reduced to include only Adelie penguins from now on", answer = "A new filtered dataframe of only Adelie penguins will be printed into the console"))`
-
-
-`r hide("Explain this answer")`
-
-Unless the output of a series of functions is "assigned" to an object using `<-` it will not be saved, the results will be immediately printed. This code would have to be modified to the below in order to create a new filtered object `penguins_filtered`
-
-```{r, eval = F}
-penguins_filtered <- penguins |> 
-  filter(species == "Adelie")
-
-```
-
-`r unhide()`
-
-<br>
-
-
-**Question 6.** What is the main point of a data "pipe"?
-
-`r mcq(c("The code runs faster", answer = "The code is easier to read"))`
-
-
-**Question 7.** The naming convention outputted by the function `janitor::clean_names() is 
-`r mcq(c(answer = "snake_case", "camelCase", "SCREAMING_SNAKE_CASE", "kebab-case"))`
-
-
-**Question 8.** Which package provides useful functions for manipulating character strings? 
-
-`r mcq(c(answer = "stringr", "ggplot2", "lubridate", "forcats"))`
-
-**Question 9.** Which package provides useful functions for manipulating dates? 
-
-`r mcq(c("stringr", "ggplot2", answer = "lubridate", "forcats"))`
-
-
-**Question 10.** If we do not specify a character variable as a factor, then ordering will default to what?
-
-`r mcq(c("numerical", answer = "alphabetical", "order in the dataframe"))`
-
 ```{r, include = FALSE}
 penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
 
@@ -233,69 +172,91 @@ head(penguins_raw) # check the data has loaded, prints first 10 rows of datafram
 
 # CLEAN DATA ----
 
-# clean all variable names to snake_case 
+# clean all variable names to snake_case
 # using the clean_names function from the janitor package
-# note we are using assign <- 
-# to overwrite the old version of penguins 
+# note we are using assign <-
+# to overwrite the old version of penguins
 # with a version that has updated names
-# this changes the data in our R workspace 
+# this changes the data in our R workspace
 # but NOT the original csv file
 
 # clean the column names
 # assign to new R object
-penguins_clean <- janitor::clean_names(penguins_raw) 
+penguins_clean <- janitor::clean_names(penguins_raw)
 
 # quickly check the new variable names
-colnames(penguins_clean) 
+colnames(penguins_clean)
 
 # shorten the variable names for N and C isotope blood samples
 
 penguins <- rename(penguins_clean,
-         "delta_15n"="delta_15_n_o_oo",  # use rename from the dplyr package
-         "delta_13c"="delta_13_c_o_oo")
+  "delta_15n" = "delta_15_n_o_oo", # use rename from the dplyr package
+  "delta_13c" = "delta_13_c_o_oo"
+)
 
 # use mutate and case_when for a statement that conditionally changes the names of the values in a variable
-penguins <- penguins_clean |> 
-  mutate(species = case_when(species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
-                             species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
-                             species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
+penguins <- penguins_clean |>
+  mutate(species = case_when(
+    species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
+    species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
+    species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"
+  ))
 
 # use mutate and if_else
-# for a statement that conditionally changes 
+# for a statement that conditionally changes
 # the names of the values in a variable
-penguins <- penguins |> 
+penguins <- penguins |>
   mutate(sex = if_else(
     sex == "MALE", "Male", "Female"
-  )
-  )
+  ))
 
 # use lubridate to format date and extract the year
 penguins <- penguins |>
   mutate(date_egg = lubridate::dmy(date_egg))
 
-penguins <- penguins |> 
+penguins <- penguins |>
   mutate(year = lubridate::year(date_egg))
 
 # Set body mass ranges
-penguins <- penguins |> 
+penguins <- penguins |>
   mutate(mass_range = case_when(
     body_mass_g <= 3500 ~ "smol penguin",
-    body_mass_g >3500 & body_mass_g < 4500 ~ "mid penguin",
+    body_mass_g > 3500 & body_mass_g < 4500 ~ "mid penguin",
     body_mass_g >= 4500 ~ "chonk penguin",
-    .default = NA)
-  )
+    .default = NA
+  ))
 
 # Assign these to an ordered factor
 
-penguins <- penguins |> 
-  mutate(mass_range = fct_relevel(mass_range, 
-                                  "smol penguin", 
-                                  "mid penguin", 
-                                  "chonk penguin")
-         )
+penguins <- penguins |>
+  mutate(mass_range = fct_relevel(
+    mass_range,
+    "smol penguin",
+    "mid penguin",
+    "chonk penguin"
+  ))
 
 saveRDS(penguins, file = here("files", "chapter5.RDS"))
 ```
+
+
+## Essential shortcuts
+
+- Comment/uncomment - `Ctrl/Cmd + Shift + c` 
+        
+    - Highlight text and use shortcut keys to commment out text
+    
+- Rename in scope - `Ctrl/Cmd + Alt + Shift + M`
+
+    - Highlight an R object then use this shortcut key to rename all examples in the script
+    
+## Layout
+
+- Define logical regions of scripts with either `----` or `====` after `#` 
+
+- This uses markdown logic, #, ##, ### to define titles, headers and subheaders
+
+- Use `styler` to help format code and keep it neat
 
 
 ## Reading

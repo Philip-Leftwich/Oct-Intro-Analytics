@@ -56,43 +56,63 @@ penguins_clean_names |>
 
 :::
 
-Great! 
+Great! In our dataset we have no examples of duplicated rows of data
 
-If I did have duplications I could investigate further and extract these exact rows: 
+### Working with duplications
 
-```{r, eval = F}
+As our dataset is duplication free, lets quickly add a few dupes to our data: 
 
-# Inspect duplicated rows
-penguins_clean_names |> 
-  filter(duplicated(across(everything())))
+```{r}
+penguins_demo <- penguins_clean_names |> 
+  slice(1:50) |> 
+  bind_rows(slice(penguins_clean_names, c(1,5,10,15,30)))
 
 ```
 
-```
-A tibble:0 × 17
-0 rows | 1-8 of 17 columns
-```
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Run the code above to make a dataset with some duplications
+
+* [ ] Re-run a duplication check
+
+::::
+:::
+
+If I did have duplications I could remove these with a few commands: 
+
+:::{.panel-tabset}
+
+## duplicated
 
 ```{r, eval = F}
 
 # Keep only unduplicated data with !
-penguins_clean_names |> 
+penguins_demo |> 
   filter(!duplicated(across(everything())))
 
 ```
 
-```{r, eval = T, echo = F}
+## distinct
 
-# Keep only unduplicated data
-penguins_clean_names |> 
-  filter(duplicated(across(everything()))) |> 
-  head()
+```{r, eval = F}
+
+
+penguins_demo |> 
+  distinct()
 
 ```
+
+:::
 
 
 
 ### Counting unique entries
+
+Using the `n_distinct()` function from dplyr, you can count the number of distinct values in an R data frame using one of the following methods.
 
 
 ```{r}

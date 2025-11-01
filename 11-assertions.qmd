@@ -237,7 +237,7 @@ dplyr::group_modify(~ .x |> insist(within_n_sds(3), eggs_laid, error_fun = just_
 
 You now know how to:
 
-- Use assertr to check data integrity before analysis.
+- Use `assertr` to check data integrity before analysis.
 
 - Validate numeric and categorical variables.
 
@@ -248,24 +248,3 @@ You now know how to:
 Automated validation transforms your scripts into self-auditing workflows — they document and test your assumptions each time the data changes.
 
 
-
-
-```{r}
-data_checks <- function(female_egg_data, just_warn, is.numeric, female_id, age_days, eggs_laid, eggs_hatched, is.character, treatment, is_uniq, not_na) {
-  female_egg_data  |> 
-      verify(has_all_names("female_id", "treatment",
-                           "age_days", "eggs_laid", "eggs_hatched"),
-             error_fun = just_warn) |>
-      assert(is.numeric, female_id, age_days, eggs_laid, eggs_hatched,
-             error_fun = just_warn) |>
-      assert(is.character, treatment, error_fun = just_warn) |>
-      assert(is_uniq, female_id, error_fun = just_warn) |>
-      assert(not_na, female_id, treatment, age_days,
-             eggs_laid, eggs_hatched, error_fun = just_warn) |>
-      assert(in_set("A", "B"), treatment) |> 
-      assert(within_bounds(1, 30), age_days, error_fun = just_warn) |>
-      verify(eggs_hatched <= eggs_laid, error_fun = just_warn) |>
-      insist(within_n_sds(3), eggs_laid, error_fun = just_warn)
-}
-
-```
