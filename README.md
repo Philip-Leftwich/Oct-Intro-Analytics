@@ -103,7 +103,7 @@ stat_summary() ggpubr???
 13.30 - 14.15 Random Effects (Conceptual)	Explain why batch/plate/subject vary.	Visual demonstration.
 
 # 14:15 – 15.00	Power and Sample Size via Simulation	Intuitive demonstration of power.	
-
+# Put this before glms?
 - Intro section
 - Add think, discuss, your turn sections
 - Errors, Effect sizes and simulation of p-values?

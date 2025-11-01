@@ -76,9 +76,20 @@ select(.data = penguins_raw,
 
 ```
 
+:::{.callout-warning collapse = "true"}
+
+## Assign outputs
+
 Note that `select()` does **not** change the original `penguins` tibble. It spits out the new tibble directly into your console. 
 
 If you don't **save** this new tibble, it won't be stored. If you want to keep it, then you must create a new object. 
+
+```{r, eval = F}
+penguin_idcols <- select(.data = penguins_raw,
+       -`studyName`, -`Sample Number`)
+```
+
+:::
 
 :::{.task}
 ::::{.task-header}

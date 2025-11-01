@@ -1,3 +1,5 @@
+library(janitor)
+
 # IMPORT DATA ----
 penguins_raw <- read_csv(here::here("files", "penguins_raw.csv"))
 

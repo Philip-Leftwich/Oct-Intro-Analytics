@@ -63,18 +63,15 @@ book:
   - part: "Data Validation"
     chapters:
     - 11-assertions.qmd
+    - 12-data-checking-functions.qmd
   - part: "Data Visualisation"
     chapters:
     - ggplot.qmd
     - ggplot2.qmd
     - ggplot3.qmd
-  - part: "Summary tables"
-    chapters:
-    - summary-table.qmd
   appendices:
   - r-basics.qmd
   - references.qmd
-  - 06-complex-models.qmd
 bibliography:
   - include/packages.bib
   - include/references.bib

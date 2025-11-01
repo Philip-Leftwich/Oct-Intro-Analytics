@@ -1,4 +1,4 @@
-# Summary {#sec-summary-clean}
+# Scripts {#sec-summary-scripts}
 
 
 ```{r, echo = F, warning = F, message = F}
@@ -7,7 +7,7 @@ library(janitor)
 library(here)
 source("R/booktem_setup.R")
 source("R/my_setup.R")
-penguins <- readRDS("data/penguin_clean_names.RDS")
+
 ```
 
 ### Save scripts {#sec-save-script}
@@ -115,11 +115,11 @@ knitr::include_graphics("images/project_penguin.png")
 knitr::include_graphics("images/r_script.png")
 ```
 
-- Does your script run from a `r glossary("blank slate")` without errors as described in {#sec-workflow}
+- Does your script run from a `blank slate` without errors?
 
 ### Checklist for data checking
 
-- Is our dataframe in a `r glossary("tidy data")` format?
+- Is our dataframe in a tidy format?
 
 - Is each column assigned to the correct data type?
     
@@ -133,6 +133,35 @@ knitr::include_graphics("images/r_script.png")
 - Do we have any data duplication?
 
 - Are there any typos or mistakes in character strings?
+
+## Running a script from console
+
+Now that we have made an import and cleaning script, we can check our blank slates set-up and that our script runs without errors:
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Restart your R session - (does your Environment clear?)
+
+* [ ] Using the `source()` function in your console type the filepath of your script and hit `enter`.
+
+`r hide("Solution")`
+
+```{r, eval = F}
+source("scripts/01_import_penguins_data.R") # must specify dir
+
+# source(here::here("scripts", "01_import_penguins_data.R"))
+# using here 
+
+```
+
+`r unhide()`
+
+::::
+:::
 
 
 ## Activity: Test yourself
@@ -268,12 +297,6 @@ penguins <- penguins |>
 saveRDS(penguins, file = here("files", "chapter5.RDS"))
 ```
 
-
-## Glossary
-
-```{r, echo = FALSE}
-glossary_table()
-```
 
 ## Reading
 

@@ -6,12 +6,21 @@ library(janitor)
 library(here)
 source("R/booktem_setup.R")
 source("R/my_setup.R")
-penguins <- readRDS("data/penguin_clean_names.RDS")
+penguins_clean_names <- readRDS("data/penguin_clean_names.RDS")
 ```
 
-
-
 It is very easy when inputting data to make mistakes, copy something in twice for example, or if someone did a lot of copy-pasting to assemble a spreadsheet (yikes!). We can check this pretty quickly
+
+:::{.callout-important collapse = "true"}
+
+## Penguin clean names dataset
+
+```{r, eval = FALSE}
+penguins_clean_names <- readRDS(url("https://github.com/Philip-Leftwich/Oct-Intro-Analytics/raw/refs/heads/dev/data/penguin_clean_names.RDS"))
+
+```
+
+:::
 
 
 ## Duplicated rows
@@ -24,7 +33,7 @@ It is very easy when inputting data to make mistakes, copy something in twice fo
 ```{r, eval = F}
 # check for whole duplicate 
 # rows in the data
-penguins |> 
+penguins_clean_names |> 
   filter(duplicated(across(everything())))
   sum() 
 
@@ -40,7 +49,7 @@ penguins |>
 ```{r}
 library(janitor)
 
-penguins |> 
+penguins_clean_names |> 
   get_dupes()
 
 ```
@@ -54,7 +63,7 @@ If I did have duplications I could investigate further and extract these exact r
 ```{r, eval = F}
 
 # Inspect duplicated rows
-penguins |> 
+penguins_clean_names |> 
   filter(duplicated(across(everything())))
 
 ```
@@ -67,7 +76,7 @@ A tibble:0 × 17
 ```{r, eval = F}
 
 # Keep only unduplicated data with !
-penguins |> 
+penguins_clean_names |> 
   filter(!duplicated(across(everything())))
 
 ```
@@ -75,7 +84,7 @@ penguins |>
 ```{r, eval = T, echo = F}
 
 # Keep only unduplicated data
-penguins |> 
+penguins_clean_names |> 
   filter(duplicated(across(everything()))) |> 
   head()
 
@@ -87,7 +96,7 @@ penguins |>
 
 
 ```{r}
-penguins |> 
+penguins_clean_names |> 
   summarise(
   n = n(),
   n_distinct(individual_id)

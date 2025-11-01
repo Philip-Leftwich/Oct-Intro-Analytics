@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.8.24">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Analytical skills for Biologists">
-<title>15&nbsp; ggplot – Data Analysis in R</title>
+<title>16&nbsp; ggplot – Data Analysis in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +82,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./ggplot2.html" rel="next">
-<link href="./11-assertions.html" rel="prev">
+<link href="./12-data-checking-functions.html" rel="prev">
 <link href="./images/logos/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -299,7 +299,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ggplot.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ggplot.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -448,7 +448,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
   </div>
 </li>
       </ul>
@@ -468,6 +468,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data validation</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-data-checking-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function based data checks</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -482,19 +488,19 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
   </div>
 </li>
       </ul>
@@ -502,29 +508,12 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Summary tables</span></a>
+ <span class="menu-text">Appendices</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summary-table.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary tables</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
@@ -537,12 +526,6 @@ div.csl-indent {
  <span class="menu-text">References</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
     </ul>
@@ -553,19 +536,19 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">15.1</span> Learning Objectives</a></li>
+<li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">16.1</span> Learning Objectives</a></li>
   <li><a href="#building-plots" id="toc-building-plots" class="nav-link" data-scroll-target="#building-plots">Building plots</a></li>
-  <li><a href="#exploring-common-geom-types" id="toc-exploring-common-geom-types" class="nav-link" data-scroll-target="#exploring-common-geom-types"><span class="header-section-number">15.2</span> Exploring Common Geom Types</a></li>
-  <li><a href="#sec-hist" id="toc-sec-hist" class="nav-link" data-scroll-target="#sec-hist"><span class="header-section-number">15.3</span> Histogram (<code>geom_histogram()</code>)</a></li>
-  <li><a href="#sec-scatter" id="toc-sec-scatter" class="nav-link" data-scroll-target="#sec-scatter"><span class="header-section-number">15.4</span> Scatterplot (<code>geom_point()</code>)</a></li>
-  <li><a href="#boxplot-geom_boxplot" id="toc-boxplot-geom_boxplot" class="nav-link" data-scroll-target="#boxplot-geom_boxplot"><span class="header-section-number">15.5</span> Boxplot (<code>geom_boxplot()</code>)</a></li>
-  <li><a href="#violin-plot-geom_violin" id="toc-violin-plot-geom_violin" class="nav-link" data-scroll-target="#violin-plot-geom_violin"><span class="header-section-number">15.6</span> Violin plot (<code>geom_violin()</code>)</a></li>
-  <li><a href="#violin-boxplots" id="toc-violin-boxplots" class="nav-link" data-scroll-target="#violin-boxplots"><span class="header-section-number">15.7</span> Violin-boxplots</a></li>
+  <li><a href="#exploring-common-geom-types" id="toc-exploring-common-geom-types" class="nav-link" data-scroll-target="#exploring-common-geom-types"><span class="header-section-number">16.2</span> Exploring Common Geom Types</a></li>
+  <li><a href="#sec-hist" id="toc-sec-hist" class="nav-link" data-scroll-target="#sec-hist"><span class="header-section-number">16.3</span> Histogram (<code>geom_histogram()</code>)</a></li>
+  <li><a href="#sec-scatter" id="toc-sec-scatter" class="nav-link" data-scroll-target="#sec-scatter"><span class="header-section-number">16.4</span> Scatterplot (<code>geom_point()</code>)</a></li>
+  <li><a href="#boxplot-geom_boxplot" id="toc-boxplot-geom_boxplot" class="nav-link" data-scroll-target="#boxplot-geom_boxplot"><span class="header-section-number">16.5</span> Boxplot (<code>geom_boxplot()</code>)</a></li>
+  <li><a href="#violin-plot-geom_violin" id="toc-violin-plot-geom_violin" class="nav-link" data-scroll-target="#violin-plot-geom_violin"><span class="header-section-number">16.6</span> Violin plot (<code>geom_violin()</code>)</a></li>
+  <li><a href="#violin-boxplots" id="toc-violin-boxplots" class="nav-link" data-scroll-target="#violin-boxplots"><span class="header-section-number">16.7</span> Violin-boxplots</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ggplot.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-ggplot" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ggplot.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-ggplot" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></h1>
 </div>
 
 
@@ -579,8 +562,8 @@ div.csl-indent {
   
 
 
-</header><section id="learning-objectives" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="learning-objectives">
-<span class="header-section-number">15.1</span> Learning Objectives</h2>
+</header><section id="learning-objectives" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="learning-objectives">
+<span class="header-section-number">16.1</span> Learning Objectives</h2>
 <p>By the end of this chapter, you will be able to:</p>
 <ul>
 <li><p>Understand the basic structure of a ggplot and how it builds layer by layer.</p></li>
@@ -630,20 +613,21 @@ Tip
 <col style="width: 5%">
 <col style="width: 3%">
 <col style="width: 2%">
-<col style="width: 4%">
+<col style="width: 3%">
 <col style="width: 7%">
 <col style="width: 5%">
-<col style="width: 7%">
-<col style="width: 4%">
-<col style="width: 7%">
 <col style="width: 6%">
-<col style="width: 7%">
-<col style="width: 5%">
-<col style="width: 2%">
 <col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
 <col style="width: 4%">
-<col style="width: 13%">
 <col style="width: 2%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 1%">
+<col style="width: 4%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">study_name</th>
@@ -660,10 +644,11 @@ Tip
 <th style="text-align: right;">flipper_length_mm</th>
 <th style="text-align: right;">body_mass_g</th>
 <th style="text-align: left;">sex</th>
-<th style="text-align: right;">delta_15n</th>
-<th style="text-align: right;">delta_13c</th>
+<th style="text-align: right;">delta_15_n_o_oo</th>
+<th style="text-align: right;">delta_13_c_o_oo</th>
 <th style="text-align: left;">comments</th>
 <th style="text-align: right;">year</th>
+<th style="text-align: left;">mass_range</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -685,6 +670,7 @@ Tip
 <td style="text-align: right;">NA</td>
 <td style="text-align: left;">Not enough blood for isotopes.</td>
 <td style="text-align: right;">2007</td>
+<td style="text-align: left;">mid penguin</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">PAL0708</td>
@@ -705,6 +691,7 @@ Tip
 <td style="text-align: right;">-24.69454</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: right;">2007</td>
+<td style="text-align: left;">mid penguin</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">PAL0708</td>
@@ -725,6 +712,7 @@ Tip
 <td style="text-align: right;">-25.33302</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: right;">2007</td>
+<td style="text-align: left;">smol penguin</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">PAL0708</td>
@@ -745,6 +733,7 @@ Tip
 <td style="text-align: right;">NA</td>
 <td style="text-align: left;">Adult not sampled.</td>
 <td style="text-align: right;">2007</td>
+<td style="text-align: left;">NA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">PAL0708</td>
@@ -765,6 +754,7 @@ Tip
 <td style="text-align: right;">-25.32426</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: right;">2007</td>
+<td style="text-align: left;">smol penguin</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">PAL0708</td>
@@ -785,6 +775,7 @@ Tip
 <td style="text-align: right;">-25.29805</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: right;">2007</td>
+<td style="text-align: left;">mid penguin</td>
 </tr>
 </tbody>
 </table>
@@ -988,8 +979,8 @@ Important
 <p>You need to stick to the first three layers to create your base plot. Everything else is optional, meaning you don’t need to use all eight layers. Additionally, layers 4-8 can be added in any order (more or less), whereas layers 1-3 must follow a fixed sequence.</p>
 </div>
 </div>
-</section><section id="exploring-common-geom-types" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="exploring-common-geom-types">
-<span class="header-section-number">15.2</span> Exploring Common Geom Types</h2>
+</section><section id="exploring-common-geom-types" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="exploring-common-geom-types">
+<span class="header-section-number">16.2</span> Exploring Common Geom Types</h2>
 <p>We’ve seen scatterplots, boxplots, and histograms—but ggplot offers many more geoms for storytelling.</p>
 <table class="caption-top table">
 <colgroup>
@@ -1025,8 +1016,8 @@ Important
 <td>Distributions</td>
 </tr>
 </tbody>
-</table></section><section id="sec-hist" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="sec-hist">
-<span class="header-section-number">15.3</span> Histogram (<code>geom_histogram()</code>)</h2>
+</table></section><section id="sec-hist" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="sec-hist">
+<span class="header-section-number">16.3</span> Histogram (<code>geom_histogram()</code>)</h2>
 <p>If you want to show the <strong>distribution of a continuous variable</strong>, you can use a histogram. As with every plot, you need at least 3 layers to create a base version of the plot. Similar to <code>geom_bar()</code>, <code>geom_histogram()</code> only requires an <code>x</code> variable as it does the counting “in the background”.</p>
 <p>A histogram divides the data into “bins” (i.e., groupings displayed in a single bar). These bins are plotted along the x-axis, with the y-axis showing the count of observations in each bin. It’s basically a barchart for continuous variables.</p>
 <p>Let’s have a look at the weight distribution in our dataset.</p>
@@ -1039,12 +1030,12 @@ Important
 <img src="ggplot_files/figure-html/fig-hist-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.1: Default histogram
+Figure&nbsp;16.1: Default histogram
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>The default <strong>number of bins</strong> is 30 (as shown in <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>15.1</span></a> above). Changing the number of bins (argument <code>bins</code>) allows for more or less fine-tuning of the data. A higher number of bins results in more detailed granularity.</p>
+<p>The default <strong>number of bins</strong> is 30 (as shown in <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>16.1</span></a> above). Changing the number of bins (argument <code>bins</code>) allows for more or less fine-tuning of the data. A higher number of bins results in more detailed granularity.</p>
 <p>Perhaps it’s more intuitive to modify the <strong>width of each bin</strong> using the <code>binwidth</code> argument. For example, <code>binwidth = 1</code> for the weight category would mean each “weight group” represents 1g, while <code>binwidth = 50</code> would group ages into 50g spans. The plots below show modifications for both <code>bins</code> and <code>binwidth</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">#less finetuning</span></span>
@@ -1062,7 +1053,7 @@ Figure&nbsp;15.1: Default histogram
 <img src="ggplot_files/figure-html/fig-bins-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.2: Bins vs binwidth arguments
+Figure&nbsp;16.2: Bins vs binwidth arguments
 </figcaption></figure>
 </div>
 </div>
@@ -1168,8 +1159,8 @@ Tip
 </div>
 </div>
 </div>
-</section><section id="sec-scatter" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="sec-scatter">
-<span class="header-section-number">15.4</span> Scatterplot (<code>geom_point()</code>)</h2>
+</section><section id="sec-scatter" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="sec-scatter">
+<span class="header-section-number">16.4</span> Scatterplot (<code>geom_point()</code>)</h2>
 <p>Scatterplots are appropriate when you want to plot <strong>two continuous variables</strong>. We can also <strong>add a trendline</strong> by using <code>geom_smooth()</code>. The default trendline is <code>loess</code>. If you want a linear trendline, you would need to add <code>method = "lm"</code> inside the <code>geom_smooth()</code> function.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm)) <span class="sc">+</span></span>
@@ -1187,7 +1178,7 @@ Tip
 <img src="ggplot_files/figure-html/fig-scatter-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.3: Default Scatterplot with added trendline - loess (left) and linear (right)
+Figure&nbsp;16.3: Default Scatterplot with added trendline - loess (left) and linear (right)
 </figcaption></figure>
 </div>
 </div>
@@ -1331,8 +1322,8 @@ Figure&nbsp;15.3: Default Scatterplot with added trendline - loess (left) and li
 </div>
 </div>
 </div>
-</section><section id="boxplot-geom_boxplot" class="level2" data-number="15.5"><h2 data-number="15.5" class="anchored" data-anchor-id="boxplot-geom_boxplot">
-<span class="header-section-number">15.5</span> Boxplot (<code>geom_boxplot()</code>)</h2>
+</section><section id="boxplot-geom_boxplot" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="boxplot-geom_boxplot">
+<span class="header-section-number">16.5</span> Boxplot (<code>geom_boxplot()</code>)</h2>
 <p>A boxplot is one of the options to display a <strong>continuous variable with categorical grouping variable</strong>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># default boxplot</span></span>
@@ -1422,8 +1413,8 @@ Figure&nbsp;15.3: Default Scatterplot with added trendline - loess (left) and li
 </div>
 </div>
 </div>
-</section><section id="violin-plot-geom_violin" class="level2" data-number="15.6"><h2 data-number="15.6" class="anchored" data-anchor-id="violin-plot-geom_violin">
-<span class="header-section-number">15.6</span> Violin plot (<code>geom_violin()</code>)</h2>
+</section><section id="violin-plot-geom_violin" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="violin-plot-geom_violin">
+<span class="header-section-number">16.6</span> Violin plot (<code>geom_violin()</code>)</h2>
 <p>An alternative way to display a <strong>continuous variable with a categorical grouping variable</strong> is a violin plot.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># default boxplot</span></span>
@@ -1489,8 +1480,8 @@ Figure&nbsp;15.3: Default Scatterplot with added trendline - loess (left) and li
 </div>
 </div>
 </div>
-</section><section id="violin-boxplots" class="level2" data-number="15.7"><h2 data-number="15.7" class="anchored" data-anchor-id="violin-boxplots">
-<span class="header-section-number">15.7</span> Violin-boxplots</h2>
+</section><section id="violin-boxplots" class="level2" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="violin-boxplots">
+<span class="header-section-number">16.7</span> Violin-boxplots</h2>
 <p>So far, we’ve only added one <code>geom_?</code> layer to our plots. However, thanks to ggplot’s layered system, we can add multiple geoms, for example, when creating a violin-boxplot.</p>
 <p>Remember, the order of the layers can sometimes make a difference. We’ve seen this already - adding a theme at the end can override earlier arguments like the legend position. Similarly, <code>ggplot + violinplot + boxplot</code> will look different from <code>ggplot + boxplot + violinplot</code>.</p>
 <p>Let’s use the example of QRPs at timepoint 2 and a grouping variable of Second-year Grade.</p>
@@ -1511,7 +1502,7 @@ Figure&nbsp;15.3: Default Scatterplot with added trendline - loess (left) and li
 <img src="ggplot_files/figure-html/fig-vb_bv-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vb_bv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.4: Default violin-boxplot: Order of the layer matters
+Figure&nbsp;16.4: Default violin-boxplot: Order of the layer matters
 </figcaption></figure>
 </div>
 </div>
@@ -1535,7 +1526,7 @@ Figure&nbsp;15.4: Default violin-boxplot: Order of the layer matters
 <img src="ggplot_files/figure-html/fig-vb_width-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vb_width-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.5: Default violin-boxplot: adjusting width of the box
+Figure&nbsp;16.5: Default violin-boxplot: adjusting width of the box
 </figcaption></figure>
 </div>
 </div>
@@ -1555,7 +1546,7 @@ Figure&nbsp;15.5: Default violin-boxplot: adjusting width of the box
 <img src="ggplot_files/figure-html/fig-vb_colour-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vb_colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.6: Violin-boxplot with a different colour palette
+Figure&nbsp;16.6: Violin-boxplot with a different colour palette
 </figcaption></figure>
 </div>
 </div>
@@ -2269,13 +2260,13 @@ window.onresize = move_sidebar;
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./11-assertions.html" class="pagination-link" aria-label="Data validation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data validation</span></span>
+      <a href="./12-data-checking-functions.html" class="pagination-link" aria-label="Function based data checks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function based data checks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ggplot2.html" class="pagination-link" aria-label="ggplot2">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot2</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

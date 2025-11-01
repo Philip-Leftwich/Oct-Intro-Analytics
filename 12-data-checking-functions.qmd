@@ -1,6 +1,5 @@
-## Data validation {#sec-validate}
+## Function based data checks {#sec-validate-functional}
 
-https://docs.ropensci.org/assertr/articles/assertr.html#verify-vs--assert
 
 ```{r, echo = F, warning = F, message = F}
 library(tidyverse)
@@ -38,7 +37,83 @@ female_egg_data
 
 ```
 
-## Learning Objectives:
+## Motivation
+
+We have run through the principles of organised data dictionaries and data validation. Once we understand the consistent types of data(sets) we encounter it is possible to start building data validation **pipelines**.
+
+- Pipelines are collections of custom data functions that can apply consistent data cleaning steps to different data that fits a particular layout
+
+- Pipelines can help speed up the process of data validation, analysis and plotting. 
+
+### Examples
+
+- Parameterised reports - simple summary reports that can be generated from a dataset with a button push
+
+- Parameterised data import and validation pipelines - our second example and presented here:
+
+
+## The data
+
+In the previous chapters we worked through the process of applying data validation checks to a dataset on female age, fertility and fecundity according to treatments
+
+```{r}
+head(female_egg_data)
+
+```
+
+
+### Loading and cleaning data
+
+In our previous chapters we worked through the steps of importing a dataset, standardising column names, formatting column types and standardising date formats. 
+
+We also carried out simple exploratory steps using packages such as `skimr`. 
+
+When we understand the requirements of our data - we can choose to convert code that runs on specific datasets (object-oriented programming) into something more abstract - functional programming. 
+
+When we have a series of functions - these can be run without modification on new data:
+
+```{r}
+load_and_clean_data <- function(path, 
+                                date_col = NULL,
+                                delim = ",",
+                                show_skim = TRUE) {
+  # Read data using readr
+  df <- readr::read_delim(path, delim = delim, show_col_types = FALSE) |>
+    janitor::clean_names()
+  
+  # Convert date column if provided
+  if (!is.null(date_col) && date_col %in% names(df)) {
+    df <- df |>
+      dplyr::mutate({{ date_col }} := lubridate::dmy(.data[[date_col]]))
+  } else if (!is.null(date_col)) {
+    warning(paste("Column", date_col, "not found in data — skipping date conversion"))
+  }
+  
+  # Optionally skim summary
+  if (show_skim) {
+    cat("\n📊 Quick data summary:\n")
+    print(skimr::skim(df))
+  }
+  
+  return(df)
+}
+
+```
+
+
+
+```{r}
+load_and_clean_data("data dictionary/female_egg_data.csv")
+```
+
+:::{.callout-note}
+
+In theory this function could be applied to any dataset (as long as it was in tidy format)
+
+:::
+
+
+### Validating data
 
 
 ```{r}
@@ -121,35 +196,19 @@ data_checks <- function(data,
 ```
 
 
-```{r}
-load_and_clean_data <- function(path, 
-                                date_col = NULL,
-                                delim = ",",
-                                show_skim = TRUE) {
-  # Read data using readr
-  df <- readr::read_delim(path, delim = delim, show_col_types = FALSE) |>
-    janitor::clean_names()
-  
-  # Convert date column if provided
-  if (!is.null(date_col) && date_col %in% names(df)) {
-    df <- df |>
-      dplyr::mutate({{ date_col }} := lubridate::dmy(.data[[date_col]]))
-  } else if (!is.null(date_col)) {
-    warning(paste("Column", date_col, "not found in data — skipping date conversion"))
-  }
-  
-  # Optionally skim summary
-  if (show_skim) {
-    cat("\n📊 Quick data summary:\n")
-    print(skimr::skim(df))
-  }
-  
-  return(df)
-}
+:::{.task}
+::::{.task-header}
+Question
+::::
+::::{.task-container}
+Can we think of any ways this code could *potentially* be abstracted/improved further?
 
+`r hide("Solution")`
 
-```
+`r unhide()`
 
+::::
+:::
 
 ```{r}
   egg_data <- 

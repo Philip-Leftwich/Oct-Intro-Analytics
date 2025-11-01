@@ -428,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
   </div>
 </li>
       </ul>
@@ -448,6 +448,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data validation</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-data-checking-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function based data checks</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -462,19 +468,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
   </div>
 </li>
       </ul>
@@ -482,29 +488,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Summary tables</span></a>
+ <span class="menu-text">Appendices</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summary-table.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary tables</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
@@ -515,12 +504,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -553,18 +536,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>In R, factors are a class of data that allow for <strong>ordered categories</strong> with a fixed set of acceptable values.</p>
+</header><div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Penguin clean names dataset
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>penguins_clean_names <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">url</span>(<span class="st">"https://github.com/Philip-Leftwich/Oct-Intro-Analytics/raw/refs/heads/dev/data/penguin_clean_names.RDS"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>In R, factors are a class of data that allow for <strong>ordered categories</strong> with a fixed set of acceptable values.</p>
 <p>Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables, or for use in linear model analyses (more on this later).</p>
 <p>Working with factors is easy with the <code>forcats</code> package:</p>
 <p>Using across - we can apply functions to columns based on selected criteria - here within mutate we are changing each column in the <code>.cols</code> argument and applying the function <code><a href="https://forcats.tidyverse.org/reference/as_factor.html">forcats::as_factor()</a></code></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-3"><a href="#cb1-3"></a>    <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"region"</span>, <span class="st">"island"</span>, <span class="st">"stage"</span>, <span class="st">"sex"</span>),</span>
-<span id="cb1-4"><a href="#cb1-4"></a>           <span class="at">.fns =</span> forcats<span class="sc">::</span>as_factor)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.factor)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"region"</span>, <span class="st">"island"</span>, <span class="st">"stage"</span>, <span class="st">"sex"</span>),</span>
+<span id="cb2-4"><a href="#cb2-4"></a>           <span class="at">.fns =</span> forcats<span class="sc">::</span>as_factor)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.factor)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 344
 Columns: 5
@@ -592,23 +593,23 @@ Important
 <span class="header-section-number">12.0.1</span> Setting factor levels</h3>
 <p>If we want to specify the <em>correct</em> order for a factor we can use <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">forcats::fct_relevel</a></code></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">case_when</span>(</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    body_mass_g <span class="sc">&lt;=</span> <span class="dv">3500</span> <span class="sc">~</span> <span class="st">"smol penguin"</span>,</span>
-<span id="cb3-4"><a href="#cb3-4"></a>    body_mass_g <span class="sc">&gt;</span><span class="dv">3500</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&lt;</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"mid penguin"</span>,</span>
-<span id="cb3-5"><a href="#cb3-5"></a>    body_mass_g <span class="sc">&gt;=</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"chonk penguin"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6"></a>    <span class="at">.default =</span> <span class="cn">NA</span>)</span>
-<span id="cb3-7"><a href="#cb3-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    body_mass_g <span class="sc">&lt;=</span> <span class="dv">3500</span> <span class="sc">~</span> <span class="st">"smol penguin"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    body_mass_g <span class="sc">&gt;</span><span class="dv">3500</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&lt;</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"mid penguin"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    body_mass_g <span class="sc">&gt;=</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"chonk penguin"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">.default =</span> <span class="cn">NA</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If we make a barplot, the order of the values on the x axis will typically be in alphabetical order for any character data</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span> </span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -616,39 +617,39 @@ Important
 <p>To convert a character or numeric column to class factor, you can use any function from the <code>forcats</code> package. They will convert to class factor and then also perform or allow certain ordering of the levels - for example using <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">forcats::fct_relevel()</a></code> lets you manually specify the level order.</p>
 <p>The function <code>as_factor()</code> simply converts the class without any further capabilities.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">as_factor</span>(mass_range))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">as_factor</span>(mass_range))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">levels</span>(penguins<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">levels</span>(penguins_clean_names<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "mid penguin"   "smol penguin"  "chonk penguin"</code></pre>
 </div>
 </div>
 <p>Below we use <code>mutate()</code> and <code>as_factor()</code> to convert the column flipper_range from class character to class factor.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Correct the code in your script with this version</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">fct_relevel</span>(mass_range, </span>
-<span id="cb8-4"><a href="#cb8-4"></a>                                  <span class="st">"smol penguin"</span>, </span>
-<span id="cb8-5"><a href="#cb8-5"></a>                                  <span class="st">"mid penguin"</span>, </span>
-<span id="cb8-6"><a href="#cb8-6"></a>                                  <span class="st">"chonk penguin"</span>)</span>
-<span id="cb8-7"><a href="#cb8-7"></a>         )</span>
-<span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="fu">levels</span>(penguins<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Correct the code in your script with this version</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">fct_relevel</span>(mass_range, </span>
+<span id="cb9-4"><a href="#cb9-4"></a>                                  <span class="st">"smol penguin"</span>, </span>
+<span id="cb9-5"><a href="#cb9-5"></a>                                  <span class="st">"mid penguin"</span>, </span>
+<span id="cb9-6"><a href="#cb9-6"></a>                                  <span class="st">"chonk penguin"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7"></a>         )</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="fu">levels</span>(penguins_clean_names<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "smol penguin"  "mid penguin"   "chonk penguin"</code></pre>
 </div>
 </div>
 <p>Now when we call a plot, we can see that the x axis categories match the intrinsic order we have specified with our factor levels.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span>  </span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span>  </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1315,8 +1316,8 @@ window.onresize = move_sidebar;
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Summary.html" class="pagination-link" aria-label="Summary">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Summary.html" class="pagination-link" aria-label="Scripts">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -179,10 +179,10 @@ One of the most useful column name cleaning functions is `janitor::clean_names()
 
 # clean the column names
 # assign to new R object
-penguins_clean <- janitor::clean_names(penguins_raw) 
+penguins_clean_names <- janitor::clean_names(penguins_raw) 
 
 # quickly check the new variable names
-colnames(penguins_clean) 
+colnames(penguins_clean_names) 
 
 
 ```
@@ -193,7 +193,7 @@ colnames(penguins_clean)
 We can combine data import and name repair in a single step if we want to:
 
 ```{r, eval = FALSE}
-penguins_clean <- read_csv ("data/penguins_raw.csv",
+penguins_clean_names <- read_csv ("data/penguins_raw.csv",
                       name_repair = janitor::make_clean_names)
 
 ```
@@ -210,7 +210,7 @@ The `clean_names` function quickly converts all variable names into `r glossary(
 
 # shorten the variable names for isotope blood samples
 # use rename from the dplyr package
-penguins_clean <- rename(penguins_clean,
+penguins_clean_names <- rename(penguins_clean_names,
          "delta_15n"="delta_15_n_o_oo",  
          "delta_13c"="delta_13_c_o_oo")
 
@@ -230,7 +230,7 @@ Saving as `.RDS` ensures you can load the cleaned version quickly next time.
 
 ```{r, eval = FALSE}
 
-saveRDS(penguins_clean, "data/penguin_clean_names.RDS")
+saveRDS(penguins_clean_names, "data/penguin_clean_names.RDS")
 
 ```
 

@@ -107,7 +107,10 @@ knitr::include_graphics("images/project.png")
   * scripts
   * outputs
 
-![RStudio IDE]("images/new-folders.png")
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap = "Making folders"}
+knitr::include_graphics("images/new-folders.png")
+```
 
 :::{.callout-warning}
 R is case-sensitive and whitespace-sensitive so type everything EXACTLY as printed here
@@ -158,7 +161,11 @@ You might want also want to keep any information (wider reading) you have gather
 
 
 
-### Mini challenge
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Try creating subdirectories for the outputs folder
 
@@ -173,6 +180,9 @@ fs::dir_create("outputs", subdir)
 ```
 
 `r unhide()`
+
+::::
+:::
 
 ## Blank slates
 
@@ -238,13 +248,9 @@ knitr::include_graphics("images/rstudio-workspace.png")
 
 :::{.task}
 ::::{.task-header}
-Your turn
+Question
 ::::
 ::::{.task-container}
-
-* [ ] Set your Project up with the settings above.
-
-## Question
 
 Which feels safer and more reproducible for long-term work?
 

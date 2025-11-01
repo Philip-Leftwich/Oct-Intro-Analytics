@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.8.24">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Analytical skills for Biologists">
-<title>18&nbsp; Summary tables – Data Analysis in R</title>
+<title>15&nbsp; Function based data checks – Data Analysis in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,8 +61,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./r-basics.html" rel="next">
-<link href="./ggplot3.html" rel="prev">
+<link href="./ggplot.html" rel="next">
+<link href="./11-assertions.html" rel="prev">
 <link href="./images/logos/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./summary-table.html">Summary tables</a></li><li class="breadcrumb-item"><a href="./summary-table.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary tables</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11-assertions.html">Data Validation</a></li><li class="breadcrumb-item"><a href="./12-data-checking-functions.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function based data checks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -428,24 +428,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Data Validation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-assertions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data validation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-data-checking-functions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function based data checks</span></span></a>
   </div>
 </li>
       </ul>
@@ -462,49 +468,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Summary tables</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summary-table.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary tables</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
@@ -517,12 +506,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">References</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
     </ul>
@@ -533,12 +516,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#sjplot" id="toc-sjplot" class="nav-link active" data-scroll-target="#sjplot"><span class="header-section-number">18.1</span> sjPlot</a></li>
+<li>
+<a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation"><span class="header-section-number">15.1</span> Motivation</a>
+  <ul class="collapse">
+<li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">15.1.1</span> Examples</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">15.2</span> The data</a>
+  <ul class="collapse">
+<li><a href="#loading-and-cleaning-data" id="toc-loading-and-cleaning-data" class="nav-link" data-scroll-target="#loading-and-cleaning-data"><span class="header-section-number">15.2.1</span> Loading and cleaning data</a></li>
+  <li><a href="#validating-data" id="toc-validating-data" class="nav-link" data-scroll-target="#validating-data"><span class="header-section-number">15.2.2</span> Validating data</a></li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./summary-table.html">Summary tables</a></li><li class="breadcrumb-item"><a href="./summary-table.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary tables</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-tables" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary tables</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11-assertions.html">Data Validation</a></li><li class="breadcrumb-item"><a href="./12-data-checking-functions.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function based data checks</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-validate-functional" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function based data checks</span></span></h1>
 </div>
 
 
@@ -552,1125 +547,444 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>While we need to report the parameters and statistics of our models in text with any reports, it can also be extremely useful to provide a model summary table, especially when reporting complex analyses. Below I present examples from two of my favourite packages for model reporting.</p>
-<p>Both packages come with lots of options for customisation to produce presentation ready tables</p>
-<section id="sjplot" class="level2" data-number="18.1"><h2 data-number="18.1" class="anchored" data-anchor-id="sjplot">
-<span class="header-section-number">18.1</span> sjPlot</h2>
-<p><code>sjPlot</code> A really nice package that helps produce model summaries for you automatically, currently it will only output in HTML format</p>
+</header><section id="motivation" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="motivation">
+<span class="header-section-number">15.1</span> Motivation</h2>
+<p>We have run through the principles of organised data dictionaries and data validation. Once we understand the consistent types of data(sets) we encounter it is possible to start building data validation <strong>pipelines</strong>.</p>
+<ul>
+<li><p>Pipelines are collections of custom data functions that can apply consistent data cleaning steps to different data that fits a particular layout</p></li>
+<li><p>Pipelines can help speed up the process of data validation, analysis and plotting.</p></li>
+</ul>
+<section id="examples" class="level3" data-number="15.1.1"><h3 data-number="15.1.1" class="anchored" data-anchor-id="examples">
+<span class="header-section-number">15.1.1</span> Examples</h3>
+<ul>
+<li><p>Parameterised reports - simple summary reports that can be generated from a dataset with a button push</p></li>
+<li><p>Parameterised data import and validation pipelines - our second example and presented here:</p></li>
+</ul></section></section><section id="the-data" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="the-data">
+<span class="header-section-number">15.2</span> The data</h2>
+<p>In the previous chapters we worked through the process of applying data validation checks to a dataset on female age, fertility and fecundity according to treatments</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">tab_model</span>(William_ls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">head</span>(female_egg_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small"><tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</th>
-<th colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">William</th>
-</tr>
-<tr class="even">
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">8.53</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">8.38&nbsp;–&nbsp;8.68</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">O3</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-7.14</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-9.15&nbsp;–&nbsp;-5.13</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Stress [Well-watered]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.18</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.07&nbsp;–&nbsp;0.29</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.003</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">30</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.703 / 0.681</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">tab_model</span>(</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  William_ls2, </span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="at">pred.labels =</span> <span class="fu">c</span>(<span class="st">"Intercept"</span>, <span class="st">"O³"</span>, <span class="st">"Stress[Well-watered]"</span>),</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="at">dv.labels =</span> <span class="st">"Biomass"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="at">string.pred =</span> <span class="st">"Coefficient"</span>,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="at">string.ci =</span> <span class="st">"Conf. Int (95%)"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="at">string.p =</span> <span class="st">"P-Value"</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small"><tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</th>
-<th colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Biomass</th>
-</tr>
-<tr class="even">
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Coefficient</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Conf. Int (95%)</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">P-Value</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Intercept</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">8.53</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">8.38&nbsp;–&nbsp;8.68</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">O³</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-7.14</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-9.15&nbsp;–&nbsp;-5.13</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Stress[Well-watered]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.18</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.07&nbsp;–&nbsp;0.29</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.003</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">30</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
-<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.703 / 0.681</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<p><code>gtsummary</code> Is an extension of the <code>gt</code> package and provides even greater levels of flexibility and customisation. It is also compatible with HTML, word or pdf. Perhaps the only downside is the level of options and customisability can be slightly overwhelming. In addition the <code>gt</code> package has been undergoing a lot of active development, so sometimes older code examples are now defunct.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">tbl_regression</span>(William_ls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="uvogtafktj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uvogtafktj table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#uvogtafktj thead, #uvogtafktj tbody, #uvogtafktj tfoot, #uvogtafktj tr, #uvogtafktj td, #uvogtafktj th {
-  border-style: none;
-}
-
-#uvogtafktj p {
-  margin: 0;
-  padding: 0;
-}
-
-#uvogtafktj .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#uvogtafktj .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#uvogtafktj .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#uvogtafktj .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#uvogtafktj .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#uvogtafktj .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#uvogtafktj .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#uvogtafktj .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#uvogtafktj .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#uvogtafktj .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#uvogtafktj .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#uvogtafktj .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#uvogtafktj .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#uvogtafktj .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#uvogtafktj .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#uvogtafktj .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#uvogtafktj .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#uvogtafktj .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#uvogtafktj .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#uvogtafktj .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#uvogtafktj .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#uvogtafktj .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#uvogtafktj .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#uvogtafktj .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#uvogtafktj .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#uvogtafktj .gt_left {
-  text-align: left;
-}
-
-#uvogtafktj .gt_center {
-  text-align: center;
-}
-
-#uvogtafktj .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#uvogtafktj .gt_font_normal {
-  font-weight: normal;
-}
-
-#uvogtafktj .gt_font_bold {
-  font-weight: bold;
-}
-
-#uvogtafktj .gt_font_italic {
-  font-style: italic;
-}
-
-#uvogtafktj .gt_super {
-  font-size: 65%;
-}
-
-#uvogtafktj .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#uvogtafktj .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#uvogtafktj .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#uvogtafktj .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#uvogtafktj .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#uvogtafktj .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#uvogtafktj .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#uvogtafktj .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#uvogtafktj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead><tr class="gt_col_headings header">
-<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
-<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
-<strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
-<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">female_id</th>
+<th style="text-align: left;">treatment</th>
+<th style="text-align: right;">age_days</th>
+<th style="text-align: right;">eggs_laid</th>
+<th style="text-align: right;">eggs_hatched</th>
 </tr></thead>
-<tbody class="gt_table_body">
+<tbody>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">O3</td>
-<td class="gt_row gt_center" headers="estimate">-7.1</td>
-<td class="gt_row gt_center" headers="conf.low">-9.2, -5.1</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">52.0000</td>
+<td style="text-align: right;">47</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">Stress</td>
-<td class="gt_row gt_center" headers="estimate"><br></td>
-<td class="gt_row gt_center" headers="conf.low"><br></td>
-<td class="gt_row gt_center" headers="p.value"><br></td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">100.8233</td>
+<td style="text-align: right;">52</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Stressed</td>
-<td class="gt_row gt_center" headers="estimate">—</td>
-<td class="gt_row gt_center" headers="conf.low">—</td>
-<td class="gt_row gt_center" headers="p.value"><br></td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">50.0000</td>
+<td style="text-align: right;">55</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Well-watered</td>
-<td class="gt_row gt_center" headers="estimate">0.18</td>
-<td class="gt_row gt_center" headers="conf.low">0.07, 0.29</td>
-<td class="gt_row gt_center" headers="p.value">0.003</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">46.0000</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">59.0000</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">55.0000</td>
+<td style="text-align: right;">43</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr class="odd">
-<td colspan="4" class="gt_footnote">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> CI = Confidence Interval</td>
-</tr></tfoot>
 </table>
+</div>
+</div>
+</div>
+<section id="loading-and-cleaning-data" class="level3" data-number="15.2.1"><h3 data-number="15.2.1" class="anchored" data-anchor-id="loading-and-cleaning-data">
+<span class="header-section-number">15.2.1</span> Loading and cleaning data</h3>
+<p>In our previous chapters we worked through the steps of importing a dataset, standardising column names, formatting column types and standardising date formats.</p>
+<p>We also carried out simple exploratory steps using packages such as <code>skimr</code>.</p>
+<p>When we understand the requirements of our data - we can choose to convert code that runs on specific datasets (object-oriented programming) into something more abstract - functional programming.</p>
+<p>When we have a series of functions - these can be run without modification on new data:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>load_and_clean_data <span class="ot">&lt;-</span> <span class="cf">function</span>(path, </span>
+<span id="cb2-2"><a href="#cb2-2"></a>                                <span class="at">date_col =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>                                <span class="at">delim =</span> <span class="st">","</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>                                <span class="at">show_skim =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co"># Read data using readr</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(path, <span class="at">delim =</span> delim, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb2-8"><a href="#cb2-8"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="co"># Convert date column if provided</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col) <span class="sc">&amp;&amp;</span> date_col <span class="sc">%in%</span> <span class="fu">names</span>(df)) {</span>
+<span id="cb2-11"><a href="#cb2-11"></a>    df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>      dplyr<span class="sc">::</span><span class="fu">mutate</span>({{ date_col }} <span class="sc">:</span><span class="er">=</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(.data[[date_col]]))</span>
+<span id="cb2-13"><a href="#cb2-13"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col)) {</span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"Column"</span>, date_col, <span class="st">"not found in data — skipping date conversion"</span>))</span>
+<span id="cb2-15"><a href="#cb2-15"></a>  }</span>
+<span id="cb2-16"><a href="#cb2-16"></a>  </span>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="co"># Optionally skim summary</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="cf">if</span> (show_skim) {</span>
+<span id="cb2-19"><a href="#cb2-19"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">📊 Quick data summary:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20"></a>    <span class="fu">print</span>(skimr<span class="sc">::</span><span class="fu">skim</span>(df))</span>
+<span id="cb2-21"><a href="#cb2-21"></a>  }</span>
+<span id="cb2-22"><a href="#cb2-22"></a>  </span>
+<span id="cb2-23"><a href="#cb2-23"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb2-24"><a href="#cb2-24"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">load_and_clean_data</span>(<span class="st">"data dictionary/female_egg_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+📊 Quick data summary:
+── Data Summary ────────────────────────
+                           Values
+Name                       df    
+Number of rows             20    
+Number of columns          5     
+_______________________          
+Column type frequency:           
+  character                1     
+  numeric                  4     
+________________________         
+Group variables            None  
+
+── Variable type: character ────────────────────────────────────────────────────
+  skim_variable n_missing complete_rate min max empty n_unique whitespace
+1 treatment             0             1   1   1     0        2          0
+
+── Variable type: numeric ──────────────────────────────────────────────────────
+  skim_variable n_missing complete_rate mean    sd p0   p25  p50  p75 p100 hist 
+1 female_id             0             1 10.5  5.92  1  5.75 10.5 15.2  20  ▇▇▇▇▇
+2 age_days              0             1 17    8.81  0 10.8  19   25    28  ▅▂▂▇▇
+3 eggs_laid             0             1 51.1 12.8  41 45.5  48   52.8 101. ▇▂▁▁▁
+4 eggs_hatched          0             1 44.2  5.18 34 41    44   47    55  ▃▅▇▅▂</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">female_id</th>
+<th style="text-align: left;">treatment</th>
+<th style="text-align: right;">age_days</th>
+<th style="text-align: right;">eggs_laid</th>
+<th style="text-align: right;">eggs_hatched</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">52.0000</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">100.8233</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">50.0000</td>
+<td style="text-align: right;">55</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">46.0000</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">59.0000</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">55.0000</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">49.0000</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">44.0000</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">42.0000</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">44.0000</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">57.0000</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">48.0000</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">41.0000</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">41.0000</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">49.0000</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">56.0000</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">48.0000</td>
+<td style="text-align: right;">46</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In theory this function could be applied to any dataset (as long as it was in tidy format)</p>
+</div>
+</div>
+</section><section id="validating-data" class="level3" data-number="15.2.2"><h3 data-number="15.2.2" class="anchored" data-anchor-id="validating-data">
+<span class="header-section-number">15.2.2</span> Validating data</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(assertr)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">library</span>(rlang)</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>data_checks <span class="ot">&lt;-</span> <span class="cf">function</span>(data,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>                        <span class="at">metadata_path =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>                        <span class="at">numeric_cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-8"><a href="#cb5-8"></a>                        <span class="at">character_cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-9"><a href="#cb5-9"></a>                        <span class="at">unique_cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>                        <span class="at">bounded_cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-11"><a href="#cb5-11"></a>                        <span class="at">bounds =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">30</span>),</span>
+<span id="cb5-12"><a href="#cb5-12"></a>                        <span class="at">treatment_levels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>),</span>
+<span id="cb5-13"><a href="#cb5-13"></a>                        <span class="at">just_warn =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb5-14"><a href="#cb5-14"></a>  </span>
+<span id="cb5-15"><a href="#cb5-15"></a>  <span class="co"># Define error handler</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>  handler <span class="ot">&lt;-</span> <span class="cf">if</span> (just_warn) assertr<span class="sc">::</span>just_warn <span class="cf">else</span> assertr<span class="sc">::</span>error_stop</span>
+<span id="cb5-17"><a href="#cb5-17"></a>  </span>
+<span id="cb5-18"><a href="#cb5-18"></a>  metadata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(metadata_path, <span class="at">sheet =</span> <span class="st">"Data Dictionary"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19"></a>    </span>
+<span id="cb5-20"><a href="#cb5-20"></a>  required_cols <span class="ot">&lt;-</span> metadata <span class="sc">|&gt;</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>      <span class="fu">pull</span>(<span class="st">`</span><span class="at">Name</span><span class="st">`</span>)</span>
+<span id="cb5-22"><a href="#cb5-22"></a>  </span>
+<span id="cb5-23"><a href="#cb5-23"></a>  <span class="co"># Start pipeline</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>  out <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>    <span class="fu">verify</span>(<span class="fu">has_all_names</span>(required_cols), <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-26"><a href="#cb5-26"></a>  </span>
+<span id="cb5-27"><a href="#cb5-27"></a>  <span class="co"># Numeric checks</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(numeric_cols)) {</span>
+<span id="cb5-29"><a href="#cb5-29"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>      <span class="fu">assert</span>(is.numeric, <span class="sc">!!!</span><span class="fu">syms</span>(numeric_cols), <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-31"><a href="#cb5-31"></a>  }</span>
+<span id="cb5-32"><a href="#cb5-32"></a>  </span>
+<span id="cb5-33"><a href="#cb5-33"></a>  <span class="co"># Character checks</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(character_cols)) {</span>
+<span id="cb5-35"><a href="#cb5-35"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a>      <span class="fu">assert</span>(is.character, <span class="sc">!!!</span><span class="fu">syms</span>(character_cols), <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-37"><a href="#cb5-37"></a>  }</span>
+<span id="cb5-38"><a href="#cb5-38"></a>  </span>
+<span id="cb5-39"><a href="#cb5-39"></a>  <span class="co"># Unique checks</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(unique_cols)) {</span>
+<span id="cb5-41"><a href="#cb5-41"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a>      <span class="fu">assert</span>(is_uniq, <span class="sc">!!!</span><span class="fu">syms</span>(unique_cols), <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-43"><a href="#cb5-43"></a>  }</span>
+<span id="cb5-44"><a href="#cb5-44"></a>  </span>
+<span id="cb5-45"><a href="#cb5-45"></a>  <span class="co"># Non-missing checks</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a>  all_cols <span class="ot">&lt;-</span> <span class="fu">names</span>(data)</span>
+<span id="cb5-47"><a href="#cb5-47"></a>  </span>
+<span id="cb5-48"><a href="#cb5-48"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(all_cols)) {</span>
+<span id="cb5-49"><a href="#cb5-49"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a>      <span class="fu">assert</span>(not_na, <span class="sc">!!!</span><span class="fu">syms</span>(all_cols), <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-51"><a href="#cb5-51"></a>  }</span>
+<span id="cb5-52"><a href="#cb5-52"></a>  </span>
+<span id="cb5-53"><a href="#cb5-53"></a>  <span class="co"># Treatment in set</span></span>
+<span id="cb5-54"><a href="#cb5-54"></a>  <span class="cf">if</span> (<span class="st">"treatment"</span> <span class="sc">%in%</span> <span class="fu">names</span>(data)) {</span>
+<span id="cb5-55"><a href="#cb5-55"></a>    pred_treatment <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">in_set</span>(treatment_levels)</span>
+<span id="cb5-56"><a href="#cb5-56"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a>      <span class="fu">assert</span>(pred_treatment, treatment, <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-58"><a href="#cb5-58"></a>  }</span>
+<span id="cb5-59"><a href="#cb5-59"></a>  </span>
+<span id="cb5-60"><a href="#cb5-60"></a>  <span class="co"># Bounded numeric checks</span></span>
+<span id="cb5-61"><a href="#cb5-61"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(bounded_cols)) {</span>
+<span id="cb5-62"><a href="#cb5-62"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
+<span id="cb5-63"><a href="#cb5-63"></a>      <span class="fu">assert</span>(<span class="fu">within_bounds</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">2</span>]), <span class="sc">!!!</span><span class="fu">syms</span>(bounded_cols),</span>
+<span id="cb5-64"><a href="#cb5-64"></a>             <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-65"><a href="#cb5-65"></a>  }</span>
+<span id="cb5-66"><a href="#cb5-66"></a>  </span>
+<span id="cb5-67"><a href="#cb5-67"></a>  <span class="co"># Eggs logic check if present</span></span>
+<span id="cb5-68"><a href="#cb5-68"></a>  <span class="cf">if</span> (<span class="fu">all</span>(<span class="fu">c</span>(<span class="st">"eggs_hatched"</span>, <span class="st">"eggs_laid"</span>) <span class="sc">%in%</span> <span class="fu">names</span>(out))) {</span>
+<span id="cb5-69"><a href="#cb5-69"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
+<span id="cb5-70"><a href="#cb5-70"></a>      <span class="fu">verify</span>(eggs_hatched <span class="sc">&lt;=</span> eggs_laid, <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-71"><a href="#cb5-71"></a>  }</span>
+<span id="cb5-72"><a href="#cb5-72"></a>  </span>
+<span id="cb5-73"><a href="#cb5-73"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb5-74"><a href="#cb5-74"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="task">
+<div class="task-header">
+<p>Question</p>
+</div>
+<div class="task-container">
+<p>Can we think of any ways this code could <em>potentially</em> be abstracted/improved further?</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">tbl_regression</span>(William_ls2,</span>
-<span id="cb4-2"><a href="#cb4-2"></a>               <span class="at">intercept =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb4-3"><a href="#cb4-3"></a>               <span class="at">label =</span> <span class="fu">list</span>(O3 <span class="sc">~</span> <span class="st">"O³"</span>, Stress <span class="sc">~</span> <span class="st">"Stress"</span>),</span>
-<span id="cb4-4"><a href="#cb4-4"></a>               <span class="at">pvalue_fun =</span> <span class="sc">~</span> <span class="fu">style_pvalue</span>(.x, <span class="at">digits =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">"Coefficient"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6"></a>                <span class="at">estimate =</span> <span class="st">"Estimate"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">bold_labels</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb4-8"><a href="#cb4-8"></a>  <span class="fu">bold_p</span>(<span class="at">t =</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-9"><a href="#cb4-9"></a>  <span class="fu">as_gt</span> () <span class="sc">%&gt;%</span> </span>
-<span id="cb4-10"><a href="#cb4-10"></a>   gt<span class="sc">::</span><span class="fu">tab_source_note</span>(gt<span class="sc">::</span><span class="fu">md</span>(<span class="st">"*This is an ordinary least squares model*"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="vngkfmpcss" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vngkfmpcss table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>  egg_data <span class="ot">&lt;-</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">load_and_clean_data</span>(<span class="st">"data dictionary/female_egg_data.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">data_checks</span>(<span class="at">metadata_path =</span> <span class="st">"data dictionary/insect_egg_metadata.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+📊 Quick data summary:
+── Data Summary ────────────────────────
+                           Values
+Name                       df    
+Number of rows             20    
+Number of columns          5     
+_______________________          
+Column type frequency:           
+  character                1     
+  numeric                  4     
+________________________         
+Group variables            None  
 
-#vngkfmpcss thead, #vngkfmpcss tbody, #vngkfmpcss tfoot, #vngkfmpcss tr, #vngkfmpcss td, #vngkfmpcss th {
-  border-style: none;
-}
+── Variable type: character ────────────────────────────────────────────────────
+  skim_variable n_missing complete_rate min max empty n_unique whitespace
+1 treatment             0             1   1   1     0        2          0
 
-#vngkfmpcss p {
-  margin: 0;
-  padding: 0;
-}
+── Variable type: numeric ──────────────────────────────────────────────────────
+  skim_variable n_missing complete_rate mean    sd p0   p25  p50  p75 p100 hist 
+1 female_id             0             1 10.5  5.92  1  5.75 10.5 15.2  20  ▇▇▇▇▇
+2 age_days              0             1 17    8.81  0 10.8  19   25    28  ▅▂▂▇▇
+3 eggs_laid             0             1 51.1 12.8  41 45.5  48   52.8 101. ▇▂▁▁▁
+4 eggs_hatched          0             1 44.2  5.18 34 41    44   47    55  ▃▅▇▅▂
+verification [has_all_names(required_cols)] failed! (1 failure)
 
-#vngkfmpcss .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
+    verb redux_fn                    predicate column index value
+1 verify       NA has_all_names(required_cols)     NA     1    NA
 
-#vngkfmpcss .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
+verification [eggs_hatched &lt;= eggs_laid] failed! (1 failure)
 
-#vngkfmpcss .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#vngkfmpcss .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#vngkfmpcss .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#vngkfmpcss .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#vngkfmpcss .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#vngkfmpcss .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#vngkfmpcss .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#vngkfmpcss .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#vngkfmpcss .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#vngkfmpcss .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#vngkfmpcss .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#vngkfmpcss .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#vngkfmpcss .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#vngkfmpcss .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vngkfmpcss .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#vngkfmpcss .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#vngkfmpcss .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#vngkfmpcss .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vngkfmpcss .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#vngkfmpcss .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vngkfmpcss .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#vngkfmpcss .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vngkfmpcss .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#vngkfmpcss .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vngkfmpcss .gt_left {
-  text-align: left;
-}
-
-#vngkfmpcss .gt_center {
-  text-align: center;
-}
-
-#vngkfmpcss .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#vngkfmpcss .gt_font_normal {
-  font-weight: normal;
-}
-
-#vngkfmpcss .gt_font_bold {
-  font-weight: bold;
-}
-
-#vngkfmpcss .gt_font_italic {
-  font-style: italic;
-}
-
-#vngkfmpcss .gt_super {
-  font-size: 65%;
-}
-
-#vngkfmpcss .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#vngkfmpcss .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#vngkfmpcss .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#vngkfmpcss .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#vngkfmpcss .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#vngkfmpcss .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#vngkfmpcss .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#vngkfmpcss .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#vngkfmpcss div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span data-qmd-base64="Q29lZmZpY2llbnQ="><span class="gt_from_md">Coefficient</span></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span data-qmd-base64="RXN0aW1hdGU="><span class="gt_from_md">Estimate</span></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span data-qmd-base64="PHN0cm9uZz45NSUgQ0k8L3N0cm9uZz4="><span class="gt_from_md"><strong>95% CI</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span data-qmd-base64="PHN0cm9uZz5wLXZhbHVlPC9zdHJvbmc+"><span class="gt_from_md"><strong>p-value</strong></span></span></th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">(Intercept)</td>
-<td headers="estimate" class="gt_row gt_center">8.5</td>
-<td headers="conf.low" class="gt_row gt_center">8.4, 8.7</td>
-<td headers="p.value" class="gt_row gt_center" style="font-weight: bold;">&lt;0.001</td>
-</tr>
-<tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">O³</td>
-<td headers="estimate" class="gt_row gt_center">-7.1</td>
-<td headers="conf.low" class="gt_row gt_center">-9.2, -5.1</td>
-<td headers="p.value" class="gt_row gt_center" style="font-weight: bold;">&lt;0.001</td>
-</tr>
-<tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Stress</td>
-<td headers="estimate" class="gt_row gt_center"><br></td>
-<td headers="conf.low" class="gt_row gt_center"><br></td>
-<td headers="p.value" class="gt_row gt_center"><br></td>
-</tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Stressed</td>
-<td headers="estimate" class="gt_row gt_center">—</td>
-<td headers="conf.low" class="gt_row gt_center">—</td>
-<td headers="p.value" class="gt_row gt_center"><br></td>
-</tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Well-watered</td>
-<td headers="estimate" class="gt_row gt_center">0.18</td>
-<td headers="conf.low" class="gt_row gt_center">0.07, 0.29</td>
-<td headers="p.value" class="gt_row gt_center" style="font-weight: bold;">0.003</td>
-</tr>
-</tbody>
-<tfoot class="gt_sourcenotes"><tr>
-<td class="gt_sourcenote" colspan="4"><span data-qmd-base64="PGVtPlRoaXMgaXMgYW4gb3JkaW5hcnkgbGVhc3Qgc3F1YXJlcyBtb2RlbDwvZW0+"><span class="gt_from_md"><em>This is an ordinary least squares model</em></span></span></td>
-    </tr></tfoot>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span data-qmd-base64="Q0kgPSBDb25maWRlbmNlIEludGVydmFs"><span class="gt_from_md">CI = Confidence Interval</span></span>
-</td>
-    </tr></tfoot>
-</table>
-</div>
+    verb redux_fn                 predicate column index value
+1 verify       NA eggs_hatched &lt;= eggs_laid     NA     3    NA</code></pre>
 </div>
 </div>
 
 
-</section></main><!-- /main --><script>
+</section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
@@ -2315,13 +1629,13 @@ window.onresize = move_sidebar;
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./ggplot3.html" class="pagination-link" aria-label="Themes">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Themes</span></span>
+      <a href="./11-assertions.html" class="pagination-link" aria-label="Data validation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data validation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./r-basics.html" class="pagination-link" aria-label="R Basics">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R Basics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ggplot.html" class="pagination-link" aria-label="ggplot">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

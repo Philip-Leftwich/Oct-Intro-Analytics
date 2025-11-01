@@ -362,6 +362,23 @@ anova(flyls2, flyls3)
 
 Before we can interpret the terms in our model, we should check to see if this is even a good way of fitting and measuring our data. We should check the assumptions of our model are being met.
 
+R has ways to do this with the `plot()` function, but the `performance` packages @R-performance from `easystats` also gives nice residual checks:
+
+:::{.panel-tabset}
+
+## base R
+
+```{r, eval = TRUE, message = FALSE, warning = FALSE, fig.height=9}
+
+# Set plotting area to 2x2 (four panels)
+par(mfrow = c(2, 2))
+
+# Plot diagnostic plots
+plot(flyls2)
+```
+
+
+## performance
 ```{r, eval = TRUE, message = FALSE, warning = FALSE, fig.height=9}
 
 performance::check_model(flyls2,

@@ -5,7 +5,8 @@ library(tidyverse)
 library(here)
 source("R/booktem_setup.R")
 source("R/my_setup.R")
-#source("R/clean_penguins.R")
+
+penguins <- readRDS(here("files", "chapter5.RDS"))
 
 #___________________________----
 # SET UP ----

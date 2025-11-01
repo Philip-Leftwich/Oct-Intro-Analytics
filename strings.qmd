@@ -6,9 +6,20 @@ library(janitor)
 library(here)
 source("R/booktem_setup.R")
 source("R/my_setup.R")
-penguins <- readRDS("data/penguin_clean_names.RDS")
+penguins_clean_names <- readRDS("data/penguin_clean_names.RDS")
 ```
 
+
+:::{.callout-important collapse = "true"}
+
+## Penguin clean names dataset
+
+```{r, eval = FALSE}
+penguins_clean_names <- readRDS(url("https://github.com/Philip-Leftwich/Oct-Intro-Analytics/raw/refs/heads/dev/data/penguin_clean_names.RDS"))
+
+```
+
+:::
 
 ## Learning Outcomes
 
@@ -39,7 +50,7 @@ Terms might be capitalised (or not), have accidental spaces at the beginning or 
 ## Basic string manipulation
 
 The `stringr` package provides lots of handy tools for cleaning and manipulating text (or “strings”) in R.
-Let’s look at some examples using the `penguins_raw` dataset.
+Let’s look at some examples using the `penguins_clean_names` dataset.
 
 ::: {.callout-note}
 You can think of string manipulation as tidying text variables — useful when species names, island names, or other labels contain extra spaces or unwanted characters.
@@ -105,7 +116,7 @@ We can look for typos by asking R to produce all of the distinct values in a var
 
 ```{r, eval = T}
 # Print only unique character strings in this variable
-penguins |>  
+penguins_clean_names |>  
   distinct(sex)
 
 ```
@@ -127,7 +138,7 @@ It works a bit like an “if / else if / else” ladder.
 # use mutate and case_when 
 # for a statement that conditionally changes 
 # the names of the values in a variable
-penguins <- penguins |> 
+penguins <- penguins_clean_names |> 
   mutate(species = case_when(
   species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
   species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
@@ -151,7 +162,7 @@ Think of `case_when()` as a tidy way to handle many possible categories.
 # use mutate and if_else
 # for a statement that conditionally changes 
 # the names of the values in a variable
-penguins <- penguins |> 
+penguins <- penguins_clean_names |> 
   mutate(sex = if_else(
     sex == "MALE", "Male", "Female"
   )
@@ -195,7 +206,7 @@ Below we repeat the outcomes above, but with string matching:
 # use mutate and case_when 
 # for a statement that conditionally changes 
 # the names of the values in a variable
-penguins |> 
+penguins_clean_names |> 
   mutate(species = stringr::word(species, 1)
   ) |> 
   mutate(sex = stringr::str_to_title(sex))
@@ -221,7 +232,7 @@ Alternatively we could decide we want simpler species names but that we would li
 They are **however** also complex and unintuitive. ChatGPT (or any LLM) is  great for building more complex regex snippets.
 
 ```{r, eval = F}
-penguins |> 
+penguins_clean_names |> 
     separate(
         species,
         into = c("species", "full_latin_name"),
@@ -230,7 +241,7 @@ penguins |>
 ```
 
 ```{r, eval = T, echo = F}
-penguins |> 
+penguins_clean_names |> 
     separate(
         species,
         into = c("species", "full_latin_name"),
@@ -253,11 +264,11 @@ Use `str_detect()` to filter your data. Here, we filter the species names to onl
 
 ```{r}
 # 3 possible names in species column
-penguins |> distinct(species)
+penguins_clean_names |> distinct(species)
 ```
 
 ```{r}
-penguins |>
+penguins_clean_names |>
   filter(str_detect(species, "papua")) |>
   select(species)
 
@@ -272,7 +283,7 @@ str_remove("Genus specificus", pattern = "Genus ")
 
 
 ```{r}
-penguins |> 
+penguins_clean_names |> 
     separate(
         species,
         into = c("species", "full_latin_name"),

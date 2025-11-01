@@ -217,6 +217,35 @@ penguins_raw
 ::::
 :::
 
+## Running a script from console
+
+Now that we have made a very simple script, we can check our blank slates set-up and that our script runs without errors:
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Restart your R session - (does your Environment clear?)
+
+* [ ] Using the `source()` function in your console type the filepath of your script and hit `enter`.
+
+`r hide("Solution")`
+
+```{r, eval = F}
+source("scripts/01_import_penguins_data.R") # must specify dir
+
+# source(here::here("scripts", "01_import_penguins_data.R"))
+# using here 
+
+```
+
+`r unhide()`
+
+::::
+:::
+
 ## Summary
 
 In this chapter we have:

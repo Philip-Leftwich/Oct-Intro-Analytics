@@ -1,7 +1,5 @@
 ## Data validation {#sec-validate}
 
-https://docs.ropensci.org/assertr/articles/assertr.html#verify-vs--assert
-
 ```{r, echo = F, warning = F, message = F}
 library(tidyverse)
 library(janitor)

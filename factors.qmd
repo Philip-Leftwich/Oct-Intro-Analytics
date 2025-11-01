@@ -7,8 +7,21 @@ library(janitor)
 library(here)
 source("R/booktem_setup.R")
 source("R/my_setup.R")
-penguins <- readRDS("data/penguin_clean_names.RDS")
+penguins_clean_names <- readRDS("data/penguin_clean_names.RDS")
 ```
+
+:::{.callout-important collapse = "true"}
+
+## Penguin clean names dataset
+
+```{r, eval = FALSE}
+penguins_clean_names <- readRDS(url("https://github.com/Philip-Leftwich/Oct-Intro-Analytics/raw/refs/heads/dev/data/penguin_clean_names.RDS"))
+
+```
+
+:::
+
+
 
 In R, factors are a class of data that allow for **ordered categories** with a fixed set of acceptable values. 
 
@@ -20,7 +33,7 @@ Using across - we can apply functions to columns based on selected criteria - he
 
 ```{r}
 
-penguins |> 
+penguins_clean_names |> 
   mutate(
     across(.cols = c("species", "region", "island", "stage", "sex"),
            .fns = forcats::as_factor)
@@ -42,7 +55,7 @@ If we want to specify the *correct* order for a factor we can use `forcats::fct_
 
 
 ```{r, eval = T, warning = F, message = F}
-penguins <- penguins |> 
+penguins_clean_names <- penguins_clean_names |> 
   mutate(mass_range = case_when(
     body_mass_g <= 3500 ~ "smol penguin",
     body_mass_g >3500 & body_mass_g < 4500 ~ "mid penguin",
@@ -54,7 +67,7 @@ penguins <- penguins |>
 If we make a barplot, the order of the values on the x axis will typically be in alphabetical order for any character data
 
 ```{r, eval = T, warning = F, message = F}
-penguins |> 
+penguins_clean_names |> 
   drop_na(mass_range) |> 
   ggplot(aes(x = mass_range))+
   geom_bar()
@@ -67,34 +80,34 @@ To convert a character or numeric column to class factor, you can use any functi
 The function `as_factor()` simply converts the class without any further capabilities.
 
 ```{r, eval = T, warning=FALSE, message = F}
-penguins <- penguins |> 
+penguins_clean_names <- penguins_clean_names |> 
   mutate(mass_range = as_factor(mass_range))
 
 ```
 
 
 ```{r}
-levels(penguins$mass_range)
+levels(penguins_clean_names$mass_range)
 ```
 
 Below we use `mutate()` and `as_factor()` to convert the column flipper_range from class character to class factor. 
 
 ```{r}
 # Correct the code in your script with this version
-penguins <- penguins |> 
+penguins_clean_names <- penguins_clean_names |> 
   mutate(mass_range = fct_relevel(mass_range, 
                                   "smol penguin", 
                                   "mid penguin", 
                                   "chonk penguin")
          )
 
-levels(penguins$mass_range)
+levels(penguins_clean_names$mass_range)
 ```
 
 Now when we call a plot, we can see that the x axis categories match the intrinsic order we have specified with our factor levels. 
 
 ```{r, eval = T, warning = F, message = F}
-penguins |> 
+penguins_clean_names |> 
   drop_na(mass_range) |>  
   ggplot(aes(x = mass_range))+
   geom_bar()

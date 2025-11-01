@@ -6,9 +6,19 @@ library(janitor)
 library(here)
 source("R/booktem_setup.R")
 source("R/my_setup.R")
-penguins <- readRDS("data/penguin_clean_names.RDS")
+penguins_clean_names <- readRDS("data/penguin_clean_names.RDS")
 ```
 
+:::{.callout-important collapse = "true"}
+
+## Penguin clean names dataset
+
+```{r, eval = FALSE}
+penguins_clean_names <- readRDS(url("https://github.com/Philip-Leftwich/Oct-Intro-Analytics/raw/refs/heads/dev/data/penguin_clean_names.RDS"))
+
+```
+
+:::
 
 
 Working with dates can be tricky, treating date as strictly numeric is problematic, it won't account for number of days in months or number of months in a year. 
@@ -28,11 +38,11 @@ Additionally there's a lot of different ways to write the same date:
 This variability makes it difficult to tell our software how to read the information, luckily we can use the functions in the `lubridate` package. 
 
 
-```{block, type = "warning"}
+:::{.callout-warning}
 If you get a warning that some dates could not be parsed, then you might find the date has been inconsistently entered into the dataset.
 
 Pay attention to warning and error messages
-```
+:::
 
 Depending on how we interpret the date ordering in a file, we can use `ymd()`, `ydm()`, `mdy()`, `dmy()` 
 
@@ -61,7 +71,7 @@ excel_numeric_to_date(42370)
 
 ```{r, eval = T, warning = F, message = F}
 
-penguins <- penguins |>
+penguins_clean_names <- penguins_clean_names |>
   mutate(date_egg = lubridate::dmy(date_egg))
 
 ```
@@ -77,7 +87,7 @@ Once we have established our date data, we are able to perform calculations or e
 ### Calculations with dates
 
 ```{r, eval = F}
-penguins |> 
+penguins_clean_names |> 
   summarise(min_date=min(date_egg),
             max_date=max(date_egg))
 ```
@@ -85,7 +95,7 @@ penguins |>
 We can also extract and make new columns from our date column - such as a simple column of the year when each observation was made:
 
 ```{r, eval = F}
-penguins <- penguins |> 
+penguins_clean_names <- penguins_clean_names |> 
   mutate(year = lubridate::year(date_egg))
 
 ```

@@ -448,7 +448,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
   </div>
 </li>
       </ul>
@@ -468,6 +468,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data validation</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-data-checking-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Function based data checks</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -482,19 +488,19 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Themes</span></span></a>
   </div>
 </li>
       </ul>
@@ -502,29 +508,12 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Summary tables</span></a>
+ <span class="menu-text">Appendices</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summary-table.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary tables</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
@@ -535,12 +524,6 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -555,13 +538,17 @@ div.csl-indent {
   <ul>
 <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">6.1</span> Learning Objectives</a></li>
   <li><a href="#a-first-glimpse" id="toc-a-first-glimpse" class="nav-link" data-scroll-target="#a-first-glimpse"><span class="header-section-number">6.2</span> A first glimpse</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">6.3</span> Next Steps</a></li>
   <li>
-<a href="#summarise" id="toc-summarise" class="nav-link" data-scroll-target="#summarise"><span class="header-section-number">6.4</span> Summarise</a>
+<a href="#summary-counts" id="toc-summary-counts" class="nav-link" data-scroll-target="#summary-counts"><span class="header-section-number">6.3</span> Summary counts</a>
   <ul class="collapse">
-<li><a href="#visualising-frequencies" id="toc-visualising-frequencies" class="nav-link" data-scroll-target="#visualising-frequencies"><span class="header-section-number">6.4.1</span> Visualising Frequencies</a></li>
+<li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering"><span class="header-section-number">6.3.1</span> Filtering</a></li>
+  <li><a href="#grouping" id="toc-grouping" class="nav-link" data-scroll-target="#grouping"><span class="header-section-number">6.3.2</span> Grouping</a></li>
   </ul>
 </li>
+  <li><a href="#frequency-counts-by-subgroups" id="toc-frequency-counts-by-subgroups" class="nav-link" data-scroll-target="#frequency-counts-by-subgroups"><span class="header-section-number">6.4</span> Frequency counts by subgroups</a></li>
+  <li><a href="#visualising-frequencies" id="toc-visualising-frequencies" class="nav-link" data-scroll-target="#visualising-frequencies"><span class="header-section-number">6.5</span> Visualising Frequencies</a></li>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">6.6</span> Summary statistics</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">6.7</span> Summary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -1010,14 +997,14 @@ Explanation
 </div>
 </div>
 </div>
-</section><section id="next-steps" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="next-steps">
-<span class="header-section-number">6.3</span> Next Steps</h2>
 <p>We have just learned some ways to initially inspect our dataset. Keep in mind, we don’t expect everything to be perfect. This initial inspection is a good opportunity to identify where these issues might be and assess their severity.</p>
 <p>When you are confident that the dataset is largely as expected, you are ready to start summarising your data.</p>
-</section><section id="summarise" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="summarise">
-<span class="header-section-number">6.4</span> Summarise</h2>
+</section><section id="summary-counts" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="summary-counts">
+<span class="header-section-number">6.3</span> Summary counts</h2>
 <p>In the previous section, we learned how to get an overview of our data’s structure, including the number of rows, the columns present, and any missing data. In this section, we will focus on summarising the data. Summarising data can provide insight into the scope and variation in our dataset, and help in evaluating its suitability for our analysis.</p>
-<p>With our data we can count the total number of occurrences for different groups:</p>
+<p>With our data we can count the total number of occurrences for different groups either by:</p>
+<section id="filtering" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="filtering">
+<span class="header-section-number">6.3.1</span> Filtering</h3>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>penguins_raw <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Adelie Penguin (Pygoscelis adeliae)"</span>) <span class="sc">|&gt;</span> </span>
@@ -1035,37 +1022,42 @@ Explanation
 </div>
 </div>
 </div>
-<p>Or grouped by another variable such as sex:</p>
+</section><section id="grouping" class="level3" data-number="6.3.2"><h3 data-number="6.3.2" class="anchored" data-anchor-id="grouping">
+<span class="header-section-number">6.3.2</span> Grouping</h3>
+<p>Or by grouping :</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>penguins_raw <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Adelie Penguin (Pygoscelis adeliae)"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">group_by</span>(Sex) <span class="sc">|&gt;</span> </span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
-<th style="text-align: left;">Sex</th>
+<th style="text-align: left;">Species</th>
 <th style="text-align: right;">n</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">FEMALE</td>
-<td style="text-align: right;">73</td>
+<td style="text-align: left;">Adelie Penguin (Pygoscelis adeliae)</td>
+<td style="text-align: right;">152</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">MALE</td>
-<td style="text-align: right;">73</td>
+<td style="text-align: left;">Chinstrap penguin (Pygoscelis antarctica)</td>
+<td style="text-align: right;">68</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">6</td>
+<td style="text-align: left;">Gentoo penguin (Pygoscelis papua)</td>
+<td style="text-align: right;">124</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
+</section></section><section id="frequency-counts-by-subgroups" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="frequency-counts-by-subgroups">
+<span class="header-section-number">6.4</span> Frequency counts by subgroups</h2>
+<p>We can apply multiple grouping parameters at the same time - for example if we wish to know the frequency of observations by species <strong>and</strong> sex.</p>
+<p>We can do this using <code>dplyr</code> or with functions in the <code>janitor</code> package:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Dplyr</a></li>
@@ -1194,14 +1186,13 @@ Explanation
 </div>
 </div>
 </div>
-<section id="visualising-frequencies" class="level3" data-number="6.4.1"><h3 data-number="6.4.1" class="anchored">
-<span class="header-section-number">6.4.1</span> Visualising Frequencies</h3>
+</section><section id="visualising-frequencies" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="visualising-frequencies">
+<span class="header-section-number">6.5</span> Visualising Frequencies</h2>
 <p>Graphs make summaries easier to interpret at a glance.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Geom_col</a></li>
 <li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Geom_bar</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">Summary</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
@@ -1241,8 +1232,11 @@ Explanation
 </div>
 </div>
 </div>
-<section id="summarising-with-mean-and-sd" class="level3" data-number="6.4.2"><h3 data-number="6.4.2" class="anchored">
-<span class="header-section-number">6.4.2</span> Summarising with Mean and SD</h3>
+</div>
+</div>
+</div>
+</section><section id="summary-statistics" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="summary-statistics">
+<span class="header-section-number">6.6</span> Summary statistics</h2>
 <p>We can extend our summaries to show not just counts, but also measures of central tendency (mean) and spread (standard deviation).</p>
 <p>These are powerful ways to understand variation within groups.</p>
 <div class="cell" data-layout-align="center">
@@ -1373,8 +1367,8 @@ Solution
 </div>
 </div>
 </div>
-<section id="interpreting-mean-and-sd" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="interpreting-mean-and-sd">
-<span class="header-section-number">6.5</span> Interpreting Mean and SD</h2>
+<section id="interpreting-mean-and-sd" class="level3" data-number="6.6.1"><h3 data-number="6.6.1" class="anchored" data-anchor-id="interpreting-mean-and-sd">
+<span class="header-section-number">6.6.1</span> Interpreting Mean and SD</h3>
 <ul>
 <li><p>Mean gives the central (average) value.</p></li>
 <li><p>Standard deviation (SD) shows how spread out the values are — a large SD means more variability.</p></li>
@@ -1382,9 +1376,8 @@ Solution
 </ul></section>
 </div>
 </div>
-</section>
-</div>
-<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+</section><section id="summary" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">6.7</span> Summary</h2>
 <p>In this section we learned to:</p>
 <ul>
 <li>
@@ -1409,15 +1402,12 @@ Solution
 </ul>
 
 
-</div>
-</div>
-</div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-R-janitor" class="csl-entry" role="listitem">
 Firke, S. (2024). <em>Janitor: Simple tools for examining and cleaning dirty data</em>. <a href="https://github.com/sfirke/janitor">https://github.com/sfirke/janitor</a>
 </div>
 </div>
-</section></section></main><!-- /main --><script>
+</section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
