@@ -27,7 +27,7 @@ All code written in R version 4.4.3 "Trophy Case". Released on February 28, 2025
 # automatically create a bib database for R packages
 # add any packages you want to cite here
 knitr::write_bib(c(
-  .packages(), 'rstatix', 'patchwork', 'here', 'kableExtra', 'plotly', 'gitcreds', 'usethis', 'ggridges', 'scales', 'purrr', 'tinytex', 'gt', 'broom', 'tidyverse','styler', 'rstatix', 'performance', 'see', 'lme4', 'lmerTest', 'DHARMa', 'glmmTMB', 'nlme', 'ggeffects', 'sjPlot', 'DHARMa', 'report', 'MuMIn', 'palmerpenguins', 'colorBlindness', 'skimr', 'ggplot2', 'sandwich', 'parameters', 'esquisse', 'plotly', 'assertr', 'showtext', 'sysfonts', 'ggforce', 'geomtextpath', 'ggtext', 'gghighlight', 'ggh4x', 'ggbeeswarm', 'fs', 'glue', 'janitor', 'palmerpenguins', 'camcorder', 'gghalves', 'colorblindr', 'dplyr', 'colorspace', 'easystats', 'gtsummary', 'naniar'
+  .packages(), 'rstatix', 'patchwork', 'here', 'kableExtra', 'plotly', 'ggridges', 'scales', 'purrr', 'gt', 'broom', 'tidyverse','styler', 'performance', 'see', 'lme4', 'lmerTest', 'DHARMa', 'glmmTMB', 'nlme', 'ggeffects', 'sjPlot', 'report', 'MuMIn', 'palmerpenguins', 'colorBlindness', 'skimr', 'ggplot2', 'sandwich', 'parameters', 'esquisse', 'assertr', 'showtext', 'sysfonts', 'ggforce', 'geomtextpath', 'ggtext', 'gghighlight', 'ggh4x', 'ggbeeswarm', 'fs', 'glue', 'janitor', 'camcorder', 'gghalves', 'dplyr', 'colorspace', 'easystats', 'gtsummary', 'naniar', 'DescTools', 'lubridate'
 ), 'include/packages.bib')
 
 

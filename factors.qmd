@@ -22,14 +22,22 @@ penguins_clean_names <- readRDS(url("https://github.com/Philip-Leftwich/Oct-Intr
 :::
 
 
-
 In R, factors are a class of data that allow for **ordered categories** with a fixed set of acceptable values. 
 
 Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables, or for use in linear model analyses (more on this later). 
 
 Working with factors is easy with the `forcats` package:
 
-Using across - we can apply functions to columns based on selected criteria - here within mutate we are changing each column in the `.cols` argument and applying the function `forcats::as_factor()`
+```{r, eval = F}
+penguins_clean_names |> 
+  mutate(species = as_factor(species))
+
+```
+
+
+### Applying changes across columns
+
+Using `across` - we can apply functions to columns based on selected criteria - here within mutate we are changing each column in the `.cols` argument and applying the function `forcats::as_factor()`
 
 ```{r}
 
@@ -49,10 +57,66 @@ Unless we assign the output of this code to an R object it will just print into 
 
 :::
 
-### Setting factor levels
 
-If we want to specify the *correct* order for a factor we can use `forcats::fct_relevel`
+### Ordering factors manually
 
+With the `forcats::fct_relevel` function we can set factors and apply a specified level at the same time:
+
+```{r}
+penguins_clean_names |> 
+  mutate(species = fct_relevel(species, "Adelie", "Chinstrap", "Gentoo")) |> 
+  ggplot(aes(x = species))+
+  geom_bar()+
+  coord_flip()
+  
+
+```
+
+### Ordering factors by another variable
+
+With the function `forcats::fct_infreq` we can change the order according to how frequently each level occurs
+
+```{r}
+penguins_clean_names |> 
+   mutate(species = fct_infreq(species)) |>  
+  ggplot(aes(x = species))+
+  geom_bar()+
+  coord_flip()
+  
+
+```
+
+The `forcats::fct_rev()` function in R is used to reverse the order of levels in a factor variable. It is particularly useful for changing the order of factor levels when you want to display data in a reversed or descending order.
+
+```{r}
+penguins_clean_names |> 
+  mutate(species = fct_rev(as_factor(species))) |> 
+  ggplot(aes(x = species))+
+  geom_bar()+
+  coord_flip()
+
+```
+
+```{r, warning = FALSE}
+penguins_clean_names |> 
+  mutate(species = as_factor(species) |> 
+           fct_reorder(body_mass_g,
+                       .fun = mean,
+                       .na_rm = T)) |> 
+  # by default the levels are ordered by the median values of the continuous variable
+  # mean, min and max can all be included here
+  ggplot(aes(x = species,
+             y = body_mass_g,
+             colour = species))+
+  geom_boxplot(width = .2,
+               outlier.shape = NA)+
+  coord_flip()+
+  theme(legend.position ="none")
+```
+
+### Factor bins
+
+If we want to we can also *bin* continuous data into useful chunks: 
 
 ```{r, eval = T, warning = F, message = F}
 penguins_clean_names <- penguins_clean_names |> 
@@ -75,6 +139,16 @@ penguins_clean_names |>
 ```
 
 
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Our new variable `mass_range` is not yet set as a factor, can you try this now?
+
+`r hide("Solution")`
+
 To convert a character or numeric column to class factor, you can use any function from the `forcats` package. They will convert to class factor and then also perform or allow certain ordering of the levels - for example using `forcats::fct_relevel()` lets you manually specify the level order. 
 
 The function `as_factor()` simply converts the class without any further capabilities.
@@ -89,6 +163,13 @@ penguins_clean_names <- penguins_clean_names |>
 ```{r}
 levels(penguins_clean_names$mass_range)
 ```
+
+` r unhide()`
+
+
+* [ ] Make sure the factors are set to a sensible order
+
+` r hide("Solution")`
 
 Below we use `mutate()` and `as_factor()` to convert the column flipper_range from class character to class factor. 
 
@@ -114,15 +195,8 @@ penguins_clean_names |>
 
 ```
 
-```{block, type = "info"}
+`r unhide()`
 
-Factors will also be important when we build linear models a bit later. The reference or intercept for a categorical predictor variable when it is read as a `<chr>` is set by R as the first one when ordered alphabetically. This may not always be the most appropriate choice, and by changing this to an ordered `<fct>` we can manually set the intercept.
-
-```
-
-
-
-## Summary
-
-In this chapter we have successfully imported and checked our data for typos and small errors, we have also been introduce to some of the key functions in the `dplyr` package for data wrangling. Now that we have confidence in the format and integrity of our data, next time we will start to make insights and understand patterns. 
+::::
+:::
 

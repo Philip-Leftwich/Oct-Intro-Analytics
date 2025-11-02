@@ -339,8 +339,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -502,6 +502,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -519,7 +525,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>
 <a href="#duplicated-rows" id="toc-duplicated-rows" class="nav-link active" data-scroll-target="#duplicated-rows"><span class="header-section-number">10.1</span> Duplicated rows</a>
   <ul class="collapse">
-<li><a href="#counting-unique-entries" id="toc-counting-unique-entries" class="nav-link" data-scroll-target="#counting-unique-entries"><span class="header-section-number">10.1.1</span> Counting unique entries</a></li>
+<li><a href="#working-with-duplications" id="toc-working-with-duplications" class="nav-link" data-scroll-target="#working-with-duplications"><span class="header-section-number">10.1.1</span> Working with duplications</a></li>
+  <li><a href="#counting-unique-entries" id="toc-counting-unique-entries" class="nav-link" data-scroll-target="#counting-unique-entries"><span class="header-section-number">10.1.2</span> Counting unique entries</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -634,69 +641,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Great!</p>
-<p>If I did have duplications I could investigate further and extract these exact rows:</p>
+<p>Great! In our dataset we have no examples of duplicated rows of data</p>
+<section id="working-with-duplications" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="working-with-duplications">
+<span class="header-section-number">10.1.1</span> Working with duplications</h3>
+<p>As our dataset is duplication free, lets quickly add a few dupes to our data:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Inspect duplicated rows</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(<span class="fu">across</span>(<span class="fu">everything</span>())))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>penguins_demo <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">bind_rows</span>(<span class="fu">slice</span>(penguins_clean_names, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>,<span class="dv">30</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<pre><code>A tibble:0 × 17
-0 rows | 1-8 of 17 columns</code></pre>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<ul class="task-list">
+<li><p><label><input type="checkbox">Run the code above to make a dataset with some duplications</label></p></li>
+<li><p><label><input type="checkbox">Re-run a duplication check</label></p></li>
+</ul>
+</div>
+</div>
+<p>If I did have duplications I could remove these with a few commands:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">duplicated</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">distinct</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Keep only unduplicated data with !</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">across</span>(<span class="fu">everything</span>())))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Keep only unduplicated data with !</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>penguins_demo <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">across</span>(<span class="fu">everything</span>())))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top" style="width:100%;">
-<colgroup>
-<col style="width: 5%">
-<col style="width: 7%">
-<col style="width: 4%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 4%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 6%">
-<col style="width: 2%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 4%">
-</colgroup>
-<thead><tr class="header">
-<th style="text-align: left;">study_name</th>
-<th style="text-align: right;">sample_number</th>
-<th style="text-align: left;">species</th>
-<th style="text-align: left;">region</th>
-<th style="text-align: left;">island</th>
-<th style="text-align: left;">stage</th>
-<th style="text-align: left;">individual_id</th>
-<th style="text-align: left;">clutch_completion</th>
-<th style="text-align: left;">date_egg</th>
-<th style="text-align: right;">culmen_length_mm</th>
-<th style="text-align: right;">culmen_depth_mm</th>
-<th style="text-align: right;">flipper_length_mm</th>
-<th style="text-align: right;">body_mass_g</th>
-<th style="text-align: left;">sex</th>
-<th style="text-align: right;">delta_15n</th>
-<th style="text-align: right;">delta_13c</th>
-<th style="text-align: left;">comments</th>
-</tr></thead>
-<tbody></tbody>
-</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>penguins_demo <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">distinct</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<section id="counting-unique-entries" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="counting-unique-entries">
-<span class="header-section-number">10.1.1</span> Counting unique entries</h3>
+</div>
+</section><section id="counting-unique-entries" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="counting-unique-entries">
+<span class="header-section-number">10.1.2</span> Counting unique entries</h3>
+<p>Using the <code>n_distinct()</code> function from dplyr, you can count the number of distinct values in an R data frame using one of the following methods.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
 <span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">summarise</span>(</span>

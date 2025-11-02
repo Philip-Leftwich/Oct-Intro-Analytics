@@ -624,6 +624,16 @@ subtitle = "Comparing relationships across species"
 
 #### Marginal plots
 
+A *marginal plot* augments a two-dimensional plot (usually a scatterplot) with one-dimensional summaries along its margins—typically histograms, density curves, or boxplots.
+
+They let readers inspect the joint relationship and each variable’s distribution simultaneously.
+
+Conceptually:
+
+- The main panel shows how x and y relate.
+
+- The marginal panels show the univariate spread of each variable.
+
 ```{r}
 
 pal <- c("darkorange", "purple", "cyan")
@@ -673,6 +683,9 @@ marginal_1+scatterplot+marginal_2 +plot_layout(design = layout)
 
 ## Plotly
 
+`plotly` @R-plotly bridges static ggplots to interactive web graphics built on the JavaScript Plotly.js library.
+It preserves ggplot2’s grammar (via `ggplotly()`), but turns each layer into a responsive SVG/HTML element with tooltips, zooming, and panning: 
+
 ```{r}
 library(plotly)
 ggplotly(
@@ -702,7 +715,7 @@ You should specify the output path to your figures folder, then provide a file n
 # OUTPUT FIGURE TO FILE
 
 
-ggsave("outputs/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
+ggsave("outputs/figures/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
 ```
 
 ### `svg`
@@ -714,7 +727,7 @@ What does this mean?
 Open your image in a programme like powerpoint and each element of the plot can be edited, resized or moved!
 
 ```{r, eval = F}
-ggsave("test-file.svg")
+ggsave("outputs/files/test-file.svg")
 ```
 
 ```{r, eval=TRUE, echo=FALSE, out.width="100%", fig.alt= "svg format"}
@@ -734,10 +747,20 @@ The solution is to start with a fixed canvas size. Only then can you safely hard
 
 ```{r, eval = F}
 camcorder::gg_record(
-  dir = 'img', device = "png", dpi = 300, width = 16, height = 9, units = 'cm'
+  dir = 'outputs/figures', device = "png", dpi = 300, width = 16, height = 9, units = 'cm'
 )
 ```
 
 This will save all plots that I generate in a directory called `dir`.`
 
 So be aware - everytime you produce an image it will write to disk - but what you will see in the Viewer pane is now EXACTLY how it looks saved as a file
+
+:::{.callout-important}
+
+- Minor breaking changes to `camcorder` mean that for now you have to run `record_polaroid()` and manually save the plot under the conditions set in `gg_record()`
+
+- If you are using custom fonts with `showtext` you need to set your text to the same dpi as your plots: `showtext::showtext_opts(dpi = 300)`
+
+:::
+
+

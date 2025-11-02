@@ -103,7 +103,7 @@ Set your Rstudio theme to something that works for you:
 
 Why do we need scripts to be organised?
 
-Scripts are a human readable record of our analysis - we need them to be organised, consistent, and well-documented. See @sec-scripts for general tips on how to do this. 
+Scripts are a human readable record of our analysis - we need them to be organised, consistent, and well-documented. See @sec-save-script for general tips on how to do this. 
 
 Well organised scripts are useful in that provide a reference for what you did - think of them as the analysis equivalent of a lab notebook. The more detail provided in the form of comments, the more context we have. The more organised they are, the easier it is to find the sections we need to review. Just like a lab notebook they should be written as though someone else will be reading them. 
 

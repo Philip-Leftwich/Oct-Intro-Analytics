@@ -339,8 +339,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -502,6 +502,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -516,8 +522,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#setting-factor-levels" id="toc-setting-factor-levels" class="nav-link active" data-scroll-target="#setting-factor-levels"><span class="header-section-number">12.0.1</span> Setting factor levels</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">12.1</span> Summary</a></li>
+<li><a href="#applying-changes-across-columns" id="toc-applying-changes-across-columns" class="nav-link active" data-scroll-target="#applying-changes-across-columns"><span class="header-section-number">12.0.1</span> Applying changes across columns</a></li>
+  <li><a href="#ordering-factors-manually" id="toc-ordering-factors-manually" class="nav-link" data-scroll-target="#ordering-factors-manually"><span class="header-section-number">12.0.2</span> Ordering factors manually</a></li>
+  <li><a href="#ordering-factors-by-another-variable" id="toc-ordering-factors-by-another-variable" class="nav-link" data-scroll-target="#ordering-factors-by-another-variable"><span class="header-section-number">12.0.3</span> Ordering factors by another variable</a></li>
+  <li><a href="#factor-bins" id="toc-factor-bins" class="nav-link" data-scroll-target="#factor-bins"><span class="header-section-number">12.0.4</span> Factor bins</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -557,15 +565,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In R, factors are a class of data that allow for <strong>ordered categories</strong> with a fixed set of acceptable values.</p>
 <p>Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables, or for use in linear model analyses (more on this later).</p>
 <p>Working with factors is easy with the <code>forcats</code> package:</p>
-<p>Using across - we can apply functions to columns based on selected criteria - here within mutate we are changing each column in the <code>.cols</code> argument and applying the function <code><a href="https://forcats.tidyverse.org/reference/as_factor.html">forcats::as_factor()</a></code></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"region"</span>, <span class="st">"island"</span>, <span class="st">"stage"</span>, <span class="st">"sex"</span>),</span>
-<span id="cb2-4"><a href="#cb2-4"></a>           <span class="at">.fns =</span> forcats<span class="sc">::</span>as_factor)</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.factor)) <span class="sc">|&gt;</span> </span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as_factor</span>(species))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="applying-changes-across-columns" class="level3" data-number="12.0.1"><h3 data-number="12.0.1" class="anchored" data-anchor-id="applying-changes-across-columns">
+<span class="header-section-number">12.0.1</span> Applying changes across columns</h3>
+<p>Using <code>across</code> - we can apply functions to columns based on selected criteria - here within mutate we are changing each column in the <code>.cols</code> argument and applying the function <code><a href="https://forcats.tidyverse.org/reference/as_factor.html">forcats::as_factor()</a></code></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"region"</span>, <span class="st">"island"</span>, <span class="st">"stage"</span>, <span class="st">"sex"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4"></a>           <span class="at">.fns =</span> forcats<span class="sc">::</span>as_factor)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.factor)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 344
 Columns: 5
@@ -589,24 +603,15 @@ Important
 <p>Unless we assign the output of this code to an R object it will just print into the console, in the above I am demonstrating how to change variables to factors but we aren’t “saving” this change.</p>
 </div>
 </div>
-<section id="setting-factor-levels" class="level3" data-number="12.0.1"><h3 data-number="12.0.1" class="anchored" data-anchor-id="setting-factor-levels">
-<span class="header-section-number">12.0.1</span> Setting factor levels</h3>
-<p>If we want to specify the <em>correct</em> order for a factor we can use <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">forcats::fct_relevel</a></code></p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">case_when</span>(</span>
-<span id="cb4-3"><a href="#cb4-3"></a>    body_mass_g <span class="sc">&lt;=</span> <span class="dv">3500</span> <span class="sc">~</span> <span class="st">"smol penguin"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    body_mass_g <span class="sc">&gt;</span><span class="dv">3500</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&lt;</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"mid penguin"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    body_mass_g <span class="sc">&gt;=</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"chonk penguin"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">.default =</span> <span class="cn">NA</span>)</span>
-<span id="cb4-7"><a href="#cb4-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>If we make a barplot, the order of the values on the x axis will typically be in alphabetical order for any character data</p>
+</section><section id="ordering-factors-manually" class="level3" data-number="12.0.2"><h3 data-number="12.0.2" class="anchored" data-anchor-id="ordering-factors-manually">
+<span class="header-section-number">12.0.2</span> Ordering factors manually</h3>
+<p>With the <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">forcats::fct_relevel</a></code> function we can set factors and apply a specified level at the same time:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">fct_relevel</span>(species, <span class="st">"Adelie"</span>, <span class="st">"Chinstrap"</span>, <span class="st">"Gentoo"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species))<span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -614,56 +619,143 @@ Important
 </div>
 </div>
 </div>
+</section><section id="ordering-factors-by-another-variable" class="level3" data-number="12.0.3"><h3 data-number="12.0.3" class="anchored" data-anchor-id="ordering-factors-by-another-variable">
+<span class="header-section-number">12.0.3</span> Ordering factors by another variable</h3>
+<p>With the function <code><a href="https://forcats.tidyverse.org/reference/fct_inorder.html">forcats::fct_infreq</a></code> we can change the order according to how frequently each level occurs</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>   <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">fct_infreq</span>(species)) <span class="sc">|&gt;</span>  </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species))<span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The <code><a href="https://forcats.tidyverse.org/reference/fct_rev.html">forcats::fct_rev()</a></code> function in R is used to reverse the order of levels in a factor variable. It is particularly useful for changing the order of factor levels when you want to display data in a reversed or descending order.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">fct_rev</span>(<span class="fu">as_factor</span>(species))) <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species))<span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as_factor</span>(species) <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>           <span class="fu">fct_reorder</span>(body_mass_g,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>                       <span class="at">.fun =</span> mean,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>                       <span class="at">.na_rm =</span> T)) <span class="sc">|&gt;</span> </span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="co"># by default the levels are ordered by the median values of the continuous variable</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="co"># mean, min and max can all be included here</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species,</span>
+<span id="cb8-9"><a href="#cb8-9"></a>             <span class="at">y =</span> body_mass_g,</span>
+<span id="cb8-10"><a href="#cb8-10"></a>             <span class="at">colour =</span> species))<span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>,</span>
+<span id="cb8-12"><a href="#cb8-12"></a>               <span class="at">outlier.shape =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span><span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="factor-bins" class="level3" data-number="12.0.4"><h3 data-number="12.0.4" class="anchored" data-anchor-id="factor-bins">
+<span class="header-section-number">12.0.4</span> Factor bins</h3>
+<p>If we want to we can also <em>bin</em> continuous data into useful chunks:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">case_when</span>(</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    body_mass_g <span class="sc">&lt;=</span> <span class="dv">3500</span> <span class="sc">~</span> <span class="st">"smol penguin"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    body_mass_g <span class="sc">&gt;</span><span class="dv">3500</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&lt;</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"mid penguin"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    body_mass_g <span class="sc">&gt;=</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"chonk penguin"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="at">.default =</span> <span class="cn">NA</span>)</span>
+<span id="cb9-7"><a href="#cb9-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If we make a barplot, the order of the values on the x axis will typically be in alphabetical order for any character data</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<ul class="task-list">
+<li><label><input type="checkbox">Our new variable <code>mass_range</code> is not yet set as a factor, can you try this now?</label></li>
+</ul>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 <p>To convert a character or numeric column to class factor, you can use any function from the <code>forcats</code> package. They will convert to class factor and then also perform or allow certain ordering of the levels - for example using <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">forcats::fct_relevel()</a></code> lets you manually specify the level order.</p>
 <p>The function <code>as_factor()</code> simply converts the class without any further capabilities.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">as_factor</span>(mass_range))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">as_factor</span>(mass_range))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">levels</span>(penguins_clean_names<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">levels</span>(penguins_clean_names<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "mid penguin"   "smol penguin"  "chonk penguin"</code></pre>
 </div>
 </div>
+<p><code>r unhide()</code></p>
+<ul class="task-list">
+<li><label><input type="checkbox">Make sure the factors are set to a sensible order</label></li>
+</ul>
+<p><code>r hide("Solution")</code></p>
 <p>Below we use <code>mutate()</code> and <code>as_factor()</code> to convert the column flipper_range from class character to class factor.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Correct the code in your script with this version</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">fct_relevel</span>(mass_range, </span>
-<span id="cb9-4"><a href="#cb9-4"></a>                                  <span class="st">"smol penguin"</span>, </span>
-<span id="cb9-5"><a href="#cb9-5"></a>                                  <span class="st">"mid penguin"</span>, </span>
-<span id="cb9-6"><a href="#cb9-6"></a>                                  <span class="st">"chonk penguin"</span>)</span>
-<span id="cb9-7"><a href="#cb9-7"></a>         )</span>
-<span id="cb9-8"><a href="#cb9-8"></a></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="fu">levels</span>(penguins_clean_names<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Correct the code in your script with this version</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">fct_relevel</span>(mass_range, </span>
+<span id="cb14-4"><a href="#cb14-4"></a>                                  <span class="st">"smol penguin"</span>, </span>
+<span id="cb14-5"><a href="#cb14-5"></a>                                  <span class="st">"mid penguin"</span>, </span>
+<span id="cb14-6"><a href="#cb14-6"></a>                                  <span class="st">"chonk penguin"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7"></a>         )</span>
+<span id="cb14-8"><a href="#cb14-8"></a></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">levels</span>(penguins_clean_names<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "smol penguin"  "mid penguin"   "chonk penguin"</code></pre>
 </div>
 </div>
 <p>Now when we call a plot, we can see that the x axis categories match the intrinsic order we have specified with our factor levels.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span>  </span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span>  </span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-layout-align="center" type="info">
-<div class="info">
-<p>
-Factors will also be important when we build linear models a bit later. The reference or intercept for a categorical predictor variable when it is read as a <code>&lt;chr&gt;</code> is set by R as the first one when ordered alphabetically. This may not always be the most appropriate choice, and by changing this to an ordered <code>&lt;fct&gt;</code> we can manually set the intercept.
-</p>
 </div>
 </div>
-</section><section id="summary" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">12.1</span> Summary</h2>
-<p>In this chapter we have successfully imported and checked our data for typos and small errors, we have also been introduce to some of the key functions in the <code>dplyr</code> package for data wrangling. Now that we have confidence in the format and integrity of our data, next time we will start to make insights and understand patterns.</p>
+</div>
 
 
 </section></main><!-- /main --><script>

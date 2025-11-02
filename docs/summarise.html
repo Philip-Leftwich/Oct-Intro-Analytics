@@ -299,7 +299,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tidy-data.html">Project &amp; Data Management</a></li><li class="breadcrumb-item"><a href="./summarise.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./spreadsheets.html">Project &amp; Data Management</a></li><li class="breadcrumb-item"><a href="./summarise.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -359,8 +359,8 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -522,6 +522,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -547,12 +553,18 @@ div.csl-indent {
 </li>
   <li><a href="#frequency-counts-by-subgroups" id="toc-frequency-counts-by-subgroups" class="nav-link" data-scroll-target="#frequency-counts-by-subgroups"><span class="header-section-number">6.4</span> Frequency counts by subgroups</a></li>
   <li><a href="#visualising-frequencies" id="toc-visualising-frequencies" class="nav-link" data-scroll-target="#visualising-frequencies"><span class="header-section-number">6.5</span> Visualising Frequencies</a></li>
-  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">6.6</span> Summary statistics</a></li>
+  <li>
+<a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">6.6</span> Summary statistics</a>
+  <ul class="collapse">
+<li><a href="#summarise-multiple-variables" id="toc-summarise-multiple-variables" class="nav-link" data-scroll-target="#summarise-multiple-variables"><span class="header-section-number">6.6.1</span> Summarise multiple variables</a></li>
+  <li><a href="#useful-summary-functions" id="toc-useful-summary-functions" class="nav-link" data-scroll-target="#useful-summary-functions"><span class="header-section-number">6.6.2</span> Useful <code>summary</code> functions</a></li>
+  </ul>
+</li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">6.7</span> Summary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tidy-data.html">Project &amp; Data Management</a></li><li class="breadcrumb-item"><a href="./summarise.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./spreadsheets.html">Project &amp; Data Management</a></li><li class="breadcrumb-item"><a href="./summarise.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title"><span id="sec-summarise" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></h1>
 </div>
 
@@ -1241,7 +1253,7 @@ Explanation
 <p>These are powerful ways to understand variation within groups.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>penguins_raw <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span> <span class="co"># Calculate withing groups</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="fu">summarise</span>(</span>
 <span id="cb12-4"><a href="#cb12-4"></a><span class="at">mean_mass =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Body Mass (g)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb12-5"><a href="#cb12-5"></a><span class="at">sd_mass =</span> <span class="fu">sd</span>(<span class="st">`</span><span class="at">Body Mass (g)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
@@ -1367,16 +1379,150 @@ Solution
 </div>
 </div>
 </div>
-<section id="interpreting-mean-and-sd" class="level3" data-number="6.6.1"><h3 data-number="6.6.1" class="anchored" data-anchor-id="interpreting-mean-and-sd">
-<span class="header-section-number">6.6.1</span> Interpreting Mean and SD</h3>
+</div>
+</div>
+<section id="summarise-multiple-variables" class="level3" data-number="6.6.1"><h3 data-number="6.6.1" class="anchored" data-anchor-id="summarise-multiple-variables">
+<span class="header-section-number">6.6.1</span> Summarise multiple variables</h3>
 <ul>
-<li><p>Mean gives the central (average) value.</p></li>
-<li><p>Standard deviation (SD) shows how spread out the values are — a large SD means more variability.</p></li>
-<li><p>Missing values are removed with <code>na.rm = TRUE</code>.</p></li>
-</ul></section>
+<li><code>summarise_at()</code></li>
+</ul>
+<p>Summarise specific selected variables:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>penguins_raw <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span> </span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">summarise_at</span>(<span class="fu">c</span>(<span class="st">"Flipper Length (mm)"</span>, <span class="st">"Culmen Length (mm)"</span>, <span class="st">"Culmen Depth (mm)"</span>),</span>
+<span id="cb14-4"><a href="#cb14-4"></a>               mean,</span>
+<span id="cb14-5"><a href="#cb14-5"></a>               <span class="at">na.rm =</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 20%">
+<col style="width: 19%">
+<col style="width: 18%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Species</th>
+<th style="text-align: right;">Flipper Length (mm)</th>
+<th style="text-align: right;">Culmen Length (mm)</th>
+<th style="text-align: right;">Culmen Depth (mm)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Adelie Penguin (Pygoscelis adeliae)</td>
+<td style="text-align: right;">189.9536</td>
+<td style="text-align: right;">38.79139</td>
+<td style="text-align: right;">18.34636</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinstrap penguin (Pygoscelis antarctica)</td>
+<td style="text-align: right;">195.8235</td>
+<td style="text-align: right;">48.83382</td>
+<td style="text-align: right;">18.42059</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gentoo penguin (Pygoscelis papua)</td>
+<td style="text-align: right;">217.1870</td>
+<td style="text-align: right;">47.50488</td>
+<td style="text-align: right;">14.98211</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</section><section id="summary" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="summary">
+</div>
+<ul>
+<li><code>summarise_if()</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>penguins_raw <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">summarise_if</span>(is.numeric, mean, <span class="at">na.rm =</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Species</th>
+<th style="text-align: right;">Sample Number</th>
+<th style="text-align: right;">Culmen Length (mm)</th>
+<th style="text-align: right;">Culmen Depth (mm)</th>
+<th style="text-align: right;">Flipper Length (mm)</th>
+<th style="text-align: right;">Body Mass (g)</th>
+<th style="text-align: right;">Delta 15 N (o/oo)</th>
+<th style="text-align: right;">Delta 13 C (o/oo)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Adelie Penguin (Pygoscelis adeliae)</td>
+<td style="text-align: right;">76.5</td>
+<td style="text-align: right;">38.79139</td>
+<td style="text-align: right;">18.34636</td>
+<td style="text-align: right;">189.9536</td>
+<td style="text-align: right;">3700.662</td>
+<td style="text-align: right;">8.859733</td>
+<td style="text-align: right;">-25.80419</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinstrap penguin (Pygoscelis antarctica)</td>
+<td style="text-align: right;">34.5</td>
+<td style="text-align: right;">48.83382</td>
+<td style="text-align: right;">18.42059</td>
+<td style="text-align: right;">195.8235</td>
+<td style="text-align: right;">3733.088</td>
+<td style="text-align: right;">9.356155</td>
+<td style="text-align: right;">-24.54654</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gentoo penguin (Pygoscelis papua)</td>
+<td style="text-align: right;">62.5</td>
+<td style="text-align: right;">47.50488</td>
+<td style="text-align: right;">14.98211</td>
+<td style="text-align: right;">217.1870</td>
+<td style="text-align: right;">5076.016</td>
+<td style="text-align: right;">8.245338</td>
+<td style="text-align: right;">-26.18530</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section><section id="useful-summary-functions" class="level3" data-number="6.6.2"><h3 data-number="6.6.2" class="anchored" data-anchor-id="useful-summary-functions">
+<span class="header-section-number">6.6.2</span> Useful <code>summary</code> functions</h3>
+<section id="measure-of-location" class="level4" data-number="6.6.2.1"><h4 data-number="6.6.2.1" class="anchored" data-anchor-id="measure-of-location">
+<span class="header-section-number">6.6.2.1</span> Measure of location:</h4>
+<ul>
+<li><p>mean(x): sum of x divided by the length</p></li>
+<li><p>median(x): 50% of x is above and 50% is below</p></li>
+</ul></section><section id="measure-of-variation" class="level4" data-number="6.6.2.2"><h4 data-number="6.6.2.2" class="anchored" data-anchor-id="measure-of-variation">
+<span class="header-section-number">6.6.2.2</span> Measure of variation:</h4>
+<ul>
+<li><p>sd(x): standard deviation</p></li>
+<li><p>IQR(x): interquartile range (robust equivalent of sd when outliers are present in the data)</p></li>
+</ul></section><section id="measure-of-rank" class="level4" data-number="6.6.2.3"><h4 data-number="6.6.2.3" class="anchored" data-anchor-id="measure-of-rank">
+<span class="header-section-number">6.6.2.3</span> Measure of rank:</h4>
+<ul>
+<li><p>min(x): minimum value of x</p></li>
+<li><p>max(x): maximum value of x</p></li>
+<li><p>quantile(x, 0.25): 25% of x is below this value</p></li>
+</ul></section><section id="counts" class="level4" data-number="6.6.2.4"><h4 data-number="6.6.2.4" class="anchored" data-anchor-id="counts">
+<span class="header-section-number">6.6.2.4</span> Counts:</h4>
+<ul>
+<li><p>n(x): the number of element in x</p></li>
+<li><p>sum(!is.na(x)): count non-missing values</p></li>
+<li><p>n_distinct(x): count the number of unique value</p></li>
+</ul></section></section></section><section id="summary" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="summary">
 <span class="header-section-number">6.7</span> Summary</h2>
 <p>In this section we learned to:</p>
 <ul>
@@ -1398,7 +1544,6 @@ Solution
 <li>Compute group-wise summaries with <code>summarise()</code> such as means, SDs, and counts.</li>
 </ul>
 </li>
-<li><p>Visualise summaries</p></li>
 </ul>
 
 

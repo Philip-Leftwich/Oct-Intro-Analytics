@@ -117,7 +117,8 @@ ggplot(power_df, aes(x = p1, y = power, color = method)) +
     ) +
     theme_minimal(base_size = 12) +
     geom_hline(yintercept = 0.05, linetype = "dotted", color = "gray40") +
-    scale_color_manual(values = c("binomial GLM" = "red", "t-test on proportions" = "blue")) +
+    scale_color_manual(values = c("pooled_GLM_LRT" = "#D55E00",
+                                "t_test_prop"  = "#0072B2",)) +
     ylim(0,1)
 
 
@@ -199,7 +200,7 @@ ggplot(plot_df, aes(x = sim, y = emmean, color = model)) +
   geom_pointrange(aes(ymin = lower.CL, ymax = upper.CL),
                   position = position_dodge(width = 0.6),
                   alpha = 0.8) +
-  facet_wrap(~ group, nrow = 2, scales = "fixed") +
+  facet_grid(model ~ group, scales = "fixed") +
   geom_hline(yintercept = c(0, 1), linetype = "dotted", color = "gray40") +
   scale_color_manual(
     values = c("lm_proportion" = "#0072B2", "glm_binomial" = "#D55E00"),
@@ -207,12 +208,13 @@ ggplot(plot_df, aes(x = sim, y = emmean, color = model)) +
   ) +
   labs(
     title = "Estimated Means and 95% CI from Linear Model vs Binomial GLM",
-    subtitle = "CIs from LM (blue) can exceed 1; Binomial GLM (red) stays within [0,1]",
+    subtitle = "CIs from a t-test (blue) can exceed 1; Binomial GLM (orange) stays within [0,1]",
     x = "Simulation index",
     y = "Estimated group mean (response scale)",
     color = "Model"
   ) +
   theme_minimal(base_size = 13)+
+  theme(legend.position = "bottom")+
   scale_y_continuous(limits = c(0.75,1.03))
 ```
 
@@ -244,11 +246,11 @@ n_rows_per_rep_per_group <- 5      # rows per group per replicate
 n_trials_per_row <- 10              # trials per row
 
 # Fixed effects (logit scale)
-p0 <- 0.2
+p0 <- 0.9
 logit <- function(p) log(p/(1-p))
 inv_logit <- function(x) plogis(x)
 beta0 <- logit(p0)
-OR <- 1.8
+OR <- .5
 beta_trt <- log(OR)
 
 # Sweep parameters

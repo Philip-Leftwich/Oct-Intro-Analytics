@@ -217,7 +217,7 @@ These are powerful ways to understand variation within groups.
 ```{r, eval = T, message = F, warning = F}
 
 penguins_raw |>
-group_by(Species) |> 
+group_by(Species) |> # Calculate withing groups
 summarise(
 mean_mass = mean(`Body Mass (g)`, na.rm = TRUE),
 sd_mass = sd(`Body Mass (g)`, na.rm = TRUE),
@@ -253,16 +253,66 @@ n = n()
 
 `r unhide()`
 
-### Interpreting Mean and SD
-
-- Mean gives the central (average) value.
-
-- Standard deviation (SD) shows how spread out the values are — a large SD means more variability.
-
-- Missing values are removed with `na.rm = TRUE`.
-
 ::::
 :::
+
+
+### Summarise multiple variables
+
+- `summarise_at()`
+
+Summarise specific selected variables:
+
+```{r}
+penguins_raw |> 
+  group_by(Species) |> 
+  summarise_at(c("Flipper Length (mm)", "Culmen Length (mm)", "Culmen Depth (mm)"),
+               mean,
+               na.rm =T)
+
+```
+
+- `summarise_if()`
+
+```{r}
+penguins_raw |> 
+  group_by(Species) |> 
+  summarise_if(is.numeric, mean, na.rm =T)
+
+```
+
+
+
+### Useful `summary` functions
+
+#### Measure of location:
+
+- mean(x): sum of x divided by the length
+
+- median(x): 50% of x is above and 50% is below
+
+#### Measure of variation:
+
+- sd(x): standard deviation
+
+- IQR(x): interquartile range (robust equivalent of sd when outliers are present in the data)
+
+#### Measure of rank:
+
+- min(x): minimum value of x
+
+- max(x): maximum value of x
+
+- quantile(x, 0.25): 25% of x is below this value
+
+#### Counts:
+
+- n(x): the number of element in x
+
+- sum(!is.na(x)): count non-missing values
+
+- n_distinct(x): count the number of unique value
+
 
 ## Summary
 
@@ -283,7 +333,5 @@ In this section we learned to:
 - Calculate descriptive statistics
 
     - Compute group-wise summaries with `summarise()` such as means, SDs, and counts.
-
-- Visualise summaries
 
 

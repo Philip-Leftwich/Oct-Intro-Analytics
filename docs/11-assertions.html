@@ -124,7 +124,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><script src="site_libs/font-awesome-6.7.2/js/script.js"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -359,8 +359,8 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -522,6 +522,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -538,22 +544,17 @@ div.csl-indent {
   <ul>
 <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">14.1</span> Learning Objectives:</a></li>
   <li><a href="#why-validate-data" id="toc-why-validate-data" class="nav-link" data-scroll-target="#why-validate-data"><span class="header-section-number">14.2</span> Why validate data</a></li>
+  <li><a href="#our-dataset" id="toc-our-dataset" class="nav-link" data-scroll-target="#our-dataset"><span class="header-section-number">14.3</span> Our dataset</a></li>
+  <li><a href="#run-an-assertion-check" id="toc-run-an-assertion-check" class="nav-link" data-scroll-target="#run-an-assertion-check"><span class="header-section-number">14.4</span> Run an assertion check</a></li>
   <li>
-<a href="#the-dataset" id="toc-the-dataset" class="nav-link" data-scroll-target="#the-dataset"><span class="header-section-number">14.3</span> the dataset</a>
+<a href="#assert-insist-verify" id="toc-assert-insist-verify" class="nav-link" data-scroll-target="#assert-insist-verify"><span class="header-section-number">14.5</span> assert, insist, verify</a>
   <ul class="collapse">
-<li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="header-section-number">14.3.1</span> Question</a></li>
+<li><a href="#error-functions" id="toc-error-functions" class="nav-link" data-scroll-target="#error-functions"><span class="header-section-number">14.5.1</span> error functions</a></li>
   </ul>
 </li>
-  <li><a href="#assert-insist-verify" id="toc-assert-insist-verify" class="nav-link" data-scroll-target="#assert-insist-verify"><span class="header-section-number">14.4</span> assert, insist, verify</a></li>
-  <li><a href="#options-for-data-pipelines" id="toc-options-for-data-pipelines" class="nav-link" data-scroll-target="#options-for-data-pipelines"><span class="header-section-number">14.5</span> Options for data pipelines</a></li>
-  <li>
-<a href="#options-for-within-group-datachecks" id="toc-options-for-within-group-datachecks" class="nav-link" data-scroll-target="#options-for-within-group-datachecks"><span class="header-section-number">14.6</span> Options for within group datachecks</a>
-  <ul class="collapse">
-<li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">14.6.1</span> Question</a></li>
-  <li><a href="#group-specific-checks" id="toc-group-specific-checks" class="nav-link" data-scroll-target="#group-specific-checks"><span class="header-section-number">14.6.2</span> Group specific checks</a></li>
-  </ul>
-</li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">14.7</span> Summary</a></li>
+  <li><a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines"><span class="header-section-number">14.6</span> Pipelines</a></li>
+  <li><a href="#options-for-within-group-datachecks" id="toc-options-for-within-group-datachecks" class="nav-link" data-scroll-target="#options-for-within-group-datachecks"><span class="header-section-number">14.7</span> Options for within group datachecks</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">14.8</span> Summary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -593,9 +594,16 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>Remember Garbage in = Garbage out</p>
 </blockquote>
-</section><section id="the-dataset" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="the-dataset">
-<span class="header-section-number">14.3</span> the dataset</h2>
+</section><section id="our-dataset" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="our-dataset">
+<span class="header-section-number">14.3</span> Our dataset</h2>
 <p>Here’s our experimental dataset: each row is a female insect, with basic life-cycle and reproduction data</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<a href="https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/female_egg_data.csv">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download female egg data as csv</button>
+</a>
+</div>
+</div>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>female_egg_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -613,140 +621,140 @@ div.csl-indent {
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">52.0000</td>
+<td style="text-align: right;">52</td>
 <td style="text-align: right;">47</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">19</td>
-<td style="text-align: right;">100.8233</td>
+<td style="text-align: right;">120</td>
 <td style="text-align: right;">52</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">50.0000</td>
+<td style="text-align: right;">50</td>
 <td style="text-align: right;">55</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">46.0000</td>
+<td style="text-align: right;">46</td>
 <td style="text-align: right;">46</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">5</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">59.0000</td>
+<td style="text-align: right;">59</td>
 <td style="text-align: right;">50</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">18</td>
-<td style="text-align: right;">55.0000</td>
+<td style="text-align: right;">55</td>
 <td style="text-align: right;">43</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">22</td>
-<td style="text-align: right;">49.0000</td>
+<td style="text-align: right;">49</td>
 <td style="text-align: right;">49</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">8</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">11</td>
-<td style="text-align: right;">44.0000</td>
+<td style="text-align: right;">44</td>
 <td style="text-align: right;">38</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">9</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">42.0000</td>
+<td style="text-align: right;">42</td>
 <td style="text-align: right;">42</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">10</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">20</td>
-<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
 <td style="text-align: right;">39</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">11</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">44.0000</td>
+<td style="text-align: right;">44</td>
 <td style="text-align: right;">44</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">12</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">22</td>
-<td style="text-align: right;">57.0000</td>
+<td style="text-align: right;">57</td>
 <td style="text-align: right;">46</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">13</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">48.0000</td>
+<td style="text-align: right;">48</td>
 <td style="text-align: right;">44</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">14</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">26</td>
-<td style="text-align: right;">41.0000</td>
+<td style="text-align: right;">41</td>
 <td style="text-align: right;">41</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">15</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">27</td>
-<td style="text-align: right;">41.0000</td>
+<td style="text-align: right;">41</td>
 <td style="text-align: right;">41</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">16</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
 <td style="text-align: right;">43</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">17</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">19</td>
-<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
 <td style="text-align: right;">47</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">18</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">27</td>
-<td style="text-align: right;">49.0000</td>
+<td style="text-align: right;">49</td>
 <td style="text-align: right;">34</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">19</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">56.0000</td>
+<td style="text-align: right;">56</td>
 <td style="text-align: right;">37</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">20</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">28</td>
-<td style="text-align: right;">48.0000</td>
+<td style="text-align: right;">48</td>
 <td style="text-align: right;">46</td>
 </tr>
 </tbody>
@@ -754,8 +762,11 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<section id="question" class="level3" data-number="14.3.1"><h3 data-number="14.3.1" class="anchored" data-anchor-id="question">
-<span class="header-section-number">14.3.1</span> Question</h3>
+<div class="task">
+<div class="task-header">
+<p>Question</p>
+</div>
+<div class="task-container">
 <p>If this were your dataset, what checks would you want to include?</p>
 <div class="webex-solution">
 <button>
@@ -807,16 +818,52 @@ Solution
 </tbody>
 </table>
 </div>
+</div>
+</div>
+</section><section id="run-an-assertion-check" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="run-an-assertion-check">
+<span class="header-section-number">14.4</span> Run an assertion check</h2>
+<p>With <code>assertr</code> by default if a validation check fails the code will throw an error:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(assertr)</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a>female_egg_data <span class="sc">|&gt;</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">verify</span>(age_days <span class="sc">&gt;</span> <span class="dv">0</span>)                      <span class="co"># hatched ≤ laid</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section><section id="assert-insist-verify" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="assert-insist-verify">
+<span class="header-section-number">14.5</span> assert, insist, verify</h2>
+<p>The assertr package (<span class="citation" data-cites="R-assertr">Fischetti (<a href="references.html#ref-R-assertr" role="doc-biblioref">2023</a>)</span>) has three main functions:</p>
+<ul>
+<li>
+<code>verify()</code> - <strong>is this statement true for the whole data?</strong>
+</li>
+</ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>female_egg_data <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">verify</span>(age_days <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb3-3"><a href="#cb3-3"></a>         <span class="at">error_fun =</span> just_warn)                      <span class="co"># hatched ≤ laid</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df <span class="sc">|&gt;</span>  <span class="fu">verify</span>(<span class="fu">has_all_names</span>(<span class="st">"female_id"</span>,<span class="st">"treatment"</span>,<span class="st">"age_days"</span>,<span class="st">"eggs_laid"</span>,<span class="st">"eggs_hatched"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>
+<code>assert()</code> - <strong>applies a prediction row-by-row to the specified columns</strong>
+</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>df <span class="sc">|&gt;</span>  <span class="fu">assert</span>(is.numeric, female_id, age_days, eggs_laid, eggs_hatched)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>
+<code>insist()</code> - <strong>Flag values using a rule that depends on the whole column</strong>
+</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>df <span class="sc">|&gt;</span>  <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="error-functions" class="level3" data-number="14.5.1"><h3 data-number="14.5.1" class="anchored" data-anchor-id="error-functions">
+<span class="header-section-number">14.5.1</span> error functions</h3>
+<p>The <code>error_fun</code> argument defines what happens when a validation check produces an error. By default it prints a summary of the errors and halts the code.</p>
+<p>This may not be desirable if we wish to run a longer pipeline or many error checks, there are multiple options including <code>just_warn</code> script execution continues and a warning is printed.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>female_egg_data <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">verify</span>(age_days <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>         <span class="at">error_fun =</span> just_warn)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>verification [age_days &gt; 0] failed! (1 failure)
 
@@ -838,140 +885,140 @@ Solution
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">52.0000</td>
+<td style="text-align: right;">52</td>
 <td style="text-align: right;">47</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">19</td>
-<td style="text-align: right;">100.8233</td>
+<td style="text-align: right;">120</td>
 <td style="text-align: right;">52</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">50.0000</td>
+<td style="text-align: right;">50</td>
 <td style="text-align: right;">55</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">46.0000</td>
+<td style="text-align: right;">46</td>
 <td style="text-align: right;">46</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">5</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">59.0000</td>
+<td style="text-align: right;">59</td>
 <td style="text-align: right;">50</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">18</td>
-<td style="text-align: right;">55.0000</td>
+<td style="text-align: right;">55</td>
 <td style="text-align: right;">43</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">22</td>
-<td style="text-align: right;">49.0000</td>
+<td style="text-align: right;">49</td>
 <td style="text-align: right;">49</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">8</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">11</td>
-<td style="text-align: right;">44.0000</td>
+<td style="text-align: right;">44</td>
 <td style="text-align: right;">38</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">9</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">42.0000</td>
+<td style="text-align: right;">42</td>
 <td style="text-align: right;">42</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">10</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">20</td>
-<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
 <td style="text-align: right;">39</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">11</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">44.0000</td>
+<td style="text-align: right;">44</td>
 <td style="text-align: right;">44</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">12</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">22</td>
-<td style="text-align: right;">57.0000</td>
+<td style="text-align: right;">57</td>
 <td style="text-align: right;">46</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">13</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">48.0000</td>
+<td style="text-align: right;">48</td>
 <td style="text-align: right;">44</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">14</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">26</td>
-<td style="text-align: right;">41.0000</td>
+<td style="text-align: right;">41</td>
 <td style="text-align: right;">41</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">15</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">27</td>
-<td style="text-align: right;">41.0000</td>
+<td style="text-align: right;">41</td>
 <td style="text-align: right;">41</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">16</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
 <td style="text-align: right;">43</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">17</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">19</td>
-<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
 <td style="text-align: right;">47</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">18</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">27</td>
-<td style="text-align: right;">49.0000</td>
+<td style="text-align: right;">49</td>
 <td style="text-align: right;">34</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">19</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">56.0000</td>
+<td style="text-align: right;">56</td>
 <td style="text-align: right;">37</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">20</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">28</td>
-<td style="text-align: right;">48.0000</td>
+<td style="text-align: right;">48</td>
 <td style="text-align: right;">46</td>
 </tr>
 </tbody>
@@ -979,33 +1026,9 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="assert-insist-verify" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="assert-insist-verify">
-<span class="header-section-number">14.4</span> assert, insist, verify</h2>
-<p>The assertr package (<span class="citation" data-cites="R-assertr">Fischetti (<a href="references.html#ref-R-assertr" role="doc-biblioref">2023</a>)</span>) has three main functions:</p>
-<ul>
-<li>
-<code>verify()</code> - <strong>is this statement true for the whole data?</strong>
-</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">verify</span>(<span class="fu">has_all_names</span>(<span class="st">"female_id"</span>,<span class="st">"treatment"</span>,<span class="st">"age_days"</span>,<span class="st">"eggs_laid"</span>,<span class="st">"eggs_hatched"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<ul>
-<li>
-<code>assert()</code> - <strong>applies a prediction row-by-row to the specified columns</strong>
-</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">assert</span>(is.numeric, female_id, age_days, eggs_laid, eggs_hatched)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<ul>
-<li>
-<code>insist()</code> - <strong>Flag values using a rule that depends on the whole column</strong>
-</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+</section></section><section id="pipelines" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="pipelines">
+<span class="header-section-number">14.6</span> Pipelines</h2>
+<p>We can string together multiple checks into a single pipeline, we don’t <em>need</em> <code>assertr</code>, it can be achieved using <code>dplyr</code> but this package makes pipelines easier.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Assertr</a></li>
@@ -1081,15 +1104,15 @@ Solution
 </tr>
 <tr class="odd">
 <td style="text-align: left;">age_days</td>
-<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">integer</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">eggs_laid</td>
-<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">integer</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">eggs_hatched</td>
-<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">integer</td>
 </tr>
 </tbody>
 </table>
@@ -1135,7 +1158,7 @@ Solution
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">52.0000</td>
+<td style="text-align: right;">52</td>
 <td style="text-align: right;">47</td>
 <td style="text-align: left;">TRUE</td>
 <td style="text-align: left;">FALSE</td>
@@ -1146,7 +1169,7 @@ Solution
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">19</td>
-<td style="text-align: right;">100.8233</td>
+<td style="text-align: right;">120</td>
 <td style="text-align: right;">52</td>
 <td style="text-align: left;">FALSE</td>
 <td style="text-align: left;">FALSE</td>
@@ -1157,7 +1180,7 @@ Solution
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">50.0000</td>
+<td style="text-align: right;">50</td>
 <td style="text-align: right;">55</td>
 <td style="text-align: left;">FALSE</td>
 <td style="text-align: left;">FALSE</td>
@@ -1172,211 +1195,24 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="options-for-data-pipelines" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="options-for-data-pipelines">
-<span class="header-section-number">14.5</span> Options for data pipelines</h2>
-<p>All functions accept different arguments for what to do when an error is found:</p>
+</section><section id="options-for-within-group-datachecks" class="level2" data-number="14.7"><h2 data-number="14.7" class="anchored" data-anchor-id="options-for-within-group-datachecks">
+<span class="header-section-number">14.7</span> Options for within group datachecks</h2>
+<p><code>assertr</code> is designed for whole dataset validation, but it can make sense for some <code><a href="https://docs.ropensci.org/assertr/reference/insist.html">assertr::insist()</a></code> rules that these are applied in a group specific way</p>
+<div class="task">
+<div class="task-header">
+<p>Question</p>
+</div>
+<div class="task-container">
+<p>When might we want to consider groups for some data validations?</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>For data within the <code>insist</code> function we compare data across the entire column - in these examples we might check data is within certain deviations of the mean. But if there are multiple groups, this makes sense to perform within groups.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>female_egg_data <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid, <span class="at">error_fun =</span> error_df_return)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: left;">verb</th>
-<th style="text-align: left;">redux_fn</th>
-<th style="text-align: left;">predicate</th>
-<th style="text-align: left;">column</th>
-<th style="text-align: right;">index</th>
-<th style="text-align: right;">value</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td style="text-align: left;">insist</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">within_n_sds(3)</td>
-<td style="text-align: left;">eggs_laid</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">100.8233</td>
-</tr></tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>female_egg_data <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid, <span class="at">error_fun =</span> just_warn) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Column 'eggs_laid' violates assertion 'within_n_sds(3)' 1 time
-    verb redux_fn       predicate    column index    value
-1 insist       NA within_n_sds(3) eggs_laid     2 100.8233</code></pre>
-</div>
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: right;">female_id</th>
-<th style="text-align: left;">treatment</th>
-<th style="text-align: right;">age_days</th>
-<th style="text-align: right;">eggs_laid</th>
-<th style="text-align: right;">eggs_hatched</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">52.0000</td>
-<td style="text-align: right;">47</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">100.8233</td>
-<td style="text-align: right;">52</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">50.0000</td>
-<td style="text-align: right;">55</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">46.0000</td>
-<td style="text-align: right;">46</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">59.0000</td>
-<td style="text-align: right;">50</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">55.0000</td>
-<td style="text-align: right;">43</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">49.0000</td>
-<td style="text-align: right;">49</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">44.0000</td>
-<td style="text-align: right;">38</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">42.0000</td>
-<td style="text-align: right;">42</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">10</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">47.0000</td>
-<td style="text-align: right;">39</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">11</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">44.0000</td>
-<td style="text-align: right;">44</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">12</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">57.0000</td>
-<td style="text-align: right;">46</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">48.0000</td>
-<td style="text-align: right;">44</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">14</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">41.0000</td>
-<td style="text-align: right;">41</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">15</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">41.0000</td>
-<td style="text-align: right;">41</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">16</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">47.0000</td>
-<td style="text-align: right;">43</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">17</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">47.0000</td>
-<td style="text-align: right;">47</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">18</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">49.0000</td>
-<td style="text-align: right;">34</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">19</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">56.0000</td>
-<td style="text-align: right;">37</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">20</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">28</td>
-<td style="text-align: right;">48.0000</td>
-<td style="text-align: right;">46</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section><section id="options-for-within-group-datachecks" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="options-for-within-group-datachecks">
-<span class="header-section-number">14.6</span> Options for within group datachecks</h2>
-<p><code>assertr</code> is designed for whole dataset validation, but it can make sense for some <code><a href="https://docs.ropensci.org/assertr/reference/insist.html">assertr::insist()</a></code> rules that these are applied in a group specific way</p>
-<section id="question-1" class="level3" data-number="14.6.1"><h3 data-number="14.6.1" class="anchored" data-anchor-id="question-1">
-<span class="header-section-number">14.6.1</span> Question</h3>
-<p>Why might we want to consider groups for some data validations?</p>
-</section><section id="group-specific-checks" class="level3" data-number="14.6.2"><h3 data-number="14.6.2" class="anchored" data-anchor-id="group-specific-checks">
-<span class="header-section-number">14.6.2</span> Group specific checks</h3>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>female_egg_data <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span> </span>
-<span id="cb13-3"><a href="#cb13-3"></a>dplyr<span class="sc">::</span><span class="fu">group_modify</span>(<span class="sc">~</span> .x <span class="sc">|&gt;</span> <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid, <span class="at">error_fun =</span> just_warn))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>dplyr<span class="sc">::</span><span class="fu">group_modify</span>(<span class="sc">~</span> .x <span class="sc">|&gt;</span> <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid, <span class="at">error_fun =</span> just_warn))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1392,140 +1228,140 @@ Solution
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">52.0000</td>
+<td style="text-align: right;">52</td>
 <td style="text-align: right;">47</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">50.0000</td>
+<td style="text-align: right;">50</td>
 <td style="text-align: right;">55</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">59.0000</td>
+<td style="text-align: right;">59</td>
 <td style="text-align: right;">50</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">22</td>
-<td style="text-align: right;">49.0000</td>
+<td style="text-align: right;">49</td>
 <td style="text-align: right;">49</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">42.0000</td>
+<td style="text-align: right;">42</td>
 <td style="text-align: right;">42</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">44.0000</td>
+<td style="text-align: right;">44</td>
 <td style="text-align: right;">44</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">13</td>
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">48.0000</td>
+<td style="text-align: right;">48</td>
 <td style="text-align: right;">44</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">15</td>
 <td style="text-align: right;">27</td>
-<td style="text-align: right;">41.0000</td>
+<td style="text-align: right;">41</td>
 <td style="text-align: right;">41</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">17</td>
 <td style="text-align: right;">19</td>
-<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
 <td style="text-align: right;">47</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">56.0000</td>
+<td style="text-align: right;">56</td>
 <td style="text-align: right;">37</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">19</td>
-<td style="text-align: right;">100.8233</td>
+<td style="text-align: right;">120</td>
 <td style="text-align: right;">52</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">46.0000</td>
+<td style="text-align: right;">46</td>
 <td style="text-align: right;">46</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">18</td>
-<td style="text-align: right;">55.0000</td>
+<td style="text-align: right;">55</td>
 <td style="text-align: right;">43</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">11</td>
-<td style="text-align: right;">44.0000</td>
+<td style="text-align: right;">44</td>
 <td style="text-align: right;">38</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">20</td>
-<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
 <td style="text-align: right;">39</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">22</td>
-<td style="text-align: right;">57.0000</td>
+<td style="text-align: right;">57</td>
 <td style="text-align: right;">46</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">26</td>
-<td style="text-align: right;">41.0000</td>
+<td style="text-align: right;">41</td>
 <td style="text-align: right;">41</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">16</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">47.0000</td>
+<td style="text-align: right;">47</td>
 <td style="text-align: right;">43</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">18</td>
 <td style="text-align: right;">27</td>
-<td style="text-align: right;">49.0000</td>
+<td style="text-align: right;">49</td>
 <td style="text-align: right;">34</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">20</td>
 <td style="text-align: right;">28</td>
-<td style="text-align: right;">48.0000</td>
+<td style="text-align: right;">48</td>
 <td style="text-align: right;">46</td>
 </tr>
 </tbody>
@@ -1533,34 +1369,19 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="summary" class="level2" data-number="14.7"><h2 data-number="14.7" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">14.7</span> Summary</h2>
+</div>
+</div>
+</div>
+</section><section id="summary" class="level2" data-number="14.8"><h2 data-number="14.8" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">14.8</span> Summary</h2>
 <p>You now know how to:</p>
 <ul>
-<li><p>Use assertr to check data integrity before analysis.</p></li>
+<li><p>Use <code>assertr</code> to check data integrity before analysis.</p></li>
 <li><p>Validate numeric and categorical variables.</p></li>
 <li><p>Combine checks into a tidy pipeline.</p></li>
 <li><p>Control what happens when checks fail.</p></li>
 </ul>
 <p>Automated validation transforms your scripts into self-auditing workflows — they document and test your assumptions each time the data changes.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>data_checks <span class="ot">&lt;-</span> <span class="cf">function</span>(female_egg_data, just_warn, is.numeric, female_id, age_days, eggs_laid, eggs_hatched, is.character, treatment, is_uniq, not_na) {</span>
-<span id="cb14-2"><a href="#cb14-2"></a>  female_egg_data  <span class="sc">|&gt;</span> </span>
-<span id="cb14-3"><a href="#cb14-3"></a>      <span class="fu">verify</span>(<span class="fu">has_all_names</span>(<span class="st">"female_id"</span>, <span class="st">"treatment"</span>,</span>
-<span id="cb14-4"><a href="#cb14-4"></a>                           <span class="st">"age_days"</span>, <span class="st">"eggs_laid"</span>, <span class="st">"eggs_hatched"</span>),</span>
-<span id="cb14-5"><a href="#cb14-5"></a>             <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a>      <span class="fu">assert</span>(is.numeric, female_id, age_days, eggs_laid, eggs_hatched,</span>
-<span id="cb14-7"><a href="#cb14-7"></a>             <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a>      <span class="fu">assert</span>(is.character, treatment, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>      <span class="fu">assert</span>(is_uniq, female_id, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a>      <span class="fu">assert</span>(not_na, female_id, treatment, age_days,</span>
-<span id="cb14-11"><a href="#cb14-11"></a>             eggs_laid, eggs_hatched, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb14-12"><a href="#cb14-12"></a>      <span class="fu">assert</span>(<span class="fu">in_set</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), treatment) <span class="sc">|&gt;</span> </span>
-<span id="cb14-13"><a href="#cb14-13"></a>      <span class="fu">assert</span>(<span class="fu">within_bounds</span>(<span class="dv">1</span>, <span class="dv">30</span>), age_days, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb14-14"><a href="#cb14-14"></a>      <span class="fu">verify</span>(eggs_hatched <span class="sc">&lt;=</span> eggs_laid, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a>      <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid, <span class="at">error_fun =</span> just_warn)</span>
-<span id="cb14-16"><a href="#cb14-16"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">

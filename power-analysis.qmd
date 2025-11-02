@@ -22,6 +22,8 @@ Researchers often have been trained to think in standardized effect sizes, such 
 - or other indices such as f^2 or eta^2
 
 
+(https://Philip-Leftwich-hypothesis-testing-simulation.share.connect.posit.cloud)
+
 In the simulation approach, we typical work on the raw scale of variables.
 
 The raw effect size is simply the treatment effect on the original BDI scale (i.e., the group difference in the outcome variable). In our case we assume that the treatment lowers the BDI score by 6 points, on average. Defining the raw effect requires some domain knowledge – you need to know your measurement scale, and you need to know what the values (and differences between values) mean. In our example, a reduction of 6 BDI points means that the average patient moves from a moderate depression (23 points) to a mild depression (17 points). Working with raw effect sizes forces you to think about your actual data (instead of plugging in content-free default standardized effect sizes) and enables you to do plausibility checks on your simulation.

@@ -359,8 +359,8 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -518,6 +518,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1103,7 +1109,7 @@ Tip
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>Here we <strong>removed the label</strong> for the y axes <code>Count</code> (to show you some variety) and <strong>modified the breaks</strong>. The y-axis is now displayed in increasing steps of 5 (rather than 10), and the x-axis has 1-year increments instead of 5.</p>
 <p>Notice how the <code>breaks =</code> argument changes the labels of the break ticks but not the scale limits. You can adjust the limits of the scale using the <code>limits =</code> argument. To exaggerate, we set the limits to 15 and 50. See how the values from 15 to 19, and 44 to 50 do not have labels? You would need to adjust that using the <code>breaks =</code> argument.</p>
-<p>The <code>expansion()</code> function removes the gap between the x-axis and the bars. It is exactly the same code we used in <span class="quarto-unresolved-ref">?sec-dataviz</span>.</p>
+<p>The <code>expansion()</code> function removes the gap between the x-axis and the bars.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"#586cfd"</span>, <span class="at">colour =</span> <span class="st">"#FC58BE"</span>) <span class="sc">+</span></span>
@@ -1484,7 +1490,6 @@ Figure&nbsp;16.3: Default Scatterplot with added trendline - loess (left) and li
 <span class="header-section-number">16.7</span> Violin-boxplots</h2>
 <p>So far, we’ve only added one <code>geom_?</code> layer to our plots. However, thanks to ggplot’s layered system, we can add multiple geoms, for example, when creating a violin-boxplot.</p>
 <p>Remember, the order of the layers can sometimes make a difference. We’ve seen this already - adding a theme at the end can override earlier arguments like the legend position. Similarly, <code>ggplot + violinplot + boxplot</code> will look different from <code>ggplot + boxplot + violinplot</code>.</p>
-<p>Let’s use the example of QRPs at timepoint 2 and a grouping variable of Second-year Grade.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">geom_violin</span>()<span class="sc">+</span></span>

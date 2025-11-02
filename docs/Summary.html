@@ -339,8 +339,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -502,6 +502,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -519,8 +525,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#sec-save-script" id="toc-sec-save-script" class="nav-link active" data-scroll-target="#sec-save-script"><span class="header-section-number">13.0.1</span> Save scripts</a></li>
   <li><a href="#checklist-for-data-checking" id="toc-checklist-for-data-checking" class="nav-link" data-scroll-target="#checklist-for-data-checking"><span class="header-section-number">13.0.2</span> Checklist for data checking</a></li>
   <li><a href="#running-a-script-from-console" id="toc-running-a-script-from-console" class="nav-link" data-scroll-target="#running-a-script-from-console"><span class="header-section-number">13.1</span> Running a script from console</a></li>
-  <li><a href="#activity-test-yourself" id="toc-activity-test-yourself" class="nav-link" data-scroll-target="#activity-test-yourself"><span class="header-section-number">13.2</span> Activity: Test yourself</a></li>
-  <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading"><span class="header-section-number">13.3</span> Reading</a></li>
+  <li><a href="#essential-shortcuts" id="toc-essential-shortcuts" class="nav-link" data-scroll-target="#essential-shortcuts"><span class="header-section-number">13.2</span> Essential shortcuts</a></li>
+  <li><a href="#layout" id="toc-layout" class="nav-link" data-scroll-target="#layout"><span class="header-section-number">13.3</span> Layout</a></li>
+  <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading"><span class="header-section-number">13.4</span> Reading</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -693,73 +700,29 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="activity-test-yourself" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="activity-test-yourself">
-<span class="header-section-number">13.2</span> Activity: Test yourself</h2>
-<p><strong>Question 1.</strong> In order to subset a data by <strong>rows</strong> I should use the function <select class="webex-select"><option value="blank"></option>
-<option value="">select()</option>
-<option value="answer">filter()</option>
-<option value="">group_by()</option></select></p>
-<p><strong>Question 2.</strong> In order to subset a data by <strong>columns</strong> I should use the function <select class="webex-select"><option value="blank"></option>
-<option value="answer">select()</option>
-<option value="">filter()</option>
-<option value="">group_by()</option></select></p>
-<p><strong>Question 3.</strong> In order to make a new column I should use the function <select class="webex-select"><option value="blank"></option>
-<option value="">group_by()</option>
-<option value="">select()</option>
-<option value="answer">mutate()</option>
-<option value="">arrange()</option></select></p>
-<p><strong>Question 4.</strong> Which operator should I use to send the output from line of code into the next line? <select class="webex-select"><option value="blank"></option>
-<option value="">+</option>
-<option value="">&lt;-)</option>
-<option value="answer">|&gt;</option>
-<option value="">%in%</option></select></p>
-<p><strong>Question 5.</strong> What will be the outcome of the following line of code?</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><select class="webex-select"><option value="blank"></option>
-<option value="">The penguins dataframe object is reduced to include only Adelie penguins from now on</option>
-<option value="answer">A new filtered dataframe of only Adelie penguins will be printed into the console</option></select></p>
-<div class="webex-solution">
-<button>
-Explain this answer
-</button>
-<p>Unless the output of a series of functions is “assigned” to an object using <code>&lt;-</code> it will not be saved, the results will be immediately printed. This code would have to be modified to the below in order to create a new filtered object <code>penguins_filtered</code></p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>penguins_filtered <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-<p><br></p>
-<p><strong>Question 6.</strong> What is the main point of a data “pipe”?</p>
-<p><select class="webex-select"><option value="blank"></option>
-<option value="">The code runs faster</option>
-<option value="answer">The code is easier to read</option></select></p>
-<p><strong>Question 7.</strong> The naming convention outputted by the function `janitor::clean_names() is <select class="webex-select"><option value="blank"></option>
-<option value="answer">snake_case</option>
-<option value="">camelCase</option>
-<option value="">SCREAMING_SNAKE_CASE</option>
-<option value="">kebab-case</option></select></p>
-<p><strong>Question 8.</strong> Which package provides useful functions for manipulating character strings?</p>
-<p><select class="webex-select"><option value="blank"></option>
-<option value="answer">stringr</option>
-<option value="">ggplot2</option>
-<option value="">lubridate</option>
-<option value="">forcats</option></select></p>
-<p><strong>Question 9.</strong> Which package provides useful functions for manipulating dates?</p>
-<p><select class="webex-select"><option value="blank"></option>
-<option value="">stringr</option>
-<option value="">ggplot2</option>
-<option value="answer">lubridate</option>
-<option value="">forcats</option></select></p>
-<p><strong>Question 10.</strong> If we do not specify a character variable as a factor, then ordering will default to what?</p>
-<p><select class="webex-select"><option value="blank"></option>
-<option value="">numerical</option>
-<option value="answer">alphabetical</option>
-<option value="">order in the dataframe</option></select></p>
-</section><section id="reading" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="reading">
-<span class="header-section-number">13.3</span> Reading</h2>
+</section><section id="essential-shortcuts" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="essential-shortcuts">
+<span class="header-section-number">13.2</span> Essential shortcuts</h2>
+<ul>
+<li>
+<p>Comment/uncomment - <code>Ctrl/Cmd + Shift + c</code></p>
+<ul>
+<li>Highlight text and use shortcut keys to commment out text</li>
+</ul>
+</li>
+<li>
+<p>Rename in scope - <code>Ctrl/Cmd + Alt + Shift + M</code></p>
+<ul>
+<li>Highlight an R object then use this shortcut key to rename all examples in the script</li>
+</ul>
+</li>
+</ul></section><section id="layout" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="layout">
+<span class="header-section-number">13.3</span> Layout</h2>
+<ul>
+<li><p>Define logical regions of scripts with either <code>----</code> or <code>====</code> after <code>#</code></p></li>
+<li><p>This uses markdown logic, #, ##, ### to define titles, headers and subheaders</p></li>
+<li><p>Use <code>styler</code> to help format code and keep it neat</p></li>
+</ul></section><section id="reading" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="reading">
+<span class="header-section-number">13.4</span> Reading</h2>
 <ul>
 <li><p><a href="https://dplyr.tidyverse.org/index.html">Dplyr</a></p></li>
 <li><p><a href="https://lubridate.tidyverse.org/">Lubridate</a></p></li>

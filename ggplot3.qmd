@@ -137,34 +137,13 @@ the equally-flippered Chinstraps.",
 
 ```
 
-```{r, eval = FALSE, echo = TRUE}
 
-basic_plot <- 
-  penguins |> 
-  drop_na(flipper_length_mm) |> 
-  ggplot(aes(x = island, y = flipper_length_mm)) +
-  ggbeeswarm::geom_beeswarm(aes(fill = species,
-                                size = body_mass_g),
-                            shape = 21,
-                            colour = "#FFFFFF",
-                            alpha = 0.7) +
-  colorspace::scale_fill_discrete_qualitative(palette = "Dark2") +
-  guides(size = "none") +
-  labs(title = "Only on Dream do penguins of different species share\nsimilar flipper lengths",
-       subtitle = "Each column represents the penguin population of an island. Each dot is a penguin;
-the larger the dot, the heavier the penguin. The Adelie penguins live on all three
-islands. They share Biscoe with the longer-flippered Gentoos, and Dream with 
-the equally-flippered Chinstraps.",
-       caption = "Data from {palmerpenguins}",
-       x = "Island",
-       y = "Flipper length", 
-       fill = "")+
-  theme_minimal()
-
+```{r, eval = F}
+basic_plot
 ```
 
-```{r}
-basic_plot
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/basic_plot.png")
 ```
 
 
@@ -184,31 +163,6 @@ light_text <- mono_blue[3]
 
 ```
 
-```{r, echo = F}
-library(showtext)
-
-font_add_google("Open Sans", "Open Sans")
-
-showtext::showtext_auto()
-
-basic_plot +
-  theme(
-    text = element_text(colour = mid_text,
-                        family = "Open Sans"),
-    plot.title = element_text(colour = dark_text,
-                              family = "Open Sans",
-                              size = rel(2)),
-    plot.subtitle = element_text(size = rel(1.1)),
-    axis.text.y = element_text(colour = light_text, 
-                               size = rel(1)),
-    axis.title.y = element_text(size = rel(1)),
-    axis.text.x = element_text(colour = mid_text),
-    plot.caption = element_text(size = rel(0.8))
-  )
-
-showtext::showtext_auto(enable = FALSE)
-
-```
 
 ```{r, eval = F}
 library(showtext)
@@ -237,42 +191,12 @@ showtext::showtext_auto(enable = FALSE)
 
 ```
 
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/basic_plot_2.png")
+```
 
 ### Give the plot some space
 
-```{r, echo = F}
-
-showtext::showtext_auto()
-
-basic_plot +
-  theme(
-    text = element_text(colour = mid_text,
-                        family = "Open Sans",
-                        lineheight = 1.1),
-    plot.title = element_text(colour = dark_text,
-                              family = "Open Sans",
-                              size = rel(1.6),
-                              margin = margin(12, 0, 8, 0)),
-    plot.subtitle = element_text(size = rel(1.1),
-                                 margin = margin(4, 0, 0, 0)),
-    axis.text.y = element_text(colour = light_text, 
-                               size = rel(0.8)),
-    axis.title.y = element_text(size = 12,
-                                margin = margin(0, 4, 0, 0)),
-    axis.text.x = element_text(colour = mid_text,
-                               size = 12),
-    axis.title.x = element_blank(),
-    panel.grid = element_line(colour = "#dedddd"),
-    legend.position = "top",
-    legend.justification = 1,
-    plot.caption = element_text(size = rel(0.8),
-                                margin = margin(8, 0, 0, 0)),
-    plot.margin = margin(0.25, 0.25, 0.25, 0.25, "cm")
-  )
-
-showtext::showtext_auto(enable = FALSE)
-
-```
 
 ```{r, eval = F}
 
@@ -308,6 +232,20 @@ basic_plot +
 showtext::showtext_auto(enable = FALSE)
 
 ```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/basic_plot_3.png")
+```
+
+
+## Making a custom palette
+
+Establishing a coherent colour palette ensures every figure feels unified.
+
+The first code block defines a named vector of brand colours, assigning meaningful names (teal, navy, yellow, etc.) to specific hex codes.
+
+This allows the colours to be referenced consistently across plots:
+
 
 ```{r}
 
@@ -353,6 +291,26 @@ show_brand_palettes <- function(palettes = brand_palettes) {
 }
 ```
 
+
+## Making a custom theme
+
+Building a custom ggplot theme
+
+A theme function defines the non-data aspects of a plot: typography, line styles, gridlines, and overall layout.
+
+Here, `theme_ox()` creates a cohesive institutional style aligned with the brand colours.
+
+Key elements to note:
+
+- Typography – the function attempts to load the Google font Open Sans via the {showtext} package, ensuring reproducible fonts across systems.
+
+- Accessibility – if accessible = TRUE, the function substitutes colourblind-friendly viridis palettes.
+
+- Axis options – axis_type toggles between continuous and categorical grid settings, adjusting gridlines and spacing accordingly.
+
+- Colour palettes – palette selects one of the brand palette variants and attaches appropriate scale_fill_* and scale_colour_* definitions automatically.
+
+Because the function returns both a theme object and corresponding colour scales, you can call it directly within a ggplot pipeline and immediately inherit both the look and the colour logic:
 
 ```{r}
 
@@ -468,10 +426,6 @@ theme_ox <- function(base_size = 30,
 
 
 ```{r, eval = F, echo = F}
-
-## Optional????
-
-  # set default theme to theme_urbn_*() --------------------------------------
 
  
  theme_ox_defaults <- function(base_size = 18,

@@ -28,10 +28,15 @@ female_egg_data <- tibble(
 
 # Step 2: Introduce some deliberate issues
 female_egg_data$age_days[1] <- 0                     # invalid age
-female_egg_data$eggs_laid[2] <- mean(female_egg_data$eggs_laid) + 10*sd(female_egg_data$eggs_laid)  # extreme eggs_laid
+female_egg_data$eggs_laid[2] <- 120 # extreme eggs_laid
 female_egg_data$eggs_hatched[3] <- female_egg_data$eggs_laid[3] + 5  # eggs_hatched > eggs_laid
 
 female_egg_data
+
+female_egg_data <- female_egg_data |> mutate(across(where(is.numeric),
+                                 .fns = as.integer))
+
+write_csv(female_egg_data, here::here("files", "female_egg_data.csv"))
 
 
 ```
@@ -66,9 +71,20 @@ Think about the assumptions we build into or data:
 > Remember Garbage in = Garbage out
 
 
-## the dataset
+## Our dataset
 
 Here’s our experimental dataset: each row is a female insect, with basic life-cycle and reproduction data
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/female_egg_data.csv",
+  button_label = "Download female egg data as csv",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
 
 ```{r}
 
@@ -76,7 +92,11 @@ female_egg_data
 
 ```
 
-### Question
+:::{.task}
+::::{.task-header}
+Question
+::::
+::::{.task-container}
 
 If this were your dataset, what checks would you want to include?
 
@@ -94,19 +114,18 @@ If this were your dataset, what checks would you want to include?
 
 `r unhide()`
 
+::::
+:::
+
+## Run an assertion check
+
+With `assertr` by default if a validation check fails the code will throw an error: 
+
 ```{r, eval = FALSE}
 library(assertr)
 
 female_egg_data |>
   verify(age_days > 0)                      # hatched ≤ laid
-
-
-```
-
-```{r}
-female_egg_data |>
-  verify(age_days > 0,
-         error_fun = just_warn)                      # hatched ≤ laid
 
 
 ```
@@ -119,24 +138,41 @@ The assertr package (@R-assertr) has three main functions:
 - `verify()` - **is this statement true for the whole data?**
 
 ```{r, eval = F}
-df %>% verify(has_all_names("female_id","treatment","age_days","eggs_laid","eggs_hatched"))
+df |>  verify(has_all_names("female_id","treatment","age_days","eggs_laid","eggs_hatched"))
 
 ```
 
 - `assert()` - **applies a prediction row-by-row to the specified columns**
 
 ```{r, eval = F}
-df %>% assert(is.numeric, female_id, age_days, eggs_laid, eggs_hatched)
+df |>  assert(is.numeric, female_id, age_days, eggs_laid, eggs_hatched)
 ```
 
 - `insist()` - **Flag values using a rule that depends on the whole column**
 
 
 ```{r, eval = F}
-df %>% insist(within_n_sds(3), eggs_laid)
+df |>  insist(within_n_sds(3), eggs_laid)
 
 ```
 
+
+### error functions
+
+The `error_fun` argument defines what happens when a validation check produces an error. By default it prints a summary of the errors and halts the code. 
+
+This may not be desirable if we wish to run a longer pipeline or many error checks, there are multiple options including `just_warn` script execution continues and a warning is printed. 
+
+```{r}
+female_egg_data |>
+  verify(age_days > 0,
+         error_fun = just_warn)  
+
+```
+
+## Pipelines
+
+We can string together multiple checks into a single pipeline, we don't *need* `assertr`, it can be achieved using `dplyr` but this package makes pipelines easier. 
 
 :::{.panel-tabset}
 # Assertr
@@ -200,31 +236,21 @@ female_egg_data_report |>
 :::
 
 
-## Options for data pipelines
-
-All functions accept different arguments for what to do when an error is found: 
-
-```{r}
-female_egg_data |> 
-  insist(within_n_sds(3), eggs_laid, error_fun = error_df_return)
-```
-
-```{r}
-female_egg_data |> 
-  insist(within_n_sds(3), eggs_laid, error_fun = just_warn) 
-
-```
-
 ## Options for within group datachecks
 
 `assertr` is designed for whole dataset validation, but it can make sense for some `assertr::insist()` rules that these are applied in a group specific way
 
-### Question
+:::{.task}
+::::{.task-header}
+Question
+::::
+::::{.task-container}
 
-Why might we want to consider groups for some data validations?
+When might we want to consider groups for some data validations?
 
+`r hide("Solution")`
 
-### Group specific checks
+For data within the `insist` function we compare data across the entire column - in these examples we might check data is within certain deviations of the mean. But if there are multiple groups, this makes sense to perform within groups.
 
 ```{r}
 female_egg_data |> 
@@ -232,6 +258,13 @@ female_egg_data |>
 dplyr::group_modify(~ .x |> insist(within_n_sds(3), eggs_laid, error_fun = just_warn))
 
 ```
+
+`r unhide()`
+
+::::
+:::
+
+
 
 ## Summary
 

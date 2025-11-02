@@ -291,7 +291,7 @@ Here we **removed the label** for the y axes `Count` (to show you some variety) 
 Notice how the `breaks =` argument changes the labels of the break ticks but not the scale limits. You can adjust the limits of the scale using the `limits =` argument. To exaggerate, we set the limits to 15 and 50. See how the values from 15 to 19, and 44 to 50 do not have labels? You would need to adjust that using the `breaks =` argument.
 
 
-The `expansion()` function removes the gap between the x-axis and the bars. It is exactly the same code we used in @sec-dataviz.
+The `expansion()` function removes the gap between the x-axis and the bars.
 
 
 ```{r warning=FALSE}

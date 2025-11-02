@@ -339,8 +339,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -502,6 +502,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -579,42 +585,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">52.0000</td>
+<td style="text-align: right;">52</td>
 <td style="text-align: right;">47</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">19</td>
-<td style="text-align: right;">100.8233</td>
+<td style="text-align: right;">120</td>
 <td style="text-align: right;">52</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">50.0000</td>
+<td style="text-align: right;">50</td>
 <td style="text-align: right;">55</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">46.0000</td>
+<td style="text-align: right;">46</td>
 <td style="text-align: right;">46</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">5</td>
 <td style="text-align: left;">A</td>
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">59.0000</td>
+<td style="text-align: right;">59</td>
 <td style="text-align: right;">50</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">B</td>
 <td style="text-align: right;">18</td>
-<td style="text-align: right;">55.0000</td>
+<td style="text-align: right;">55</td>
 <td style="text-align: right;">43</td>
 </tr>
 </tbody>
@@ -627,216 +633,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In our previous chapters we worked through the steps of importing a dataset, standardising column names, formatting column types and standardising date formats.</p>
 <p>We also carried out simple exploratory steps using packages such as <code>skimr</code>.</p>
 <p>When we understand the requirements of our data - we can choose to convert code that runs on specific datasets (object-oriented programming) into something more abstract - functional programming.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/female_egg_data.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">dmy</span>(date))</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">skim</span>(data)</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="fu">print</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<p>Using the Rstudio drop down Code &gt; Extract Function - you can highlight code and start turning it into a named function.</p>
+<ul>
+<li>this is relatively simple and may not give you exactly what you want (AI support can help here)</li>
+</ul>
+</div>
+</div>
 <p>When we have a series of functions - these can be run without modification on new data:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>load_and_clean_data <span class="ot">&lt;-</span> <span class="cf">function</span>(path, </span>
-<span id="cb2-2"><a href="#cb2-2"></a>                                <span class="at">date_col =</span> <span class="cn">NULL</span>,</span>
-<span id="cb2-3"><a href="#cb2-3"></a>                                <span class="at">delim =</span> <span class="st">","</span>,</span>
-<span id="cb2-4"><a href="#cb2-4"></a>                                <span class="at">show_skim =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co"># Read data using readr</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>  df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(path, <span class="at">delim =</span> delim, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb2-8"><a href="#cb2-8"></a>  </span>
-<span id="cb2-9"><a href="#cb2-9"></a>  <span class="co"># Convert date column if provided</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col) <span class="sc">&amp;&amp;</span> date_col <span class="sc">%in%</span> <span class="fu">names</span>(df)) {</span>
-<span id="cb2-11"><a href="#cb2-11"></a>    df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>      dplyr<span class="sc">::</span><span class="fu">mutate</span>({{ date_col }} <span class="sc">:</span><span class="er">=</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(.data[[date_col]]))</span>
-<span id="cb2-13"><a href="#cb2-13"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col)) {</span>
-<span id="cb2-14"><a href="#cb2-14"></a>    <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"Column"</span>, date_col, <span class="st">"not found in data — skipping date conversion"</span>))</span>
-<span id="cb2-15"><a href="#cb2-15"></a>  }</span>
-<span id="cb2-16"><a href="#cb2-16"></a>  </span>
-<span id="cb2-17"><a href="#cb2-17"></a>  <span class="co"># Optionally skim summary</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a>  <span class="cf">if</span> (show_skim) {</span>
-<span id="cb2-19"><a href="#cb2-19"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">📊 Quick data summary:</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb2-20"><a href="#cb2-20"></a>    <span class="fu">print</span>(skimr<span class="sc">::</span><span class="fu">skim</span>(df))</span>
-<span id="cb2-21"><a href="#cb2-21"></a>  }</span>
-<span id="cb2-22"><a href="#cb2-22"></a>  </span>
-<span id="cb2-23"><a href="#cb2-23"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb2-24"><a href="#cb2-24"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>load_and_clean_data <span class="ot">&lt;-</span> <span class="cf">function</span>(path, </span>
+<span id="cb3-2"><a href="#cb3-2"></a>                                <span class="at">date_col =</span> <span class="cn">NULL</span>,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>                                <span class="at">delim =</span> <span class="st">","</span>,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>                                <span class="at">show_skim =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="co"># Read data using readr</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(path, <span class="at">delim =</span> delim, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb3-8"><a href="#cb3-8"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="co"># Convert date column if provided</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col) <span class="sc">&amp;&amp;</span> date_col <span class="sc">%in%</span> <span class="fu">names</span>(df)) {</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>      dplyr<span class="sc">::</span><span class="fu">mutate</span>({{ date_col }} <span class="sc">:</span><span class="er">=</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(.data[[date_col]]))</span>
+<span id="cb3-13"><a href="#cb3-13"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col)) {</span>
+<span id="cb3-14"><a href="#cb3-14"></a>    <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"Column"</span>, date_col, <span class="st">"not found in data — skipping date conversion"</span>))</span>
+<span id="cb3-15"><a href="#cb3-15"></a>  }</span>
+<span id="cb3-16"><a href="#cb3-16"></a>  </span>
+<span id="cb3-17"><a href="#cb3-17"></a>  <span class="co"># Optionally skim summary</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>  <span class="cf">if</span> (show_skim) {</span>
+<span id="cb3-19"><a href="#cb3-19"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">📊 Quick data summary:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20"></a>    <span class="fu">print</span>(skimr<span class="sc">::</span><span class="fu">skim</span>(df))</span>
+<span id="cb3-21"><a href="#cb3-21"></a>  }</span>
+<span id="cb3-22"><a href="#cb3-22"></a>  </span>
+<span id="cb3-23"><a href="#cb3-23"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb3-24"><a href="#cb3-24"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">load_and_clean_data</span>(<span class="st">"data dictionary/female_egg_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-📊 Quick data summary:
-── Data Summary ────────────────────────
-                           Values
-Name                       df    
-Number of rows             20    
-Number of columns          5     
-_______________________          
-Column type frequency:           
-  character                1     
-  numeric                  4     
-________________________         
-Group variables            None  
-
-── Variable type: character ────────────────────────────────────────────────────
-  skim_variable n_missing complete_rate min max empty n_unique whitespace
-1 treatment             0             1   1   1     0        2          0
-
-── Variable type: numeric ──────────────────────────────────────────────────────
-  skim_variable n_missing complete_rate mean    sd p0   p25  p50  p75 p100 hist 
-1 female_id             0             1 10.5  5.92  1  5.75 10.5 15.2  20  ▇▇▇▇▇
-2 age_days              0             1 17    8.81  0 10.8  19   25    28  ▅▂▂▇▇
-3 eggs_laid             0             1 51.1 12.8  41 45.5  48   52.8 101. ▇▂▁▁▁
-4 eggs_hatched          0             1 44.2  5.18 34 41    44   47    55  ▃▅▇▅▂</code></pre>
-</div>
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: right;">female_id</th>
-<th style="text-align: left;">treatment</th>
-<th style="text-align: right;">age_days</th>
-<th style="text-align: right;">eggs_laid</th>
-<th style="text-align: right;">eggs_hatched</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">52.0000</td>
-<td style="text-align: right;">47</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">100.8233</td>
-<td style="text-align: right;">52</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">50.0000</td>
-<td style="text-align: right;">55</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">46.0000</td>
-<td style="text-align: right;">46</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">59.0000</td>
-<td style="text-align: right;">50</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">55.0000</td>
-<td style="text-align: right;">43</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">49.0000</td>
-<td style="text-align: right;">49</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">44.0000</td>
-<td style="text-align: right;">38</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">42.0000</td>
-<td style="text-align: right;">42</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">10</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">47.0000</td>
-<td style="text-align: right;">39</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">11</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">44.0000</td>
-<td style="text-align: right;">44</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">12</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">57.0000</td>
-<td style="text-align: right;">46</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">48.0000</td>
-<td style="text-align: right;">44</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">14</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">41.0000</td>
-<td style="text-align: right;">41</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">15</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">41.0000</td>
-<td style="text-align: right;">41</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">16</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">47.0000</td>
-<td style="text-align: right;">43</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">17</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">47.0000</td>
-<td style="text-align: right;">47</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">18</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">49.0000</td>
-<td style="text-align: right;">34</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">19</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">56.0000</td>
-<td style="text-align: right;">37</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">20</td>
-<td style="text-align: left;">B</td>
-<td style="text-align: right;">28</td>
-<td style="text-align: right;">48.0000</td>
-<td style="text-align: right;">46</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">load_and_clean_data</span>(<span class="st">"data/raw/female_egg_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -855,79 +700,66 @@ Note
 <span class="header-section-number">15.2.2</span> Validating data</h3>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(assertr)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="fu">library</span>(rlang)</span>
 <span id="cb5-4"><a href="#cb5-4"></a></span>
 <span id="cb5-5"><a href="#cb5-5"></a>data_checks <span class="ot">&lt;-</span> <span class="cf">function</span>(data,</span>
 <span id="cb5-6"><a href="#cb5-6"></a>                        <span class="at">metadata_path =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-7"><a href="#cb5-7"></a>                        <span class="at">numeric_cols =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-8"><a href="#cb5-8"></a>                        <span class="at">character_cols =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-9"><a href="#cb5-9"></a>                        <span class="at">unique_cols =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-10"><a href="#cb5-10"></a>                        <span class="at">bounded_cols =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-11"><a href="#cb5-11"></a>                        <span class="at">bounds =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">30</span>),</span>
-<span id="cb5-12"><a href="#cb5-12"></a>                        <span class="at">treatment_levels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>),</span>
-<span id="cb5-13"><a href="#cb5-13"></a>                        <span class="at">just_warn =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb5-14"><a href="#cb5-14"></a>  </span>
-<span id="cb5-15"><a href="#cb5-15"></a>  <span class="co"># Define error handler</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a>  handler <span class="ot">&lt;-</span> <span class="cf">if</span> (just_warn) assertr<span class="sc">::</span>just_warn <span class="cf">else</span> assertr<span class="sc">::</span>error_stop</span>
-<span id="cb5-17"><a href="#cb5-17"></a>  </span>
-<span id="cb5-18"><a href="#cb5-18"></a>  metadata <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(metadata_path, <span class="at">sheet =</span> <span class="st">"Data Dictionary"</span>)</span>
-<span id="cb5-19"><a href="#cb5-19"></a>    </span>
-<span id="cb5-20"><a href="#cb5-20"></a>  required_cols <span class="ot">&lt;-</span> metadata <span class="sc">|&gt;</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a>      <span class="fu">pull</span>(<span class="st">`</span><span class="at">Name</span><span class="st">`</span>)</span>
-<span id="cb5-22"><a href="#cb5-22"></a>  </span>
-<span id="cb5-23"><a href="#cb5-23"></a>  <span class="co"># Start pipeline</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a>  out <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>    <span class="fu">verify</span>(<span class="fu">has_all_names</span>(required_cols), <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-26"><a href="#cb5-26"></a>  </span>
-<span id="cb5-27"><a href="#cb5-27"></a>  <span class="co"># Numeric checks</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(numeric_cols)) {</span>
-<span id="cb5-29"><a href="#cb5-29"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a>      <span class="fu">assert</span>(is.numeric, <span class="sc">!!!</span><span class="fu">syms</span>(numeric_cols), <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-31"><a href="#cb5-31"></a>  }</span>
-<span id="cb5-32"><a href="#cb5-32"></a>  </span>
-<span id="cb5-33"><a href="#cb5-33"></a>  <span class="co"># Character checks</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(character_cols)) {</span>
-<span id="cb5-35"><a href="#cb5-35"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a>      <span class="fu">assert</span>(is.character, <span class="sc">!!!</span><span class="fu">syms</span>(character_cols), <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-37"><a href="#cb5-37"></a>  }</span>
-<span id="cb5-38"><a href="#cb5-38"></a>  </span>
-<span id="cb5-39"><a href="#cb5-39"></a>  <span class="co"># Unique checks</span></span>
-<span id="cb5-40"><a href="#cb5-40"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(unique_cols)) {</span>
-<span id="cb5-41"><a href="#cb5-41"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
-<span id="cb5-42"><a href="#cb5-42"></a>      <span class="fu">assert</span>(is_uniq, <span class="sc">!!!</span><span class="fu">syms</span>(unique_cols), <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>                        <span class="at">bounded_cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-8"><a href="#cb5-8"></a>                        <span class="at">bounds =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">30</span>),</span>
+<span id="cb5-9"><a href="#cb5-9"></a>                        <span class="at">treatment_levels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>),</span>
+<span id="cb5-10"><a href="#cb5-10"></a>                        <span class="at">just_warn =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb5-11"><a href="#cb5-11"></a>  handler <span class="ot">&lt;-</span> <span class="cf">if</span> (just_warn) assertr<span class="sc">::</span>just_warn <span class="cf">else</span> assertr<span class="sc">::</span>error_stop</span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a>  <span class="co"># Read metadata if provided</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>  metadata <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(metadata_path)) {</span>
+<span id="cb5-15"><a href="#cb5-15"></a>    readxl<span class="sc">::</span><span class="fu">read_excel</span>(metadata_path, <span class="at">sheet =</span> <span class="st">"Data Dictionary"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16"></a>  } <span class="cf">else</span> {</span>
+<span id="cb5-17"><a href="#cb5-17"></a>    <span class="cn">NULL</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>  }</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>  <span class="co"># Basic column presence check</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(metadata)) {</span>
+<span id="cb5-22"><a href="#cb5-22"></a>    required_cols <span class="ot">&lt;-</span> metadata <span class="sc">|&gt;</span> <span class="fu">pull</span>(Name)</span>
+<span id="cb5-23"><a href="#cb5-23"></a>    data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">verify</span>(<span class="fu">has_all_names</span>(required_cols), <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-24"><a href="#cb5-24"></a></span>
+<span id="cb5-25"><a href="#cb5-25"></a>    <span class="co"># Type check helper</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>    check_types <span class="ot">&lt;-</span> <span class="cf">function</span>(d, m) {</span>
+<span id="cb5-27"><a href="#cb5-27"></a>      out <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb5-28"><a href="#cb5-28"></a>        <span class="at">variable =</span> m<span class="sc">$</span>Name,</span>
+<span id="cb5-29"><a href="#cb5-29"></a>        <span class="at">expected =</span> m<span class="sc">$</span>Type,</span>
+<span id="cb5-30"><a href="#cb5-30"></a>        <span class="at">actual   =</span> <span class="fu">map_chr</span>(m<span class="sc">$</span>Name, <span class="sc">~</span> <span class="cf">if</span> (.x <span class="sc">%in%</span> <span class="fu">names</span>(d)) <span class="fu">class</span>(d[[.x]])[<span class="dv">1</span>] <span class="cf">else</span> <span class="cn">NA_character_</span>),</span>
+<span id="cb5-31"><a href="#cb5-31"></a>        <span class="at">match    =</span> <span class="fu">tolower</span>(expected) <span class="sc">==</span> <span class="fu">tolower</span>(actual)</span>
+<span id="cb5-32"><a href="#cb5-32"></a>      )</span>
+<span id="cb5-33"><a href="#cb5-33"></a>      <span class="fu">print</span>(out)</span>
+<span id="cb5-34"><a href="#cb5-34"></a>      <span class="fu">invisible</span>(out)</span>
+<span id="cb5-35"><a href="#cb5-35"></a>    }</span>
+<span id="cb5-36"><a href="#cb5-36"></a></span>
+<span id="cb5-37"><a href="#cb5-37"></a>    <span class="fu">check_types</span>(data, metadata)</span>
+<span id="cb5-38"><a href="#cb5-38"></a>  }</span>
+<span id="cb5-39"><a href="#cb5-39"></a></span>
+<span id="cb5-40"><a href="#cb5-40"></a>  <span class="co"># Non-missing</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a>  <span class="cf">if</span> (<span class="fu">ncol</span>(data) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb5-42"><a href="#cb5-42"></a>    data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">assert</span>(not_na, <span class="sc">!!!</span><span class="fu">syms</span>(<span class="fu">names</span>(data)), <span class="at">error_fun =</span> handler)</span>
 <span id="cb5-43"><a href="#cb5-43"></a>  }</span>
-<span id="cb5-44"><a href="#cb5-44"></a>  </span>
-<span id="cb5-45"><a href="#cb5-45"></a>  <span class="co"># Non-missing checks</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a>  all_cols <span class="ot">&lt;-</span> <span class="fu">names</span>(data)</span>
-<span id="cb5-47"><a href="#cb5-47"></a>  </span>
-<span id="cb5-48"><a href="#cb5-48"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(all_cols)) {</span>
-<span id="cb5-49"><a href="#cb5-49"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
-<span id="cb5-50"><a href="#cb5-50"></a>      <span class="fu">assert</span>(not_na, <span class="sc">!!!</span><span class="fu">syms</span>(all_cols), <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-51"><a href="#cb5-51"></a>  }</span>
-<span id="cb5-52"><a href="#cb5-52"></a>  </span>
-<span id="cb5-53"><a href="#cb5-53"></a>  <span class="co"># Treatment in set</span></span>
-<span id="cb5-54"><a href="#cb5-54"></a>  <span class="cf">if</span> (<span class="st">"treatment"</span> <span class="sc">%in%</span> <span class="fu">names</span>(data)) {</span>
-<span id="cb5-55"><a href="#cb5-55"></a>    pred_treatment <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">in_set</span>(treatment_levels)</span>
-<span id="cb5-56"><a href="#cb5-56"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
-<span id="cb5-57"><a href="#cb5-57"></a>      <span class="fu">assert</span>(pred_treatment, treatment, <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-44"><a href="#cb5-44"></a></span>
+<span id="cb5-45"><a href="#cb5-45"></a>  <span class="co"># Treatment</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a>  <span class="cf">if</span> (<span class="st">"treatment"</span> <span class="sc">%in%</span> <span class="fu">names</span>(data)) {</span>
+<span id="cb5-47"><a href="#cb5-47"></a>    data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">assert</span>(<span class="fu">in_set</span>(treatment_levels), treatment, <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-48"><a href="#cb5-48"></a>  }</span>
+<span id="cb5-49"><a href="#cb5-49"></a></span>
+<span id="cb5-50"><a href="#cb5-50"></a>  <span class="co"># Bounded numeric</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(bounded_cols)) {</span>
+<span id="cb5-52"><a href="#cb5-52"></a>    data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">assert</span>(<span class="fu">within_bounds</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">2</span>]), <span class="sc">!!!</span><span class="fu">syms</span>(bounded_cols), <span class="at">error_fun =</span> handler)</span>
+<span id="cb5-53"><a href="#cb5-53"></a>  }</span>
+<span id="cb5-54"><a href="#cb5-54"></a></span>
+<span id="cb5-55"><a href="#cb5-55"></a>  <span class="co"># Eggs logic check</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a>  <span class="cf">if</span> (<span class="fu">all</span>(<span class="fu">c</span>(<span class="st">"eggs_hatched"</span>, <span class="st">"eggs_laid"</span>) <span class="sc">%in%</span> <span class="fu">names</span>(data))) {</span>
+<span id="cb5-57"><a href="#cb5-57"></a>    data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">verify</span>(eggs_hatched <span class="sc">&lt;=</span> eggs_laid, <span class="at">error_fun =</span> handler)</span>
 <span id="cb5-58"><a href="#cb5-58"></a>  }</span>
-<span id="cb5-59"><a href="#cb5-59"></a>  </span>
-<span id="cb5-60"><a href="#cb5-60"></a>  <span class="co"># Bounded numeric checks</span></span>
-<span id="cb5-61"><a href="#cb5-61"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(bounded_cols)) {</span>
-<span id="cb5-62"><a href="#cb5-62"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
-<span id="cb5-63"><a href="#cb5-63"></a>      <span class="fu">assert</span>(<span class="fu">within_bounds</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">2</span>]), <span class="sc">!!!</span><span class="fu">syms</span>(bounded_cols),</span>
-<span id="cb5-64"><a href="#cb5-64"></a>             <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-65"><a href="#cb5-65"></a>  }</span>
-<span id="cb5-66"><a href="#cb5-66"></a>  </span>
-<span id="cb5-67"><a href="#cb5-67"></a>  <span class="co"># Eggs logic check if present</span></span>
-<span id="cb5-68"><a href="#cb5-68"></a>  <span class="cf">if</span> (<span class="fu">all</span>(<span class="fu">c</span>(<span class="st">"eggs_hatched"</span>, <span class="st">"eggs_laid"</span>) <span class="sc">%in%</span> <span class="fu">names</span>(out))) {</span>
-<span id="cb5-69"><a href="#cb5-69"></a>    out <span class="ot">&lt;-</span> out <span class="sc">|&gt;</span></span>
-<span id="cb5-70"><a href="#cb5-70"></a>      <span class="fu">verify</span>(eggs_hatched <span class="sc">&lt;=</span> eggs_laid, <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-71"><a href="#cb5-71"></a>  }</span>
-<span id="cb5-72"><a href="#cb5-72"></a>  </span>
-<span id="cb5-73"><a href="#cb5-73"></a>  <span class="fu">return</span>(out)</span>
-<span id="cb5-74"><a href="#cb5-74"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-59"><a href="#cb5-59"></a></span>
+<span id="cb5-60"><a href="#cb5-60"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb5-61"><a href="#cb5-61"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -935,52 +767,12 @@ Note
 </div>
 <div class="task-container">
 <p>Can we think of any ways this code could <em>potentially</em> be abstracted/improved further?</p>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-</div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>  egg_data <span class="ot">&lt;-</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">load_and_clean_data</span>(<span class="st">"data dictionary/female_egg_data.csv"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">data_checks</span>(<span class="at">metadata_path =</span> <span class="st">"data dictionary/insect_egg_metadata.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-📊 Quick data summary:
-── Data Summary ────────────────────────
-                           Values
-Name                       df    
-Number of rows             20    
-Number of columns          5     
-_______________________          
-Column type frequency:           
-  character                1     
-  numeric                  4     
-________________________         
-Group variables            None  
-
-── Variable type: character ────────────────────────────────────────────────────
-  skim_variable n_missing complete_rate min max empty n_unique whitespace
-1 treatment             0             1   1   1     0        2          0
-
-── Variable type: numeric ──────────────────────────────────────────────────────
-  skim_variable n_missing complete_rate mean    sd p0   p25  p50  p75 p100 hist 
-1 female_id             0             1 10.5  5.92  1  5.75 10.5 15.2  20  ▇▇▇▇▇
-2 age_days              0             1 17    8.81  0 10.8  19   25    28  ▅▂▂▇▇
-3 eggs_laid             0             1 51.1 12.8  41 45.5  48   52.8 101. ▇▂▁▁▁
-4 eggs_hatched          0             1 44.2  5.18 34 41    44   47    55  ▃▅▇▅▂
-verification [has_all_names(required_cols)] failed! (1 failure)
-
-    verb redux_fn                    predicate column index value
-1 verify       NA has_all_names(required_cols)     NA     1    NA
-
-verification [eggs_hatched &lt;= eggs_laid] failed! (1 failure)
-
-    verb redux_fn                 predicate column index value
-1 verify       NA eggs_hatched &lt;= eggs_laid     NA     3    NA</code></pre>
-</div>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">load_and_clean_data</span>(<span class="st">"data/raw/female_egg_data.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">data_checks</span>(<span class="at">metadata_path =</span> <span class="st">"data-dictionary/insect_egg_metadata.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
