@@ -55,6 +55,7 @@ book:
     - columns.qmd
     - strings.qmd
     - duplicates.qmd
+    - 08-missing-values.qmd
     - dates.qmd
     - factors.qmd
     - Summary.qmd

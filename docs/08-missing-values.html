@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.8.24">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Analytical skills for Biologists">
-<title>13&nbsp; Factors – Data Analysis in R</title>
+<title>11&nbsp; Missing data – Data Analysis in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,8 +61,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Summary.html" rel="next">
-<link href="./dates.html" rel="prev">
+<link href="./dates.html" rel="next">
+<link href="./duplicates.html" rel="prev">
 <link href="./images/logos/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./columns.html">Data Cleaning</a></li><li class="breadcrumb-item"><a href="./factors.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./columns.html">Data Cleaning</a></li><li class="breadcrumb-item"><a href="./08-missing-values.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -415,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
+  <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
   </div>
 </li>
@@ -427,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./factors.html" class="sidebar-item-text sidebar-link active">
+  <a href="./factors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
   </div>
 </li>
@@ -528,15 +528,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#applying-changes-across-columns" id="toc-applying-changes-across-columns" class="nav-link active" data-scroll-target="#applying-changes-across-columns"><span class="header-section-number">13.0.1</span> Applying changes across columns</a></li>
-  <li><a href="#ordering-factors-manually" id="toc-ordering-factors-manually" class="nav-link" data-scroll-target="#ordering-factors-manually"><span class="header-section-number">13.0.2</span> Ordering factors manually</a></li>
-  <li><a href="#ordering-factors-by-another-variable" id="toc-ordering-factors-by-another-variable" class="nav-link" data-scroll-target="#ordering-factors-by-another-variable"><span class="header-section-number">13.0.3</span> Ordering factors by another variable</a></li>
-  <li><a href="#factor-bins" id="toc-factor-bins" class="nav-link" data-scroll-target="#factor-bins"><span class="header-section-number">13.0.4</span> Factor bins</a></li>
+<li><a href="#find-missing-values" id="toc-find-missing-values" class="nav-link active" data-scroll-target="#find-missing-values"><span class="header-section-number">11.1</span> Find Missing values</a></li>
+  <li>
+<a href="#remove-missing-values" id="toc-remove-missing-values" class="nav-link" data-scroll-target="#remove-missing-values"><span class="header-section-number">11.2</span> Remove missing values</a>
+  <ul class="collapse">
+<li><a href="#drop_na-on-everything-before-we-start." id="toc-drop_na-on-everything-before-we-start." class="nav-link" data-scroll-target="#drop_na-on-everything-before-we-start."><span class="header-section-number">11.2.1</span> <code>drop_na()</code> on everything before we start.</a></li>
+  <li><a href="#drop_na-on-a-particular-variable." id="toc-drop_na-on-a-particular-variable." class="nav-link" data-scroll-target="#drop_na-on-a-particular-variable."><span class="header-section-number">11.2.2</span> <code>drop_na()</code> on a particular variable.</a></li>
+  <li><a href="#use-arguments-inside-functions" id="toc-use-arguments-inside-functions" class="nav-link" data-scroll-target="#use-arguments-inside-functions"><span class="header-section-number">11.2.3</span> Use arguments inside functions</a></li>
+  </ul>
+</li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1"><span class="header-section-number">11.3</span> Summary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./columns.html">Data Cleaning</a></li><li class="breadcrumb-item"><a href="./factors.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-factors" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./columns.html">Data Cleaning</a></li><li class="breadcrumb-item"><a href="./08-missing-values.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-missing" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></h1>
 </div>
 
 
@@ -550,7 +556,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><div class="callout callout-style-default callout-important callout-titled">
+</header><p>Datasets often contain missing values. However, analysis and visualisation software can differ in their default response to missing values. They might drop missing values, provide a warning about them, or return an error. We don’t always know which response we’ll get, which can cause problems for us (possibly without our knowing) during analysis later on. This is why it’s important to clean missing values effectively.</p>
+<p>Understanding the nature of missing data can also be useful for informing how you proceed with analysis. For instance, understanding whether missing data are random or not can influence what you choose to do with them (e.g.&nbsp;remove vs.&nbsp;impute), which in turn can affect the results of statistical models based on those datasets. Identifying where missing data occur in a dataset is therefore an important part of exploratory data analysis. This chapter will show you how to detect and remove missing values.</p>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -568,200 +576,509 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>In R, factors are a class of data that allow for <strong>ordered categories</strong> with a fixed set of acceptable values.</p>
-<p>Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables, or for use in linear model analyses (more on this later).</p>
-<p>Working with factors is easy with the <code>forcats</code> package:</p>
+<section id="find-missing-values" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="find-missing-values">
+<span class="header-section-number">11.1</span> Find Missing values</h2>
+<p>There are numerous ways to identify missing values in your data. Here we illustrate a few ways with very different output types.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page"><code>summary()</code></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href=""><code>skim()</code></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href=""><code>vis_miss()</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as_factor</span>(species))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<section id="applying-changes-across-columns" class="level3" data-number="13.0.1"><h3 data-number="13.0.1" class="anchored" data-anchor-id="applying-changes-across-columns">
-<span class="header-section-number">13.0.1</span> Applying changes across columns</h3>
-<p>Using <code>across</code> - we can apply functions to columns based on selected criteria - here within mutate we are changing each column in the <code>.cols</code> argument and applying the function <code><a href="https://forcats.tidyverse.org/reference/as_factor.html">forcats::as_factor()</a></code></p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"region"</span>, <span class="st">"island"</span>, <span class="st">"stage"</span>, <span class="st">"sex"</span>),</span>
-<span id="cb3-4"><a href="#cb3-4"></a>           <span class="at">.fns =</span> forcats<span class="sc">::</span>as_factor)</span>
-<span id="cb3-5"><a href="#cb3-5"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.factor)) <span class="sc">|&gt;</span> </span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">summary</span>(penguins_clean_names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 344
-Columns: 5
-$ species &lt;fct&gt; Adelie Penguin (Pygoscelis adeliae), Adelie Penguin (Pygosceli…
-$ region  &lt;fct&gt; Anvers, Anvers, Anvers, Anvers, Anvers, Anvers, Anvers, Anvers…
-$ island  &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgersen, Torgers…
-$ stage   &lt;fct&gt; "Adult, 1 Egg Stage", "Adult, 1 Egg Stage", "Adult, 1 Egg Stag…
-$ sex     &lt;fct&gt; MALE, FEMALE, FEMALE, NA, FEMALE, MALE, FEMALE, MALE, NA, NA, …</code></pre>
+<pre><code>  study_name        sample_number      species             region         
+ Length:344         Min.   :  1.00   Length:344         Length:344        
+ Class :character   1st Qu.: 29.00   Class :character   Class :character  
+ Mode  :character   Median : 58.00   Mode  :character   Mode  :character  
+                    Mean   : 63.15                                        
+                    3rd Qu.: 95.25                                        
+                    Max.   :152.00                                        
+                                                                          
+    island             stage           individual_id      clutch_completion 
+ Length:344         Length:344         Length:344         Length:344        
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+   date_egg         culmen_length_mm culmen_depth_mm flipper_length_mm
+ Length:344         Min.   :32.10    Min.   :13.10   Min.   :172.0    
+ Class :character   1st Qu.:39.23    1st Qu.:15.60   1st Qu.:190.0    
+ Mode  :character   Median :44.45    Median :17.30   Median :197.0    
+                    Mean   :43.92    Mean   :17.15   Mean   :200.9    
+                    3rd Qu.:48.50    3rd Qu.:18.70   3rd Qu.:213.0    
+                    Max.   :59.60    Max.   :21.50   Max.   :231.0    
+                    NA's   :2        NA's   :2       NA's   :2        
+  body_mass_g       sex              delta_15n        delta_13c     
+ Min.   :2700   Length:344         Min.   : 7.632   Min.   :-27.02  
+ 1st Qu.:3550   Class :character   1st Qu.: 8.300   1st Qu.:-26.32  
+ Median :4050   Mode  :character   Median : 8.652   Median :-25.83  
+ Mean   :4202                      Mean   : 8.733   Mean   :-25.69  
+ 3rd Qu.:4750                      3rd Qu.: 9.172   3rd Qu.:-25.06  
+ Max.   :6300                      Max.   :10.025   Max.   :-23.79  
+ NA's   :2                         NA's   :14       NA's   :13      
+   comments        
+ Length:344        
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   
+                   </code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Unless we assign the output of this code to an R object it will just print into the console, in the above I am demonstrating how to change variables to factors but we aren’t “saving” this change.</p>
-</div>
-</div>
-</section><section id="ordering-factors-manually" class="level3" data-number="13.0.2"><h3 data-number="13.0.2" class="anchored" data-anchor-id="ordering-factors-manually">
-<span class="header-section-number">13.0.2</span> Ordering factors manually</h3>
-<p>With the <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">forcats::fct_relevel</a></code> function we can set factors and apply a specified level at the same time:</p>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">fct_relevel</span>(species, <span class="st">"Adelie"</span>, <span class="st">"Chinstrap"</span>, <span class="st">"Gentoo"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species))<span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(penguins_clean_names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">penguins_clean_names</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">344</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">17</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 11%">
+<col style="width: 14%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">study_name</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">species</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">region</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">island</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stage</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">individual_id</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">clutch_completion</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">date_egg</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sex</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">comments</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 5%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">sample_number</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">63.15</td>
+<td style="text-align: right;">40.43</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">29.00</td>
+<td style="text-align: right;">58.00</td>
+<td style="text-align: right;">95.25</td>
+<td style="text-align: right;">152.00</td>
+<td style="text-align: left;">▇▇▆▅▃</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">culmen_length_mm</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">43.92</td>
+<td style="text-align: right;">5.46</td>
+<td style="text-align: right;">32.10</td>
+<td style="text-align: right;">39.23</td>
+<td style="text-align: right;">44.45</td>
+<td style="text-align: right;">48.50</td>
+<td style="text-align: right;">59.60</td>
+<td style="text-align: left;">▃▇▇▆▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">culmen_depth_mm</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">17.15</td>
+<td style="text-align: right;">1.97</td>
+<td style="text-align: right;">13.10</td>
+<td style="text-align: right;">15.60</td>
+<td style="text-align: right;">17.30</td>
+<td style="text-align: right;">18.70</td>
+<td style="text-align: right;">21.50</td>
+<td style="text-align: left;">▅▅▇▇▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">flipper_length_mm</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">200.92</td>
+<td style="text-align: right;">14.06</td>
+<td style="text-align: right;">172.00</td>
+<td style="text-align: right;">190.00</td>
+<td style="text-align: right;">197.00</td>
+<td style="text-align: right;">213.00</td>
+<td style="text-align: right;">231.00</td>
+<td style="text-align: left;">▂▇▃▅▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">body_mass_g</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">4201.75</td>
+<td style="text-align: right;">801.95</td>
+<td style="text-align: right;">2700.00</td>
+<td style="text-align: right;">3550.00</td>
+<td style="text-align: right;">4050.00</td>
+<td style="text-align: right;">4750.00</td>
+<td style="text-align: right;">6300.00</td>
+<td style="text-align: left;">▃▇▆▃▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">delta_15n</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">8.73</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">7.63</td>
+<td style="text-align: right;">8.30</td>
+<td style="text-align: right;">8.65</td>
+<td style="text-align: right;">9.17</td>
+<td style="text-align: right;">10.03</td>
+<td style="text-align: left;">▃▇▆▅▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">delta_13c</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">-25.69</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">-27.02</td>
+<td style="text-align: right;">-26.32</td>
+<td style="text-align: right;">-25.83</td>
+<td style="text-align: right;">-25.06</td>
+<td style="text-align: right;">-23.79</td>
+<td style="text-align: left;">▆▇▅▅▂</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>naniar<span class="sc">::</span><span class="fu">vis_miss</span>(penguins_clean_names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-missing-values_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="ordering-factors-by-another-variable" class="level3" data-number="13.0.3"><h3 data-number="13.0.3" class="anchored" data-anchor-id="ordering-factors-by-another-variable">
-<span class="header-section-number">13.0.3</span> Ordering factors by another variable</h3>
-<p>With the function <code><a href="https://forcats.tidyverse.org/reference/fct_inorder.html">forcats::fct_infreq</a></code> we can change the order according to how frequently each level occurs</p>
+</div>
+</div>
+</div>
+<p>We can return all rows with a missing variable.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>   <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">fct_infreq</span>(species)) <span class="sc">|&gt;</span>  </span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species))<span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(<span class="fu">everything</span>(), is.na)) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">select</span>(culmen_length_mm, culmen_depth_mm, flipper_length_mm, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>         sex, delta_15n, delta_13c,comments,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>         <span class="fu">everything</span>()) <span class="co"># reorder columns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<p>The <code><a href="https://forcats.tidyverse.org/reference/fct_rev.html">forcats::fct_rev()</a></code> function in R is used to reverse the order of levels in a factor variable. It is particularly useful for changing the order of factor levels when you want to display data in a reversed or descending order.</p>
+<p>Or we can specify we just want to look at a specific columns NA:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">fct_rev</span>(<span class="fu">as_factor</span>(species))) <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species))<span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(culmen_length_mm, is.na))  <span class="co"># reorder columns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 12%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 1%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 20%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">study_name</th>
+<th style="text-align: right;">sample_number</th>
+<th style="text-align: left;">species</th>
+<th style="text-align: left;">region</th>
+<th style="text-align: left;">island</th>
+<th style="text-align: left;">stage</th>
+<th style="text-align: left;">individual_id</th>
+<th style="text-align: left;">clutch_completion</th>
+<th style="text-align: left;">date_egg</th>
+<th style="text-align: right;">culmen_length_mm</th>
+<th style="text-align: right;">culmen_depth_mm</th>
+<th style="text-align: right;">flipper_length_mm</th>
+<th style="text-align: right;">body_mass_g</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">delta_15n</th>
+<th style="text-align: right;">delta_13c</th>
+<th style="text-align: left;">comments</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PAL0708</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Adelie Penguin (Pygoscelis adeliae)</td>
+<td style="text-align: left;">Anvers</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: left;">Adult, 1 Egg Stage</td>
+<td style="text-align: left;">N2A2</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">16/11/2007</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">Adult not sampled.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PAL0910</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">Gentoo penguin (Pygoscelis papua)</td>
+<td style="text-align: left;">Anvers</td>
+<td style="text-align: left;">Biscoe</td>
+<td style="text-align: left;">Adult, 1 Egg Stage</td>
+<td style="text-align: left;">N38A2</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">01/12/2009</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">Adult not sampled. Nest never observed with full clutch.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
+</section><section id="remove-missing-values" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="remove-missing-values">
+<span class="header-section-number">11.2</span> Remove missing values</h2>
+<p>Three main strategies:</p>
+<ol type="1">
+<li><p>Drop all rows with <em>any</em> NA (<code>drop_na()</code>): simple but can remove lots - <strong>the nuclear option</strong></p></li>
+<li><p>Drop NAs in specific columns only.</p></li>
+<li><p>Keep rows, use <code>na.rm = TRUE</code> inside summary functions (least destructive).</p></li>
+</ol>
+<section id="drop_na-on-everything-before-we-start." class="level3" data-number="11.2.1"><h3 data-number="11.2.1" class="anchored" data-anchor-id="drop_na-on-everything-before-we-start.">
+<span class="header-section-number">11.2.1</span> <code>drop_na()</code> on everything before we start.</h3>
+<p>Using <code>drop_na()</code> to remove rows that contain any missing values across all variables can be useful, but it also runs the risk of losing a large portion of the data.</p>
+<ul>
+<li><p>Pros: It’s a simple, all-in-one solution for datasets where missing values are widespread and problematic.</p></li>
+<li><p>Cons: This method may remove entire rows of data, even if the missing value is only in a single, unimportant column. This can lead to significant data loss if many rows have missing values in non-critical variables.</p></li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as_factor</span>(species) <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href="#cb8-3"></a>           <span class="fu">fct_reorder</span>(body_mass_g,</span>
-<span id="cb8-4"><a href="#cb8-4"></a>                       <span class="at">.fun =</span> mean,</span>
-<span id="cb8-5"><a href="#cb8-5"></a>                       <span class="at">.na_rm =</span> T)) <span class="sc">|&gt;</span> </span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="co"># by default the levels are ordered by the median values of the continuous variable</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>  <span class="co"># mean, min and max can all be included here</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species,</span>
-<span id="cb8-9"><a href="#cb8-9"></a>             <span class="at">y =</span> body_mass_g,</span>
-<span id="cb8-10"><a href="#cb8-10"></a>             <span class="at">colour =</span> species))<span class="sc">+</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>,</span>
-<span id="cb8-12"><a href="#cb8-12"></a>               <span class="at">outlier.shape =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span><span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">drop_na</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-</section><section id="factor-bins" class="level3" data-number="13.0.4"><h3 data-number="13.0.4" class="anchored" data-anchor-id="factor-bins">
-<span class="header-section-number">13.0.4</span> Factor bins</h3>
-<p>If we want to we can also <em>bin</em> continuous data into useful chunks:</p>
+</section><section id="drop_na-on-a-particular-variable." class="level3" data-number="11.2.2"><h3 data-number="11.2.2" class="anchored" data-anchor-id="drop_na-on-a-particular-variable.">
+<span class="header-section-number">11.2.2</span> <code>drop_na()</code> on a particular variable.</h3>
+<p>Another approach is to remove rows with missing data in a specific variable, such as <code>body_mass_g</code>. This is less drastic but still needs to be done thoughtfully, especially if you overwrite the original dataset with the modified version. It’s often better to drop <code>NA</code>s temporarily for specific analyses or calculations.</p>
+<ul>
+<li><p>Pros: You retain more data because you only remove rows with missing values in the column that matters for your current analysis.</p></li>
+<li><p>Cons: You might still lose useful information from other columns. If you overwrite the dataset permanently (e.g., using <code>penguins_clean_names &lt;- penguins_clean_names |&gt; drop_na(body_mass_g))</code>, you can’t recover the dropped rows without reloading the data.</p></li>
+</ul></section><section id="use-arguments-inside-functions" class="level3" data-number="11.2.3"><h3 data-number="11.2.3" class="anchored" data-anchor-id="use-arguments-inside-functions">
+<span class="header-section-number">11.2.3</span> Use arguments inside functions</h3>
+<p>A more cautious approach is to handle missing data within summary or calculation functions, using the <code>na.rm = TRUE</code> argument. Many summary functions (like <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html">median()</a></code>, or <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>) include this argument, which, when set to <code>TRUE</code>, excludes <code>NA</code> values from the calculation. This allows you to keep missing values in the dataset but ignore them only when performing calculations.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">case_when</span>(</span>
-<span id="cb9-3"><a href="#cb9-3"></a>    body_mass_g <span class="sc">&lt;=</span> <span class="dv">3500</span> <span class="sc">~</span> <span class="st">"smol penguin"</span>,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    body_mass_g <span class="sc">&gt;</span><span class="dv">3500</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&lt;</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"mid penguin"</span>,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>    body_mass_g <span class="sc">&gt;=</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"chonk penguin"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>    <span class="at">.default =</span> <span class="cn">NA</span>)</span>
-<span id="cb9-7"><a href="#cb9-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="at">mean_body_mass =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> T)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>If we make a barplot, the order of the values on the x axis will typically be in alphabetical order for any character data</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span> </span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="task">
-<div class="task-header">
-<p>Your turn</p>
-</div>
-<div class="task-container">
-<ul class="task-list">
-<li><label><input type="checkbox">Our new variable <code>mass_range</code> is not yet set as a factor, can you try this now?</label></li>
-</ul>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-<p>To convert a character or numeric column to class factor, you can use any function from the <code>forcats</code> package. They will convert to class factor and then also perform or allow certain ordering of the levels - for example using <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">forcats::fct_relevel()</a></code> lets you manually specify the level order.</p>
-<p>The function <code>as_factor()</code> simply converts the class without any further capabilities.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">as_factor</span>(mass_range))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">levels</span>(penguins_clean_names<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "mid penguin"   "smol penguin"  "chonk penguin"</code></pre>
-</div>
-</div>
-<p><code>r unhide()</code></p>
-<ul class="task-list">
-<li><label><input type="checkbox">Make sure the factors are set to a sensible order</label></li>
-</ul>
-<p><code>r hide("Solution")</code></p>
-<p>Below we use <code>mutate()</code> and <code>as_factor()</code> to convert the column flipper_range from class character to class factor.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Correct the code in your script with this version</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>penguins_clean_names <span class="ot">&lt;-</span> penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">fct_relevel</span>(mass_range, </span>
-<span id="cb14-4"><a href="#cb14-4"></a>                                  <span class="st">"smol penguin"</span>, </span>
-<span id="cb14-5"><a href="#cb14-5"></a>                                  <span class="st">"mid penguin"</span>, </span>
-<span id="cb14-6"><a href="#cb14-6"></a>                                  <span class="st">"chonk penguin"</span>)</span>
-<span id="cb14-7"><a href="#cb14-7"></a>         )</span>
-<span id="cb14-8"><a href="#cb14-8"></a></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">levels</span>(penguins_clean_names<span class="sc">$</span>mass_range)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "smol penguin"  "mid penguin"   "chonk penguin"</code></pre>
-</div>
-</div>
-<p>Now when we call a plot, we can see that the x axis categories match the intrinsic order we have specified with our factor levels.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>penguins_clean_names <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">drop_na</span>(mass_range) <span class="sc">|&gt;</span>  </span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mass_range))<span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<ul>
+<li><p>Pros: This is the least destructive option because it allows you to handle missing data without removing any rows from the dataset. You only exclude <code>NA</code> values during specific calculations.</p></li>
+<li><p>Cons: This doesn’t remove missing data, so you need to ensure that they won’t cause issues later in other analyses (e.g., regressions or visualizations).</p></li>
+</ul></section></section><section id="summary-1" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="summary-1">
+<span class="header-section-number">11.3</span> Summary</h2>
+<p>This chapter showed ways to find and remove different types of missing records from your dataset. It’s important to note that there might not be a single cleaned dataset without any missing values. You might find that in the same workflow, you will clean your dataset in multiple ways to preserve rows that are missing some, but not all, information. For example, some records may have complete taxonomic identification but lack spatial coordinates, while others have spatial coordinates but lack taxonomic information. Depending on the type of analysis you intend to perform, you may need to adjust your data cleaning approach accordingly.</p>
+<p>For a more comprehensive resource about missing values, including how to clean, visually represent, and impute them, check out <a href="https://tmb.njtierney.com/">The Missing Book</a>.</p>
 
 
 </section></main><!-- /main --><script>
@@ -1409,13 +1726,13 @@ window.onresize = move_sidebar;
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./dates.html" class="pagination-link" aria-label="Dates">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span>
+      <a href="./duplicates.html" class="pagination-link" aria-label="Duplicates">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Summary.html" class="pagination-link" aria-label="Scripts">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./dates.html" class="pagination-link" aria-label="Dates">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
