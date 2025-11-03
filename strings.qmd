@@ -284,7 +284,8 @@ penguins_clean_names |> distinct(species)
 penguins_clean_names |> distinct(species) |> head()
 ```
 
-```{r, echo = F}
+
+```{r, eval = F}
 penguins_clean_names |>
   filter(str_detect(species, "papua")) |>
   select(species)
@@ -292,7 +293,7 @@ penguins_clean_names |>
 ```
 
 
-```{r, eval = F}
+```{r, echo = F}
 penguins_clean_names |>
   filter(str_detect(species, "papua")) |>
   select(species) |> 
@@ -307,6 +308,7 @@ penguins_clean_names |>
 str_remove("Genus specificus", pattern = "Genus ")
 ```
 
+In the example above we split the species column into a common and latin name column - but it left some ugly brackets - we can use `str_remove` to strip away those brackets: 
 
 ```{r, eval = F}
 penguins_clean_names |> 

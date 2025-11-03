@@ -26,11 +26,20 @@ In R, factors are a class of data that allow for **ordered categories** with a f
 
 Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables, or for use in linear model analyses (more on this later). 
 
+```{r}
+
+levels(penguins_clean_names$species)
+
+```
+
+
 Working with factors is easy with the `forcats` package:
 
 ```{r, eval = F}
-penguins_clean_names |> 
+penguin_factors <- penguins_clean_names |> 
   mutate(species = as_factor(species))
+
+levels(penguin_factors$species)
 
 ```
 

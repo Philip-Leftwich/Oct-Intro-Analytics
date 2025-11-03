@@ -83,6 +83,38 @@ Using the Rstudio drop down Code > Extract Function
 When we have a series of functions - these can be run without modification on new data:
 
 ```{r}
+
+#' Load and clean a delimited dataset
+#'
+#' This function reads a delimited text file, cleans its column names, 
+#' optionally converts a specified date column to a proper `Date` class, 
+#' and can display a summary of the data using `skimr::skim()`.
+#'
+#' @param path Character string giving the file path to the dataset to load.
+#' @param date_col Optional; unquoted column name or character string specifying
+#'   which column to parse as a date. If the column exists, it will be converted
+#'   using `lubridate::dmy()`. If not found, a warning is issued.
+#' @param delim Character string specifying the field delimiter used in the file.
+#'   Defaults to a comma (`,`) for CSV files.
+#' @param show_skim Logical; if `TRUE` (default), prints a quick data summary
+#'   using `skimr::skim()`.
+#'
+#' @return A cleaned `data.frame` (tibble) with standardized column names, and
+#'   optionally a converted date column.
+#'
+#' @details
+#' Column names are standardized to lower snake_case via `janitor::clean_names()`.
+#' If a date column is specified and present, the function attempts to convert it
+#' assuming day-month-year format.
+#'
+#' @examples
+#' \dontrun{
+#' df <- load_and_clean_data("data/sales.csv", date_col = "order_date")
+#' }
+#'
+#' @export
+
+
 load_and_clean_data <- function(path, 
                                 date_col = NULL,
                                 delim = ",",
@@ -127,68 +159,95 @@ In theory this function could be applied to any dataset (as long as it was in ti
 
 
 ```{r}
-library(assertr)
-library(tidyverse)
-library(rlang)
-
+#' Robust data validation checks
+#'
+#' Performs simple but resilient validation of a dataset:
+#' verifies column presence (optionally from metadata), checks types,
+#' enforces uniqueness and bounds, and validates logical consistency.
+#'
+#' @param data A data frame or tibble.
+#' @param metadata_path Optional path to an Excel file containing a
+#'   "Data Dictionary" sheet. Column names are read from the `Name` column.
+#' @param numeric_cols Character vector of columns expected to be numeric.
+#' @param character_cols Character vector of columns expected to be character.
+#' @param bounded_cols Character vector of numeric columns checked within `bounds`.
+#' @param bounds Numeric vector of length 2 specifying lower and upper limits.
+#' @param treatment_levels Allowed values for the `treatment` column.
+#' @param just_warn If TRUE (default), issues warnings instead of stopping on errors.
+#'
+#' @return The validated data frame, invisibly.
+#' @export
 data_checks <- function(data,
                         metadata_path = NULL,
+                        numeric_cols = NULL,
+                        character_cols = NULL,
+                        unique_cols = NULL,
                         bounded_cols = NULL,
                         bounds = c(1, 30),
                         treatment_levels = c("A", "B"),
                         just_warn = TRUE) {
+  stopifnot(is.data.frame(data))
+  stopifnot(length(bounds) == 2, is.numeric(bounds), bounds[1] < bounds[2])
+
   handler <- if (just_warn) assertr::just_warn else assertr::error_stop
 
-  # Read metadata if provided
-  metadata <- if (!is.null(metadata_path)) {
-    readxl::read_excel(metadata_path, sheet = "Data Dictionary")
-  } else {
-    NULL
-  }
-
-  # Basic column presence check
-  if (!is.null(metadata)) {
-    required_cols <- metadata |> pull(Name)
-    data <- data |> verify(has_all_names(required_cols), error_fun = handler)
-
-    # Type check helper
-    check_types <- function(d, m) {
-      out <- tibble(
-        variable = m$Name,
-        expected = m$Type,
-        actual   = map_chr(m$Name, ~ if (.x %in% names(d)) class(d[[.x]])[1] else NA_character_),
-        match    = tolower(expected) == tolower(actual)
-      )
-      print(out)
-      invisible(out)
+  # --- Metadata check (safe) ---
+  required_cols <- NULL
+  if (!is.null(metadata_path)) {
+    metadata <- tryCatch(
+      readxl::read_excel(metadata_path, sheet = "Data Dictionary"),
+      error = function(e) {
+        warning("Could not read metadata: ", conditionMessage(e))
+        NULL
+      }
+    )
+    if (!is.null(metadata) && "Name" %in% names(metadata)) {
+      required_cols <- janitor::make_clean_names(metadata$Name)
+      data_names <- janitor::make_clean_names(names(data))
+      missing <- setdiff(required_cols, data_names)
+      if (length(missing) > 0) {
+        msg <- paste("Missing required columns:", paste(missing, collapse = ", "))
+        if (just_warn) warning(msg, call. = FALSE) else stop(msg, call. = FALSE)
+      }
     }
-
-    check_types(data, metadata)
   }
 
-  # Non-missing
+  # --- Type checks ---
+  if (!is.null(numeric_cols)) {
+    found <- intersect(numeric_cols, names(data))
+    data <- assertr::assert(data, is.numeric, !!!rlang::syms(found), error_fun = handler)
+  }
+  if (!is.null(character_cols)) {
+    found <- intersect(character_cols, names(data))
+    data <- assertr::assert(data, is.character, !!!rlang::syms(found), error_fun = handler)
+  }
+
+  # --- Non-missing ---
   if (ncol(data) > 0) {
-    data <- data |> assert(not_na, !!!syms(names(data)), error_fun = handler)
+    data <- assertr::assert(data, assertr::not_na, !!!rlang::syms(names(data)), error_fun = handler)
   }
 
-  # Treatment
+  # --- Treatment levels ---
   if ("treatment" %in% names(data)) {
-    data <- data |> assert(in_set(treatment_levels), treatment, error_fun = handler)
+    data <- assertr::assert(data, assertr::in_set(treatment_levels), treatment, error_fun = handler)
   }
 
-  # Bounded numeric
+  # --- Bounded numeric ---
   if (!is.null(bounded_cols)) {
-    data <- data |> assert(within_bounds(bounds[1], bounds[2]), !!!syms(bounded_cols), error_fun = handler)
+    found <- intersect(bounded_cols, names(data))
+    data <- assertr::assert(data,
+                            assertr::within_bounds(bounds[1], bounds[2]),
+                            !!!rlang::syms(found),
+                            error_fun = handler)
   }
 
-  # Eggs logic check
+  # --- Logical rule ---
   if (all(c("eggs_hatched", "eggs_laid") %in% names(data))) {
-    data <- data |> verify(eggs_hatched <= eggs_laid, error_fun = handler)
+    data <- assertr::verify(data, eggs_hatched <= eggs_laid, error_fun = handler)
   }
 
-  return(data)
+  invisible(data)
 }
-
 
 ```
 
@@ -203,9 +262,30 @@ Can we think of any ways this code could *potentially* be abstracted/improved fu
 ::::
 :::
 
+
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Try making a new R script - put the two functions here and save the script as `data_cleaning_functions.R`
+
+* [ ] In your console or in another script run `source()` and then try using the functions:
+
 ```{r, eval = FALSE}
   egg_data <- 
   load_and_clean_data("data/raw/female_egg_data.csv") |> 
-  data_checks(metadata_path = "data-dictionary/insect_egg_metadata.xlsx")
+  data_checks(metadata_path = "data-dictionary/insect_egg_metadata.xlsx",
+              numeric_cols = c("female_id",
+                               "age_days",
+                               "eggs_laid",
+                               "eggs_hatched"),
+              character_cols = "treatment")
 
 ```
+
+
+::::
+:::

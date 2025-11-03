@@ -572,6 +572,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><section id="learning-objectives" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="learning-objectives">
 <span class="header-section-number">2.1</span> Learning Objectives</h2>
 <p>By the end of this chapter, you will be able to:</p>
+<ul>
+<li><p>Understand the limitations with messy/inconsistent data</p></li>
+<li><p>Apply a set of rules to maintain a well organised spreadsheet</p></li>
+<li><p>Write a simple data dictionary</p></li>
+</ul>
 <div class="task">
 <div class="task-header">
 <p>Question</p>
@@ -612,8 +617,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">2.2.1</span> Example</h3>
 <ul>
 <li><p>Even though are data is extremely messy, and has a lot of inconsistencies - we can clean and reformat our data with clear code.</p></li>
-<li><p>My keeping our data cleaning and tidying to the commmand line we ensure that our work is completely reproducible, with a set of documented steps available at all times.</p></li>
+<li><p>By keeping our data cleaning and tidying to the commmand line we ensure that our work is completely reproducible, with a set of documented steps available at all times.</p></li>
 </ul>
+<div class="webex-solution">
+<button>
+Code
+</button>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
@@ -631,6 +640,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-14"><a href="#cb1-14"></a>clean_data <span class="sc">|&gt;</span> </span>
 <span id="cb1-15"><a href="#cb1-15"></a>  <span class="fu">mutate</span>(<span class="at">genotype =</span> <span class="fu">str_remove</span>(genotype, <span class="st">"A-"</span>)) <span class="sc">|&gt;</span> <span class="co"># fix genotype names</span></span>
 <span id="cb1-16"><a href="#cb1-16"></a>  <span class="fu">fill</span>(genotype) <span class="co"># fill in blanks for genotype in line C</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -712,6 +722,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="consistency" class="level3" data-number="2.3.1"><h3 data-number="2.3.1" class="anchored" data-anchor-id="consistency">
 <span class="header-section-number">2.3.1</span> Consistency</h3>
 <p><strong>Principle</strong>: Every categorical code, variable name, and missing-value marker must be used consistently. Inconsistency leads to type coercion, ambiguous factors, and failed joins.</p>
+<ul>
+<li>Inconsistent</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
@@ -721,17 +734,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6"></a>  <span class="at">glucose =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="fl">5.2</span>, <span class="fl">6.1</span>, <span class="fl">5.7</span>, <span class="st">""</span>)</span>
 <span id="cb2-7"><a href="#cb2-7"></a>)</span>
 <span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a>data</span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a>data_clean <span class="ot">&lt;-</span> data  <span class="sc">|&gt;</span> </span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    <span class="at">sex =</span> <span class="fu">recode</span>(<span class="fu">tolower</span>(sex),</span>
-<span id="cb2-14"><a href="#cb2-14"></a>                 <span class="st">"m"</span> <span class="ot">=</span> <span class="st">"male"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15"></a>                 <span class="st">"f"</span> <span class="ot">=</span> <span class="st">"female"</span>),</span>
-<span id="cb2-16"><a href="#cb2-16"></a>    <span class="at">glucose =</span> <span class="fu">na_if</span>(glucose, <span class="st">""</span>)</span>
-<span id="cb2-17"><a href="#cb2-17"></a>  )</span>
-<span id="cb2-18"><a href="#cb2-18"></a></span>
-<span id="cb2-19"><a href="#cb2-19"></a>data_clean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a href="#cb2-9"></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -769,6 +772,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </div>
+</div>
+</div>
+<ul>
+<li>Consistent</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>data_clean <span class="ot">&lt;-</span> data  <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="at">sex =</span> <span class="fu">recode</span>(<span class="fu">tolower</span>(sex),</span>
+<span id="cb3-4"><a href="#cb3-4"></a>                 <span class="st">"m"</span> <span class="ot">=</span> <span class="st">"male"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>                 <span class="st">"f"</span> <span class="ot">=</span> <span class="st">"female"</span>),</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="at">glucose =</span> <span class="fu">na_if</span>(glucose, <span class="st">""</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>  )</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a>data_clean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
@@ -810,6 +829,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="variable-and-file-naming" class="level3" data-number="2.3.2"><h3 data-number="2.3.2" class="anchored" data-anchor-id="variable-and-file-naming">
 <span class="header-section-number">2.3.2</span> Variable and file naming</h3>
 <p><strong>Principle</strong>: Names are part of your analytical grammar. They must be readable, regular, and machine-safe.</p>
+<ul>
+<li>
+<p>Do:</p>
+<ul>
+<li><p>Keep your filenames to a reasonable length</p></li>
+<li><p>Use underscores and hyphens for readability</p></li>
+<li><p>Start or end your filename with a letter or number</p></li>
+<li><p>Use a standard date format when applicable; example: YYYY-MM-DD</p></li>
+<li><p>Use filenames for related files that work well with default ordering; example: in chronological order, or logical order using numbers first</p></li>
+</ul>
+</li>
+</ul>
+<pre><code>2025_04_10_lineA_fecundity_rep2.csv
+
+2025_04_10_lineA_fecundity_analysis.R
+</code></pre>
+<ul>
+<li>
+<p>Don’t:</p>
+<ul>
+<li><p>Use unnecessary additional characters in filenames</p></li>
+<li><p>Use spaces or “illegal” characters; examples: &amp;, %, #, &lt;, or &gt;</p></li>
+<li><p>Start or end your filename with a symbol</p></li>
+<li><p>Use incomplete or inconsistent date formats; example: M-D-YY</p></li>
+<li><p>Use filenames for related files that do not work well with default ordering; examples: a random system of numbers or date formats, or using letters first</p></li>
+</ul>
+</li>
+</ul>
+<pre><code>4102020marchfecundity&lt;workinprogress&gt;.R
+
+ _20210320*newlineinfo.csv
+
+ firstfile_for_analysis.R</code></pre>
 <p>See <a href="columns.html" class="quarto-xref"><span>Chapter 8</span></a></p>
 </section><section id="dates-and-times" class="level3" data-number="2.3.3"><h3 data-number="2.3.3" class="anchored" data-anchor-id="dates-and-times">
 <span class="header-section-number">2.3.3</span> Dates and Times</h3>
@@ -819,14 +871,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">2.3.4</span> One variable per column</h3>
 <p><strong>Principle</strong>: Each cell holds one atomic value; never embed multiple attributes in one field.</p>
 <p>See <a href="tidy-data.html" class="quarto-xref"><span>Appendix B</span></a></p>
+<ul>
+<li>Not this:</li>
+</ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>data_messy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">combined =</span> <span class="fu">c</span>(<span class="st">"adult_male"</span>, <span class="st">"juvenile_female"</span>, <span class="st">"adult_female"</span>))</span>
-<span id="cb3-4"><a href="#cb3-4"></a>data_messy</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a>data_clean <span class="ot">&lt;-</span> <span class="fu">separate</span>(data_messy, combined, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"age_group"</span>, <span class="st">"sex"</span>), <span class="at">sep =</span> <span class="st">"_"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7"></a>data_clean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>data_messy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">combined =</span> <span class="fu">c</span>(<span class="st">"adult_male"</span>, <span class="st">"juvenile_female"</span>, <span class="st">"adult_female"</span>))</span>
+<span id="cb6-4"><a href="#cb6-4"></a>data_messy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -850,6 +902,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </div>
+</div>
+</div>
+<ul>
+<li>But This:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>data_clean <span class="ot">&lt;-</span> <span class="fu">separate</span>(data_messy, combined, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"age_group"</span>, <span class="st">"sex"</span>), <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>data_clean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
@@ -892,14 +953,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="preserve-raw-data" class="level3" data-number="2.3.6"><h3 data-number="2.3.6" class="anchored" data-anchor-id="preserve-raw-data">
 <span class="header-section-number">2.3.6</span> Preserve Raw Data</h3>
 <ul>
-<li>Never alter the raw data collection files, every time this occurs errors can be introduced and they may not be trackable.</li>
+<li><p>Never alter the raw data collection files, every time this occurs errors can be introduced and they may not be trackable.</p></li>
+<li><p>Make backups!</p></li>
 </ul></section><section id="no-excel-formatting-as-data" class="level3" data-number="2.3.7"><h3 data-number="2.3.7" class="anchored" data-anchor-id="no-excel-formatting-as-data">
 <span class="header-section-number">2.3.7</span> No Excel formatting as Data</h3>
 <p>Principle: Encoded information via colour blocks or fonts are invisible to R and ambiguous to other users.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/excel_colour.png" class="img-fluid figure-img" style="width:80.0%" alt="excel colour blocks"></p>
+<figcaption>please don’t do this</figcaption></figure>
+</div>
+</div>
+</div>
 </section><section id="metadata-and-data-dictionaries" class="level3" data-number="2.3.8"><h3 data-number="2.3.8" class="anchored" data-anchor-id="metadata-and-data-dictionaries">
 <span class="header-section-number">2.3.8</span> Metadata and Data Dictionaries</h3>
 <p>Principle: Every dataset requires a companion dictionary documenting meaning, units, and type.</p>
 <p><a href="https://cghlewis.com/blog/data_dictionary/">Examples of data dictionaries</a></p>
+<ul>
+<li>Example data:</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/penguins_raw.csv">
@@ -907,6 +980,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </a>
 </div>
 </div>
+<ul>
+<li>A simple data dictionary:</li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <a href="https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/data-dictionary/palmer_penguins_metadata.xlsx">
@@ -917,7 +993,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="validation-checks" class="level3" data-number="2.3.9"><h3 data-number="2.3.9" class="anchored" data-anchor-id="validation-checks">
 <span class="header-section-number">2.3.9</span> Validation Checks</h3>
 <ul>
-<li>Every import should be followed by automated sanity checks</li>
+<li>
+<p>Every import should be followed by automated sanity checks</p>
+<ul>
+<li><p>Are there fewer eggs hatching than eggs laid?</p></li>
+<li><p>Are there negative valuse for body weight?</p></li>
+</ul>
+</li>
 </ul>
 <p>see <a href="11-assertions.html" class="quarto-xref"><span>Chapter 15</span></a></p>
 </section><section id="file-formats-and-version-control" class="level3" data-number="2.3.10"><h3 data-number="2.3.10" class="anchored" data-anchor-id="file-formats-and-version-control">

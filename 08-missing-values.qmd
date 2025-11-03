@@ -25,6 +25,26 @@ penguins_clean_names <- readRDS(url("https://github.com/Philip-Leftwich/Oct-Intr
 
 :::
 
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Run this command in your console:
+
+```{r}
+penguins_clean_names |> 
+  group_by(species) |> 
+  summarise(mean = mean(body_mass_g))
+
+```
+
+- Question: Why is this happening?
+
+::::
+:::
+
 ## Find Missing values
 
 There are numerous ways to identify missing values in your data. Here we illustrate a few ways with very different output types.
@@ -111,6 +131,7 @@ A more cautious approach is to handle missing data within summary or calculation
 
 ```{r, eval = F}
 penguins_clean_names |> 
+  group_by(species) |> 
   summarise(
     mean_body_mass = mean(body_mass_g, na.rm = T)
   )

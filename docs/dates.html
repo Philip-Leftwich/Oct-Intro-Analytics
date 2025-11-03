@@ -705,6 +705,12 @@ Caused by warning:
 </div>
 </section><section id="excel-date-formats" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="excel-date-formats">
 <span class="header-section-number">12.3</span> Excel date formats</h2>
+<p>Excel stores dates internally as serial numbers — counting the number of days since a specific “origin” date.</p>
+<ul>
+<li>On Windows, the default origin is 1899-12-30</li>
+</ul>
+<p>This means that sometimes the date is imported into R as the numeric (number of days since origin).</p>
+<p>The janitor package has a handy function <code><a href="https://sfirke.github.io/janitor/reference/excel_numeric_to_date.html">janitor::excel_numeric_to_date()</a></code> to deal with this.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(janitor)</span>
 <span id="cb20-2"><a href="#cb20-2"></a></span>
@@ -721,8 +727,8 @@ Caused by warning:
 <ul class="task-list">
 <li><label><input type="checkbox"><strong>Question</strong> What is the appropriate function from the above to use on the <code>date_egg</code> variable in the penguins dataset?</label></li>
 </ul>
-<div id="radio_HUQFDAHQGX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HUQFDAHQGX" value=""><span>ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_HUQFDAHQGX" value=""><span>ydm()</span></label><label><input type="radio" autocomplete="off" name="radio_HUQFDAHQGX" value=""><span>mdy()</span></label><label><input type="radio" autocomplete="off" name="radio_HUQFDAHQGX" value="answer"><span>dmy()</span></label>
+<div id="radio_CMAIPRKVWT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CMAIPRKVWT" value=""><span>ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_CMAIPRKVWT" value=""><span>ydm()</span></label><label><input type="radio" autocomplete="off" name="radio_CMAIPRKVWT" value=""><span>mdy()</span></label><label><input type="radio" autocomplete="off" name="radio_CMAIPRKVWT" value="answer"><span>dmy()</span></label>
 </div>
 <div class="webex-solution">
 <button>

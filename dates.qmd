@@ -131,6 +131,14 @@ day("2017-11-28T14:02:00")
 
 ## Excel date formats
 
+Excel stores dates internally as serial numbers — counting the number of days since a specific “origin” date.
+
+- On Windows, the default origin is 1899-12-30
+
+This means that sometimes the date is imported into R as the numeric (number of days since origin). 
+
+The janitor package has a handy function `janitor::excel_numeric_to_date()` to deal with this. 
+
 ```{r}
 library(janitor)
 
