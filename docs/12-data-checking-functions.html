@@ -648,6 +648,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6"></a></span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="fu">print</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div class="webex-solution">
+<button>
+Functions
+</button>
+<p>R makes it easy to create user defined functions by using <code>function()</code>. Here is how it works:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># this is an example function</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>my_function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(my_args) {</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="co"># document your function here</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="co"># what the function does</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="co"># function inputs and outputs</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  some_calculated_output <span class="ot">&lt;-</span> (argument1 <span class="sc">+</span> argument2 )</span>
+<span id="cb3-7"><a href="#cb3-7"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">return</span>(some_calculated_output)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here is a very simple function. Can you guess what it does?</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>add_one <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">return</span>(x <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">add_one</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+</div>
 <div class="task">
 <div class="task-header">
 <p>Your turn</p>
@@ -661,64 +690,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>When we have a series of functions - these can be run without modification on new data:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#' Load and clean a delimited dataset</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#'</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#' This function reads a delimited text file, cleans its column names, </span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#' optionally converts a specified date column to a proper `Date` class, </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#' and can display a summary of the data using `skimr::skim()`.</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#'</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#' @param path Character string giving the file path to the dataset to load.</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#' @param date_col Optional; unquoted column name or character string specifying</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#'   which column to parse as a date. If the column exists, it will be converted</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#'   using `lubridate::dmy()`. If not found, a warning is issued.</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#' @param delim Character string specifying the field delimiter used in the file.</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#'   Defaults to a comma (`,`) for CSV files.</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#' @param show_skim Logical; if `TRUE` (default), prints a quick data summary</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#'   using `skimr::skim()`.</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#'</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#' @return A cleaned `data.frame` (tibble) with standardized column names, and</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#'   optionally a converted date column.</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#'</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#' @details</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#' Column names are standardized to lower snake_case via `janitor::clean_names()`.</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#' If a date column is specified and present, the function attempts to convert it</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#' assuming day-month-year format.</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#'</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#' @examples</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#' \dontrun{</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#' df &lt;- load_and_clean_data("data/sales.csv", date_col = "order_date")</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#' }</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#'</span></span>
-<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#' @export</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a></span>
-<span id="cb3-31"><a href="#cb3-31"></a></span>
-<span id="cb3-32"><a href="#cb3-32"></a>load_and_clean_data <span class="ot">&lt;-</span> <span class="cf">function</span>(path, </span>
-<span id="cb3-33"><a href="#cb3-33"></a>                                <span class="at">date_col =</span> <span class="cn">NULL</span>,</span>
-<span id="cb3-34"><a href="#cb3-34"></a>                                <span class="at">delim =</span> <span class="st">","</span>,</span>
-<span id="cb3-35"><a href="#cb3-35"></a>                                <span class="at">show_skim =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb3-36"><a href="#cb3-36"></a>  <span class="co"># Read data using readr</span></span>
-<span id="cb3-37"><a href="#cb3-37"></a>  df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(path, <span class="at">delim =</span> delim, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a>    janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb3-39"><a href="#cb3-39"></a>  </span>
-<span id="cb3-40"><a href="#cb3-40"></a>  <span class="co"># Convert date column if provided</span></span>
-<span id="cb3-41"><a href="#cb3-41"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col) <span class="sc">&amp;&amp;</span> date_col <span class="sc">%in%</span> <span class="fu">names</span>(df)) {</span>
-<span id="cb3-42"><a href="#cb3-42"></a>    df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb3-43"><a href="#cb3-43"></a>      dplyr<span class="sc">::</span><span class="fu">mutate</span>({{ date_col }} <span class="sc">:</span><span class="er">=</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(.data[[date_col]]))</span>
-<span id="cb3-44"><a href="#cb3-44"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col)) {</span>
-<span id="cb3-45"><a href="#cb3-45"></a>    <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"Column"</span>, date_col, <span class="st">"not found in data — skipping date conversion"</span>))</span>
-<span id="cb3-46"><a href="#cb3-46"></a>  }</span>
-<span id="cb3-47"><a href="#cb3-47"></a>  </span>
-<span id="cb3-48"><a href="#cb3-48"></a>  <span class="co"># Optionally skim summary</span></span>
-<span id="cb3-49"><a href="#cb3-49"></a>  <span class="cf">if</span> (show_skim) {</span>
-<span id="cb3-50"><a href="#cb3-50"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">📊 Quick data summary:</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb3-51"><a href="#cb3-51"></a>    <span class="fu">print</span>(skimr<span class="sc">::</span><span class="fu">skim</span>(df))</span>
-<span id="cb3-52"><a href="#cb3-52"></a>  }</span>
-<span id="cb3-53"><a href="#cb3-53"></a>  </span>
-<span id="cb3-54"><a href="#cb3-54"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb3-55"><a href="#cb3-55"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">#' Load and clean a delimited dataset</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#'</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#' This function reads a delimited text file, cleans its column names, </span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#' optionally converts a specified date column to a proper `Date` class, </span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#' and can display a summary of the data using `skimr::skim()`.</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#'</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#' @param path Character string giving the file path to the dataset to load.</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#' @param date_col Optional; character string specifying</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#'   which column to parse as a date. If the column exists, it will be converted</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#'   using `lubridate::dmy()`. If not found, a warning is issued.</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#' @param delim Character string specifying the field delimiter used in the file.</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#'   Defaults to a comma (`,`) for CSV files.</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#' @param show_skim Logical; if `TRUE` (default), prints a quick data summary</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#'   using `skimr::skim()`.</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#'</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#' @return A cleaned `data.frame` (tibble) with standardized column names, and</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#'   optionally a converted date column.</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#'</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#' @details</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#' Column names are standardized to lower snake_case via `janitor::clean_names()`.</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#' If a date column is specified and present, the function attempts to convert it</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#' assuming day-month-year format.</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#'</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#' @examples</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#' \dontrun{</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#' df &lt;- load_and_clean_data("data/sales.csv", date_col = "order_date")</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co">#' }</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="co">#'</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co">#' @export</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a></span>
+<span id="cb7-31"><a href="#cb7-31"></a></span>
+<span id="cb7-32"><a href="#cb7-32"></a>load_and_clean_data <span class="ot">&lt;-</span> <span class="cf">function</span>(path, </span>
+<span id="cb7-33"><a href="#cb7-33"></a>                                <span class="at">date_col =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-34"><a href="#cb7-34"></a>                                <span class="at">delim =</span> <span class="st">","</span>,</span>
+<span id="cb7-35"><a href="#cb7-35"></a>                                <span class="at">show_skim =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb7-36"><a href="#cb7-36"></a>  <span class="co"># Read data using readr</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a>  df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(path, <span class="at">delim =</span> delim, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a>    janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb7-39"><a href="#cb7-39"></a>  </span>
+<span id="cb7-40"><a href="#cb7-40"></a>  <span class="co"># Convert date column if provided</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a>  <span class="co"># Convert date column if provided</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col) <span class="sc">&amp;&amp;</span> <span class="fu">all</span>(date_col <span class="sc">%in%</span> <span class="fu">names</span>(df))) {</span>
+<span id="cb7-43"><a href="#cb7-43"></a>        df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a>            <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(date_col),</span>
+<span id="cb7-45"><a href="#cb7-45"></a>                          <span class="sc">~</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(<span class="fu">as.character</span>(.x))))</span>
+<span id="cb7-46"><a href="#cb7-46"></a>    </span>
+<span id="cb7-47"><a href="#cb7-47"></a>    } <span class="cf">else</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(date_col)) {</span>
+<span id="cb7-48"><a href="#cb7-48"></a>    <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"Column"</span>, date_col, <span class="st">"not found in data — skipping date conversion"</span>))</span>
+<span id="cb7-49"><a href="#cb7-49"></a>  }</span>
+<span id="cb7-50"><a href="#cb7-50"></a>  </span>
+<span id="cb7-51"><a href="#cb7-51"></a>  <span class="co"># Optionally skim summary</span></span>
+<span id="cb7-52"><a href="#cb7-52"></a>  <span class="cf">if</span> (show_skim) {</span>
+<span id="cb7-53"><a href="#cb7-53"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">📊 Quick data summary:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb7-54"><a href="#cb7-54"></a>    <span class="fu">print</span>(skimr<span class="sc">::</span><span class="fu">skim</span>(df))</span>
+<span id="cb7-55"><a href="#cb7-55"></a>  }</span>
+<span id="cb7-56"><a href="#cb7-56"></a>  </span>
+<span id="cb7-57"><a href="#cb7-57"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb7-58"><a href="#cb7-58"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">load_and_clean_data</span>(<span class="st">"data/raw/female_egg_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">load_and_clean_data</span>(<span class="st">"data/raw/female_egg_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -736,95 +768,95 @@ Note
 </section><section id="validating-data" class="level3" data-number="16.2.2"><h3 data-number="16.2.2" class="anchored" data-anchor-id="validating-data">
 <span class="header-section-number">16.2.2</span> Validating data</h3>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">#' Robust data validation checks</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#'</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#' Performs simple but resilient validation of a dataset:</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#' verifies column presence (optionally from metadata), checks types,</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#' enforces uniqueness and bounds, and validates logical consistency.</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#'</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#' @param data A data frame or tibble.</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#' @param metadata_path Optional path to an Excel file containing a</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#'   "Data Dictionary" sheet. Column names are read from the `Name` column.</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#' @param numeric_cols Character vector of columns expected to be numeric.</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#' @param character_cols Character vector of columns expected to be character.</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#' @param bounded_cols Character vector of numeric columns checked within `bounds`.</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#' @param bounds Numeric vector of length 2 specifying lower and upper limits.</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#' @param treatment_levels Allowed values for the `treatment` column.</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#' @param just_warn If TRUE (default), issues warnings instead of stopping on errors.</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#'</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">#' @return The validated data frame, invisibly.</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">#' @export</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a>data_checks <span class="ot">&lt;-</span> <span class="cf">function</span>(data,</span>
-<span id="cb5-20"><a href="#cb5-20"></a>                        <span class="at">metadata_path =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-21"><a href="#cb5-21"></a>                        <span class="at">numeric_cols =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-22"><a href="#cb5-22"></a>                        <span class="at">character_cols =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-23"><a href="#cb5-23"></a>                        <span class="at">unique_cols =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-24"><a href="#cb5-24"></a>                        <span class="at">bounded_cols =</span> <span class="cn">NULL</span>,</span>
-<span id="cb5-25"><a href="#cb5-25"></a>                        <span class="at">bounds =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">30</span>),</span>
-<span id="cb5-26"><a href="#cb5-26"></a>                        <span class="at">treatment_levels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>),</span>
-<span id="cb5-27"><a href="#cb5-27"></a>                        <span class="at">just_warn =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb5-28"><a href="#cb5-28"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.data.frame</span>(data))</span>
-<span id="cb5-29"><a href="#cb5-29"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(bounds) <span class="sc">==</span> <span class="dv">2</span>, <span class="fu">is.numeric</span>(bounds), bounds[<span class="dv">1</span>] <span class="sc">&lt;</span> bounds[<span class="dv">2</span>])</span>
-<span id="cb5-30"><a href="#cb5-30"></a></span>
-<span id="cb5-31"><a href="#cb5-31"></a>  handler <span class="ot">&lt;-</span> <span class="cf">if</span> (just_warn) assertr<span class="sc">::</span>just_warn <span class="cf">else</span> assertr<span class="sc">::</span>error_stop</span>
-<span id="cb5-32"><a href="#cb5-32"></a></span>
-<span id="cb5-33"><a href="#cb5-33"></a>  <span class="co"># --- Metadata check (safe) ---</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a>  required_cols <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb5-35"><a href="#cb5-35"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(metadata_path)) {</span>
-<span id="cb5-36"><a href="#cb5-36"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(</span>
-<span id="cb5-37"><a href="#cb5-37"></a>      readxl<span class="sc">::</span><span class="fu">read_excel</span>(metadata_path, <span class="at">sheet =</span> <span class="st">"Data Dictionary"</span>),</span>
-<span id="cb5-38"><a href="#cb5-38"></a>      <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb5-39"><a href="#cb5-39"></a>        <span class="fu">warning</span>(<span class="st">"Could not read metadata: "</span>, <span class="fu">conditionMessage</span>(e))</span>
-<span id="cb5-40"><a href="#cb5-40"></a>        <span class="cn">NULL</span></span>
-<span id="cb5-41"><a href="#cb5-41"></a>      }</span>
-<span id="cb5-42"><a href="#cb5-42"></a>    )</span>
-<span id="cb5-43"><a href="#cb5-43"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(metadata) <span class="sc">&amp;&amp;</span> <span class="st">"Name"</span> <span class="sc">%in%</span> <span class="fu">names</span>(metadata)) {</span>
-<span id="cb5-44"><a href="#cb5-44"></a>      required_cols <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(metadata<span class="sc">$</span>Name)</span>
-<span id="cb5-45"><a href="#cb5-45"></a>      data_names <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(<span class="fu">names</span>(data))</span>
-<span id="cb5-46"><a href="#cb5-46"></a>      missing <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(required_cols, data_names)</span>
-<span id="cb5-47"><a href="#cb5-47"></a>      <span class="cf">if</span> (<span class="fu">length</span>(missing) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb5-48"><a href="#cb5-48"></a>        msg <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Missing required columns:"</span>, <span class="fu">paste</span>(missing, <span class="at">collapse =</span> <span class="st">", "</span>))</span>
-<span id="cb5-49"><a href="#cb5-49"></a>        <span class="cf">if</span> (just_warn) <span class="fu">warning</span>(msg, <span class="at">call. =</span> <span class="cn">FALSE</span>) <span class="cf">else</span> <span class="fu">stop</span>(msg, <span class="at">call. =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-50"><a href="#cb5-50"></a>      }</span>
-<span id="cb5-51"><a href="#cb5-51"></a>    }</span>
-<span id="cb5-52"><a href="#cb5-52"></a>  }</span>
-<span id="cb5-53"><a href="#cb5-53"></a></span>
-<span id="cb5-54"><a href="#cb5-54"></a>  <span class="co"># --- Type checks ---</span></span>
-<span id="cb5-55"><a href="#cb5-55"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(numeric_cols)) {</span>
-<span id="cb5-56"><a href="#cb5-56"></a>    found <span class="ot">&lt;-</span> <span class="fu">intersect</span>(numeric_cols, <span class="fu">names</span>(data))</span>
-<span id="cb5-57"><a href="#cb5-57"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data, is.numeric, <span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(found), <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-58"><a href="#cb5-58"></a>  }</span>
-<span id="cb5-59"><a href="#cb5-59"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(character_cols)) {</span>
-<span id="cb5-60"><a href="#cb5-60"></a>    found <span class="ot">&lt;-</span> <span class="fu">intersect</span>(character_cols, <span class="fu">names</span>(data))</span>
-<span id="cb5-61"><a href="#cb5-61"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data, is.character, <span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(found), <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-62"><a href="#cb5-62"></a>  }</span>
-<span id="cb5-63"><a href="#cb5-63"></a></span>
-<span id="cb5-64"><a href="#cb5-64"></a>  <span class="co"># --- Non-missing ---</span></span>
-<span id="cb5-65"><a href="#cb5-65"></a>  <span class="cf">if</span> (<span class="fu">ncol</span>(data) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb5-66"><a href="#cb5-66"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data, assertr<span class="sc">::</span>not_na, <span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(<span class="fu">names</span>(data)), <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-67"><a href="#cb5-67"></a>  }</span>
-<span id="cb5-68"><a href="#cb5-68"></a></span>
-<span id="cb5-69"><a href="#cb5-69"></a>  <span class="co"># --- Treatment levels ---</span></span>
-<span id="cb5-70"><a href="#cb5-70"></a>  <span class="cf">if</span> (<span class="st">"treatment"</span> <span class="sc">%in%</span> <span class="fu">names</span>(data)) {</span>
-<span id="cb5-71"><a href="#cb5-71"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data, assertr<span class="sc">::</span><span class="fu">in_set</span>(treatment_levels), treatment, <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-72"><a href="#cb5-72"></a>  }</span>
-<span id="cb5-73"><a href="#cb5-73"></a></span>
-<span id="cb5-74"><a href="#cb5-74"></a>  <span class="co"># --- Bounded numeric ---</span></span>
-<span id="cb5-75"><a href="#cb5-75"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(bounded_cols)) {</span>
-<span id="cb5-76"><a href="#cb5-76"></a>    found <span class="ot">&lt;-</span> <span class="fu">intersect</span>(bounded_cols, <span class="fu">names</span>(data))</span>
-<span id="cb5-77"><a href="#cb5-77"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data,</span>
-<span id="cb5-78"><a href="#cb5-78"></a>                            assertr<span class="sc">::</span><span class="fu">within_bounds</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">2</span>]),</span>
-<span id="cb5-79"><a href="#cb5-79"></a>                            <span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(found),</span>
-<span id="cb5-80"><a href="#cb5-80"></a>                            <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-81"><a href="#cb5-81"></a>  }</span>
-<span id="cb5-82"><a href="#cb5-82"></a></span>
-<span id="cb5-83"><a href="#cb5-83"></a>  <span class="co"># --- Logical rule ---</span></span>
-<span id="cb5-84"><a href="#cb5-84"></a>  <span class="cf">if</span> (<span class="fu">all</span>(<span class="fu">c</span>(<span class="st">"eggs_hatched"</span>, <span class="st">"eggs_laid"</span>) <span class="sc">%in%</span> <span class="fu">names</span>(data))) {</span>
-<span id="cb5-85"><a href="#cb5-85"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">verify</span>(data, eggs_hatched <span class="sc">&lt;=</span> eggs_laid, <span class="at">error_fun =</span> handler)</span>
-<span id="cb5-86"><a href="#cb5-86"></a>  }</span>
-<span id="cb5-87"><a href="#cb5-87"></a></span>
-<span id="cb5-88"><a href="#cb5-88"></a>  <span class="fu">invisible</span>(data)</span>
-<span id="cb5-89"><a href="#cb5-89"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">#' Robust data validation checks</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#'</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#' Performs simple but resilient validation of a dataset:</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#' verifies column presence (optionally from metadata), checks types,</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#' enforces uniqueness and bounds, and validates logical consistency.</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#'</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#' @param data A data frame or tibble.</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#' @param metadata_path Optional path to an Excel file containing a</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#'   "Data Dictionary" sheet. Column names are read from the `Name` column.</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#' @param numeric_cols Character vector of columns expected to be numeric.</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#' @param character_cols Character vector of columns expected to be character.</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#' @param bounded_cols Character vector of numeric columns checked within `bounds`.</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#' @param bounds Numeric vector of length 2 specifying lower and upper limits.</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#' @param treatment_levels Allowed values for the `treatment` column.</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#' @param just_warn If TRUE (default), issues warnings instead of stopping on errors.</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#'</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#' @return The validated data frame, invisibly.</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#' @export</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>data_checks <span class="ot">&lt;-</span> <span class="cf">function</span>(data,</span>
+<span id="cb9-20"><a href="#cb9-20"></a>                        <span class="at">metadata_path =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-21"><a href="#cb9-21"></a>                        <span class="at">numeric_cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-22"><a href="#cb9-22"></a>                        <span class="at">character_cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-23"><a href="#cb9-23"></a>                        <span class="at">unique_cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-24"><a href="#cb9-24"></a>                        <span class="at">bounded_cols =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-25"><a href="#cb9-25"></a>                        <span class="at">bounds =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">30</span>),</span>
+<span id="cb9-26"><a href="#cb9-26"></a>                        <span class="at">treatment_levels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>),</span>
+<span id="cb9-27"><a href="#cb9-27"></a>                        <span class="at">just_warn =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb9-28"><a href="#cb9-28"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.data.frame</span>(data))</span>
+<span id="cb9-29"><a href="#cb9-29"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(bounds) <span class="sc">==</span> <span class="dv">2</span>, <span class="fu">is.numeric</span>(bounds), bounds[<span class="dv">1</span>] <span class="sc">&lt;</span> bounds[<span class="dv">2</span>])</span>
+<span id="cb9-30"><a href="#cb9-30"></a></span>
+<span id="cb9-31"><a href="#cb9-31"></a>  handler <span class="ot">&lt;-</span> <span class="cf">if</span> (just_warn) assertr<span class="sc">::</span>just_warn <span class="cf">else</span> assertr<span class="sc">::</span>error_stop</span>
+<span id="cb9-32"><a href="#cb9-32"></a></span>
+<span id="cb9-33"><a href="#cb9-33"></a>  <span class="co"># --- Metadata check (safe) ---</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>  required_cols <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(metadata_path)) {</span>
+<span id="cb9-36"><a href="#cb9-36"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(</span>
+<span id="cb9-37"><a href="#cb9-37"></a>      readxl<span class="sc">::</span><span class="fu">read_excel</span>(metadata_path, <span class="at">sheet =</span> <span class="st">"Data Dictionary"</span>),</span>
+<span id="cb9-38"><a href="#cb9-38"></a>      <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb9-39"><a href="#cb9-39"></a>        <span class="fu">warning</span>(<span class="st">"Could not read metadata: "</span>, <span class="fu">conditionMessage</span>(e))</span>
+<span id="cb9-40"><a href="#cb9-40"></a>        <span class="cn">NULL</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a>      }</span>
+<span id="cb9-42"><a href="#cb9-42"></a>    )</span>
+<span id="cb9-43"><a href="#cb9-43"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(metadata) <span class="sc">&amp;&amp;</span> <span class="st">"Name"</span> <span class="sc">%in%</span> <span class="fu">names</span>(metadata)) {</span>
+<span id="cb9-44"><a href="#cb9-44"></a>      required_cols <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(metadata<span class="sc">$</span>Name)</span>
+<span id="cb9-45"><a href="#cb9-45"></a>      data_names <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">make_clean_names</span>(<span class="fu">names</span>(data))</span>
+<span id="cb9-46"><a href="#cb9-46"></a>      missing <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(required_cols, data_names)</span>
+<span id="cb9-47"><a href="#cb9-47"></a>      <span class="cf">if</span> (<span class="fu">length</span>(missing) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb9-48"><a href="#cb9-48"></a>        msg <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Missing required columns:"</span>, <span class="fu">paste</span>(missing, <span class="at">collapse =</span> <span class="st">", "</span>))</span>
+<span id="cb9-49"><a href="#cb9-49"></a>        <span class="cf">if</span> (just_warn) <span class="fu">warning</span>(msg, <span class="at">call. =</span> <span class="cn">FALSE</span>) <span class="cf">else</span> <span class="fu">stop</span>(msg, <span class="at">call. =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-50"><a href="#cb9-50"></a>      }</span>
+<span id="cb9-51"><a href="#cb9-51"></a>    }</span>
+<span id="cb9-52"><a href="#cb9-52"></a>  }</span>
+<span id="cb9-53"><a href="#cb9-53"></a></span>
+<span id="cb9-54"><a href="#cb9-54"></a>  <span class="co"># --- Type checks ---</span></span>
+<span id="cb9-55"><a href="#cb9-55"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(numeric_cols)) {</span>
+<span id="cb9-56"><a href="#cb9-56"></a>    found <span class="ot">&lt;-</span> <span class="fu">intersect</span>(numeric_cols, <span class="fu">names</span>(data))</span>
+<span id="cb9-57"><a href="#cb9-57"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data, is.numeric, <span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(found), <span class="at">error_fun =</span> handler)</span>
+<span id="cb9-58"><a href="#cb9-58"></a>  }</span>
+<span id="cb9-59"><a href="#cb9-59"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(character_cols)) {</span>
+<span id="cb9-60"><a href="#cb9-60"></a>    found <span class="ot">&lt;-</span> <span class="fu">intersect</span>(character_cols, <span class="fu">names</span>(data))</span>
+<span id="cb9-61"><a href="#cb9-61"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data, is.character, <span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(found), <span class="at">error_fun =</span> handler)</span>
+<span id="cb9-62"><a href="#cb9-62"></a>  }</span>
+<span id="cb9-63"><a href="#cb9-63"></a></span>
+<span id="cb9-64"><a href="#cb9-64"></a>  <span class="co"># --- Non-missing ---</span></span>
+<span id="cb9-65"><a href="#cb9-65"></a>  <span class="cf">if</span> (<span class="fu">ncol</span>(data) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb9-66"><a href="#cb9-66"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data, assertr<span class="sc">::</span>not_na, <span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(<span class="fu">names</span>(data)), <span class="at">error_fun =</span> handler)</span>
+<span id="cb9-67"><a href="#cb9-67"></a>  }</span>
+<span id="cb9-68"><a href="#cb9-68"></a></span>
+<span id="cb9-69"><a href="#cb9-69"></a>  <span class="co"># --- Treatment levels ---</span></span>
+<span id="cb9-70"><a href="#cb9-70"></a>  <span class="cf">if</span> (<span class="st">"treatment"</span> <span class="sc">%in%</span> <span class="fu">names</span>(data)) {</span>
+<span id="cb9-71"><a href="#cb9-71"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data, assertr<span class="sc">::</span><span class="fu">in_set</span>(treatment_levels), treatment, <span class="at">error_fun =</span> handler)</span>
+<span id="cb9-72"><a href="#cb9-72"></a>  }</span>
+<span id="cb9-73"><a href="#cb9-73"></a></span>
+<span id="cb9-74"><a href="#cb9-74"></a>  <span class="co"># --- Bounded numeric ---</span></span>
+<span id="cb9-75"><a href="#cb9-75"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(bounded_cols)) {</span>
+<span id="cb9-76"><a href="#cb9-76"></a>    found <span class="ot">&lt;-</span> <span class="fu">intersect</span>(bounded_cols, <span class="fu">names</span>(data))</span>
+<span id="cb9-77"><a href="#cb9-77"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">assert</span>(data,</span>
+<span id="cb9-78"><a href="#cb9-78"></a>                            assertr<span class="sc">::</span><span class="fu">within_bounds</span>(bounds[<span class="dv">1</span>], bounds[<span class="dv">2</span>]),</span>
+<span id="cb9-79"><a href="#cb9-79"></a>                            <span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(found),</span>
+<span id="cb9-80"><a href="#cb9-80"></a>                            <span class="at">error_fun =</span> handler)</span>
+<span id="cb9-81"><a href="#cb9-81"></a>  }</span>
+<span id="cb9-82"><a href="#cb9-82"></a></span>
+<span id="cb9-83"><a href="#cb9-83"></a>  <span class="co"># --- Logical rule ---</span></span>
+<span id="cb9-84"><a href="#cb9-84"></a>  <span class="cf">if</span> (<span class="fu">all</span>(<span class="fu">c</span>(<span class="st">"eggs_hatched"</span>, <span class="st">"eggs_laid"</span>) <span class="sc">%in%</span> <span class="fu">names</span>(data))) {</span>
+<span id="cb9-85"><a href="#cb9-85"></a>    data <span class="ot">&lt;-</span> assertr<span class="sc">::</span><span class="fu">verify</span>(data, eggs_hatched <span class="sc">&lt;=</span> eggs_laid, <span class="at">error_fun =</span> handler)</span>
+<span id="cb9-86"><a href="#cb9-86"></a>  }</span>
+<span id="cb9-87"><a href="#cb9-87"></a></span>
+<span id="cb9-88"><a href="#cb9-88"></a>  <span class="fu">invisible</span>(data)</span>
+<span id="cb9-89"><a href="#cb9-89"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -844,14 +876,14 @@ Note
 <li><p><label><input type="checkbox">In your console or in another script run <code><a href="https://rdrr.io/r/base/source.html">source()</a></code> and then try using the functions:</label></p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>  egg_data <span class="ot">&lt;-</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">load_and_clean_data</span>(<span class="st">"data/raw/female_egg_data.csv"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">data_checks</span>(<span class="at">metadata_path =</span> <span class="st">"data-dictionary/insect_egg_metadata.xlsx"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4"></a>              <span class="at">numeric_cols =</span> <span class="fu">c</span>(<span class="st">"female_id"</span>,</span>
-<span id="cb6-5"><a href="#cb6-5"></a>                               <span class="st">"age_days"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6"></a>                               <span class="st">"eggs_laid"</span>,</span>
-<span id="cb6-7"><a href="#cb6-7"></a>                               <span class="st">"eggs_hatched"</span>),</span>
-<span id="cb6-8"><a href="#cb6-8"></a>              <span class="at">character_cols =</span> <span class="st">"treatment"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>  egg_data <span class="ot">&lt;-</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">load_and_clean_data</span>(<span class="st">"data/raw/female_egg_data.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">data_checks</span>(<span class="at">metadata_path =</span> <span class="st">"data-dictionary/insect_egg_metadata.xlsx"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4"></a>              <span class="at">numeric_cols =</span> <span class="fu">c</span>(<span class="st">"female_id"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>                               <span class="st">"age_days"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6"></a>                               <span class="st">"eggs_laid"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7"></a>                               <span class="st">"eggs_hatched"</span>),</span>
+<span id="cb10-8"><a href="#cb10-8"></a>              <span class="at">character_cols =</span> <span class="st">"treatment"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>

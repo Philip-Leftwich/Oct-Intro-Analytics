@@ -63,6 +63,42 @@ print(data)
 
 ```
 
+`r hide("Functions")`
+
+R makes it easy to create user defined functions by using `function()`. Here is how it works:
+
+```{r, eval = FALSE}
+
+# this is an example function
+my_function_name <- function(my_args) {
+  # document your function here
+  # what the function does
+  # function inputs and outputs
+  some_calculated_output <- (argument1 + argument2 )
+  
+  return(some_calculated_output)
+}
+
+
+```
+
+Here is a very simple function. Can you guess what it does?
+
+```{r}
+add_one <- function(x) {
+  return(x + 1)
+}
+```
+
+```{r}
+
+add_one(10)
+
+```
+
+`r unhide()`
+
+
 :::{.task}
 ::::{.task-header}
 Your turn
@@ -91,7 +127,7 @@ When we have a series of functions - these can be run without modification on ne
 #' and can display a summary of the data using `skimr::skim()`.
 #'
 #' @param path Character string giving the file path to the dataset to load.
-#' @param date_col Optional; unquoted column name or character string specifying
+#' @param date_col Optional; character string specifying
 #'   which column to parse as a date. If the column exists, it will be converted
 #'   using `lubridate::dmy()`. If not found, a warning is issued.
 #' @param delim Character string specifying the field delimiter used in the file.
@@ -124,10 +160,13 @@ load_and_clean_data <- function(path,
     janitor::clean_names()
   
   # Convert date column if provided
-  if (!is.null(date_col) && date_col %in% names(df)) {
-    df <- df |>
-      dplyr::mutate({{ date_col }} := lubridate::dmy(.data[[date_col]]))
-  } else if (!is.null(date_col)) {
+  # Convert date column if provided
+    if (!is.null(date_col) && all(date_col %in% names(df))) {
+        df <- df |>
+            mutate(across(all_of(date_col),
+                          ~ lubridate::dmy(as.character(.x))))
+    
+    } else if (!is.null(date_col)) {
     warning(paste("Column", date_col, "not found in data — skipping date conversion"))
   }
   
