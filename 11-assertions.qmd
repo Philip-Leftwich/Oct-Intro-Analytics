@@ -114,6 +114,23 @@ If this were your dataset, what checks would you want to include?
 
 `r unhide()`
 
+
+`r hide("Example data dictionary")`
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/data-dictionary/insect_egg_metadata.xlsx",
+  button_label = "Download female egg data as csv",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+`r unhide()`
+
 ::::
 :::
 
