@@ -89,153 +89,11 @@ penguins <- penguins |>
 
 By the end of this workshop, you will be able to:
 
-- Evaluate and improve the clarity of data visualisations using visual hierarchy and layout principles.
+- Apply custom themes that fit with brand design choices
 
-- Apply accessibility guidelines to ensure visualisations are readable, interpretable, and inclusive.
+In professional settings, visual outputs should communicate not only data but identity.
+This session shows how to translate a set of visual branding principles (colours, typography, tone) into a coherent `ggplot2` theme and apply it consistently across plot types.
 
-- Use tools and R functions to test colour contrast, grayscale readability, and font legibility.
-
-- Reflect critically on how design decisions influence interpretation and audience trust.
-
-## Summary
-
-Accessible visualisation is not about making plots prettier — it’s about making them clearer, fairer, and easier to understand for everyone.
-Even small tweaks in text size, colour, spacing, or annotation can transform comprehension and prevent misinterpretation.
-
-Throughout this session, you’ll assess plots for clarity and accessibility, then apply improvements step by step.
-
-## Text Hierarchy
-
-Text guides the reader through your story — titles tell what matters, axes describe structure, captions clarify meaning.
-A clear text hierarchy ensures the reader’s eye moves naturally from title → subtitle → axes → ticks.
-
-Use visual contrast (size, boldness, weight) to emphasize importance. Avoid decorative or serif fonts.
-
-
-```{r, eval = T, echo = F}
-
-basic_plot <- 
-  penguins |> 
-  drop_na(flipper_length_mm) |> 
-  ggplot(aes(x = island, y = flipper_length_mm)) +
-  ggbeeswarm::geom_beeswarm(aes(fill = species,
-                                size = body_mass_g),
-                            shape = 21,
-                            colour = "#FFFFFF",
-                            alpha = 0.7) +
-  colorspace::scale_fill_discrete_qualitative(palette = "Dark2") +
-  guides(size = "none") +
-  labs(title = "Only on Dream do penguins of different species share\nsimilar flipper lengths",
-       subtitle = "Each column represents the penguin population of an island. Each dot is a penguin;
-the larger the dot, the heavier the penguin. The Adelie penguins live on all three
-islands. They share Biscoe with the longer-flippered Gentoos, and Dream with 
-the equally-flippered Chinstraps.",
-       caption = "Data from {palmerpenguins}",
-       x = "Island",
-       y = "Flipper length", 
-       fill = "")
-
-```
-
-
-```{r, eval = F}
-basic_plot
-```
-
-```{r, eval=TRUE, echo=FALSE, out.width="80%"}
-knitr::include_graphics("images/basic_plot.png")
-```
-
-
-```{r}
-mono_palette <- function(base_col = "#2c4977", n = 5) {
-  colorRampPalette(c(base_col, "white"))(n)
-}
-
-# Example use
-mono_blue <- mono_palette( "#2c4977", n = 5)
-
-dark_text <- mono_blue[1]
-
-mid_text <- mono_blue[2]
-
-light_text <- mono_blue[3]
-
-```
-
-
-```{r, eval = F}
-library(showtext)
-
-font_add_google("Open Sans", "Open Sans")
-
-showtext::showtext_auto()
-
-basic_plot +
-  theme_minimal()+
-  theme(
-    text = element_text(colour = mid_text,
-                        family = "Open Sans"),
-    plot.title = element_text(colour = dark_text,
-                              family = "Open Sans",
-                              size = rel(2)),
-    plot.subtitle = element_text(size = rel(1.1)),
-    axis.text.y = element_text(colour = light_text, 
-                               size = rel(1)),
-    axis.title.y = element_text(size = rel(1)),
-    axis.text.x = element_text(colour = mid_text),
-    plot.caption = element_text(size = rel(0.8))
-  )
-
-showtext::showtext_auto(enable = FALSE)
-
-```
-
-```{r, eval=TRUE, echo=FALSE, out.width="80%"}
-knitr::include_graphics("images/basic_plot_2.png")
-```
-
-### Give the plot some space
-
-
-```{r, eval = F}
-
-showtext::showtext_auto()
-
-basic_plot +
-  theme_minimal(base_size = 11) +
-  theme(
-    text = element_text(colour = mid_text,
-                        family = "Open Sans",
-                        lineheight = 1.1),
-    plot.title = element_text(colour = dark_text,
-                              family = "Open Sans",
-                              size = rel(1.6),
-                              margin = margin(12, 0, 8, 0)),
-    plot.subtitle = element_text(size = rel(1.1),
-                                 margin = margin(4, 0, 0, 0)),
-    axis.text.y = element_text(colour = light_text, 
-                               size = rel(0.8)),
-    axis.title.y = element_text(size = 12,
-                                margin = margin(0, 4, 0, 0)),
-    axis.text.x = element_text(colour = mid_text,
-                               size = 12),
-    axis.title.x = element_blank(),
-    panel.grid = element_line(colour = "#dedddd"),
-    legend.position = "top",
-    legend.justification = 1,
-    plot.caption = element_text(size = rel(0.8),
-                                margin = margin(8, 0, 0, 0)),
-    plot.margin = margin(0.25, 0.25, 0.25, 0.25, "cm")
-  )
-
-showtext::showtext_auto(enable = FALSE)
-
-```
-
-```{r, eval=TRUE, echo=FALSE, out.width="80%"}
-knitr::include_graphics("images/basic_plot_3.png")
-```
 
 
 ## Making a custom palette
@@ -258,13 +116,21 @@ brand_colours <- c(
   "yellow"  = "#d2db2e"   # lime-yellow accent
 )
 
+mono_palette <- function(base_col = "#2c4977", n = 5) {
+  colorRampPalette(c(base_col, "white"))(n)
+}
+
+# Example use
+mono_blue <- mono_palette( "#2c4977", n = 5)
+
 
 brand_palettes <- list(
   brand_colours = brand_colours,
   discrete = c("#09baba", "#0d8242", "#3293BD", "#d2db2e", "#2c4977"),
   continuous_light = c("#2c4977","#09baba",  "#d2db2e" ),
   continuous_cool  = c("#09baba", "#3293BD", "#2c4977"),
-  diverging        = c("#0d8242", "#d2db2e", "#3293BD")
+  diverging        = c("#0d8242", "#d2db2e", "#3293BD"),
+  mono_blue = mono_blue
 )
 
 show_brand_palettes <- function(palettes = brand_palettes) {
@@ -276,7 +142,7 @@ show_brand_palettes <- function(palettes = brand_palettes) {
         )
     })
     
-    ggplot(df, aes(x = order, y = palette, fill = color)) +
+   plot <-  ggplot(df, aes(x = order, y = palette, fill = color)) +
         geom_tile(color = "white", linewidth = 0.8) +
         geom_text(aes(label = color), color = "black", size = 3, vjust = 2) +
         scale_fill_identity() +
@@ -288,23 +154,152 @@ show_brand_palettes <- function(palettes = brand_palettes) {
             axis.text.x = element_blank(),
             axis.text.y = element_text(face = "bold")
         )
+   plot
 }
+
 ```
 
 
-## Making a custom theme
+### Design check:
 
-Building a custom ggplot theme
+Which colours carry the brand’s main tone?
+
+Which are suitable for accents or backgrounds?
+
+Which combinations maintain legibility and contrast?
+
+```{r}
+
+show_brand_palettes()
+
+```
+
+`r hide("Colour Accessibility")`
+```{r}
+
+colorBlindness::cvdPlot(show_brand_palettes())
+
+```
+
+`r unhide()`
+
+
+## Using showtext
+
+In R, system fonts can vary across computers — meaning your carefully chosen typography might not appear the same for others or when exporting plots.
+The `showtext` package solves this by rendering text using font files directly, ensuring consistent appearance across systems and outputs (e.g. PNG, PDF).
+
+The simplest way to activate it is with `showtext::showtext_auto()` — once turned on, it applies automatically to all your plots. Check out (https://fonts.google.com/) for available fonts
+
+```{r}
+library(showtext)
+
+# Register and activate a Google font
+font_add_google("Monsieur La Doulaise", "Mon")
+
+showtext_auto()
+
+# Use the font in ggplot
+ggplot(penguins, 
+       aes(x = culmen_length_mm, 
+           y = body_mass_g, 
+           fill = species,
+           shape = species))+
+    geom_point()+
+  ggtitle("A Fancy Scatterplot of Culmen length against Body Mass")+
+  theme_bw(base_family ="Mon",
+           base_size = 30)
+
+
+showtext_auto(enable = FALSE) # to stop auto rendering
+```
+
+`showtext_auto()` makes font rendering automatic and portable — ensuring that your branded typeface appears consistently across systems, exports, and collaborators’ machines.
+
+## Construct a base theme
+
+```{r}
+
+theme_brand <- function(base_size = 14, base_family = "Open Sans") {
+  theme_minimal(base_size = base_size, base_family = base_family) +
+    theme(
+      # Text
+      text = element_text(colour = mono_blue[1]),
+      plot.title = element_text(face = "bold", size = rel(1.4), colour = mono_blue[1]),
+      plot.subtitle = element_text(colour = mono_blue[2], size = rel(1.1)),
+      plot.caption = element_text(size = rel(0.8), colour = mono_blue[2]),
+      axis.title = element_text(face = "bold", colour = mono_blue[2]),
+      axis.text = element_text(colour = mono_blue[3]),
+      
+      # Panels and gridlines
+      panel.grid.major = element_line(colour = "grey90"),
+      panel.grid.minor = element_blank(),
+      panel.background = element_rect(fill = "white", colour = NA),
+      
+      # Facets
+      strip.background = element_rect(fill = brand_colours["teal"], colour = NA),
+      strip.text = element_text(face = "bold", colour = "white"),
+      
+      # Legends
+      legend.title = element_text(face = "bold"),
+      legend.position = "right"
+    )
+}
+
+
+```
+
+
+:::{.panel-tabset}
+
+## Scatterplot
+
+```{r}
+ggplot(penguins, 
+       aes(x = culmen_length_mm, 
+           y = body_mass_g, 
+           fill = species,
+           shape = species))+
+    geom_point()+
+    labs(title= "Scatterplot", 
+         subtitle = "Culmen Length (mm) against Body Mass (g)", 
+         caption = "made by Philip Leftwich") +
+  scale_shape_manual (values = c(21,22,23))
+
+```
+
+## Applied theme
+
+```{r}
+ggplot(penguins, 
+       aes(x = culmen_length_mm, 
+           y = body_mass_g, 
+           fill = species,
+           shape = species))+
+    geom_point()+
+    labs(title= "Scatterplot", 
+         subtitle = "Culmen Length (mm) against Body Mass (g)", 
+         caption = "made by Philip Leftwich") +
+    theme_brand() +
+  scale_shape_manual (values = c(21,22,23))
+
+```
+
+:::
+
+- Which aspects make this “on-brand”?
+
+- Is the hierarchy of colour, text, and space clear?
+
+## Making an advanced custom theme
 
 A theme function defines the non-data aspects of a plot: typography, line styles, gridlines, and overall layout.
 
-Here, `theme_ox()` creates a cohesive institutional style aligned with the brand colours.
+Here - `theme_brand()` creates a cohesive institutional style aligned with the brand colours.
 
 Key elements to note:
 
-- Typography – the function attempts to load the Google font Open Sans via the {showtext} package, ensuring reproducible fonts across systems.
-
-- Accessibility – if accessible = TRUE, the function substitutes colourblind-friendly viridis palettes.
+- Typography – the function attempts to load the Google font Open Sans via the `showtext` package @R-showtext, ensuring reproducible fonts across systems.
 
 - Axis options – axis_type toggles between continuous and categorical grid settings, adjusting gridlines and spacing accordingly.
 
@@ -314,16 +309,71 @@ Because the function returns both a theme object and corresponding colour scales
 
 ```{r}
 
+#' Create a Branded ggplot2 Theme with Integrated Colour Palettes
+#'
+#' @description
+#' Builds a ggplot2 theme styled according to institutional or project-specific 
+#' brand aesthetics. The function defines typographic, gridline, and layout styles 
+#' while automatically applying brand colour scales for both discrete and continuous data. 
+#' 
+#' This function is designed for consistent, reproducible brand alignment across plots.
+#'
+#' @param base_size Numeric. Base font size for the theme text elements. Default is `30`.
+#' @param base_family Character. Font family to use (default is `"Open Sans"`). 
+#' If available, the function attempts to load it automatically via the `showtext` package.
+#' @param base_line_size Numeric. Line width for base line elements. Default is `0.8`.
+#' @param base_rect_size Numeric. Line width for rectangular elements (panel borders, etc.). Default is `0.5`.
+#' @param axis_type Character. Determines gridline layout: `"categorical"` for discrete x-axes 
+#' or `"continuous"` for numeric axes. Default is `"categorical"`.
+#' @param palette Character. Selects which brand palette variant to apply. 
+#' Options are `"discrete"`, `"continuous_light"`, `"continuous_cool"`, or `"diverging"`. 
+#' Default is `"discrete"`.
+#' @param midpoint Numeric. Midpoint value used for diverging colour scales. Default is `0`.
+#'
+#' @details
+#' The function loads and activates the Google font *Open Sans* (if available) 
+#' using `showtext` and `sysfonts`. It composes the theme from a base minimal layout, 
+#' adjusting typography, gridlines, and strip backgrounds to reflect the brand palette.
+#'
+#' The function returns a list containing the ggplot2 theme object and 
+#' corresponding colour/fill scales. When added to a ggplot pipeline, both are applied automatically:
+#'
+#' ```r
+#' ggplot(data, aes(x, y, colour = group)) +
+#'   geom_point() +
+#'   theme_brand(axis_type = "continuous", palette = "discrete")
+#' ```
+#'
+#' @return
+#' A list containing:
+#' \itemize{
+#'   \item A ggplot2 theme object controlling non-data aesthetics.
+#'   \item Corresponding `scale_*` definitions for colour and fill, matched to the chosen palette.
+#' }
+#'
+#' @examples
+#' \dontrun{
+#' ggplot(penguins, aes(bill_length_mm, bill_depth_mm, colour = species)) +
+#'   geom_point(size = 3) +
+#'   labs(title = "Penguin bill dimensions") +
+#'   theme_brand(axis_type = "continuous", palette = "discrete")
+#' }
+#'
+#' @seealso [ggplot2::theme()], [ggplot2::scale_color_manual()], [showtext::showtext_auto()]
+#'
+#'
+#' @dependencies
+#' Requires: `ggplot2`, `showtext`, `sysfonts`, and user-defined objects 
+#' `brand_colours`, `brand_palettes`, and `mono_blue` to be available in the environment.
 
 # ---- Theme Function ----
-theme_ox <- function(base_size = 30,
+theme_brand <- function(base_size = 30,
                              base_family = "Open Sans",
                              base_line_size = 0.8,
                              base_rect_size = 0.5,
                              axis_type = c("categorical", "continuous"),
                              palette = c("discrete", "continuous_light", "continuous_cool", "diverging"),
-                             midpoint = 0,
-                             accessible = FALSE) {
+                             midpoint = 0) {
 
   palette <- match.arg(palette)
   
@@ -338,33 +388,30 @@ theme_ox <- function(base_size = 30,
     }
   }
 
-  # Accessibility-safe fallback
-  if (accessible) {
-    brand_palettes$discrete <- viridisLite::viridis(5, option = "D")
-    brand_palettes$continuous_light <- viridisLite::viridis(256)
-    brand_palettes$continuous_cool <- viridisLite::mako(256)
-    brand_palettes$diverging <- c("#440154", "#FFFFFF", "#FDE725")
-  }
-
-  half_line <- base_size / 2L
-
-  # ---- Core Theme ----
+   # ---- Core Theme ----
   base <- ggplot2::theme(
     line = ggplot2::element_line(colour = "#000000", linewidth = base_line_size),
     rect = ggplot2::element_rect(fill = "#FFFFFF", colour = "#000000", linewidth = base_rect_size),
     text = ggplot2::element_text(family = base_family, colour = "#000000", size = base_size),
 
-    plot.title = ggplot2::element_text(face = "bold", hjust = 0, size = base_size * 1.8,
-                                       colour = brand_colours["navy"]),
-    plot.subtitle = ggplot2::element_text(hjust = 0, size = base_size * 1.2,
-                                          colour = brand_colours["blue"]),
-    plot.caption = ggplot2::element_text(hjust = 1, size = base_size * 0.9,
-                                         colour = brand_colours["navy"]),
-    axis.title = ggplot2::element_text(size = base_size),
+    plot.title = ggplot2::element_text(face = "bold", hjust = 0, size = rel(1.8),margin = ggplot2::margin(12, 0, 8, 0),
+                                       colour = mono_blue[1]),
+    plot.subtitle = ggplot2::element_text(hjust = 0, size = base_size * 1.2,margin = ggplot2::margin(4, 0, 0, 0),
+                                          colour = mono_blue[2]),
+    plot.caption = ggplot2::element_text(hjust = 1, size = rel(0.9),margin = ggplot2::margin(8, 0, 0, 0),
+                                         colour = mono_blue[3]),
+    axis.text.y = element_text(colour = mono_blue[3], 
+                               size = rel(0.8)),
+    axis.title.y = element_text(colour = mono_blue[2],
+                                margin = margin(0, 4, 0, 0)),
+    axis.text.x = element_text(colour = mono_blue[3]
+                               ),
+    axis.title.x = element_text(colour = mono_blue[2],
+                                margin = margin(0, 4, 0, 0)),
     panel.background = ggplot2::element_rect(fill = "white", colour = NA),
     strip.background = ggplot2::element_rect(fill = brand_colours["teal"], colour = NA),
     strip.text = ggplot2::element_text(face = "bold", colour = "white",
-                                       size = base_size * 1.1),
+                                       size = rel(1.1)),
     panel.border = ggplot2::element_blank(),
     axis.line = ggplot2::element_line(linewidth = base_line_size, colour = "black"),  
     axis.line.x = ggplot2::element_line(linewidth = base_line_size, linetype = "solid", colour = "black"),
@@ -425,72 +472,25 @@ theme_ox <- function(base_size = 30,
 ```
 
 
-```{r, eval = F, echo = F}
+:::{.panel-tabset}
 
- 
- theme_ox_defaults <- function(base_size = 18,
-                             base_family = "Open Sans",
-                             base_line_size = 0.5,
-                             base_rect_size = 0.5,
-                             palette = c("discrete", "continuous_light", "continuous_cool", "diverging"),
-                             midpoint = 0,
-                             accessible = FALSE) {
+## Scatter plot
+```{r}
 
-  palette <- match.arg(palette)
-
-  # Load and activate font via showtext
-  if (requireNamespace("showtext", quietly = TRUE)) {
-    showtext::showtext_auto(enable = TRUE)
-    # Add Google font if not already registered
-    if (!("Open Sans" %in% sysfonts::font_families())) {
-      try(sysfonts::font_add_google("Open Sans", "Open Sans"), silent = TRUE)
-    }
-  }
-
-  # Accessibility-safe fallback
-  if (accessible) {
-    brand_palettes$discrete <- viridisLite::viridis(5, option = "D")
-    brand_palettes$continuous_light <- viridisLite::viridis(256)
-    brand_palettes$continuous_cool <- viridisLite::mako(256)
-    brand_palettes$diverging <- c("#440154", "#FFFFFF", "#FDE725")
-  }
-
-  half_line <- base_size / 2L
-
-  # ---- Core Theme ----
-  ggplot2::theme_set(theme_ox()[[1]][[1]])
- 
-
-  # add base_family font to text and label geoms ---------------------------
-
-  ggplot2::update_geom_defaults("text", list(family = base_family, size = 1 / 0.352777778))
-  ggplot2::update_geom_defaults("label", list(family = base_family, size = 1 / 0.352777778))
-
-  # set defaults for geoms --------------------------------------------------
-
-  ggplot2::update_geom_defaults("bar", list(fill = "#09baba"))
-  ggplot2::update_geom_defaults("col", list(fill = "#09baba"))
-  ggplot2::update_geom_defaults("point", list(fill = "#09baba", shape = 21, size = 3, colour = "white"))
-  ggplot2::update_geom_defaults("jitter", list(fill = "#09baba", shape = 21, size = 3, width = .2))
-  ggplot2::update_geom_defaults("line", list(colour = "#09baba", size = 1))
-  ggplot2::update_geom_defaults("step", list(colour = "#09baba", size = 1))
-  ggplot2::update_geom_defaults("path", list(colour = "#09baba", size = 1))
-  ggplot2::update_geom_defaults("boxplot", list(fill = "#09baba"))
-  ggplot2::update_geom_defaults("density", list(fill = "#09baba"))
-  ggplot2::update_geom_defaults("violin", list(fill = "#09baba"))
-  ggplot2::update_geom_defaults("sf", list(fill = "#09baba", color = "white", size = 0.1))
-
-  # set defaults for stats --------------------------------------------------
-
-  ggplot2::update_stat_defaults("count", list(fill = "#09baba"))
-  ggplot2::update_stat_defaults("boxplot", list(fill = "#09baba"))
-  ggplot2::update_stat_defaults("density", list(fill = "#09baba"))
-  ggplot2::update_stat_defaults("ydensity", list(fill = "#09baba"))
-
-}
+ggplot(penguins, 
+       aes(x = culmen_length_mm, 
+           y = body_mass_g, 
+           fill = species,
+           shape = species))+
+    geom_point()+
+    labs(title= "Scatterplot", 
+         subtitle = "Culmen Length (mm) against Body Mass (g)", 
+         caption = "made by Philip Leftwich") +
+  scale_shape_manual (values = c(21,22,23))
 
 ```
 
+## Theme
 
 ```{r}
 ggplot(penguins, 
@@ -502,28 +502,38 @@ ggplot(penguins,
     labs(title= "Scatterplot", 
          subtitle = "Culmen Length (mm) against Body Mass (g)", 
          caption = "made by Philip Leftwich") +
-    theme_ox(axis_type  = "continuous") +
+    theme_brand(axis_type  = "continuous") +
   scale_shape_manual (values = c(21,22,23))
 
 ```
 
+:::
 
+
+
+:::{.panel-tabset}
+
+
+## Boxplot
 
 ```{r}
-ggplot(penguins, 
-       aes(x = culmen_length_mm, 
-           y = culmen_depth_mm, 
-           fill = body_mass_g,
-           shape = species))+
-    geom_point()+
-    labs(title= "Scatterplot", 
-         subtitle = "Culmen Length (mm) against Body Mass (g)", 
-         caption = "made by Philip Leftwich") +
-    theme_ox(axis_type  = "continuous",
-             palette = "diverging", midpoint = 4500) +
-    scale_shape_manual (values = c(21,22,23))
+
+dodge <- 0.8
+
+penguins |> 
+  drop_na(sex) |> 
+ggplot(    aes(x = species, 
+           y = body_mass_g, 
+           fill = sex))+
+  geom_violin(position = position_dodge(width = dodge), alpha = .4)+
+  geom_boxplot(position = position_dodge(width = dodge), width = .5, outliers = FALSE, show.legend = FALSE)+
+  labs(title= "Boxplot", 
+       subtitle = "A comparison of Body Mass (g) by Sex and Species", 
+       caption = "made by Philip Leftwich") 
 
 ```
+
+## Theme
 
 ```{r}
 
@@ -539,9 +549,28 @@ ggplot(    aes(x = species,
   labs(title= "Boxplot", 
        subtitle = "A comparison of Body Mass (g) by Sex and Species", 
        caption = "made by Philip Leftwich") +
-    theme_ox(axis_type  = "categorical")
+    theme_brand(axis_type  = "categorical")
 
 ```
 
+:::
 
+
+:::{.task}
+::::{.task-header}
+Task
+::::
+::::{.task-container}
+
+* [ ]  Create a `.R` file - save the funcitons here and give it a clear and recognisable filename
+
+* This file when run now defines A named colour palette and a base theme function (theme_[yourbrand]())
+
+* [ ] Try applying this theme to any plots you have/want to make.
+
+::::
+:::
+
+Right now, your theme function is a standalone script — usable only within the current project.
+To ensure it can be shared, versioned, and applied consistently across analyses and colleagues, the correct next step is to encapsulate it in an **R package**
 

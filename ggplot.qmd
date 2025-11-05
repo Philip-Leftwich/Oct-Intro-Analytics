@@ -52,11 +52,13 @@ These first 3 layers will give you the most simple version of a complete plot. H
 :::
 
 ::: g-col-6
-![gg layers [(Presentation by Ryan Safner)](https://metricsf20.classes.ryansafner.com/slides/1.3-slides#20){target="_blank"}](images/gglayers.png){width="90%"}
+```{r, eval=TRUE, echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/gglayers.png")
+```
 :::
 :::
 
-To give you a brief overview of the layering system, we will use the `palmerpenguins` package ([https://allisonhorst.github.io/palmerpenguins/](https://allisonhorst.github.io/palmerpenguins/){target="_blank"}). This dataset contains information about penguins, including bill length and depth, flipper length, body mass, and more.
+
 
 ```{r}
 head(penguins)
