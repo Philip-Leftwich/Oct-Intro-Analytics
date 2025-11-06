@@ -705,7 +705,7 @@ Solution
 <p>Having previously used <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code> to select certain variables, we will now use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code> to select only certain rows or observations. For example only Adelie penguins.</p>
 <p>We can do this with the equivalence operator <code>==</code></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> new_penguins, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> penguins_raw, </span>
 <span id="cb5-2"><a href="#cb5-2"></a>       <span class="st">`</span><span class="at">Species</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Adelie Penguin (Pygoscelis adeliae)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can use several different operators to assess the way in which we should filter our data that work the same in tidyverse or base R.</p>
@@ -752,12 +752,12 @@ Solution
 </div>
 <p>If you wanted to select all the Penguin species except Adelies, you use ‘not equals’.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> new_penguins, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> penguins_raw, </span>
 <span id="cb6-2"><a href="#cb6-2"></a>       <span class="st">`</span><span class="at">Species</span><span class="st">`</span> <span class="sc">!=</span> <span class="st">"Adelie Penguin (Pygoscelis adeliae)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This is the same as</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> new_penguins, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> penguins_raw, </span>
 <span id="cb7-2"><a href="#cb7-2"></a>       <span class="st">`</span><span class="at">Species</span><span class="st">`</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Chinstrap penguin (Pygoscelis antarctica)"</span>,</span>
 <span id="cb7-3"><a href="#cb7-3"></a>                      <span class="st">"Gentoo penguin (Pygoscelis papua)"</span>)</span>
 <span id="cb7-4"><a href="#cb7-4"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -774,7 +774,7 @@ Solution
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> new_penguins, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> penguins_raw, </span>
 <span id="cb8-2"><a href="#cb8-2"></a>       <span class="st">`</span><span class="at">Species</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Adelie Penguin (Pygoscelis adeliae)"</span>, </span>
 <span id="cb8-3"><a href="#cb8-3"></a>       <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">190</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -785,13 +785,13 @@ Solution
 <span class="header-section-number">7.6</span> Arrange</h2>
 <p>The function <code>arrange()</code> sorts the rows in the table according to the columns supplied. For example</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">arrange</span>(<span class="at">.data =</span> new_penguins, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">arrange</span>(<span class="at">.data =</span> penguins_raw, </span>
 <span id="cb9-2"><a href="#cb9-2"></a>        <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The data is now arranged in alphabetical order by sex. So all of the observations of female penguins are listed before males.</p>
 <p>You can also reverse this with <code>desc()</code></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">arrange</span>(<span class="at">.data =</span> new_penguins, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">arrange</span>(<span class="at">.data =</span> penguins_raw, </span>
 <span id="cb10-2"><a href="#cb10-2"></a>        <span class="fu">desc</span>(<span class="st">`</span><span class="at">Sex</span><span class="st">`</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="mutate" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="mutate">
@@ -800,7 +800,7 @@ Solution
 <p>To create new variables we use the function <code>mutate()</code>.</p>
 <p>Note that as before, if you want to save your new column you must save it as an object. Here we are mutating a new column and attaching it to the <code>new_penguins</code> data oject.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>new_penguins <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> new_penguins,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>penguins_new_col <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> new_penguins,</span>
 <span id="cb11-2"><a href="#cb11-2"></a>                     <span class="at">body_mass_kg =</span> <span class="st">`</span><span class="at">Body Mass (g)</span><span class="st">`</span><span class="sc">/</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
@@ -856,7 +856,7 @@ Solution
 <span id="cb14-2"><a href="#cb14-2"></a>penguins_raw <span class="sc">|&gt;</span>  </span>
 <span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Species</span><span class="st">`</span>, <span class="st">`</span><span class="at">Sex</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>) <span class="sc">|&gt;</span>  </span>
 <span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Sex</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"MALE"</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>)<span class="er">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The reason that this function is called a pipe is because it ‘pipes’ the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes it will automatically take the data from the previous line of code so you don’t need to specify it again.</p>
 <div class="task">

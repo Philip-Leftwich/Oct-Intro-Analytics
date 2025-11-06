@@ -118,7 +118,7 @@ Having previously used `dplyr::select()` to select certain variables, we will no
 We can do this with the equivalence operator `==`
 
 ```{r, eval = F}
-filter(.data = new_penguins, 
+filter(.data = penguins_raw, 
        `Species` == "Adelie Penguin (Pygoscelis adeliae)")
 
 ```
@@ -143,7 +143,7 @@ box |>
 If you wanted to select all the Penguin species except Adelies, you use 'not equals'.
 
 ```{r, eval = F}
-filter(.data = new_penguins, 
+filter(.data = penguins_raw, 
        `Species` != "Adelie Penguin (Pygoscelis adeliae)")
 
 ```
@@ -151,7 +151,7 @@ filter(.data = new_penguins,
 This is the same as 
 
 ```{r, eval = F}
-filter(.data = new_penguins, 
+filter(.data = penguins_raw, 
        `Species` %in% c("Chinstrap penguin (Pygoscelis antarctica)",
                       "Gentoo penguin (Pygoscelis papua)")
        )
@@ -171,7 +171,7 @@ Filter the data so that it contains *only* Adelie penguins where flipper length 
 
 ```{r, eval =F}
 
-filter(.data = new_penguins, 
+filter(.data = penguins_raw, 
        `Species` == "Adelie Penguin (Pygoscelis adeliae)", 
        `Flipper Length (mm)` > 190)
 
@@ -189,7 +189,7 @@ The function `arrange()` sorts the rows in the table according to the columns su
 
 
 ```{r, eval = F}
-arrange(.data = new_penguins, 
+arrange(.data = penguins_raw, 
         `Sex`)
 ```
 
@@ -200,7 +200,7 @@ You can also reverse this with `desc()`
 
 ```{r, eval = F}
 
-arrange(.data = new_penguins, 
+arrange(.data = penguins_raw, 
         desc(`Sex`))
 
 ```
@@ -216,7 +216,7 @@ Note that as before, if you want to save your new column you must save it as an 
 
 
 ```{r, eval = F}
-new_penguins <- mutate(.data = new_penguins,
+penguins_new_col <- mutate(.data = new_penguins,
                      body_mass_kg = `Body Mass (g)`/1000)
 ```
 
@@ -270,7 +270,7 @@ arrange(object_2,
 penguins_raw |>  
   select(`Species`, `Sex`, `Flipper Length (mm)`) |>  
   filter(`Sex` == "MALE") |>  
-  arrange(`Flipper Length (mm)`))
+  arrange(`Flipper Length (mm)`)
 ```
 
 The reason that this function is called a pipe is because it 'pipes' the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes it will automatically take the data from the previous line of code so you don't need to specify it again.
