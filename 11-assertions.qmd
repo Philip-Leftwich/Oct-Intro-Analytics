@@ -86,7 +86,16 @@ downloadthis::download_link(
 )
 ```
 
+```{r, eval = FALSE}
+
+female_egg_data <- read_csv(here::here("data", "raw", "female_egg_data.csv"))
+
+```
+
+
+
 ```{r}
+
 
 female_egg_data
 
@@ -193,8 +202,8 @@ We can string together multiple checks into a single pipeline, we don't *need* `
 
 :::{.panel-tabset}
 # Assertr
-```{r}
-data_checks <- function(female_egg_data, just_warn, is.numeric, female_id, age_days, eggs_laid, eggs_hatched, is.character, treatment, is_uniq, not_na) {
+```{r, eval = FALSE}
+
   female_egg_data  |> 
       verify(has_all_names("female_id", "treatment",
                            "age_days", "eggs_laid", "eggs_hatched"),
@@ -209,7 +218,7 @@ data_checks <- function(female_egg_data, just_warn, is.numeric, female_id, age_d
       assert(within_bounds(1, 30), age_days, error_fun = just_warn) |>
       verify(eggs_hatched <= eggs_laid, error_fun = just_warn) |>
       insist(within_n_sds(3), eggs_laid, error_fun = just_warn)
-}
+
 
 ```
 

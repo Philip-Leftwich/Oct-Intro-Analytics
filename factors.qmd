@@ -73,7 +73,10 @@ With the `forcats::fct_relevel` function we can set factors and apply a specifie
 
 ```{r}
 penguins_clean_names |> 
-  mutate(species = fct_relevel(species, "Adelie", "Chinstrap", "Gentoo")) |> 
+  mutate(species = fct_relevel(species, 
+                               "Adelie Penguin (Pygoscelis adeliae)", 
+                               "Chinstrap penguin (Pygoscelis antarctica)", 
+                               "Gentoo penguin (Pygoscelis papua)")) |> 
   ggplot(aes(x = species))+
   geom_bar()+
   coord_flip()

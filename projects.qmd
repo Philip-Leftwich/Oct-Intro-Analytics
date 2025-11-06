@@ -103,7 +103,7 @@ knitr::include_graphics("images/project.png")
 * Create the following folders using the + New Folder button in the Files tab
 
   * data/raw
-  * data/processed
+  * data/clean
   * scripts
   * outputs
 
@@ -126,7 +126,7 @@ R is case-sensitive and whitespace-sensitive so type everything EXACTLY as print
 dir.create("data/raw",
            recursive = TRUE) 
 
-dir.create("data/processed",
+dir.create("data/clean",
            recursive = TRUE)
 
 dir.create("scripts")

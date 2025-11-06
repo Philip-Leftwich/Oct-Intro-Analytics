@@ -611,7 +611,10 @@ div.csl-indent {
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>female_egg_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>female_egg_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"female_egg_data.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>female_egg_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -842,10 +845,10 @@ Example data dictionary
 <span class="header-section-number">15.4</span> Run an assertion check</h2>
 <p>With <code>assertr</code> by default if a validation check fails the code will throw an error:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(assertr)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>female_egg_data <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">verify</span>(age_days <span class="sc">&gt;</span> <span class="dv">0</span>)                      <span class="co"># hatched ≤ laid</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(assertr)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>female_egg_data <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">verify</span>(age_days <span class="sc">&gt;</span> <span class="dv">0</span>)                      <span class="co"># hatched ≤ laid</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="assert-insist-verify" class="level2" data-number="15.5"><h2 data-number="15.5" class="anchored" data-anchor-id="assert-insist-verify">
 <span class="header-section-number">15.5</span> assert, insist, verify</h2>
@@ -856,7 +859,7 @@ Example data dictionary
 </li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df <span class="sc">|&gt;</span>  <span class="fu">verify</span>(<span class="fu">has_all_names</span>(<span class="st">"female_id"</span>,<span class="st">"treatment"</span>,<span class="st">"age_days"</span>,<span class="st">"eggs_laid"</span>,<span class="st">"eggs_hatched"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>df <span class="sc">|&gt;</span>  <span class="fu">verify</span>(<span class="fu">has_all_names</span>(<span class="st">"female_id"</span>,<span class="st">"treatment"</span>,<span class="st">"age_days"</span>,<span class="st">"eggs_laid"</span>,<span class="st">"eggs_hatched"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>
@@ -864,7 +867,7 @@ Example data dictionary
 </li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>df <span class="sc">|&gt;</span>  <span class="fu">assert</span>(is.numeric, female_id, age_days, eggs_laid, eggs_hatched)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>df <span class="sc">|&gt;</span>  <span class="fu">assert</span>(is.numeric, female_id, age_days, eggs_laid, eggs_hatched)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>
@@ -872,16 +875,16 @@ Example data dictionary
 </li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>df <span class="sc">|&gt;</span>  <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>df <span class="sc">|&gt;</span>  <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="error-functions" class="level3" data-number="15.5.1"><h3 data-number="15.5.1" class="anchored" data-anchor-id="error-functions">
 <span class="header-section-number">15.5.1</span> error functions</h3>
 <p>The <code>error_fun</code> argument defines what happens when a validation check produces an error. By default it prints a summary of the errors and halts the code.</p>
 <p>This may not be desirable if we wish to run a longer pipeline or many error checks, there are multiple options including <code>just_warn</code> script execution continues and a warning is printed.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>female_egg_data <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">verify</span>(age_days <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb6-3"><a href="#cb6-3"></a>         <span class="at">error_fun =</span> just_warn)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>female_egg_data <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">verify</span>(age_days <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>         <span class="at">error_fun =</span> just_warn)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>verification [age_days &gt; 0] failed! (1 failure)
 
@@ -1055,55 +1058,53 @@ Example data dictionary
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>data_checks <span class="ot">&lt;-</span> <span class="cf">function</span>(female_egg_data, just_warn, is.numeric, female_id, age_days, eggs_laid, eggs_hatched, is.character, treatment, is_uniq, not_na) {</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  female_egg_data  <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href="#cb8-3"></a>      <span class="fu">verify</span>(<span class="fu">has_all_names</span>(<span class="st">"female_id"</span>, <span class="st">"treatment"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4"></a>                           <span class="st">"age_days"</span>, <span class="st">"eggs_laid"</span>, <span class="st">"eggs_hatched"</span>),</span>
-<span id="cb8-5"><a href="#cb8-5"></a>             <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>      <span class="fu">assert</span>(is.numeric, female_id, age_days, eggs_laid, eggs_hatched,</span>
-<span id="cb8-7"><a href="#cb8-7"></a>             <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>      <span class="fu">assert</span>(is.character, treatment, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>      <span class="fu">assert</span>(is_uniq, female_id, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>      <span class="fu">assert</span>(not_na, female_id, treatment, age_days,</span>
-<span id="cb8-11"><a href="#cb8-11"></a>             eggs_laid, eggs_hatched, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>      <span class="fu">assert</span>(<span class="fu">in_set</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), treatment) <span class="sc">|&gt;</span> </span>
-<span id="cb8-13"><a href="#cb8-13"></a>      <span class="fu">assert</span>(<span class="fu">within_bounds</span>(<span class="dv">1</span>, <span class="dv">30</span>), age_days, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>      <span class="fu">verify</span>(eggs_hatched <span class="sc">&lt;=</span> eggs_laid, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>      <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid, <span class="at">error_fun =</span> just_warn)</span>
-<span id="cb8-16"><a href="#cb8-16"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>  female_egg_data  <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>      <span class="fu">verify</span>(<span class="fu">has_all_names</span>(<span class="st">"female_id"</span>, <span class="st">"treatment"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>                           <span class="st">"age_days"</span>, <span class="st">"eggs_laid"</span>, <span class="st">"eggs_hatched"</span>),</span>
+<span id="cb9-4"><a href="#cb9-4"></a>             <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>      <span class="fu">assert</span>(is.numeric, female_id, age_days, eggs_laid, eggs_hatched,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>             <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>      <span class="fu">assert</span>(is.character, treatment, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>      <span class="fu">assert</span>(is_uniq, female_id, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>      <span class="fu">assert</span>(not_na, female_id, treatment, age_days,</span>
+<span id="cb9-10"><a href="#cb9-10"></a>             eggs_laid, eggs_hatched, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>      <span class="fu">assert</span>(<span class="fu">in_set</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), treatment) <span class="sc">|&gt;</span> </span>
+<span id="cb9-12"><a href="#cb9-12"></a>      <span class="fu">assert</span>(<span class="fu">within_bounds</span>(<span class="dv">1</span>, <span class="dv">30</span>), age_days, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>      <span class="fu">verify</span>(eggs_hatched <span class="sc">&lt;=</span> eggs_laid, <span class="at">error_fun =</span> just_warn) <span class="sc">|&gt;</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>      <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid, <span class="at">error_fun =</span> just_warn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Step 1: Get summary stats for eggs_laid</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>female_egg_data_summary <span class="ot">&lt;-</span> female_egg_data <span class="sc">|&gt;</span> </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    <span class="at">mean_eggs_laid =</span> <span class="fu">mean</span>(eggs_laid, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-5"><a href="#cb9-5"></a>    <span class="at">sd_eggs_laid   =</span> <span class="fu">sd</span>(eggs_laid, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-6"><a href="#cb9-6"></a>  )</span>
-<span id="cb9-7"><a href="#cb9-7"></a></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co"># Check column classes</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>female_egg_data <span class="sc">|&gt;</span> </span>
-<span id="cb9-10"><a href="#cb9-10"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">class</span>(.)[<span class="dv">1</span>])) <span class="sc">%&gt;%</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
-<span id="cb9-12"><a href="#cb9-12"></a>                      <span class="at">names_to =</span> <span class="st">"column"</span>,</span>
-<span id="cb9-13"><a href="#cb9-13"></a>                      <span class="at">values_to =</span> <span class="st">"type"</span>)</span>
-<span id="cb9-14"><a href="#cb9-14"></a></span>
-<span id="cb9-15"><a href="#cb9-15"></a>female_egg_data <span class="sc">|&gt;</span> </span>
-<span id="cb9-16"><a href="#cb9-16"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(female_id))</span>
-<span id="cb9-17"><a href="#cb9-17"></a></span>
-<span id="cb9-18"><a href="#cb9-18"></a>female_egg_data_report <span class="ot">&lt;-</span> female_egg_data <span class="sc">|&gt;</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb9-20"><a href="#cb9-20"></a>    <span class="at">age_invalid           =</span> age_days <span class="sc">&lt;=</span> <span class="dv">0</span>,</span>
-<span id="cb9-21"><a href="#cb9-21"></a>    <span class="at">eggs_laid_invalid     =</span> eggs_laid <span class="sc">&lt;=</span> <span class="dv">0</span>,</span>
-<span id="cb9-22"><a href="#cb9-22"></a>    <span class="at">eggs_laid_outlier     =</span> eggs_laid <span class="sc">&lt;</span> (female_egg_data_summary<span class="sc">$</span>mean_eggs_laid <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>female_egg_data_summary<span class="sc">$</span>sd_eggs_laid) <span class="sc">|</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a>                             eggs_laid <span class="sc">&gt;</span> (female_egg_data_summary<span class="sc">$</span>mean_eggs_laid <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>female_egg_data_summary<span class="sc">$</span>sd_eggs_laid),</span>
-<span id="cb9-24"><a href="#cb9-24"></a>    <span class="at">eggs_hatched_invalid  =</span> eggs_hatched <span class="sc">&gt;</span> eggs_laid</span>
-<span id="cb9-25"><a href="#cb9-25"></a>  )</span>
-<span id="cb9-26"><a href="#cb9-26"></a></span>
-<span id="cb9-27"><a href="#cb9-27"></a><span class="co"># Step 3: view rows with any issues filter == TRUE</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a>female_egg_data_report <span class="sc">|&gt;</span> </span>
-<span id="cb9-29"><a href="#cb9-29"></a>  <span class="fu">filter</span>(age_invalid <span class="sc">|</span> eggs_laid_invalid <span class="sc">|</span> eggs_laid_outlier <span class="sc">|</span> eggs_hatched_invalid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Step 1: Get summary stats for eggs_laid</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>female_egg_data_summary <span class="ot">&lt;-</span> female_egg_data <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="at">mean_eggs_laid =</span> <span class="fu">mean</span>(eggs_laid, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="at">sd_eggs_laid   =</span> <span class="fu">sd</span>(eggs_laid, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-6"><a href="#cb10-6"></a>  )</span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co"># Check column classes</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>female_egg_data <span class="sc">|&gt;</span> </span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">class</span>(.)[<span class="dv">1</span>])) <span class="sc">%&gt;%</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
+<span id="cb10-12"><a href="#cb10-12"></a>                      <span class="at">names_to =</span> <span class="st">"column"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13"></a>                      <span class="at">values_to =</span> <span class="st">"type"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14"></a></span>
+<span id="cb10-15"><a href="#cb10-15"></a>female_egg_data <span class="sc">|&gt;</span> </span>
+<span id="cb10-16"><a href="#cb10-16"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(female_id))</span>
+<span id="cb10-17"><a href="#cb10-17"></a></span>
+<span id="cb10-18"><a href="#cb10-18"></a>female_egg_data_report <span class="ot">&lt;-</span> female_egg_data <span class="sc">|&gt;</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-20"><a href="#cb10-20"></a>    <span class="at">age_invalid           =</span> age_days <span class="sc">&lt;=</span> <span class="dv">0</span>,</span>
+<span id="cb10-21"><a href="#cb10-21"></a>    <span class="at">eggs_laid_invalid     =</span> eggs_laid <span class="sc">&lt;=</span> <span class="dv">0</span>,</span>
+<span id="cb10-22"><a href="#cb10-22"></a>    <span class="at">eggs_laid_outlier     =</span> eggs_laid <span class="sc">&lt;</span> (female_egg_data_summary<span class="sc">$</span>mean_eggs_laid <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>female_egg_data_summary<span class="sc">$</span>sd_eggs_laid) <span class="sc">|</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a>                             eggs_laid <span class="sc">&gt;</span> (female_egg_data_summary<span class="sc">$</span>mean_eggs_laid <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>female_egg_data_summary<span class="sc">$</span>sd_eggs_laid),</span>
+<span id="cb10-24"><a href="#cb10-24"></a>    <span class="at">eggs_hatched_invalid  =</span> eggs_hatched <span class="sc">&gt;</span> eggs_laid</span>
+<span id="cb10-25"><a href="#cb10-25"></a>  )</span>
+<span id="cb10-26"><a href="#cb10-26"></a></span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="co"># Step 3: view rows with any issues filter == TRUE</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a>female_egg_data_report <span class="sc">|&gt;</span> </span>
+<span id="cb10-29"><a href="#cb10-29"></a>  <span class="fu">filter</span>(age_invalid <span class="sc">|</span> eggs_laid_invalid <span class="sc">|</span> eggs_laid_outlier <span class="sc">|</span> eggs_hatched_invalid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1228,9 +1229,9 @@ Solution
 </button>
 <p>For data within the <code>insist</code> function we compare data across the entire column - in these examples we might check data is within certain deviations of the mean. But if there are multiple groups, this makes sense to perform within groups.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>female_egg_data <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span> </span>
-<span id="cb10-3"><a href="#cb10-3"></a>dplyr<span class="sc">::</span><span class="fu">group_modify</span>(<span class="sc">~</span> .x <span class="sc">|&gt;</span> <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid, <span class="at">error_fun =</span> just_warn))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>female_egg_data <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3"></a>dplyr<span class="sc">::</span><span class="fu">group_modify</span>(<span class="sc">~</span> .x <span class="sc">|&gt;</span> <span class="fu">insist</span>(<span class="fu">within_n_sds</span>(<span class="dv">3</span>), eggs_laid, <span class="at">error_fun =</span> just_warn))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">

@@ -36,6 +36,16 @@ If you are struggling to write the code for you ggplot, try loading the `esquiss
 
 :::
 
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/penguins_clean.csv",
+  button_label = "Clean Penguin Data",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
 
 ## Building plots {.unnumbered}
 
