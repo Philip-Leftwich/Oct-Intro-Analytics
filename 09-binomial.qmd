@@ -7,7 +7,7 @@ library(janitor)
 library(here)
 source("R/booktem_setup.R")
 source("R/my_setup.R")
-source("sims.R")
+
 ```
 
 
@@ -18,17 +18,12 @@ library(rstatix)
 library(performance)
 library(patchwork)
 library(DescTools)
+library(scales)
 
 ```
 
 
-```{r, eval=T, echo=F}
-library(tidyverse)
-library(rstatix)
-library(performance)
-library(patchwork)
 
-```
 
 
 When our response variable is binary, we can use a glm with a **binomial** error distribution
@@ -129,7 +124,7 @@ beetles <- read_csv(here::here("files" , "beetles.csv"))
 ```{r, eval = TRUE, echo = FALSE}
 downloadthis::download_link(
   link = "https://github.com/UEABIO/5023B/blob/dev/files/beetles.csv",
-  button_label = "Download Challenger data as csv",
+  button_label = "Download Beetle data as csv",
   button_type = "success",
   has_icon = TRUE,
   icon = "fa fa-save",
@@ -185,12 +180,66 @@ beetles <- beetles |>
 
 :::
 
+:::{.callout-note collapse = "true"}
+## A linear model
+
+Here we can fit a standard linear model to calculated proportions.
+
+
+```{r, include = FALSE}
+
+model <- lm(mortality_rate ~ dose, data = beetles)
+
+```
+
+This shows issues with normality and linearity
+
+```{r}
+performance::check_model(model, 
+                         detrend = FALSE)
+
+```
+
+
+Predictions made from this model are also inadequate
+
+```{r, include = FALSE}
+
+means <- emmeans::emmeans(model, 
+                          specs = ~ dose, 
+                          at=list(dose=c(40:80)), 
+                          type='response')  |> 
+    as_tibble()
+
+ggplot(beetles, aes(x=dose, y=mortality_rate)) + 
+  geom_point()+
+    geom_ribbon(data = means,
+                aes(x = dose,
+                    y = emmean,
+                    ymin = lower.CL,
+                    ymax = upper.CL),
+                alpha = .2)+
+    geom_line(data = means,
+              aes(x = dose,
+                  y = emmean)) +  # regression line
+    labs(title = "Logit-link Binomial Regression",
+         x = "Dose", y = "Mortality")+
+    geom_hline(yintercept = 1,
+               linetype = "dashed")+
+    geom_hline(yintercept = 0,
+               linetype = "dashed")
+
+
+```
+
+
+:::
 
 ## Fitting a binomial model
 
 ```{r}
 binomial_model <- glm(cbind(number_killed,number_survived) ~ dose, 
-                      family = binomial(link = "logit"), 
+                      family = binomial, 
                       data = beetles)
 
 
@@ -315,7 +364,8 @@ Can you edit your code to produce a prediction of the mortality rate at a pestic
 
 :::{.task}
 ::::{.task-header}
-Make a ggplot of the change in probability ::::
+Make a ggplot of the change in probability 
+::::
 ::::{.task-container}
 
 
@@ -328,6 +378,10 @@ Make a ggplot of the change in probability ::::
 
 
 `r hide("Solution")`
+
+:::{.panel-tabset}
+
+## Broom
 
 ```{r, eval = F}
 
@@ -342,6 +396,7 @@ binomial_model |>
 
 ```
 
+## Emmeans
 
 ```{r, echo = F}
 emmeans::emmeans(binomial_model, 
@@ -356,6 +411,8 @@ emmeans::emmeans(binomial_model,
 
 ```
 
+:::
+
 `r unhide()`
 
 
@@ -367,7 +424,6 @@ The `performance` package detects and alters the checks. Pay particular attentio
 ```{r}
 
 performance::check_model(binomial_model,
-                         residual_type = "normal",
                          detrend = FALSE)
 
 ```
@@ -386,8 +442,8 @@ Try fitting a quasi-likelihood model
 - Fit a quasibinomial model
 
 ```{r, eval = F}
-binomial_model <- glm(cbind(number_killed,number_survived) ~ dose, 
-                      family = quasibinomial(link = "logit"), 
+quasibinomial_model <- glm(cbind(number_killed,number_survived) ~ dose, 
+                      family = quasibinomial, 
                       data = beetles)
 ```
 
@@ -410,60 +466,54 @@ Write up the results
 ::::
 :::
 
+`r hide("Report")`
 
+The `report` package from `easystats` can help capture the information needed for full reporting of analytical models.
 
-`r hide("Write-up")`
+```{r, warning = FALSE, message = FALSE}
+library(report)
 
+report(binomial_model)
 
+```
 
 `r unhide()`
 
-
-## Final checklist
-
 ## Comparison to linear model
 
-- R squared
-
-- Predictions constant/varied
-
-- Unrealistic predictions
 
 ```{r}
 DescTools::PseudoR2(binomial_model)
-
+summary(model)$r.squared
 ```
 
-```{r, include = FALSE}
+### Power comparisons
 
-model <- lm(mortality_rate ~ dose, data = beetles)
+Unless the number of trials is identical in every row of data - then binomial models will always have greater power than the equivalent t-tests: 
 
-```
+```{r, echo = FALSE}
+power_df <- readRDS("files/power_df.RDS")
 
-
-```{r, include = FALSE}
-
-means <- emmeans::emmeans(model, 
-                          specs = ~ dose, 
-                          at=list(dose=c(40:80)), 
-                          type='response')  |> 
-    as_tibble()
-
-ggplot(beetles, aes(x=dose, y=mortality_rate)) + 
-  geom_point()+
-    geom_ribbon(data = means,
-                aes(x = dose,
-                    y = emmean,
-                    ymin = lower.CL,
-                    ymax = upper.CL),
-                alpha = .2)+
-    geom_line(data = means,
-              aes(x = dose,
-                  y = emmean)) +  # regression line
-    labs(title = "Logit-link Binomial Regression",
-         x = "Dose", y = "Mortality")+
-    theme_classic(base_size = 14)
-
+ggplot(power_df, aes(x = p1, y = power, color = method)) +
+    geom_line(size = 1.2) +
+    geom_point(size = 2) +
+    facet_grid(scenario ~ n_rows, labeller = labeller(
+        scenario = label_value,
+        n_rows = function(x) paste("Observations \n per replicate =","\n", x)
+    )) +
+    labs(
+        title = "Power Curves: Binomial GLM vs t-test on proportions",
+        subtitle = "Effect of trial heterogeneity and number of rows per group",
+        x = "True success probability in group 1",
+        y = "Estimated Power",
+        color = "Method"
+    ) +
+    theme_minimal(base_size = 12) +
+    geom_hline(yintercept = 0.05, linetype = "dotted", color = "gray40") +
+    scale_color_manual(values = c("binomial GLM" = "#D55E00",
+                                "t-test on proportions"  = "#0072B2")) +
+coord_cartesian(ylim = c(.5,1))+
+  scale_y_continuous(labels = label_percent(), limits = c(0,1))+
+  geom_hline(yintercept = .8, linetype = "dashed")
 
 ```
-

@@ -161,7 +161,7 @@ Equivalence testing allows us to:
 
 ```{r}
 body_mass_data <- readRDS("body_mass.RDS")
-m_main <- lm(body_mass ~ treatment + sex, data = dat)
+m_main <- lm(body_mass ~ treatment + sex, data = body_mass_data)
 ```
 
 Let’s say a difference smaller than 40 g is biologically negligible.

@@ -12,101 +12,105 @@ penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
 
 
 ```{r}
-
-
-set.seed(123)
-
-library(ggplot2)
-
-# Simulation parameters
-n_sim <- 200
-alpha <- 0.05
-p0 <- 0.9
-p1_values <- seq(0.85, 0.5, by = -0.05)
-
-# Grid of scenarios
-row_counts <- c(5, 10, 20)  # number of rows per group
-trial_scenarios <- list(
-    "Low variability" = 5:15,       # all rows 5 trials
-    "Moderate variability" = 1:30,
-    "High variability" = 1:50
-)
-
-# Function to generate variable trials per scenario
-generate_trials <- function(scenario, n_rows) {
-    vals <- trial_scenarios[[scenario]]
-    sample(vals, n_rows, replace = TRUE)
-}
-
-# Simulate one dataset
-simulate_once <- function(p1, trials_row) {
-    n_rows <- length(trials_row)
-    
-    successes0 <- rbinom(n_rows, trials_row, p0)
-    successes1 <- rbinom(n_rows, trials_row, p1)
-    
-    dat <- data.frame(
-        group = factor(rep(c(0,1), each = n_rows)),
-        successes = c(successes0, successes1),
-        trials = c(trials_row, trials_row)
-    )
-    
-    # Binomial GLM
-    glm_fit <- glm(cbind(successes, trials - successes) ~ group,
-                   family = binomial, data = dat)
-    p_glm <- summary(glm_fit)$coefficients["group1","Pr(>|z|)"]
-    
-    # T-test on proportions
-    dat$prop <- dat$successes / dat$trials
-
-   t_pval <- tryCatch(
-  t.test(prop ~ group, data = dat)$p.value,
-  error = function(e) 1  # if t-test fails (no variance), record p=1
-)
-    
-    c(p_glm = p_glm, t_pval = t_pval)
-}
-
-# Run simulations across all combinations
-results_list <- list()
-for(n_rows in row_counts) {
-    for(scenario in names(trial_scenarios)) {
-        cat("Simulating n_rows =", n_rows, ", scenario =", scenario, "\n")
-        for(p1 in p1_values) {
-            glm_significant <- numeric(n_sim)
-            t_significant <- numeric(n_sim)
-            
-            for(i in 1:n_sim) {
-                trials_row <- generate_trials(scenario, n_rows)
-                sim_res <- simulate_once(p1, trials_row)
-                glm_significant[i] <- sim_res["p_glm"] < alpha
-                t_significant[i] <- sim_res["t_pval"] < alpha
-            }
-            
-            results_list[[length(results_list)+1]] <- data.frame(
-                p1 = p1,
-                method = c("binomial GLM", "t-test on proportions"),
-                power = c(mean(glm_significant), mean(t_significant)),
-                scenario = scenario,
-                n_rows = n_rows
-            )
-        }
-    }
-}
-
-# Combine results
-power_df <- do.call(rbind, results_list)
-
-power_df$scenario <- factor(power_df$scenario,
-                            levels = c("Low variability", "Moderate variability", "High variability"))
+# 
+# 
+# set.seed(123)
+# 
+# library(ggplot2)
+# 
+# # Simulation parameters
+# n_sim <- 200
+# alpha <- 0.05
+# p0 <- 0.9
+# p1_values <- seq(0.85, 0.5, by = -0.05)
+# 
+# # Grid of scenarios
+# row_counts <- c(5, 10, 20)  # number of rows per group
+# trial_scenarios <- list(
+#     "Low variability" = 5:15,       # all rows 5 trials
+#     "Moderate variability" = 1:30,
+#     "High variability" = 1:50
+# )
+# 
+# # Function to generate variable trials per scenario
+# generate_trials <- function(scenario, n_rows) {
+#     vals <- trial_scenarios[[scenario]]
+#     sample(vals, n_rows, replace = TRUE)
+# }
+# 
+# # Simulate one dataset
+# simulate_once <- function(p1, trials_row) {
+#     n_rows <- length(trials_row)
+#     
+#     successes0 <- rbinom(n_rows, trials_row, p0)
+#     successes1 <- rbinom(n_rows, trials_row, p1)
+#     
+#     dat <- data.frame(
+#         group = factor(rep(c(0,1), each = n_rows)),
+#         successes = c(successes0, successes1),
+#         trials = c(trials_row, trials_row)
+#     )
+#     
+#     # Binomial GLM
+#     glm_fit <- glm(cbind(successes, trials - successes) ~ group,
+#                    family = binomial, data = dat)
+#     p_glm <- summary(glm_fit)$coefficients["group1","Pr(>|z|)"]
+#     
+#     # T-test on proportions
+#     dat$prop <- dat$successes / dat$trials
+# 
+#    t_pval <- tryCatch(
+#   t.test(prop ~ group, data = dat)$p.value,
+#   error = function(e) 1  # if t-test fails (no variance), record p=1
+# )
+#     
+#     c(p_glm = p_glm, t_pval = t_pval)
+# }
+# 
+# # Run simulations across all combinations
+# results_list <- list()
+# for(n_rows in row_counts) {
+#     for(scenario in names(trial_scenarios)) {
+#         cat("Simulating n_rows =", n_rows, ", scenario =", scenario, "\n")
+#         for(p1 in p1_values) {
+#             glm_significant <- numeric(n_sim)
+#             t_significant <- numeric(n_sim)
+#             
+#             for(i in 1:n_sim) {
+#                 trials_row <- generate_trials(scenario, n_rows)
+#                 sim_res <- simulate_once(p1, trials_row)
+#                 glm_significant[i] <- sim_res["p_glm"] < alpha
+#                 t_significant[i] <- sim_res["t_pval"] < alpha
+#             }
+#             
+#             results_list[[length(results_list)+1]] <- data.frame(
+#                 p1 = p1,
+#                 method = c("binomial GLM", "t-test on proportions"),
+#                 power = c(mean(glm_significant), mean(t_significant)),
+#                 scenario = scenario,
+#                 n_rows = n_rows
+#             )
+#         }
+#     }
+# }
+# 
+# # Combine results
+# power_df <- do.call(rbind, results_list)
+# 
+# power_df$scenario <- factor(power_df$scenario,
+#                             levels = c("Low variability", "Moderate variability", "High variability"))
 
 # Plot power curves faceted by number of rows, colored by method, separate panels for trial variability
+# Plot power curves faceted by number of rows, colored by method, separate panels for trial variability
+
+power_df <- readRDS("files/power_df.RDS")
+
 ggplot(power_df, aes(x = p1, y = power, color = method)) +
     geom_line(size = 1.2) +
     geom_point(size = 2) +
     facet_grid(scenario ~ n_rows, labeller = labeller(
         scenario = label_value,
-        n_rows = function(x) paste("Rows per group =", x)
+        n_rows = function(x) paste("Observations per group =", x)
     )) +
     labs(
         title = "Power Curves: Binomial GLM vs t-test on proportions",
@@ -117,105 +121,111 @@ ggplot(power_df, aes(x = p1, y = power, color = method)) +
     ) +
     theme_minimal(base_size = 12) +
     geom_hline(yintercept = 0.05, linetype = "dotted", color = "gray40") +
-    scale_color_manual(values = c("pooled_GLM_LRT" = "#D55E00",
-                                "t_test_prop"  = "#0072B2",)) +
-    ylim(0,1)
-
-
+    scale_color_manual(values = c("binomial GLM" = "#D55E00",
+                                "t-test on proportions"  = "#0072B2")) +
+    ylim(0,1)+coord_cartesian(ylim = c(.5,1))+scale_y_continuous(labels = label_percent())+geom_hline(yintercept = .8, linetype = "dashed")
 
 ```
 
 ```{r}
 # --- Demonstration: t-test/linear model vs binomial GLM ---
 # Shows how emmeans reveals impossible CI (>1) from linear model on proportions
+# 
+# set.seed(123)
+# library(ggplot2)
+# library(dplyr)
+# library(emmeans)
+# 
+# # --- Parameters ---
+# n_sim <- 200
+# n_rows <- 15
+# trial_range <- 5:30
+# p0 <- 0.95
+# p1 <- 0.80
+# alpha <- 0.05
+# 
+# # --- One simulation: fit both models and extract EMMs on response scale ---
+# simulate_one <- function() {
+#   # Random trial counts
+#   trials_row <- sample(trial_range, n_rows, replace = TRUE)
+#   successes0 <- rbinom(n_rows, trials_row, p0)
+#   successes1 <- rbinom(n_rows, trials_row, p1)
+#   
+#   dat <- data.frame(
+#     group = factor(rep(c("control","treat"), each = n_rows)),
+#     successes = c(successes0, successes1),
+#     trials = c(trials_row, trials_row)
+#   )
+#   dat$prop <- dat$successes / dat$trials
+#   
+#   # Linear model on proportions (wrong model)
+#   fit_lm <- lm(prop ~ group, data = dat)
+#   em_lm <- as.data.frame(emmeans(fit_lm, ~ group, type = "response"))
+#   em_lm$model <- "lm_proportion"
+#   
+#   # Binomial GLM (correct model)
+#   fit_glm <- glm(cbind(successes, trials - successes) ~ group,
+#                  family = binomial, data = dat)
+#   em_glm <- as.data.frame(emmeans(fit_glm, ~ group, type = "response"))
+#   em_glm <- em_glm |> rename(emmean = prob, lower.CL = asymp.LCL, upper.CL = asymp.UCL)
+#   em_glm$model <- "glm_binomial"
+#   
+#   bind_rows(em_lm, em_glm)
+# }
+# 
+# # --- Run simulations ---
+# res_list <- replicate(n_sim, simulate_one(), simplify = FALSE)
+# emm_df <- bind_rows(res_list, .id = "sim") %>%
+#   mutate(sim = as.integer(sim))
+# 
+# # --- Flag impossible CIs ---
+# emm_df <- emm_df %>%
+#   mutate(ci_below0 = lower.CL < 0,
+#          ci_above1 = upper.CL > 1)
+# 
+# # --- Summarize how often CIs violate bounds ---
+# violation_summary <- emm_df %>%
+#   group_by(model) %>%
+#   summarise(
+#     prop_below0 = mean(ci_below0, na.rm = TRUE),
+#     prop_above1 = mean(ci_above1, na.rm = TRUE),
+#     .groups = "drop"
+#   )
+# 
+# print(violation_summary)
+# 
+# # --- Plot: estimated means with 95% CI for subset of sims ---
+# plot_df <- emm_df %>%
+#   filter(sim <= 200) |> 
+#   filter(group == "control")# show first 200 simulations for clarity
 
-set.seed(123)
-library(ggplot2)
-library(dplyr)
-library(emmeans)
 
-# --- Parameters ---
-n_sim <- 200
-n_rows <- 15
-trial_range <- 5:30
-p0 <- 0.95
-p1 <- 0.80
-alpha <- 0.05
+plot_df <- readRDS("files/plot_df.RDS")
 
-# --- One simulation: fit both models and extract EMMs on response scale ---
-simulate_one <- function() {
-  # Random trial counts
-  trials_row <- sample(trial_range, n_rows, replace = TRUE)
-  successes0 <- rbinom(n_rows, trials_row, p0)
-  successes1 <- rbinom(n_rows, trials_row, p1)
-  
-  dat <- data.frame(
-    group = factor(rep(c("control","treat"), each = n_rows)),
-    successes = c(successes0, successes1),
-    trials = c(trials_row, trials_row)
-  )
-  dat$prop <- dat$successes / dat$trials
-  
-  # Linear model on proportions (wrong model)
-  fit_lm <- lm(prop ~ group, data = dat)
-  em_lm <- as.data.frame(emmeans(fit_lm, ~ group, type = "response"))
-  em_lm$model <- "lm_proportion"
-  
-  # Binomial GLM (correct model)
-  fit_glm <- glm(cbind(successes, trials - successes) ~ group,
-                 family = binomial, data = dat)
-  em_glm <- as.data.frame(emmeans(fit_glm, ~ group, type = "response"))
-  em_glm <- em_glm |> rename(emmean = prob, lower.CL = asymp.LCL, upper.CL = asymp.UCL)
-  em_glm$model <- "glm_binomial"
-  
-  bind_rows(em_lm, em_glm)
-}
-
-# --- Run simulations ---
-res_list <- replicate(n_sim, simulate_one(), simplify = FALSE)
-emm_df <- bind_rows(res_list, .id = "sim") %>%
-  mutate(sim = as.integer(sim))
-
-# --- Flag impossible CIs ---
-emm_df <- emm_df %>%
-  mutate(ci_below0 = lower.CL < 0,
-         ci_above1 = upper.CL > 1)
-
-# --- Summarize how often CIs violate bounds ---
-violation_summary <- emm_df %>%
-  group_by(model) %>%
-  summarise(
-    prop_below0 = mean(ci_below0, na.rm = TRUE),
-    prop_above1 = mean(ci_above1, na.rm = TRUE),
-    .groups = "drop"
-  )
-
-print(violation_summary)
-
-# --- Plot: estimated means with 95% CI for subset of sims ---
-plot_df <- emm_df %>%
-  filter(sim <= 200)  # show first 200 simulations for clarity
-
-ggplot(plot_df, aes(x = sim, y = emmean, color = model)) +
+plot_df |> 
+  mutate(model = case_when(model == "lm_proportion" ~ "T-test",
+                           model == "glm_binomial" ~ "Binomial GLM")) |> 
+ggplot(aes(x = sim, y = emmean, color = model)) +
   geom_pointrange(aes(ymin = lower.CL, ymax = upper.CL),
                   position = position_dodge(width = 0.6),
                   alpha = 0.8) +
-  facet_grid(model ~ group, scales = "fixed") +
+  facet_wrap(~model, ncol = 1,  drop = FALSE) +
   geom_hline(yintercept = c(0, 1), linetype = "dotted", color = "gray40") +
   scale_color_manual(
-    values = c("lm_proportion" = "#0072B2", "glm_binomial" = "#D55E00"),
-    labels = c("Linear model on proportions", "Binomial GLM")
+    values = c("T-test" = "#0072B2", "Binomial GLM" = "#D55E00"),
+    labels = c("T-test on proportion data", "Binomial GLM")
   ) +
   labs(
-    title = "Estimated Means and 95% CI from Linear Model vs Binomial GLM",
+    title = "Estimated Means and 95% CI from T-test vs Binomial GLM",
     subtitle = "CIs from a t-test (blue) can exceed 1; Binomial GLM (orange) stays within [0,1]",
     x = "Simulation index",
     y = "Estimated group mean (response scale)",
-    color = "Model"
+    color = "Model",
+    caption = "True proportion = 0.95"
   ) +
   theme_minimal(base_size = 13)+
   theme(legend.position = "bottom")+
-  scale_y_continuous(limits = c(0.75,1.03))
+  scale_y_continuous(limits = c(0.85,1.03))
 ```
 
 
@@ -230,150 +240,155 @@ ggplot(plot_df, aes(x = sim, y = emmean, color = model)) +
 # ------------------------------
 # Simulation: GLM vs t-test vs GLMM
 # ------------------------------
+# 
+# set.seed(123)
+# library(lme4)
+# library(dplyr)
+# library(ggplot2)
+# library(tidyr)
+# 
+# # ---- Simulation parameters ----
+# n_sim <- 200                       # simulations per scenario
+# alpha <- 0.05
+# 
+# # Data structure
+# n_rows_per_rep_per_group <- 5      # rows per group per replicate
+# n_trials_per_row <- 20              # trials per row
+# 
+# # Fixed effects (logit scale)
+# p0 <- 0.9
+# logit <- function(p) log(p/(1-p))
+# inv_logit <- function(x) plogis(x)
+# beta0 <- logit(p0)
+# OR <- .5
+# beta_trt <- log(OR)
+# 
+# # Sweep parameters
+# n_reps_vals    <- c(3, 5, 10,20,40)              # number of replicate experiments
+# sigma_rep_vals <- c(0.0,0.5, 1.0,2.0,3.0)   # between-replicate SD on logit scale
+# 
+# # ---- Helper: simulate one experiment ----
+# simulate_one <- function(n_reps, sigma_rep) {
+#   res <- c(p_glm = NA, p_t = NA, p_glmm = NA)  # initialize return
+# 
+#   # replicate-specific random intercepts
+#   u_rep <- rnorm(n_reps, 0, sigma_rep)
+# 
+#   # build dataset
+#   dat_list <- lapply(seq_len(n_reps), function(r) {
+#     n <- n_rows_per_rep_per_group
+#     intercept_r <- beta0 + u_rep[r]
+# 
+#     p_ctrl <- inv_logit(intercept_r)
+#     p_trt  <- inv_logit(intercept_r + beta_trt)
+# 
+#     s_ctrl <- rbinom(n, n_trials_per_row, p_ctrl)
+#     s_trt  <- rbinom(n, n_trials_per_row, p_trt)
+# 
+#     data.frame(
+#       replicate = r,
+#       group = factor(rep(c("control", "treat"), each = n)),
+#       successes = c(s_ctrl, s_trt),
+#       trials = rep(n_trials_per_row, 2*n)
+#     )
+#   })
+#   dat <- bind_rows(dat_list)
+# 
+#   # --- pooled GLM (LRT) ---
+#   gl <- tryCatch(glm(cbind(successes, trials - successes) ~ group,
+#                      family = binomial, data = dat),
+#                  error = function(e) NULL)
+#   if(!is.null(gl)) {
+#     nullm <- tryCatch(update(gl, . ~ . - group), error = function(e) NULL)
+#     if(!is.null(nullm)) {
+#       an <- tryCatch(anova(nullm, gl, test = "Chisq"), error = function(e) NULL)
+#       if(!is.null(an) && nrow(an) >= 2 && length(an$`Pr(>Chi)`[2]) == 1) {
+#    res["p_glm"] <- tryCatch({
+#   nullm <- update(gl, . ~ . - group)
+#   an <- anova(nullm, gl, test = "Chisq")
+#   pval <- an$`Pr(>Chi)`[2]
+#   if(is.na(pval) || length(pval) != 1) 1 else pval
+# }, error = function(e) 1)
+#       }
+#     }
+#   }
+# 
+#   # --- t-test on proportions (ignore replicates) ---
+#   dat$prop <- dat$successes / dat$trials
+#   res["p_t"] <- tryCatch(t.test(prop ~ group, data = dat)$p.value,
+#                          error = function(e) 1)
+# 
+#   # --- mixed GLMM (LRT) ---
+#   glmm <- tryCatch(glmer(cbind(successes, trials - successes) ~ group + (1 | replicate),
+#                          data = dat, family = binomial,
+#                          control = glmerControl(optimizer = "bobyqa",
+#                                                 optCtrl=list(maxfun=2e5))),
+#                    error = function(e) NULL)
+#   if(!is.null(glmm)) {
+#     nullm2 <- tryCatch(update(glmm, . ~ . - group), error = function(e) NULL)
+#     if(!is.null(nullm2)) {
+#       an2 <- tryCatch(anova(nullm2, glmm, test = "Chisq"), error = function(e) NULL)
+#       if(!is.null(an2) && nrow(an2) >= 2 && length(an2$`Pr(>Chisq)`[2]) == 1) {
+#         res["p_glmm"] <- an2$`Pr(>Chisq)`[2]
+#       }
+#     }
+#   }
+# 
+#   return(res)
+# }
+# 
+# # ---- Run grid of scenarios ----
+# results <- expand.grid(n_reps = n_reps_vals, sigma_rep = sigma_rep_vals,
+#                        stringsAsFactors = FALSE) %>%
+#   mutate(power_glm  = NA_real_,
+#          power_t    = NA_real_,
+#          power_glmm = NA_real_)
+# 
+# for(i in seq_len(nrow(results))) {
+#   n_reps <- results$n_reps[i]
+#   sigma_rep <- results$sigma_rep[i]
+#   cat("Running scenario", i, "of", nrow(results), ": n_reps =", n_reps,
+#       ", sigma_rep =", sigma_rep, "\n")
+# 
+#   # replicate simulations and ensure matrix output
+#   pvals <- replicate(n_sim, simulate_one(n_reps, sigma_rep), simplify = "matrix")
+# 
+#   # compute power, ignoring NAs
+#   results$power_glm[i]  <- mean(pvals["p_glm", ]  < alpha, na.rm = TRUE)
+#   results$power_t[i]    <- mean(pvals["p_t", ]    < alpha, na.rm = TRUE)
+#   results$power_glmm[i] <- mean(pvals["p_glmm", ] < alpha, na.rm = TRUE)
+# }
+# 
+# # ---- Tidy results for plotting ----
+# plot_df <- results %>%
+#   pivot_longer(cols = starts_with("power_"),
+#                names_to = "method", values_to = "power") %>%
+#   mutate(method = recode(method,
+#                          "power_glm"  = "pooled_GLM_LRT",
+#                          "power_t"    = "t_test_prop",
+#                          "power_glmm" = "mixed_GLMM_LRT"),
+#          n_reps = factor(n_reps))
 
-set.seed(123)
-library(lme4)
-library(dplyr)
-library(ggplot2)
-library(tidyr)
 
-# ---- Simulation parameters ----
-n_sim <- 100                       # simulations per scenario
-alpha <- 0.05
-
-# Data structure
-n_rows_per_rep_per_group <- 5      # rows per group per replicate
-n_trials_per_row <- 10              # trials per row
-
-# Fixed effects (logit scale)
-p0 <- 0.9
-logit <- function(p) log(p/(1-p))
-inv_logit <- function(x) plogis(x)
-beta0 <- logit(p0)
-OR <- .5
-beta_trt <- log(OR)
-
-# Sweep parameters
-n_reps_vals    <- c(3, 5, 10,20,40)              # number of replicate experiments
-sigma_rep_vals <- c(0.0,0.5, 1.0,2.0,3.0)   # between-replicate SD on logit scale
-
-# ---- Helper: simulate one experiment ----
-simulate_one <- function(n_reps, sigma_rep) {
-  res <- c(p_glm = NA, p_t = NA, p_glmm = NA)  # initialize return
-
-  # replicate-specific random intercepts
-  u_rep <- rnorm(n_reps, 0, sigma_rep)
-
-  # build dataset
-  dat_list <- lapply(seq_len(n_reps), function(r) {
-    n <- n_rows_per_rep_per_group
-    intercept_r <- beta0 + u_rep[r]
-
-    p_ctrl <- inv_logit(intercept_r)
-    p_trt  <- inv_logit(intercept_r + beta_trt)
-
-    s_ctrl <- rbinom(n, n_trials_per_row, p_ctrl)
-    s_trt  <- rbinom(n, n_trials_per_row, p_trt)
-
-    data.frame(
-      replicate = r,
-      group = factor(rep(c("control", "treat"), each = n)),
-      successes = c(s_ctrl, s_trt),
-      trials = rep(n_trials_per_row, 2*n)
-    )
-  })
-  dat <- bind_rows(dat_list)
-
-  # --- pooled GLM (LRT) ---
-  gl <- tryCatch(glm(cbind(successes, trials - successes) ~ group,
-                     family = binomial, data = dat),
-                 error = function(e) NULL)
-  if(!is.null(gl)) {
-    nullm <- tryCatch(update(gl, . ~ . - group), error = function(e) NULL)
-    if(!is.null(nullm)) {
-      an <- tryCatch(anova(nullm, gl, test = "Chisq"), error = function(e) NULL)
-      if(!is.null(an) && nrow(an) >= 2 && length(an$`Pr(>Chi)`[2]) == 1) {
-   res["p_glm"] <- tryCatch({
-  nullm <- update(gl, . ~ . - group)
-  an <- anova(nullm, gl, test = "Chisq")
-  pval <- an$`Pr(>Chi)`[2]
-  if(is.na(pval) || length(pval) != 1) 1 else pval
-}, error = function(e) 1)
-      }
-    }
-  }
-
-  # --- t-test on proportions (ignore replicates) ---
-  dat$prop <- dat$successes / dat$trials
-  res["p_t"] <- tryCatch(t.test(prop ~ group, data = dat)$p.value,
-                         error = function(e) 1)
-
-  # --- mixed GLMM (LRT) ---
-  glmm <- tryCatch(glmer(cbind(successes, trials - successes) ~ group + (1 | replicate),
-                         data = dat, family = binomial,
-                         control = glmerControl(optimizer = "bobyqa",
-                                                optCtrl=list(maxfun=2e5))),
-                   error = function(e) NULL)
-  if(!is.null(glmm)) {
-    nullm2 <- tryCatch(update(glmm, . ~ . - group), error = function(e) NULL)
-    if(!is.null(nullm2)) {
-      an2 <- tryCatch(anova(nullm2, glmm, test = "Chisq"), error = function(e) NULL)
-      if(!is.null(an2) && nrow(an2) >= 2 && length(an2$`Pr(>Chisq)`[2]) == 1) {
-        res["p_glmm"] <- an2$`Pr(>Chisq)`[2]
-      }
-    }
-  }
-
-  return(res)
-}
-
-# ---- Run grid of scenarios ----
-results <- expand.grid(n_reps = n_reps_vals, sigma_rep = sigma_rep_vals,
-                       stringsAsFactors = FALSE) %>%
-  mutate(power_glm  = NA_real_,
-         power_t    = NA_real_,
-         power_glmm = NA_real_)
-
-for(i in seq_len(nrow(results))) {
-  n_reps <- results$n_reps[i]
-  sigma_rep <- results$sigma_rep[i]
-  cat("Running scenario", i, "of", nrow(results), ": n_reps =", n_reps,
-      ", sigma_rep =", sigma_rep, "\n")
-
-  # replicate simulations and ensure matrix output
-  pvals <- replicate(n_sim, simulate_one(n_reps, sigma_rep), simplify = "matrix")
-
-  # compute power, ignoring NAs
-  results$power_glm[i]  <- mean(pvals["p_glm", ]  < alpha, na.rm = TRUE)
-  results$power_t[i]    <- mean(pvals["p_t", ]    < alpha, na.rm = TRUE)
-  results$power_glmm[i] <- mean(pvals["p_glmm", ] < alpha, na.rm = TRUE)
-}
-
-# ---- Tidy results for plotting ----
-plot_df <- results %>%
-  pivot_longer(cols = starts_with("power_"),
-               names_to = "method", values_to = "power") %>%
-  mutate(method = recode(method,
-                         "power_glm"  = "pooled_GLM_LRT",
-                         "power_t"    = "t_test_prop",
-                         "power_glmm" = "mixed_GLMM_LRT"),
-         n_reps = factor(n_reps))
-
+plot_mixed <- readRDS("files/plot_mixed.rds")
 # ---- Plot ----
-ggplot(plot_df, aes(x = sigma_rep, y = power, color = method, group = method)) +
+ggplot(plot_mixed, aes(x = sigma_rep, y = power, color = method, group = method)) +
   geom_line(size = 1.1) +
   geom_point(size = 2) +
   facet_wrap(~ n_reps, nrow = 1) +
   scale_color_manual(values = c("pooled_GLM_LRT" = "#D55E00",
                                 "t_test_prop"  = "#0072B2",
-                                "mixed_GLMM_LRT" = "#009E73")) +
+                                "mixed_GLMM_LRT" = "#009E73"),
+                     labels = c("Binomial GLMM", "Binomial GLM",
+                                "T-test"
+                                )) +
   labs(title = "Power vs Between-Replicate SD",
-       subtitle = paste0("n_rows_per_rep_per_group = ", n_rows_per_rep_per_group,
-                         ", trials_per_row = ", n_trials_per_row,
-                         ", sims per cell = ", n_sim),
-       x = "Between-replicate SD (logit scale)",
-       y = "Estimated power (proportion p < 0.05)",
+       subtitle = "Experimental Replicates",
+       x = "Between-replicate Standard Deviation",
+       y = "Estimated power",
        color = "Method") +
+  scale_y_continuous(labels = label_percent())+
+  geom_hline(yintercept = .8, linetype = "dashed")+
   theme_minimal(base_size = 13)
 
 

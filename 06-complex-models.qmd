@@ -109,8 +109,8 @@ dros_clean |>
 colours <- c("cyan", "darkorange", "purple")
 
 dros_clean |> 
-  ggplot(aes(x = longevity, y = type, fill = type))+
-  geom_density_ridges(alpha = 0.5)+
+  ggplot(aes(x = type, y = longevity, fill = type))+
+  geom_boxplot()+
   scale_fill_manual(values = colours)+
   theme_minimal()+
   theme(legend.position = "none")
@@ -120,7 +120,6 @@ dros_clean |>
 
 
 :::
-
 
 `r unhide()`
 
@@ -286,7 +285,7 @@ Your turn
 * [ ] What is the adjusted effect of the type on longevity?
 
 
-`r hide("Solution)`
+`r hide("Solution")`
 
 ```{r}
 summary(flyls2)
@@ -358,6 +357,20 @@ Compare to the simpler model:
 anova(flyls2, flyls3)
 ```
 
+R compares the nested models via a likelihood ratio test (LRT):
+
+- flyls2 = simpler model (without interaction term)
+
+- flyls3 = full model (with interaction term)
+
+The LRT evaluates:
+
+- H₀: β₃ = 0 (no interaction; same slope for all partner types)
+
+- H₁: β₃ ≠ 0 (interaction; slopes differ)
+
+If the p-value is small (typically < 0.05), the more complex model explains significantly more variation — implying the interaction is meaningful.
+
 ## Model checking
 
 Before we can interpret the terms in our model, we should check to see if this is even a good way of fitting and measuring our data. We should check the assumptions of our model are being met.
@@ -379,12 +392,15 @@ plot(flyls2)
 
 
 ## performance
+
 ```{r, eval = TRUE, message = FALSE, warning = FALSE, fig.height=9}
 
 performance::check_model(flyls2,
                          detrend = F)
 
 ```
+
+:::
 
 - Posterior Predictive Check – Assesses whether the model’s predicted values align well with the observed data, indicating good model fit.
 
@@ -426,6 +442,7 @@ performance::check_heteroscedasticity(flyls2)
 `r mcq(c(answer = "Yes", "No"))`
 
 `r hide("Solution")`
+
 Yes - the QQplot looks pretty good, a very minor indication of a right skew, but nothing to worry about. 
 
 [Interpreting QQ plots][What is a Quantile-Quantile (QQ) plot?]
@@ -437,7 +454,6 @@ performance::check_normality(flyls2)
 ```
 
 `r unhide()`
-
 
 
 ### Collinearity
@@ -594,8 +610,8 @@ marginal2 <- dros_clean |>
 
 # create a new dataset where all sleep values are set to a constant (mean) values - see the emmeans table
 
-means <- emmeans::emmeans(flyls1, 
-                 specs = ~ type + thorax + sleep,
+means <- emmeans::emmeans(flyls2, 
+                 specs = ~ type + thorax,
                  at = list(thorax = seq(0.64,0.94, .1))) |> 
   as_tibble()
 
