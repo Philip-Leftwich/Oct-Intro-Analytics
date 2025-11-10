@@ -68,6 +68,14 @@ book:
     - ggplot.qmd
     - ggplot2.qmd
     - ggplot3.qmd
+  - part: "Data Analysis"
+    chapters:
+    - 06-complex-models.qmd
+    - power-analysis.qmd
+    - 09-binomial.qmd
+    - 08-poisson.qmd
+    - equivalence-testing.qmd
+    - mixed-model.qmd
   appendices:
   - r-basics.qmd
   - tidy-data.qmd
