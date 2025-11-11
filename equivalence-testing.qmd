@@ -198,7 +198,7 @@ Confidence Intervals
 
 ```{r}
 
-broom::tidy(m_main, con.fint = T)
+broom::tidy(m_main, conf.int = T)
 
 #confint(m_main)
 
@@ -276,7 +276,9 @@ This shows:
 
 ```{r}
 
-broom::tidy(m_main, con.fint = T, level = .9)
+broom::tidy(m_main, 
+            conf.int = T, 
+            conf.level = 0.9)
 
 ```
 
