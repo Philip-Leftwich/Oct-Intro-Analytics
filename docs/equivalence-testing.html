@@ -935,10 +935,81 @@ Solution
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">plot</span>(<span class="fu">equivalence_test</span>(m_main, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="sc">-</span><span class="dv">20</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">equivalence_test</span>(m_main, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="sc">-</span><span class="dv">20</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 12%">
+<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 18%">
+<col style="width: 9%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: right;">CI</th>
+<th style="text-align: right;">CI_low</th>
+<th style="text-align: right;">CI_high</th>
+<th style="text-align: right;">SGPV</th>
+<th style="text-align: right;">ROPE_low</th>
+<th style="text-align: right;">ROPE_high</th>
+<th style="text-align: left;">ROPE_Equivalence</th>
+<th style="text-align: right;">p</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">V1</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">387.53804</td>
+<td style="text-align: right;">418.04782</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: left;">Rejected</td>
+<td style="text-align: right;">1.000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">V2</td>
+<td style="text-align: left;">treatmentB</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">-39.43401</td>
+<td style="text-align: right;">-4.20435</td>
+<td style="text-align: right;">0.4122</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: left;">Rejected</td>
+<td style="text-align: right;">1.021104</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">V3</td>
+<td style="text-align: left;">sexMale</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">-220.49735</td>
+<td style="text-align: right;">-185.26768</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: left;">Rejected</td>
+<td style="text-align: right;">1.000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">plot</span>(<span class="fu">equivalence_test</span>(m_main, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="sc">-</span><span class="dv">20</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="equivalence-testing_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="equivalence-testing_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>

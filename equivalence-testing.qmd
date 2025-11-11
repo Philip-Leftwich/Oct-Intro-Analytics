@@ -297,6 +297,11 @@ Try a different equivalence margin
 `r hide("Solution")`
 
 ```{r}
+
+equivalence_test(m_main, range = c(0,-20))
+```
+
+```{r}
 plot(equivalence_test(m_main, range = c(0,-20)))
 
 ```

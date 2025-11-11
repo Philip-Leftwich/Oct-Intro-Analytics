@@ -343,6 +343,8 @@ emmeans::emmeans(binomial_model,
                  type='response') 
 
 ```
+:::
+
 
 :::{.task}
 ::::{.task-header}
@@ -422,10 +424,6 @@ emmeans::emmeans(binomial_model,
 ::::
 :::
 
-
-
-
-
 ## Assumptions
 
 The `performance` package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood fit). In this case there is likely not enough data for robust checks - we could consider a quasi-likelihood model in order to have more conservative confidence intervals. 
@@ -473,8 +471,6 @@ Write up the results
 
 - How would you write up for findings from this analysis?
 
-::::
-:::
 
 `r hide("Report")`
 
@@ -489,10 +485,14 @@ report(binomial_model)
 
 `r unhide()`
 
+::::
+:::
+
+## Binomial vs Linear Model
 
 :::{.panel-tabset collapse = "true"}
 
-## Comparison to linear model
+## Comparison of R-squared
 
 A comparison of linear vs binomial model shows better explanatory power (R-squared) for our correctly fitted model:
 
