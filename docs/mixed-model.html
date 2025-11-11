@@ -631,7 +631,7 @@ window.Quarto = {
 </li>
   <li><a href="#using-random-effects" id="toc-using-random-effects" class="nav-link" data-scroll-target="#using-random-effects"><span class="header-section-number">25.3</span> Using random effects</a></li>
   <li>
-<a href="#why-use-mixed-models" id="toc-why-use-mixed-models" class="nav-link" data-scroll-target="#why-use-mixed-models"><span class="header-section-number">25.4</span> Why use mixed models?</a>
+<a href="#making-a-mixed-models" id="toc-making-a-mixed-models" class="nav-link" data-scroll-target="#making-a-mixed-models"><span class="header-section-number">25.4</span> Making a mixed models</a>
   <ul class="collapse">
 <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">25.4.1</span> The data</a></li>
   <li><a href="#all-in-one-model" id="toc-all-in-one-model" class="nav-link" data-scroll-target="#all-in-one-model"><span class="header-section-number">25.4.2</span> All in one model</a></li>
@@ -646,54 +646,49 @@ window.Quarto = {
   <li><a href="#standard-errors" id="toc-standard-errors" class="nav-link" data-scroll-target="#standard-errors"><span class="header-section-number">25.5.2</span> Standard Errors</a></li>
   </ul>
 </li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">25.6</span> Summary</a></li>
   <li>
-<a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions"><span class="header-section-number">25.7</span> Predictions</a>
+<a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions"><span class="header-section-number">25.6</span> Predictions</a>
   <ul class="collapse">
-<li><a href="#ggpredict" id="toc-ggpredict" class="nav-link" data-scroll-target="#ggpredict"><span class="header-section-number">25.7.1</span> <code>ggpredict</code></a></li>
-  <li><a href="#sjplot" id="toc-sjplot" class="nav-link" data-scroll-target="#sjplot"><span class="header-section-number">25.7.2</span> <code>sjPlot</code></a></li>
-  <li><a href="#emmeans" id="toc-emmeans" class="nav-link" data-scroll-target="#emmeans"><span class="header-section-number">25.7.3</span> <code>emmeans</code></a></li>
-  <li><a href="#interval-types" id="toc-interval-types" class="nav-link" data-scroll-target="#interval-types"><span class="header-section-number">25.7.4</span> Interval types</a></li>
+<li><a href="#ggpredict" id="toc-ggpredict" class="nav-link" data-scroll-target="#ggpredict"><span class="header-section-number">25.6.1</span> <code>ggpredict</code></a></li>
+  <li><a href="#sjplot" id="toc-sjplot" class="nav-link" data-scroll-target="#sjplot"><span class="header-section-number">25.6.2</span> <code>sjPlot</code></a></li>
+  <li><a href="#emmeans" id="toc-emmeans" class="nav-link" data-scroll-target="#emmeans"><span class="header-section-number">25.6.3</span> <code>emmeans</code></a></li>
+  <li><a href="#interval-types" id="toc-interval-types" class="nav-link" data-scroll-target="#interval-types"><span class="header-section-number">25.6.4</span> Interval types</a></li>
   </ul>
 </li>
   <li>
-<a href="#checking-model-assumptions" id="toc-checking-model-assumptions" class="nav-link" data-scroll-target="#checking-model-assumptions"><span class="header-section-number">25.8</span> Checking model assumptions</a>
+<a href="#checking-model-assumptions" id="toc-checking-model-assumptions" class="nav-link" data-scroll-target="#checking-model-assumptions"><span class="header-section-number">25.7</span> Checking model assumptions</a>
   <ul class="collapse">
-<li><a href="#performance" id="toc-performance" class="nav-link" data-scroll-target="#performance"><span class="header-section-number">25.8.1</span> performance</a></li>
-  <li><a href="#dharma" id="toc-dharma" class="nav-link" data-scroll-target="#dharma"><span class="header-section-number">25.8.2</span> DHARma</a></li>
+<li><a href="#performance" id="toc-performance" class="nav-link" data-scroll-target="#performance"><span class="header-section-number">25.7.1</span> performance</a></li>
   </ul>
 </li>
-  <li><a href="#practice-questions" id="toc-practice-questions" class="nav-link" data-scroll-target="#practice-questions"><span class="header-section-number">25.9</span> Practice Questions</a></li>
+  <li><a href="#reporting-mixed-model-results" id="toc-reporting-mixed-model-results" class="nav-link" data-scroll-target="#reporting-mixed-model-results"><span class="header-section-number">25.8</span> Reporting Mixed Model Results</a></li>
+  <li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables"><span class="header-section-number">25.9</span> Tables</a></li>
+  <li><a href="#figures" id="toc-figures" class="nav-link" data-scroll-target="#figures"><span class="header-section-number">25.10</span> Figures</a></li>
+  <li><a href="#write-ups" id="toc-write-ups" class="nav-link" data-scroll-target="#write-ups"><span class="header-section-number">25.11</span> Write-ups</a></li>
+  <li><a href="#practice-questions" id="toc-practice-questions" class="nav-link" data-scroll-target="#practice-questions"><span class="header-section-number">25.12</span> Practice Questions</a></li>
   <li>
-<a href="#worked-example-1---dolphins" id="toc-worked-example-1---dolphins" class="nav-link" data-scroll-target="#worked-example-1---dolphins"><span class="header-section-number">26</span> Worked Example 1 - Dolphins</a>
+<a href="#worked-example-1---dolphins" id="toc-worked-example-1---dolphins" class="nav-link" data-scroll-target="#worked-example-1---dolphins"><span class="header-section-number">25.13</span> Worked Example 1 - Dolphins</a>
   <ul class="collapse">
-<li><a href="#how-do-i-decide-if-it-is-a-fixed-or-random-effect" id="toc-how-do-i-decide-if-it-is-a-fixed-or-random-effect" class="nav-link" data-scroll-target="#how-do-i-decide-if-it-is-a-fixed-or-random-effect"><span class="header-section-number">26.1</span> How do I decide if it is a fixed or random effect?</a></li>
-  <li><a href="#dolphins" id="toc-dolphins" class="nav-link" data-scroll-target="#dolphins"><span class="header-section-number">26.2</span> Dolphins</a></li>
+<li><a href="#how-do-i-decide-if-it-is-a-fixed-or-random-effect" id="toc-how-do-i-decide-if-it-is-a-fixed-or-random-effect" class="nav-link" data-scroll-target="#how-do-i-decide-if-it-is-a-fixed-or-random-effect"><span class="header-section-number">25.13.1</span> How do I decide if it is a fixed or random effect?</a></li>
   </ul>
 </li>
+  <li><a href="#dolphins" id="toc-dolphins" class="nav-link" data-scroll-target="#dolphins"><span class="header-section-number">25.14</span> Dolphins</a></li>
   <li>
-<a href="#multiple-random-effects" id="toc-multiple-random-effects" class="nav-link" data-scroll-target="#multiple-random-effects"><span class="header-section-number">27</span> Multiple random effects</a>
+<a href="#multiple-random-effects" id="toc-multiple-random-effects" class="nav-link" data-scroll-target="#multiple-random-effects"><span class="header-section-number">25.15</span> Multiple random effects</a>
   <ul class="collapse">
-<li><a href="#crossed-or-nested" id="toc-crossed-or-nested" class="nav-link" data-scroll-target="#crossed-or-nested"><span class="header-section-number">27.0.1</span> Crossed or Nested</a></li>
+<li><a href="#crossed-or-nested" id="toc-crossed-or-nested" class="nav-link" data-scroll-target="#crossed-or-nested"><span class="header-section-number">25.15.1</span> Crossed or Nested</a></li>
   </ul>
 </li>
-  <li><a href="#worked-example-2---nested-design" id="toc-worked-example-2---nested-design" class="nav-link" data-scroll-target="#worked-example-2---nested-design"><span class="header-section-number">28</span> Worked Example 2 - Nested design</a></li>
+  <li><a href="#worked-example-2---nested-design" id="toc-worked-example-2---nested-design" class="nav-link" data-scroll-target="#worked-example-2---nested-design"><span class="header-section-number">25.16</span> Worked Example 2 - Nested design</a></li>
+  <li><a href="#worked-example-3---glmm-binomial-mixed-models" id="toc-worked-example-3---glmm-binomial-mixed-models" class="nav-link" data-scroll-target="#worked-example-3---glmm-binomial-mixed-models"><span class="header-section-number">25.17</span> Worked Example 3 - GLMM Binomial Mixed models</a></li>
   <li>
-<a href="#reporting-mixed-model-results" id="toc-reporting-mixed-model-results" class="nav-link" data-scroll-target="#reporting-mixed-model-results"><span class="header-section-number">29</span> Reporting Mixed Model Results</a>
+<a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">25.18</span> Summary</a>
   <ul class="collapse">
-<li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables"><span class="header-section-number">29.1</span> Tables</a></li>
-  <li><a href="#figures" id="toc-figures" class="nav-link" data-scroll-target="#figures"><span class="header-section-number">29.2</span> Figures</a></li>
-  <li><a href="#write-ups" id="toc-write-ups" class="nav-link" data-scroll-target="#write-ups"><span class="header-section-number">29.3</span> Write-ups</a></li>
+<li><a href="#checklist-for-pooling-vs.-fixed-vs.-random-effects" id="toc-checklist-for-pooling-vs.-fixed-vs.-random-effects" class="nav-link" data-scroll-target="#checklist-for-pooling-vs.-fixed-vs.-random-effects"><span class="header-section-number">25.18.1</span> Checklist for Pooling vs.&nbsp;Fixed vs.&nbsp;Random Effects</a></li>
+  <li><a href="#practical-problems" id="toc-practical-problems" class="nav-link" data-scroll-target="#practical-problems"><span class="header-section-number">25.18.2</span> Practical problems</a></li>
   </ul>
 </li>
-  <li>
-<a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1"><span class="header-section-number">30</span> Summary</a>
-  <ul class="collapse">
-<li><a href="#mixed-model-extensions" id="toc-mixed-model-extensions" class="nav-link" data-scroll-target="#mixed-model-extensions"><span class="header-section-number">30.1</span> Mixed Model extensions</a></li>
-  <li><a href="#practical-problems" id="toc-practical-problems" class="nav-link" data-scroll-target="#practical-problems"><span class="header-section-number">30.2</span> Practical problems</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">30.3</span> Further Reading</a></li>
-  </ul>
-</li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">25.19</span> Further Reading</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -733,16 +728,9 @@ window.Quarto = {
 <section id="fixed-and-random-effects" class="level3" data-number="25.2.1"><h3 data-number="25.2.1" class="anchored" data-anchor-id="fixed-and-random-effects">
 <span class="header-section-number">25.2.1</span> Fixed and Random effects</h3>
 <ul>
-<li>Fixed effects: are parameters associated with specific, non-random levels of a factor. You estimate a separate coefficient for each level (or contrast) and make inferences about those specific levels. They’re treated as systematic, not varying by chance.</li>
+<li><p><strong>Fixed effects</strong>: are parameters associated with specific, non-random levels of a factor. You estimate a separate coefficient for each level (or contrast) and make inferences about those specific levels. They’re treated as systematic, not varying by chance.</p></li>
+<li><p><strong>Random effects</strong>: are modeled as draws from a probability distribution, typically assumed to be Normal with mean zero and an estimated variance component. Instead of estimating a separate coefficient for each group, the model estimates the variance of the distribution from which those group effects are drawn. You’re not interested in the specific group effects per se, but in how much they vary around a population mean.</p></li>
 </ul>
-<p>We can consider this in terms of a very simple linear model, here the estimated intercept is the expected value of the outcome <span class="math inline">\(y\)</span> when the predictor <span class="math inline">\(x\)</span> has a value of 0. The estimated slope is the expected change in <span class="math inline">\(y\)</span> for a single unit change in <span class="math inline">\(x\)</span>. These parameters are “fixed”, meaning that each individual in the population has the same expected value for the intercept and slope.</p>
-<p>The difference between the expected value and true value is called “residual error”.</p>
-<p><span class="math display">\[Y_i = \beta_0 + \beta_1X_i + \epsilon_i\]</span></p>
-<ul>
-<li>Random effects: are modeled as draws from a probability distribution, typically assumed to be Normal with mean zero and an estimated variance component. Instead of estimating a separate coefficient for each group, the model estimates the variance of the distribution from which those group effects are drawn. You’re not interested in the specific group effects per se, but in how much they vary around a population mean.</li>
-</ul>
-<p>The random effect <span class="math inline">\(U_i\)</span> is often assumed to follow a normal distribution with a mean of zero and a variance estimated during the model fitting process.</p>
-<p><span class="math display">\[Y_i = β_0 + U_j + ε_i\]</span> Defining what a random effect actually <em>is</em> is tricky. The key practical distinction is how they are treated in mixed models.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -755,7 +743,9 @@ window.Quarto = {
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>In the book “Data analysis using regression and multilevel/hierarchical models” (<span class="citation" data-cites="gelman_hill_2006">(<a href="references.html#ref-gelman_hill_2006" role="doc-biblioref"><strong>gelman_hill_2006?</strong></a>)</span>). The authors examined five definitions of fixed and random effects and found no consistent agreement.</p>
+<p>The random effect <span class="math inline">\(U_i\)</span> is often assumed to follow a normal distribution with a mean of zero and a variance estimated during the model fitting process.</p>
+<p><span class="math display">\[Y_i = β_0 + U_j + ε_i\]</span> Defining what a random effect actually <em>is</em> is tricky. The key practical distinction is how they are treated in mixed models.</p>
+<p>In the book “Data analysis using regression and multilevel/hierarchical models” By Gelman Hill 2006. The authors examined five definitions of fixed and random effects and found no consistent agreement.</p>
 <ol type="1">
 <li><p>Fixed effects are constant across individuals, and random effects vary. For example, in a growth study, a model with random intercepts a_i and fixed slope b corresponds to parallel lines for different individuals i, or the model y_it = a_i + b t thus distinguish between fixed and random coefficients.</p></li>
 <li><p>Effects are fixed if they are interesting in themselves or random if there is interest in the underlying population.</p></li>
@@ -779,21 +769,20 @@ window.Quarto = {
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Note that the golden rule is that you generally want your random effect to have at least five levels. So, for instance, if we wanted to control for the effects of fish sex on body length, we would fit sex (a two level factor: male or female) as a fixed, not random, effect.</p>
-<p>This is, put simply, because estimating variance on few data points is very imprecise. Mathematically you could, but you wouldn’t have a lot of confidence in it. If you only have two or three levels, the model will struggle to partition the variance - it will give you an output, but not necessarily one you can trust.</p>
-<p>Finally, keep in mind that the name random doesn’t have much to do with mathematical randomness. Yes, it’s confusing. Just think about them as the grouping variables for now. Strictly speaking it’s all about making our models representative of our questions and getting better estimates. Hopefully, our next few examples will help you make sense of how and why they’re used.</p>
-<p>There’s no firm rule as to what the minimum number of factor levels should be for random effect and really you can use any factor that has two or more levels. However it is commonly reported that you may want five or more factor levels for a random effect in order to really benefit from what the random effect can do (though some argue for even more, 10 levels). Another case in which you may not want to random effect is when you don’t want your factor levels to inform each other or you don’t assume that your factor levels come from a common distribution. As noted above, male and female is not only a factor with only two levels but oftentimes we want male and female information estimated separately and we’re not necessarily assuming that males and females come from a population of sexes in which there is an infinite number and we’re interested in an average.</p>
+<p>Note that the golden rule is that you generally want your random effect to have <strong>at least five levels</strong>. So, for instance, if we wanted to control for the effects of fish sex on body length, we would fit sex (a two level factor: male or female) as a fixed, not random, effect.</p>
+<p>This is because estimating variance on few data points is very imprecise. Mathematically you could, but you wouldn’t have a lot of confidence in it. If you only have two or three levels, the model will struggle to partition the variance - it will give you an output, but not necessarily one you can trust.</p>
+<p>There’s no firm rule as to what the minimum number of factor levels should be for random effect. It is commonly reported that you may want <strong>five or more factor levels</strong> for a random effect in order to really benefit from what the random effect can do (<em>though some argue for even more, 10 levels</em>).</p>
 </div>
 </div>
 </div>
 </section></section><section id="using-random-effects" class="level2" data-number="25.3"><h2 data-number="25.3" class="anchored" data-anchor-id="using-random-effects">
 <span class="header-section-number">25.3</span> Using random effects</h2>
-<p>So random effects are usually grouping <strong>factors</strong> for which we are trying to control. <em>They are always categorical</em>, as you can’t force R to treat a continuous variable as a random effect. A lot of the time we are not specifically interested in their impact on the response variable, but we know that they might be influencing the patterns we see.</p>
+<p>Random effects are usually grouping <strong>factors</strong> for which we are trying to control. <strong>They are always categorical</strong>, as you can’t force R to treat a continuous variable as a random effect. A lot of the time we are not specifically interested in their impact on the response variable, but we know that they might be influencing the patterns we see.</p>
 <p>The mixed-effects model can be used in many situations instead of one of our more straightforward tests when this structure may be important. The main advantages of this approach are:</p>
 <ol type="i">
-<li>mixed-effects models account for more of the variance</li>
-<li>mixed-effects models incorporate group and even individual-level differences</li>
-<li>mixed-effects models cope well with missing data, unequal group sizes and repeated measurements</li>
+<li><p>mixed-effects models account for more of the variance</p></li>
+<li><p>mixed-effects models incorporate group and even individual-level differences</p></li>
+<li><p>mixed-effects models cope well with missing data, unequal group sizes and repeated measurements</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -805,25 +794,37 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>One application of mixed models is to account for overdispersion in fixed-dipsersion models (Poisson and Binomial). If a random effect is included to account for individual-level variation we may find our models have a better fit.</p>
+<p>Another application of mixed models is to account for overdispersion in fixed-dipsersion models (Poisson and Binomial). If a random effect is included to account for individual-level variation we may find our models have a better fit.</p>
 </div>
 </div>
-</section><section id="why-use-mixed-models" class="level2" data-number="25.4"><h2 data-number="25.4" class="anchored" data-anchor-id="why-use-mixed-models">
-<span class="header-section-number">25.4</span> Why use mixed models?</h2>
+</section><section id="making-a-mixed-models" class="level2" data-number="25.4"><h2 data-number="25.4" class="anchored" data-anchor-id="making-a-mixed-models">
+<span class="header-section-number">25.4</span> Making a mixed models</h2>
 <section id="the-data" class="level3" data-number="25.4.1"><h3 data-number="25.4.1" class="anchored" data-anchor-id="the-data">
 <span class="header-section-number">25.4.1</span> The data</h3>
-<p>This dataset represents results from replicate feeding experiments investigating how <em>Spodoptera frugiperda</em> larvae respond to increasing concentrations of a plant defensive compound. The explanatory variable is the concentration of the benzoxazinoid DIMBOA incorporated into the larval diet (mM), while the response variable y is a composite detoxification index combining cytochrome P450 and glutathione S-transferase activity together with expression of a marker detoxification gene.</p>
-<p>Each group corresponds to an independent experimental replicate—separate batches of larvae reared and assayed under identical conditions on different days—to capture between-replicate variation in baseline activity and toxin responsiveness.</p>
+<p>This dataset represents results from replicate feeding experiments investigating how <em>Spodoptera frugiperda</em> larvae respond to increasing concentrations of a plant defensive compound.</p>
+<ul>
+<li><p>The explanatory variable is the concentration of the benzoxazinoid DIMBOA incorporated into the larval diet (mM)</p></li>
+<li><p>The response variable y is a composite detoxification index combining cytochrome P450 and glutathione S-transferase activity together with expression of a marker detoxification gene.</p></li>
+<li><p>Each group corresponds to an independent experimental replicate—separate batches of larvae reared and assayed under identical conditions on different days—to capture between-replicate variation in baseline activity and toxin responsiveness.</p></li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<a href="https://github.com/UEABIO/5023B/blob/dev/files/benzo.csv">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/Spodoptera_frugiperda.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Fall Army Worm"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<a href="https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/benzo.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download benzoxazinoid data as csv</button>
 </a>
 </div>
 </div>
 </section><section id="all-in-one-model" class="level3" data-number="25.4.2"><h3 data-number="25.4.2" class="anchored" data-anchor-id="all-in-one-model">
 <span class="header-section-number">25.4.2</span> All in one model</h3>
-<p>We will begin by highlighting the importance of considering data structure and hierarchy when building linear models. To illustrate this, we will delve into an example that showcases the consequences of ignoring the underlying data structure. We might naively construct a single linear model that ignores the group-level variation and treats all observations as independent. This oversimplified approach fails to account for the fact that observations within groups are more similar to each other due to shared characteristics.</p>
+<p>We will begin by highlighting the importance of considering data structure and hierarchy when building linear models. To illustrate this, we will delve into an example that showcases the consequences of ignoring the underlying data structure. We might naively construct a single linear model that ignores the group-level variation and treats all observations as independent. This oversimplified approach fails to account for the fact that observations within groups may be more similar to each other.</p>
 <p><span class="math display">\[Y_i = \beta_0 + \beta_1X_i + \epsilon_i\]</span></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>basic_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(detox_exp <span class="sc">~</span> benzo_um, <span class="at">data =</span> benzo_data)</span>
@@ -855,12 +856,12 @@ F-statistic: 81.62 on 1 and 428 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">plot</span>(benzo_data<span class="sc">$</span>benzo_um, benzo_data<span class="sc">$</span>detox_exp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>Simple scatter plot x against y</figcaption></figure>
 </div>
 </div>
 </div>
-<p>Here if we use the function <code>geom_smooth()</code> on the scatter plot, the plot also includes a fitted regression line obtained using the “lm” method. This allows us to examine the overall trend and potential linear association between the variables.</p>
+<p>Here if we use the function <code>geom_smooth()</code> on the scatter plot, the plot also includes a fitted regression line obtained using the <code>lm</code> method. This allows us to examine the overall trend and potential linear association between the variables.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(benzo_data, <span class="fu">aes</span>(<span class="at">x =</span> benzo_um, </span>
 <span id="cb4-2"><a href="#cb4-2"></a>                 <span class="at">y =</span> detox_exp)) <span class="sc">+</span></span>
@@ -870,14 +871,29 @@ F-statistic: 81.62 on 1 and 428 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>Scatter plot displaying the relationship between the independent variable and the dependent variable. The points represent the observed data, while the fitted regression line represents the linear relationship between the variables. The plot helps visualize the trend and potential association between the variables.</figcaption></figure>
 </div>
 </div>
 </div>
 <p>Looking at the fit of our model we would be tempted to conclude that we have an accurate and robust model.</p>
-<p>However, when data is hierarchically structured, such as individuals nested within groups, there is typically correlation or similarity among observations within the same group. By not accounting for this clustering effect, estimates derived from a single model can be biased and inefficient. The assumption of independence among observations is violated, leading to incorrect standard errors and inflated significance levels.</p>
-<p>From the figure below we can see the difference in median and range of x values within each of our groups:</p>
+<p>However, when data is <strong>structured</strong>, such as individuals nested within groups, there is typically correlation or similarity among observations <em>within the same group</em>. By not accounting for this clustering effect, estimates derived from a single model can be biased and inefficient. The assumption of independence among observations is violated, leading to incorrect standard errors and inflated significance levels.</p>
+<p>From the figures below we can see the difference in median and range of x values within each of our groups:</p>
+<div class="task">
+<div class="task-header">
+<p>Visualise the groups</p>
+</div>
+<div class="task-container">
+<ul>
+<li>Make a simple ggplot that highlights the differences between the groups.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Hint try boxplots for average difference between groups or colour the original scatterplot by group</p>
+</blockquote>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Differences between groups</a></li>
@@ -895,7 +911,7 @@ F-statistic: 81.62 on 1 and 428 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -917,7 +933,7 @@ F-statistic: 81.62 on 1 and 428 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb6-12"><a href="#cb6-12"></a>plot_group</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -925,10 +941,13 @@ F-statistic: 81.62 on 1 and 428 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
+</div>
 <p>From the above plots, it confirms that our observations from within each of the ranges aren’t independent. We can’t ignore that: as it might make our estimates biased.</p>
+</div>
+</div>
 </section><section id="multiple-analyses-approach" class="level3" data-number="25.4.3"><h3 data-number="25.4.3" class="anchored" data-anchor-id="multiple-analyses-approach">
 <span class="header-section-number">25.4.3</span> Multiple analyses approach</h3>
-<p>Running separate linear models per group, also known as stratified analysis, can be a feasible approach in certain situations. However, there are several drawbacks including</p>
+<p>Running separate linear models per group, also known as <strong>stratified analysis</strong>, could a feasible approach in certain situations. However, there are several drawbacks including</p>
 <ul>
 <li><p>Increased complexity</p></li>
 <li><p>Inability to draw direct conclusions on overall variability</p></li>
@@ -948,51 +967,54 @@ F-statistic: 81.62 on 1 and 428 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group)  <span class="co"># Faceting the plot by group</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>Scatter plot showing the relationship between the independent variable (x) and the dependent variable (y) colored by group. Each subplot represents a different group. The line represents the group-level linear regression smoothing.</figcaption></figure>
 </div>
 </div>
 </div>
 <div class="webex-solution">
 <button>
-report_p function
+Code
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a> report_p <span class="ot">&lt;-</span> <span class="cf">function</span>(p, <span class="at">digits =</span> <span class="dv">3</span>) {</span>
-<span id="cb8-2"><a href="#cb8-2"></a>     reported <span class="ot">&lt;-</span> <span class="fu">if_else</span>(p <span class="sc">&lt;</span> <span class="fl">0.001</span>,</span>
-<span id="cb8-3"><a href="#cb8-3"></a>             <span class="st">"p &lt; 0.001"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4"></a>             <span class="fu">paste</span>(<span class="st">"p="</span>, <span class="fu">round</span>(p, digits)))</span>
-<span id="cb8-5"><a href="#cb8-5"></a>     </span>
-<span id="cb8-6"><a href="#cb8-6"></a>     <span class="fu">return</span>(reported)</span>
-<span id="cb8-7"><a href="#cb8-7"></a> }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="do">## Custom function to make pretty p-reporting</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a> report_p <span class="ot">&lt;-</span> <span class="cf">function</span>(p, <span class="at">digits =</span> <span class="dv">3</span>) {</span>
+<span id="cb8-3"><a href="#cb8-3"></a>     reported <span class="ot">&lt;-</span> <span class="fu">if_else</span>(p <span class="sc">&lt;</span> <span class="fl">0.001</span>,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>             <span class="st">"p &lt; 0.001"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>             <span class="fu">paste</span>(<span class="st">"p="</span>, <span class="fu">round</span>(p, digits)))</span>
+<span id="cb8-6"><a href="#cb8-6"></a>     </span>
+<span id="cb8-7"><a href="#cb8-7"></a>     <span class="fu">return</span>(reported)</span>
+<span id="cb8-8"><a href="#cb8-8"></a> }</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co"># Creating nested benzo_data by grouping the benzo_data by 'group'</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>nested_data <span class="ot">&lt;-</span> benzo_data <span class="sc">|&gt;</span> </span>
+<span id="cb8-13"><a href="#cb8-13"></a>  <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span> </span>
+<span id="cb8-14"><a href="#cb8-14"></a>  <span class="fu">nest</span>()</span>
+<span id="cb8-15"><a href="#cb8-15"></a></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co"># Fitting linear regression models to each nested data group</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>models <span class="ot">&lt;-</span> <span class="fu">map</span>(nested_data<span class="sc">$</span>data, <span class="sc">~</span> <span class="fu">lm</span>(detox_exp <span class="sc">~</span> benzo_um, <span class="at">data =</span> .)) <span class="sc">|&gt;</span>  </span>
+<span id="cb8-18"><a href="#cb8-18"></a>          <span class="fu">map</span>(broom<span class="sc">::</span>tidy)</span>
+<span id="cb8-19"><a href="#cb8-19"></a></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="co"># Combining the model results into a single data frame</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a>combined_models <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(models)</span>
+<span id="cb8-22"><a href="#cb8-22"></a></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="co"># Filtering the rows to include only the 'x' predictor</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a>filtered_models <span class="ot">&lt;-</span> combined_models <span class="sc">|&gt;</span> </span>
+<span id="cb8-25"><a href="#cb8-25"></a>                   <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"benzo_um"</span>)</span>
+<span id="cb8-26"><a href="#cb8-26"></a></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="co"># Adding a column for the group index using rowid_to_column function</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a>group_indexed_models <span class="ot">&lt;-</span> filtered_models <span class="sc">|&gt;</span> </span>
+<span id="cb8-29"><a href="#cb8-29"></a>                        <span class="fu">rowid_to_column</span>(<span class="st">"group"</span>)</span>
+<span id="cb8-30"><a href="#cb8-30"></a></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="co"># Modifying the p-values using a custom function report_p</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a>final_models <span class="ot">&lt;-</span> group_indexed_models <span class="sc">|&gt;</span> </span>
+<span id="cb8-33"><a href="#cb8-33"></a>                <span class="fu">mutate</span>(<span class="at">p.value =</span> <span class="fu">report_p</span>(p.value))</span>
+<span id="cb8-34"><a href="#cb8-34"></a></span>
+<span id="cb8-35"><a href="#cb8-35"></a>final_models</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Creating nested benzo_data by grouping the benzo_data by 'group'</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>nested_data <span class="ot">&lt;-</span> benzo_data <span class="sc">|&gt;</span> </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span> </span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">nest</span>()</span>
-<span id="cb9-5"><a href="#cb9-5"></a></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co"># Fitting linear regression models to each nested data group</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>models <span class="ot">&lt;-</span> <span class="fu">map</span>(nested_data<span class="sc">$</span>data, <span class="sc">~</span> <span class="fu">lm</span>(detox_exp <span class="sc">~</span> benzo_um, <span class="at">data =</span> .)) <span class="sc">|&gt;</span>  </span>
-<span id="cb9-8"><a href="#cb9-8"></a>          <span class="fu">map</span>(broom<span class="sc">::</span>tidy)</span>
-<span id="cb9-9"><a href="#cb9-9"></a></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co"># Combining the model results into a single data frame</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a>combined_models <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(models)</span>
-<span id="cb9-12"><a href="#cb9-12"></a></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co"># Filtering the rows to include only the 'x' predictor</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a>filtered_models <span class="ot">&lt;-</span> combined_models <span class="sc">|&gt;</span> </span>
-<span id="cb9-15"><a href="#cb9-15"></a>                   <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"benzo_um"</span>)</span>
-<span id="cb9-16"><a href="#cb9-16"></a></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="co"># Adding a column for the group index using rowid_to_column function</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a>group_indexed_models <span class="ot">&lt;-</span> filtered_models <span class="sc">|&gt;</span> </span>
-<span id="cb9-19"><a href="#cb9-19"></a>                        <span class="fu">rowid_to_column</span>(<span class="st">"group"</span>)</span>
-<span id="cb9-20"><a href="#cb9-20"></a></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="co"># Modifying the p-values using a custom function report_p</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a>final_models <span class="ot">&lt;-</span> group_indexed_models <span class="sc">|&gt;</span> </span>
-<span id="cb9-23"><a href="#cb9-23"></a>                <span class="fu">mutate</span>(<span class="at">p.value =</span> <span class="fu">report_p</span>(p.value))</span>
-<span id="cb9-24"><a href="#cb9-24"></a></span>
-<span id="cb9-25"><a href="#cb9-25"></a>final_models</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1055,13 +1077,15 @@ report_p function
 </blockquote>
 </section><section id="fixed-effects-model" class="level3" data-number="25.4.4"><h3 data-number="25.4.4" class="anchored" data-anchor-id="fixed-effects-model">
 <span class="header-section-number">25.4.4</span> Fixed effects model</h3>
-<p>Using a group level term with an effect on x as a fixed effect means explicitly including the terms x and the group as a predictors in the model equation. This approach assumes that the relationship between x and the outcome variable differs across groups and that these differences are constant and fixed.</p>
+<p>Using a group level term with an effect on x as a <strong>fixed effect</strong> means explicitly including the terms <code>benzo_um</code> and the <code>group</code> as a predictors in the model equation. This approach assumes that the relationship between x and the outcome variable differs across groups and that these differences are constant and fixed.</p>
 <p>It implies that each group has a unique intercept (baseline level) for the relationship between x and the outcome variable. By treating the group level term as a fixed effect, the model estimates <em>specific parameter values for each group</em>.</p>
 <p><span class="math display">\[Y_i = \beta_0 + \beta_1X_i + \beta_2.group_i+\beta_3(X_i.group_i)+\epsilon_i\]</span></p>
+<section id="include-group-as-a-fixed-effect-in-your-model" class="level4" data-number="25.4.4.1"><h4 data-number="25.4.4.1" class="anchored" data-anchor-id="include-group-as-a-fixed-effect-in-your-model">
+<span class="header-section-number">25.4.4.1</span> Include group as a fixed effect in your model</h4>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>additive_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(detox_exp <span class="sc">~</span> benzo_um <span class="sc">+</span> group, <span class="at">data =</span> benzo_data)</span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">summary</span>(additive_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>additive_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(detox_exp <span class="sc">~</span> benzo_um <span class="sc">+</span> group, <span class="at">data =</span> benzo_data)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">summary</span>(additive_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1094,7 +1118,7 @@ F-statistic: 205.3 on 5 and 424 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>relatively consistent group differences</p></li>
 <li><p>when you have few groups (&lt;5)</p></li>
 </ul>
-<p>Then the difference between a fixed-effect model and a mixed-effect model will be <em>small</em>.</p>
+<p>Then the difference between a fixed-effect model and a mixed-effect model will be <em>small</em>. And this may be the preferred option.</p>
 <p><strong>BUT</strong></p>
 <ul>
 <li><p>When replicate experiments vary in <em>n</em></p></li>
@@ -1102,56 +1126,57 @@ F-statistic: 205.3 on 5 and 424 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>When you have lots of groups (&gt; 5 - 10)</p></li>
 <li><p>When you have incomplete groups or timepoints</p></li>
 </ul>
-<p>Then mixed models can be much more powerful.</p>
-</section></section><section id="our-first-mixed-model" class="level2" data-number="25.5"><h2 data-number="25.5" class="anchored" data-anchor-id="our-first-mixed-model">
+<p><em>Then mixed models can be much more powerful</em>.</p>
+</section></section></section><section id="our-first-mixed-model" class="level2" data-number="25.5"><h2 data-number="25.5" class="anchored" data-anchor-id="our-first-mixed-model">
 <span class="header-section-number">25.5</span> Our first mixed model</h2>
 <p>A mixed model is a good choice here: it will allow us to use all the data we have (higher sample size) and account for the correlations between data coming from the groups. We will also estimate fewer parameters and avoid problems with multiple comparisons that we would encounter while using separate regressions.</p>
 <p>We can now join our random effect <span class="math inline">\(U_j\)</span> to the full dataset and define our y values as</p>
 <p><span class="math display">\[Y_{ij} = β_0 + β_1*X_{ij} + U_j + ε_{ij}\]</span>.</p>
-<p>We have a response variable, and we are attempting to explain part of the variation in test score through fitting an independent variable as a fixed effect. But the response variable has some residual variation (i.e.&nbsp;unexplained variation) associated with group. By using random effects, we are modeling that unexplained variation through variance.</p>
-<p>We now want to know if an association between <code>y ~ x</code> exists after controlling for the variation in group.</p>
+<p>We have a response variable, and we are attempting to explain <em>part of the variation through fitting an independent variable as a fixed effect</em>. But the response variable has some residual variation (i.e.&nbsp;unexplained variation) associated with group. By using random effects, we are modeling that unexplained variation through variance.</p>
+<p><strong>We now want to know if an association between <code>y ~ x</code> exists after controlling for the variation in group.</strong></p>
 <section id="running-mixed-effects-models-with-lmertest" class="level3" data-number="25.5.1"><h3 data-number="25.5.1" class="anchored" data-anchor-id="running-mixed-effects-models-with-lmertest">
 <span class="header-section-number">25.5.1</span> Running mixed effects models with lmerTest</h3>
-<p>This section will detail how to run mixed models with the <code>lmer</code> function in the R package <code>lmerTest</code> (<span class="citation" data-cites="R-lmerTest">Kuznetsova et al. (<a href="references.html#ref-R-lmerTest" role="doc-biblioref">2020</a>)</span>). This builds on the older <code>lme4</code> (<span class="citation" data-cites="R-lme4">Bates et al. (<a href="references.html#ref-R-lme4" role="doc-biblioref">2025</a>)</span>) package, and in particular add p-values that were not previously included. There are other R packages that can be used to run mixed-effects models including the <code>nlme</code> package (<span class="citation" data-cites="R-nlme">Pinheiro et al. (<a href="references.html#ref-R-nlme" role="doc-biblioref">2025</a>)</span>) and the <code>glmmTMB</code> package (<span class="citation" data-cites="R-glmmTMB">(<a href="references.html#ref-R-glmmTMB" role="doc-biblioref"><strong>R-glmmTMB?</strong></a>)</span>). Outside of R there are also other packages and software capable of running mixed-effects models, though arguably none is better supported than R software.</p>
+<p>This section will detail how to run mixed models with the <code>lmer</code> function in the R package <code>lmerTest</code> (<span class="citation" data-cites="R-lmerTest">Kuznetsova et al. (<a href="references.html#ref-R-lmerTest" role="doc-biblioref">2020</a>)</span>). There are other R packages that can be used to run mixed-effects models such as the <code>glmmTMB</code> package.</p>
 <div class="webex-solution">
 <button>
 Plotting random intercepts
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>plot_function2 <span class="ot">&lt;-</span> <span class="cf">function</span>(model, data, <span class="at">title =</span> <span class="st">"Data Coloured by Group"</span>){</span>
-<span id="cb12-2"><a href="#cb12-2"></a>  </span>
-<span id="cb12-3"><a href="#cb12-3"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span>  </span>
-<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">mutate</span>(<span class="at">fit.m =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NA</span>),</span>
-<span id="cb12-5"><a href="#cb12-5"></a>         <span class="at">fit.c =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NULL</span>))</span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">col =</span> group)) <span class="sc">+</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">geom_point</span>(<span class="at">pch =</span> <span class="dv">16</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit.c, <span class="at">col =</span> group), <span class="at">linewidth =</span> <span class="dv">2</span>)  <span class="sc">+</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">100</span>))<span class="sc">+</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a>  <span class="fu">labs</span>(<span class="at">title =</span> title, </span>
-<span id="cb12-13"><a href="#cb12-13"></a>       <span class="at">x =</span> <span class="st">"Independent Variable"</span>, </span>
-<span id="cb12-14"><a href="#cb12-14"></a>       <span class="at">y =</span> <span class="st">"Dependent Variable"</span>) </span>
-<span id="cb12-15"><a href="#cb12-15"></a>}</span>
-<span id="cb12-16"><a href="#cb12-16"></a></span>
-<span id="cb12-17"><a href="#cb12-17"></a>mixed_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> x <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>group), <span class="at">data =</span> data)</span>
-<span id="cb12-18"><a href="#cb12-18"></a></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="fu">plot_function2</span>(mixed_model,benzo_data, <span class="st">"Random intercept"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>plot_function2 <span class="ot">&lt;-</span> <span class="cf">function</span>(model, data, <span class="at">title =</span> <span class="st">"Data Coloured by Group"</span>){</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  </span>
+<span id="cb11-3"><a href="#cb11-3"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span>  </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">mutate</span>(<span class="at">fit.m =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NA</span>),</span>
+<span id="cb11-5"><a href="#cb11-5"></a>         <span class="at">fit.c =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NULL</span>))</span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">col =</span> group)) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">geom_point</span>(<span class="at">pch =</span> <span class="dv">16</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit.c, <span class="at">col =</span> group), <span class="at">linewidth =</span> <span class="dv">2</span>)  <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">100</span>))<span class="sc">+</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">labs</span>(<span class="at">title =</span> title, </span>
+<span id="cb11-13"><a href="#cb11-13"></a>       <span class="at">x =</span> <span class="st">"Independent Variable"</span>, </span>
+<span id="cb11-14"><a href="#cb11-14"></a>       <span class="at">y =</span> <span class="st">"Dependent Variable"</span>) </span>
+<span id="cb11-15"><a href="#cb11-15"></a>}</span>
+<span id="cb11-16"><a href="#cb11-16"></a></span>
+<span id="cb11-17"><a href="#cb11-17"></a>mixed_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> x <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>group), <span class="at">data =</span> data)</span>
+<span id="cb11-18"><a href="#cb11-18"></a></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="fu">plot_function2</span>(mixed_model,benzo_data, <span class="st">"Random intercept"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Here we fit our random intercepts with <code>(1|random_effect_variable)</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># random intercept model</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>mixed_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(detox_exp <span class="sc">~</span> benzo_um <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>group), <span class="at">data =</span> benzo_data)</span>
-<span id="cb13-3"><a href="#cb13-3"></a></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="fu">summary</span>(mixed_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># random intercept model</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>mixed_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(detox_exp <span class="sc">~</span> benzo_um <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>group), <span class="at">data =</span> benzo_data)</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="fu">summary</span>(mixed_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -1191,23 +1216,23 @@ benzo_um -0.131</code></pre>
 <span class="header-section-number">25.5.2</span> Standard Errors</h3>
 <p>Below we can take a look at the estimates and standard errors for three of our previously constructed models:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>pooled <span class="ot">&lt;-</span> basic_model <span class="sc">|&gt;</span>  </span>
-<span id="cb16-2"><a href="#cb16-2"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span>  </span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">"Pooled"</span>, <span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">select</span>(term, estimate, std.error, Approach)</span>
-<span id="cb16-5"><a href="#cb16-5"></a></span>
-<span id="cb16-6"><a href="#cb16-6"></a>no_pool <span class="ot">&lt;-</span> additive_model <span class="sc">|&gt;</span>  </span>
-<span id="cb16-7"><a href="#cb16-7"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span>  </span>
-<span id="cb16-8"><a href="#cb16-8"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">"No Pooling"</span>, <span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb16-9"><a href="#cb16-9"></a>  <span class="fu">select</span>(term, estimate, std.error, Approach)</span>
-<span id="cb16-10"><a href="#cb16-10"></a></span>
-<span id="cb16-11"><a href="#cb16-11"></a>partial_pool <span class="ot">&lt;-</span> mixed_model <span class="sc">|&gt;</span>  </span>
-<span id="cb16-12"><a href="#cb16-12"></a>  broom.mixed<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span>  </span>
-<span id="cb16-13"><a href="#cb16-13"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">"Mixed Model/Partial Pool"</span>, <span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb16-14"><a href="#cb16-14"></a>  <span class="fu">select</span>(Approach, term, estimate, std.error)</span>
-<span id="cb16-15"><a href="#cb16-15"></a></span>
-<span id="cb16-16"><a href="#cb16-16"></a><span class="fu">bind_rows</span>(pooled, no_pool, partial_pool) <span class="sc">|&gt;</span>  </span>
-<span id="cb16-17"><a href="#cb16-17"></a>  <span class="fu">filter</span>(term <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"x"</span> , <span class="st">"(Intercept)"</span>) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>pooled <span class="ot">&lt;-</span> basic_model <span class="sc">|&gt;</span>  </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">"Pooled"</span>, <span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb15-4"><a href="#cb15-4"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(term, estimate, std.error, Approach)</span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a>no_pool <span class="ot">&lt;-</span> additive_model <span class="sc">|&gt;</span>  </span>
+<span id="cb15-7"><a href="#cb15-7"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">"Fixed Effect"</span>, <span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb15-9"><a href="#cb15-9"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(term, estimate, std.error, Approach)</span>
+<span id="cb15-10"><a href="#cb15-10"></a></span>
+<span id="cb15-11"><a href="#cb15-11"></a>partial_pool <span class="ot">&lt;-</span> mixed_model <span class="sc">|&gt;</span>  </span>
+<span id="cb15-12"><a href="#cb15-12"></a>  broom.mixed<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb15-13"><a href="#cb15-13"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">"Mixed Model"</span>, <span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb15-14"><a href="#cb15-14"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Approach, term, estimate, std.error)</span>
+<span id="cb15-15"><a href="#cb15-15"></a></span>
+<span id="cb15-16"><a href="#cb15-16"></a><span class="fu">bind_rows</span>(pooled, no_pool, partial_pool) <span class="sc">|&gt;</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>  <span class="fu">filter</span>(term <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span>, <span class="st">"benzo_um"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1220,84 +1245,87 @@ benzo_um -0.131</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">21.05461</td>
-<td style="text-align: right;">1.649018</td>
+<td style="text-align: right;">21.054614</td>
+<td style="text-align: right;">1.6490185</td>
 <td style="text-align: left;">Pooled</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">11.78083</td>
-<td style="text-align: right;">1.293103</td>
-<td style="text-align: left;">No Pooling</td>
+<td style="text-align: left;">benzo_um</td>
+<td style="text-align: right;">2.578217</td>
+<td style="text-align: right;">0.2853798</td>
+<td style="text-align: left;">Pooled</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">23.26919</td>
-<td style="text-align: right;">6.481821</td>
-<td style="text-align: left;">Mixed Model/Partial Pool</td>
+<td style="text-align: right;">11.780827</td>
+<td style="text-align: right;">1.2931031</td>
+<td style="text-align: left;">Fixed Effect</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">benzo_um</td>
+<td style="text-align: right;">2.024207</td>
+<td style="text-align: right;">0.1703505</td>
+<td style="text-align: left;">Fixed Effect</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">23.269187</td>
+<td style="text-align: right;">6.4818211</td>
+<td style="text-align: left;">Mixed Model</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">benzo_um</td>
+<td style="text-align: right;">2.027065</td>
+<td style="text-align: right;">0.1703423</td>
+<td style="text-align: left;">Mixed Model</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>Pooling helps to improve the precision of the estimates by borrowing strength from the entire dataset. However, this can also lead to differences in the estimates and standard errors compared to models without pooling.</p>
 <ul>
-<li><p>Pooled: in the pooled model the averaged estimates may not accurately reflect the true values within each group. As a result, the estimates in pooled models can be biased towards the average behavior across all groups. We can see this in the <strong>too small</strong> standard error of the intercept, underestimating the variance in our dataset. At the same time if there is substantial variability in the relationships between groups, the pooled estimates can be less precise. This increased variability across groups can contribute to larger standard errors of the difference (SED) for fixed effects in pooled models.</p></li>
-<li><p>No pooling: This model is extremely precise with the smallest errors, however these estimates reflect conditions only for the <strong>first group in the model</strong>.</p></li>
-<li><p>Partial pooling/Mixed models: this model reflects the greater uncertainty of the Mean and SE of the intercept. However, the SED in a partial pooling model accounts for both the variability within groups and the uncertainty between groups. Compared to a no pooling approach, the SED in a partial pooling model tends to be smaller because it incorporates the pooled information, which reduces the overall uncertainty. This adjusted SED provides a more accurate measure of the uncertainty associated with the estimated differences between groups or fixed effects.</p></li>
-</ul></section></section><section id="summary" class="level2" data-number="25.6"><h2 data-number="25.6" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">25.6</span> Summary</h2>
-<p>The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function has already provided the estimates of the fixed effects, but they can also be extracted with the <code>fixef()</code> function.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">fixef</span>(mixed_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)    benzo_um 
-  23.269187    2.027066 </code></pre>
-</div>
-</div>
-<p>We can also apply <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> to a single model to get an F-test for the fixed effect</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">anova</span>(mixed_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">Sum Sq</th>
-<th style="text-align: right;">Mean Sq</th>
-<th style="text-align: right;">NumDF</th>
-<th style="text-align: right;">DenDF</th>
-<th style="text-align: right;">F value</th>
-<th style="text-align: right;">Pr(&gt;F)</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td style="text-align: left;">benzo_um</td>
-<td style="text-align: right;">14303.23</td>
-<td style="text-align: right;">14303.23</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">424.0815</td>
-<td style="text-align: right;">141.6089</td>
-<td style="text-align: right;">0</td>
-</tr></tbody>
-</table>
-</div>
-</div>
-</div>
-</section><section id="predictions" class="level2" data-number="25.7"><h2 data-number="25.7" class="anchored" data-anchor-id="predictions">
-<span class="header-section-number">25.7</span> Predictions</h2>
+<li><p><strong>Pooled</strong>: in the pooled model the averaged estimates may not accurately reflect the true values within each group. As a result, the estimates in pooled models can be biased towards the average behavior across all groups. We can see this in the <strong>too small</strong> standard error of the intercept, underestimating the variance in our dataset. At the same time if there is substantial variability in the relationships between groups, the pooled estimates can be less precise. This increased variability across groups can contribute to larger standard errors of the difference (SED) for fixed effects in pooled models.</p></li>
+<li><p><strong>Fixed effect</strong>: This model is extremely precise with the smallest errors, however these estimates reflect conditions only for the <strong>first group in the model</strong>.</p></li>
+<li><p><strong>Mixed models</strong>: this model reflects the greater uncertainty of the Mean and SE of the intercept. However, the SED in a partial pooling model accounts for both the variability within groups and the uncertainty between groups. This adjusted SED provides a more accurate measure of the uncertainty associated with the estimated differences between groups or fixed effects.</p></li>
+</ul></section></section><section id="predictions" class="level2" data-number="25.6"><h2 data-number="25.6" class="anchored" data-anchor-id="predictions">
+<span class="header-section-number">25.6</span> Predictions</h2>
 <p>It’s not always easy/straightforward to make prediciton or confidence intervals from complex general and generalized linear mixed models, luckily there are some excellent R packages that will do this for us.</p>
-<section id="ggpredict" class="level3" data-number="25.7.1"><h3 data-number="25.7.1" class="anchored" data-anchor-id="ggpredict">
-<span class="header-section-number">25.7.1</span> <code>ggpredict</code>
+<section id="ggpredict" class="level3" data-number="25.6.1"><h3 data-number="25.6.1" class="anchored" data-anchor-id="ggpredict">
+<span class="header-section-number">25.6.1</span> <code>ggpredict</code>
 </h3>
 <p>The argument <code>type = random</code> in the <code>ggpredict</code> function (from the ggeffects package <span class="citation" data-cites="R-ggeffects">Lüdecke (<a href="references.html#ref-R-ggeffects" role="doc-biblioref">2025a</a>)</span>) is used to specify the type of predictions to be generated in the context of mixed effects models. The main difference between using <code>ggpredict</code> with and without <code>type = random</code> lies in the type of predictions produced:</p>
-<p>Without <code>type = random</code>: <code>ggpredict</code> will generate <strong>fixed-effects predictions</strong>. These estimates are based solely on the fixed effects of the model, ignoring any variability associated with the random effects. The resulting estimate represent the average or expected values of the response variable for specific combinations of predictor values, considering only the fixed components of the model.</p>
-<p>Estimated mean fixed effects provide a comprehensive view of the average effect of dependent variables on the response variable. By plotting the estimated mean fixed effects using ggpredict, you can visualize how the response variable changes across different levels or values of the predictors while considering the effects of other variables in the model.</p>
+<p><code>type = fixed</code>: <code>ggpredict</code> will generate <strong>fixed-effects predictions</strong>. These estimates are based solely on the fixed effects of the model, ignoring any variability associated with the random effects. The resulting estimate represent the average or expected values of the response variable for specific combinations of predictor values, considering only the fixed components of the model.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Fixed effect predictions</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Random effect predictions</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb20-2"><a href="#cb20-2"></a></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">ggpredict</span>(mixed_model, <span class="at">terms =</span> <span class="st">"benzo_um"</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="fu">plot</span>(<span class="at">x =</span> _, <span class="at">show_data =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">ggpredict</span>(mixed_model, </span>
+<span id="cb16-4"><a href="#cb16-4"></a>          <span class="at">terms =</span> <span class="st">"benzo_um"</span>, </span>
+<span id="cb16-5"><a href="#cb16-5"></a>          <span class="at">type =</span> <span class="st">"fixed"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="fu">plot</span>(<span class="at">x =</span> _, <span class="at">show_data =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>With <code>type = random</code>: ggpredict will generate <strong>predictions</strong> that <strong>incorporate both fixed and random effects</strong>. These predictions take into account the variability introduced by the random effects in the model. The resulting predictions reflect not only the average trend captured by the fixed effects but also the additional variability associated with the random effects at different levels of the grouping factor(s).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggpredict</span>(mixed_model, </span>
+<span id="cb17-2"><a href="#cb17-2"></a>          <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span>), </span>
+<span id="cb17-3"><a href="#cb17-3"></a>          <span class="at">type =</span> <span class="st">"random"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="fu">plot</span>(<span class="at">x =</span> _, <span class="at">show_data =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb17-5"><a href="#cb17-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -1305,43 +1333,22 @@ benzo_um -0.131</code></pre>
 </div>
 </div>
 </div>
-<p>With <code>type = random</code>: ggpredict will generate <strong>predictions</strong> that <strong>incorporate both fixed and random effects</strong>. These predictions take into account the variability introduced by the random effects in the model. The resulting predictions reflect not only the average trend captured by the fixed effects but also the additional variability associated with the random effects at different levels of the grouping factor(s).</p>
-<p>By default the figure now produces <strong>prediction intervals</strong></p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggpredict</span>(mixed_model, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span>), <span class="at">type =</span> <span class="st">"random"</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">plot</span>(<span class="at">x =</span> _, <span class="at">show_data =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
 </div>
 </div>
 </div>
-<p>Furthermore, <code>ggpredict()</code> enables you to explore group-level predictions, which provide a deeper understanding of how the response variable varies across different levels of the grouping variable. By specifying the desired grouping variable in ggpredict when <code>type = random</code>, you can generate plots that depict the predicted values for each group separately, allowing for a comparative analysis of group-level effects.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggpredict</span>(mixed_model, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span>), <span class="at">type =</span> <span class="st">"random"</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">plot</span>(<span class="at">x =</span> _, <span class="at">show_data =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group)<span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="sjplot" class="level3" data-number="25.7.2"><h3 data-number="25.7.2" class="anchored" data-anchor-id="sjplot">
-<span class="header-section-number">25.7.2</span> <code>sjPlot</code>
+</section><section id="sjplot" class="level3" data-number="25.6.2"><h3 data-number="25.6.2" class="anchored" data-anchor-id="sjplot">
+<span class="header-section-number">25.6.2</span> <code>sjPlot</code>
 </h3>
 <p>Another way to visualise mixed model results is with the package <code>sjPlot</code>(<span class="citation" data-cites="R-sjPlot">Lüdecke (<a href="references.html#ref-R-sjPlot" role="doc-biblioref">2025b</a>)</span>), and if you are interested in showing the variation among levels of your random effects, you can plot the departure from the overall model estimate for intercepts - <em>and slopes, if you have a random slope model</em>:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb23-2"><a href="#cb23-2"></a></span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="fu">plot_model</span>(mixed_model, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span>), <span class="at">type =</span> <span class="st">"re"</span>)<span class="sc">/</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a>  (<span class="fu">plot_model</span>(mixed_model, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span>), <span class="at">type =</span> <span class="st">"est"</span>)<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Fixed Effects"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="fu">plot_model</span>(mixed_model, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span>), <span class="at">type =</span> <span class="st">"re"</span>)<span class="sc">/</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>(<span class="fu">plot_model</span>(mixed_model, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span>), <span class="at">type =</span> <span class="st">"est"</span>)<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Fixed Effects"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1361,32 +1368,51 @@ Warning
 </div>
 <p><code>sjPlot</code> is also capable of producing prediction plots in the same way as <code>ggeffects</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">plot_model</span>(mixed_model,<span class="at">type=</span><span class="st">"pred"</span>,</span>
-<span id="cb24-2"><a href="#cb24-2"></a>           <span class="at">terms=</span><span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span>),</span>
-<span id="cb24-3"><a href="#cb24-3"></a>           <span class="at">pred.type=</span><span class="st">"re"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4"></a>           <span class="at">show.data =</span> T)<span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">plot_model</span>(mixed_model,<span class="at">type=</span><span class="st">"pred"</span>,</span>
+<span id="cb19-2"><a href="#cb19-2"></a>           <span class="at">terms=</span><span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span>),</span>
+<span id="cb19-3"><a href="#cb19-3"></a>           <span class="at">pred.type=</span><span class="st">"re"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4"></a>           <span class="at">show.data =</span> T)<span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="emmeans" class="level3" data-number="25.7.3"><h3 data-number="25.7.3" class="anchored" data-anchor-id="emmeans">
-<span class="header-section-number">25.7.3</span> <code>emmeans</code>
+</section><section id="emmeans" class="level3" data-number="25.6.3"><h3 data-number="25.6.3" class="anchored" data-anchor-id="emmeans">
+<span class="header-section-number">25.6.3</span> <code>emmeans</code>
 </h3>
+<p>Emmeans will only produce predictions based on fixed effects:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(mixed_model, <span class="at">specs =</span> <span class="st">"benzo_um"</span>, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(mixed_model, </span>
+<span id="cb20-2"><a href="#cb20-2"></a>                 <span class="at">specs =</span> <span class="st">"benzo_um"</span>, </span>
+<span id="cb20-3"><a href="#cb20-3"></a>                 <span class="at">at =</span> <span class="fu">list</span>(<span class="st">"benzo_um"</span> <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> benzo_um emmean   SE df lower.CL upper.CL
-     5.02   33.4 6.43  4     15.6     51.3
+<pre><code> benzo_um emmean   SE   df lower.CL upper.CL
+        0   23.3 6.48 4.14     5.51     41.0
+        2   27.3 6.45 4.05     9.51     45.1
+        4   31.4 6.43 4.01    13.54     49.2
+        6   35.4 6.43 4.01    17.59     53.3
+        8   39.5 6.45 4.05    21.68     57.3
+       10   43.5 6.48 4.14    25.78     61.3
 
 Degrees-of-freedom method: kenward-roger 
 Confidence level used: 0.95 </code></pre>
 </div>
 </div>
-<p>:::</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Degrees of freedom
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>In mixed models, <strong>df are not straightforward because of</strong>:</p>
 <ul>
 <li><p>The hierarchical structure (e.g., subjects nested in groups),</p></li>
@@ -1426,13 +1452,18 @@ Confidence level used: 0.95 </code></pre>
 </tbody>
 </table>
 <p>When df is assumed to be essentially infinite (∞) - we default to the z-distribution, which will produce the narrowest confidence intervals.</p>
-</section><section id="interval-types" class="level3" data-number="25.7.4"><h3 data-number="25.7.4" class="anchored" data-anchor-id="interval-types">
-<span class="header-section-number">25.7.4</span> Interval types</h3>
-<section id="confidence-intervals" class="level4" data-number="25.7.4.1"><h4 data-number="25.7.4.1" class="anchored" data-anchor-id="confidence-intervals">
-<span class="header-section-number">25.7.4.1</span> Confidence Intervals:</h4>
+</div>
+</div>
+</div>
+</section><section id="interval-types" class="level3" data-number="25.6.4"><h3 data-number="25.6.4" class="anchored" data-anchor-id="interval-types">
+<span class="header-section-number">25.6.4</span> Interval types</h3>
+<section id="confidence-intervals" class="level4" data-number="25.6.4.1"><h4 data-number="25.6.4.1" class="anchored" data-anchor-id="confidence-intervals">
+<span class="header-section-number">25.6.4.1</span> Confidence Intervals:</h4>
 <p>A confidence interval is used to estimate the range of plausible values for a population parameter, such as the mean or the regression coefficient, based on a sample from that population. It provides a range within which the true population parameter is likely to fall with a certain level of confidence. For example, a 95% confidence interval implies that if we were to repeat the sampling process many times, <strong>95% of the resulting intervals would contain the true population mean</strong>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggpredict</span>(mixed_model, <span class="at">terms =</span> <span class="st">"benzo_um"</span>, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggpredict</span>(mixed_model, </span>
+<span id="cb22-2"><a href="#cb22-2"></a>          <span class="at">terms =</span> <span class="st">"benzo_um"</span>, </span>
+<span id="cb22-3"><a href="#cb22-3"></a>          <span class="at">interval =</span> <span class="st">"confidence"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1498,11 +1529,13 @@ Confidence level used: 0.95 </code></pre>
 </div>
 </div>
 </div>
-</section><section id="prediction-intervals" class="level4" data-number="25.7.4.2"><h4 data-number="25.7.4.2" class="anchored" data-anchor-id="prediction-intervals">
-<span class="header-section-number">25.7.4.2</span> Prediction Intervals:</h4>
+</section><section id="prediction-intervals" class="level4" data-number="25.6.4.2"><h4 data-number="25.6.4.2" class="anchored" data-anchor-id="prediction-intervals">
+<span class="header-section-number">25.6.4.2</span> Prediction Intervals:</h4>
 <p>On the other hand, a prediction interval is used to estimate the range of plausible values for an individual observation or a future observation from the population. It takes into account both the uncertainty in the estimated model parameters and the inherent variability within the data. A 95% prediction interval provides a range <strong>within which a specific observed or predicted value is likely to fall with a certain level of confidence</strong>. The wider the prediction interval, the greater the uncertainty around the specific value being predicted.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggpredict</span>(mixed_model, <span class="at">terms =</span> <span class="st">"benzo_um"</span>, <span class="at">interval =</span> <span class="st">"prediction"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">ggpredict</span>(mixed_model, </span>
+<span id="cb23-2"><a href="#cb23-2"></a>          <span class="at">terms =</span> <span class="st">"benzo_um"</span>, </span>
+<span id="cb23-3"><a href="#cb23-3"></a>          <span class="at">interval =</span> <span class="st">"prediction"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1568,54 +1601,165 @@ Confidence level used: 0.95 </code></pre>
 </div>
 </div>
 </div>
-</section></section></section><section id="checking-model-assumptions" class="level2" data-number="25.8"><h2 data-number="25.8" class="anchored" data-anchor-id="checking-model-assumptions">
-<span class="header-section-number">25.8</span> Checking model assumptions</h2>
-<section id="performance" class="level3" data-number="25.8.1"><h3 data-number="25.8.1" class="anchored" data-anchor-id="performance">
-<span class="header-section-number">25.8.1</span> performance</h3>
+</section></section></section><section id="checking-model-assumptions" class="level2" data-number="25.7"><h2 data-number="25.7" class="anchored" data-anchor-id="checking-model-assumptions">
+<span class="header-section-number">25.7</span> Checking model assumptions</h2>
+<section id="performance" class="level3" data-number="25.7.1"><h3 data-number="25.7.1" class="anchored" data-anchor-id="performance">
+<span class="header-section-number">25.7.1</span> performance</h3>
 <p>The <code>check_model()</code> function from the performance package in R is a useful tool for evaluating the performance and assumptions of a statistical model, particularly in the context of mixed models. It provides a comprehensive set of diagnostics and visualizations to assess the model’s fit, identify potential issues, and verify the assumptions underlying the model, which can be difficult with complex models</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">library</span>(performance)</span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">check_model</span>(mixed_model,</span>
-<span id="cb29-3"><a href="#cb29-3"></a>            <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">check_model</span>(mixed_model,</span>
+<span id="cb24-3"><a href="#cb24-3"></a>            <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="dharma" class="level3" data-number="25.8.2"><h3 data-number="25.8.2" class="anchored" data-anchor-id="dharma">
-<span class="header-section-number">25.8.2</span> DHARma</h3>
-<p>Simulation-based methods, like those available with DHARMa (<span class="citation" data-cites="R-DHARMa">Hartig (<a href="references.html#ref-R-DHARMa" role="doc-biblioref">2024</a>)</span>), are often preferred for model validation and assumption checking because they offer flexibility and do not rely on specific assumptions. Simulation is particularly useful for evaluating complex models with multiple levels of variability, non-linearity, or complex hierarchical structures. Such models may not be adequately evaluated by solely examining residuals, and simulation provides a more robust approach to assess their assumptions and performance.</p>
-<p>Read the authors summary <a href="https://theoreticalecology.wordpress.com/2016/08/28/dharma-an-r-package-for-residual-diagnostics-of-glmms/">here</a></p>
+<blockquote class="blockquote">
+<p>Note this package requires <span class="citation" data-cites="R-DHARMa">Hartig (<a href="references.html#ref-R-DHARMa" role="doc-biblioref">2024</a>)</span> to work with simulated residuals for mixed model checking</p>
+</blockquote>
+</section></section><section id="reporting-mixed-model-results" class="level2" data-number="25.8"><h2 data-number="25.8" class="anchored" data-anchor-id="reporting-mixed-model-results">
+<span class="header-section-number">25.8</span> Reporting Mixed Model Results</h2>
+<p>Once you get your model, you have to <strong>present</strong> it in an accurate, clear and attractive form.</p>
+<p>The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function provides us with some useful numbers such as the amount of variance left over after fitting our fixed effects that can be assigned to each of our random effects. It also provides information on how correlated our random effects are, which may be of interest in understanding the structure of our data as well.</p>
+<p>We can use it to check that the modelled random effect structure matches our data.</p>
+<p>It includes the coefficient estimates, t-statistics and p-values of our fixed effects</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">library</span>(DHARMa)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">summary</span>(mixed_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: detox_exp ~ benzo_um + (1 | group)
+   Data: benzo_data
+
+REML criterion at convergence: 3224.4
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.61968 -0.63654 -0.03584  0.66113  3.13597 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ group    (Intercept) 205      14.32   
+ Residual             101      10.05   
+Number of obs: 430, groups:  group, 5
+
+Fixed effects:
+            Estimate Std. Error       df t value Pr(&gt;|t|)    
+(Intercept)  23.2692     6.4818   4.1570    3.59   0.0215 *  
+benzo_um      2.0271     0.1703 424.0815   11.90   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+         (Intr)
+benzo_um -0.131</code></pre>
+</div>
+</div>
+<p>We may also wish to report <span class="math inline">\(R^2\)</span> values from our model fit. This requires the <code>MuMIn</code> package.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">library</span>(MuMIn)</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">r.squaredGLMM</span>(mixed_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            R2m       R2c
+[1,] 0.09949133 0.7027654</code></pre>
+</div>
+</div>
+<p>This calculates two values the first <span class="math inline">\(R^2_{m}\)</span> is the marginal <span class="math inline">\(R^2\)</span> value, representing the proportion of variance explained by our fixed effects. The second <span class="math inline">\(R^2_{c}\)</span> is the conditional <span class="math inline">\(R^2\)</span>, which is the proportion of variance explained by the full model, with both fixed and random effects.</p>
+</section><section id="tables" class="level2" data-number="25.9"><h2 data-number="25.9" class="anchored" data-anchor-id="tables">
+<span class="header-section-number">25.9</span> Tables</h2>
+<p>There are a few packages for producing beautiful summary tables from regression models, but not all of them can handle mixed-effects models, the <code>sjPlot</code> <span class="citation" data-cites="R-sjPlot">Lüdecke (<a href="references.html#ref-R-sjPlot" role="doc-biblioref">2025b</a>)</span> package is one of the most robust and produces a simple HTML table detailing fixed and random effects, produces 95% confidence intervals for fixed effects and calculates those <span class="math inline">\(R^2\)</span> values for you:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(mixed_model, </span>
+<span id="cb29-2"><a href="#cb29-2"></a>                  <span class="at">df.method =</span> <span class="st">"satterthwaite"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">detox exp</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">23.27</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">5.54&nbsp;–&nbsp;41.00</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.022</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">benzo um</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.69&nbsp;–&nbsp;2.36</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td colspan="4" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">101.01</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub><sub>group</sub>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">205.00</td>
+
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.67</td>
+
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>group</sub>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">5</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">430</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.099 / 0.703</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</section><section id="figures" class="level2" data-number="25.10"><h2 data-number="25.10" class="anchored" data-anchor-id="figures">
+<span class="header-section-number">25.10</span> Figures</h2>
+<p>We have covered some of the packages that allow us to easily produce marginal and conditional fits, along with 95% confidence or prediction intervals: these will output <code>ggplot2</code> figures, allowing plenty of customisation for presentation</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Custom colors</span></span>
 <span id="cb30-2"><a href="#cb30-2"></a></span>
-<span id="cb30-3"><a href="#cb30-3"></a>resid.mm <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(mixed_model)</span>
-<span id="cb30-4"><a href="#cb30-4"></a></span>
-<span id="cb30-5"><a href="#cb30-5"></a><span class="fu">plot</span>(resid.mm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="fu">ggpredict</span>(mixed_model, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span> ), </span>
+<span id="cb30-4"><a href="#cb30-4"></a>          <span class="at">type =</span> <span class="st">"random"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="fu">plot</span>(<span class="at">x =</span> _, <span class="at">show_data =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">scale_colour_discrete</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)<span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)<span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you have a lot of data, even minimal deviations from the expected distribution will become significant (this is discussed in the help/vignette for the DHARMa package). You will need to assess the distribution and decide if it is important for yourself.</p>
-</div>
-</div>
-</section></section><section id="practice-questions" class="level2" data-number="25.9"><h2 data-number="25.9" class="anchored" data-anchor-id="practice-questions">
-<span class="header-section-number">25.9</span> Practice Questions</h2>
+</section><section id="write-ups" class="level2" data-number="25.11"><h2 data-number="25.11" class="anchored" data-anchor-id="write-ups">
+<span class="header-section-number">25.11</span> Write-ups</h2>
+<blockquote class="blockquote">
+<p>We fitted a linear mixed model (estimated using REML) to estimate the effect of “benzo_um” on “detox_exp”. The model included a random intercept design to allow for the repeated experiment design. The model’s total explanatory power is substantial (conditional R^2 = 0.7), and the part related to the fixed effects alone (marginal R2) is 0.099. The effect of x on y was a steady increase of 2.03 per unit of x ([1.69 - 2.36], t(424.1) = 11.9, p &lt; 0.001). These 95% Confidence Intervals (CIs) and p-values were computed using a satterthwaite approximation of the degrees of freedom and a t-distribution approximation.</p>
+</blockquote>
+</section><section id="practice-questions" class="level2" data-number="25.12"><h2 data-number="25.12" class="anchored" data-anchor-id="practice-questions">
+<span class="header-section-number">25.12</span> Practice Questions</h2>
 <ol type="1">
 <li>In mixed-effects models, independent variables are also called:</li>
 </ol>
@@ -1627,31 +1771,31 @@ Warning
 <ol start="2" type="1">
 <li>A random effect is best described as?</li>
 </ol>
-<div id="radio_PRHHXQIWQU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PRHHXQIWQU" value=""><span>A variable that is noisier than other variables</span></label><label><input type="radio" autocomplete="off" name="radio_PRHHXQIWQU" value=""><span>An effect that cannot be predicted based on group membership</span></label><label><input type="radio" autocomplete="off" name="radio_PRHHXQIWQU" value="answer"><span>A variable where subgroups influence the outcome</span></label><label><input type="radio" autocomplete="off" name="radio_PRHHXQIWQU" value=""><span>Choosing slope values with a random number generator</span></label>
+<div id="radio_ULSDNMTLWC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ULSDNMTLWC" value=""><span>A variable that is noisier than other variables</span></label><label><input type="radio" autocomplete="off" name="radio_ULSDNMTLWC" value=""><span>An effect that cannot be predicted based on group membership</span></label><label><input type="radio" autocomplete="off" name="radio_ULSDNMTLWC" value="answer"><span>A variable where subgroups influence the outcome</span></label><label><input type="radio" autocomplete="off" name="radio_ULSDNMTLWC" value=""><span>Choosing slope values with a random number generator</span></label>
 </div>
 <ol start="3" type="1">
 <li>Which of the following is <strong>not</strong> an advantage of mixed-effects models?</li>
 </ol>
-<div id="radio_BNYXQNZNUE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BNYXQNZNUE" value=""><span>They can cope with situations where individuals contribute different numbers of observations</span></label><label><input type="radio" autocomplete="off" name="radio_BNYXQNZNUE" value=""><span>They can handle group-level differences in the outcome</span></label><label><input type="radio" autocomplete="off" name="radio_BNYXQNZNUE" value=""><span>They can deal with variation due to different groups</span></label><label><input type="radio" autocomplete="off" name="radio_BNYXQNZNUE" value="answer"><span>They are guaranteed to give significant results when ANOVAs do not</span></label>
+<div id="radio_CIFKTLYSPS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CIFKTLYSPS" value=""><span>They can cope with situations where individuals contribute different numbers of observations</span></label><label><input type="radio" autocomplete="off" name="radio_CIFKTLYSPS" value=""><span>They can handle group-level differences in the outcome</span></label><label><input type="radio" autocomplete="off" name="radio_CIFKTLYSPS" value=""><span>They can deal with variation due to different groups</span></label><label><input type="radio" autocomplete="off" name="radio_CIFKTLYSPS" value="answer"><span>They are guaranteed to give significant results when ANOVAs do not</span></label>
 </div>
 <ol start="4" type="1">
 <li>Mixed-effects models cope well with missing data because?</li>
 </ol>
-<div id="radio_PAVKEVJWMD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PAVKEVJWMD" value="answer"><span>They can still estimate parameters even when some observations are missing</span></label><label><input type="radio" autocomplete="off" name="radio_PAVKEVJWMD" value=""><span>They delete observations with missing data</span></label><label><input type="radio" autocomplete="off" name="radio_PAVKEVJWMD" value=""><span>They set all values to 0</span></label>
+<div id="radio_MQACJUHEMI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MQACJUHEMI" value="answer"><span>They can still estimate parameters even when some observations are missing</span></label><label><input type="radio" autocomplete="off" name="radio_MQACJUHEMI" value=""><span>They delete observations with missing data</span></label><label><input type="radio" autocomplete="off" name="radio_MQACJUHEMI" value=""><span>They set all values to 0</span></label>
 </div>
-</section><section id="worked-example-1---dolphins" class="level1" data-number="26"><h1 data-number="26">
-<span class="header-section-number">26</span> Worked Example 1 - Dolphins</h1>
-<section id="how-do-i-decide-if-it-is-a-fixed-or-random-effect" class="level2" data-number="26.1"><h2 data-number="26.1" class="anchored" data-anchor-id="how-do-i-decide-if-it-is-a-fixed-or-random-effect">
-<span class="header-section-number">26.1</span> How do I decide if it is a fixed or random effect?</h2>
+</section><section id="worked-example-1---dolphins" class="level2" data-number="25.13"><h2 data-number="25.13" class="anchored" data-anchor-id="worked-example-1---dolphins">
+<span class="header-section-number">25.13</span> Worked Example 1 - Dolphins</h2>
+<section id="how-do-i-decide-if-it-is-a-fixed-or-random-effect" class="level3" data-number="25.13.1"><h3 data-number="25.13.1" class="anchored" data-anchor-id="how-do-i-decide-if-it-is-a-fixed-or-random-effect">
+<span class="header-section-number">25.13.1</span> How do I decide if it is a fixed or random effect?</h3>
 <p>One of the most common questions in mixed-effects modelling is how to decide if an effect should be considered as fixed or random. This can be quite a complicated question, as we have touched upon briefly before the definition of a random effect is not universal. It is a considered process that can include the hypothesis or question you are asking.</p>
 <p>1 ) Are you directly interested in the effect in question. If the answer is yes it should be a fixed effect.</p>
 <p>2 ) Is the variable continuous? If the answer is yes it should be a fixed effect.</p>
 <p>3 ) Does the variable have less than five levels? If ther answer is yes it should be a fixed effect.</p>
-</section><section id="dolphins" class="level2" data-number="26.2"><h2 data-number="26.2" class="anchored" data-anchor-id="dolphins">
-<span class="header-section-number">26.2</span> Dolphins</h2>
+</section></section><section id="dolphins" class="level2" data-number="25.14"><h2 data-number="25.14" class="anchored" data-anchor-id="dolphins">
+<span class="header-section-number">25.14</span> Dolphins</h2>
 <p>This dataset was collected to measure resting lung function in 32 bottlenose dolphins. The main dependent variable was the tidal volume (<span class="math inline">\(V_T\)</span>) measured in litres, as an index of lung capacity.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1746,7 +1890,7 @@ direction2 -0.162  0.000</code></pre>
 <span id="cb36-8"><a href="#cb36-8"></a>       <span class="at">y =</span> <span class="st">"VT"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>Scatter plot of VT as a function of body mass for dolphins. Different directions of breath are represented by different colors. The solid lines indicate the marginal fitted values from our model.</figcaption></figure>
 </div>
 </div>
@@ -1758,7 +1902,7 @@ direction2 -0.162  0.000</code></pre>
 <span id="cb37-4"><a href="#cb37-4"></a>           <span class="at">show.data =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1771,52 +1915,44 @@ A brief summary
 <p>We found that for every 1kg increase in bodymass, (<span class="math inline">\(V_T\)</span>) increased by 0.02 litres (95% CI [0.01 - 0.02]), . The inbreath had on average a higher volume than the outbreath (1.11 litre difference [0.71 - 1.52]..</p>
 <p><strong>Q.</strong> This is not a perfect write-up, what else could we consider including?</p>
 </div>
-</section></section><section id="multiple-random-effects" class="level1" data-number="27"><h1 data-number="27">
-<span class="header-section-number">27</span> Multiple random effects</h1>
+</section><section id="multiple-random-effects" class="level2" data-number="25.15"><h2 data-number="25.15" class="anchored" data-anchor-id="multiple-random-effects">
+<span class="header-section-number">25.15</span> Multiple random effects</h2>
 <p>Previously we used <code>(1|group)</code> to fit our random effect. Whatever is on the right side of the <code>|</code> operator is a factor and referred to as a “grouping factor” for the term.</p>
-<section id="crossed-or-nested" class="level3" data-number="27.0.1"><h3 data-number="27.0.1" class="anchored" data-anchor-id="crossed-or-nested">
-<span class="header-section-number">27.0.1</span> Crossed or Nested</h3>
+<section id="crossed-or-nested" class="level3" data-number="25.15.1"><h3 data-number="25.15.1" class="anchored" data-anchor-id="crossed-or-nested">
+<span class="header-section-number">25.15.1</span> Crossed or Nested</h3>
 <p>When we have more than one possible random effect these can be <strong>crossed</strong> or <strong>nested</strong> - it depends on the relationship between the variables. Let’s have a look.</p>
 <p>A common issue that causes confusion is this issue of specifying random effects as either ‘crossed’ or ‘nested’. In reality, the way you specify your random effects will be determined by your experimental or sampling design. A simple example can illustrate the difference.</p>
-<section id="crossed-random-effects" class="level4" data-number="27.0.1.1"><h4 data-number="27.0.1.1" class="anchored" data-anchor-id="crossed-random-effects">
-<span class="header-section-number">27.0.1.1</span> 1. Crossed Random Effects:</h4>
+<section id="crossed-random-effects" class="level4" data-number="25.15.1.1"><h4 data-number="25.15.1.1" class="anchored" data-anchor-id="crossed-random-effects">
+<span class="header-section-number">25.15.1.1</span> 1. Crossed Random Effects:</h4>
 <p>Crossed random effects occur when the levels of two or more grouping variables are crossed or independent of each other. In this case, the grouping variables are unrelated, and each combination of levels is represented in the data.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-06934f421feb80f7a627" style="width:100%;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-06934f421feb80f7a627">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  I; II; 1; 2; 3\n\n  # several \"edge\" statements\n  I->1 I ->2 I ->3\n  II ->1  II ->2 II ->3\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>Fully Crossed</p>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-a458b90eeb83d38f9c40" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-a458b90eeb83d38f9c40">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  I; II; 1; 2; 3\n\n  # several \"edge\" statements\n  I->1 I ->2 I ->3\n  II ->1  II ->2 II ->3\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>Fully Crossed</p>
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Example 1: Let’s consider a study examining the academic performance of students from different schools and different cities. The grouping variables are “School” and “City”. Each school can be located in multiple cities, and each city can have multiple schools. The random effects of “School” and “City” are crossed since the levels of these variables are independent of each other.</p>
-</blockquote>
-<p><code>lmer(y ~ x + (1 | School) + (1 | City), data = dataset)</code></p>
-<blockquote class="blockquote">
-<p>Example 2: Imagine there is a long-term study on breeding success in passerine birds across multiple woodlands, and the researcher returns every year for five years to carry out measurements. Here “Year” is a crossed random effect with “Woodland” as each Woodland can appear in multiple years of study. Imagine a researcher was interested in understanding the factors affecting the clutch mass of a passerine bird. They have a study population spread across five separate woodlands, each containing 30 nest boxes. Every week during breeding they measure the foraging rate of females at feeders, and measure their subsequent clutch mass. Some females have multiple clutches in a season and contribute multiple data points.</p>
+<p>Example: Imagine there is a long-term study on breeding success in passerine birds across multiple woodlands, and the researcher returns every year for five years to carry out measurements. Here “Year” is a crossed random effect with “Woodland” as each Woodland can appear in multiple years of study. Imagine a researcher was interested in understanding the factors affecting the clutch mass of a passerine bird. They have a study population spread across five separate woodlands, each containing 30 nest boxes. Every week during breeding they measure the foraging rate of females at feeders, and measure their subsequent clutch mass. Some females have multiple clutches in a season and contribute multiple data points.</p>
 </blockquote>
 <p><code>lmer(y ~ x + (1 | Year) + (1 | Woodland), data = dataset)</code></p>
-</section><section id="nested-random-effects" class="level4" data-number="27.0.1.2"><h4 data-number="27.0.1.2" class="anchored" data-anchor-id="nested-random-effects">
-<span class="header-section-number">27.0.1.2</span> 2. Nested Random Effects:</h4>
+</section><section id="nested-random-effects" class="level4" data-number="25.15.1.2"><h4 data-number="25.15.1.2" class="anchored" data-anchor-id="nested-random-effects">
+<span class="header-section-number">25.15.1.2</span> 2. Nested Random Effects:</h4>
 <p>Nested random effects occur when the levels of one grouping variable are completely nested within the levels of another grouping variable. In other words, the levels of one variable are uniquely and exclusively associated with specific levels of another variable.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-3d9fbd4f8dfbd9f21a72" style="width:100%;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-3d9fbd4f8dfbd9f21a72">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  I; II; 1; 2; 3; 4; 5; 6\n\n  # several \"edge\" statements\n  I->1 I ->2 I ->3\n  II ->4  II ->5 II ->6\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>Fully Nested</p>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-cdaa534625bdadd98584" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-cdaa534625bdadd98584">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  I; II; 1; 2; 3; 4; 5; 6\n\n  # several \"edge\" statements\n  I->1 I ->2 I ->3\n  II ->4  II ->5 II ->6\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>Fully Nested</p>
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Example 1. Consider a study on the job performance of employees within different departments of an organization. The grouping variables are “Employee” and “Department”. Each employee belongs to one specific department, and no employee can be part of multiple departments. The random effects of “Employee” are nested within the random effects of “Department” since each employee is uniquely associated with a specific department.</p>
-</blockquote>
-<p><code>lmer(y ~ x + (1 | Department/Employee), data = dataset)</code></p>
-<blockquote class="blockquote">
-<p>Example 2: In the same bird study female ID is said to be nested within woodland : each woodland contains multiple females unique to that woodland (that never move among woodlands). The nested random effect controls for the fact that (i) clutches from the same female are not independent, and (ii) females from the same woodland may have clutch masses more similar to one another than to females from other woodlands</p>
+<p>Example: In the same bird study female ID is said to be nested within woodland : each woodland contains multiple females unique to that woodland (that never move among woodlands). The nested random effect controls for the fact that (i) clutches from the same female are not independent, and (ii) females from the same woodland may have clutch masses more similar to one another than to females from other woodlands</p>
 </blockquote>
 <p><code>lmer(y ~ x + (1 | Woodland/Female ID), data = dataset)</code></p>
 <p><em>or if we remember year we have a model with both crossed and nested random effects</em></p>
 <p><code>lmer(y ~ x + (1 | Woodland/Female ID) + (1|Year), data = dataset)</code></p>
-<p>For more on designing models around crossed and nested designs check out <a href="https://www.nature.com/articles/nmeth.3137">this amazing nature paper</a> <span class="citation" data-cites="krzywinski_2014">(<a href="references.html#ref-krzywinski_2014" role="doc-biblioref"><strong>krzywinski_2014?</strong></a>)</span></p>
-</section></section></section><section id="worked-example-2---nested-design" class="level1" data-number="28"><h1 data-number="28">
-<span class="header-section-number">28</span> Worked Example 2 - Nested design</h1>
+<p>For more on designing models around crossed and nested designs check out <a href="https://www.nature.com/articles/nmeth.3137">this amazing nature paper</a></p>
+</section></section></section><section id="worked-example-2---nested-design" class="level2" data-number="25.16"><h2 data-number="25.16" class="anchored" data-anchor-id="worked-example-2---nested-design">
+<span class="header-section-number">25.16</span> Worked Example 2 - Nested design</h2>
 <p>This experiment involved a simple one-way anova with 3 treatments given to 6 rats, the researchers the measured glycogen levels in their liver. The analysis was complicated by the fact that three preparations were taken from the liver of each rat, and two readings of glycogen content were taken from each preparation. This generated 6 pseudoreplicates per rat to give a total of 36 readings in all.</p>
 <p>Clearly, it would be a mistake to analyse these data as if they were a straightforward one-way anova, because that would give us 33 degrees of freedom for error. In fact, since there are only two rats in each treatment, we have only one degree of freedom per treatment, giving a total of 3 d.f. for error.</p>
 <p>The variance is likely to be different at each level of this nested analysis because:</p>
@@ -1959,7 +2095,7 @@ Treatment3 -0.707  0.500</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">plot</span>(<span class="fu">ggpredict</span>(rats_lmer<span class="fl">.2</span>, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Treatment"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1971,209 +2107,272 @@ Treatment3 -0.707  0.500</code></pre>
 <span id="cb46-4"><a href="#cb46-4"></a>     <span class="at">show_data =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="reporting-mixed-model-results" class="level1" data-number="29"><h1 data-number="29">
-<span class="header-section-number">29</span> Reporting Mixed Model Results</h1>
-<p>Once you get your model, you have to <strong>present</strong> it in an accurate, clear and attractive form.</p>
-<p>The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function provides us with some useful numbers such as the amount of variance left over after fitting our fixed effects that can be assigned to each of our random effects. It also provides information on how correlated our random effects are, which may be of interest in understanding the structure of our data as well.</p>
-<p>We can use it to check that the modelled random effect structure matches our data.</p>
-<p>It includes the coefficient estimates, t-statistics and p-values of our fixed effects</p>
+</section><section id="worked-example-3---glmm-binomial-mixed-models" class="level2" data-number="25.17"><h2 data-number="25.17" class="anchored" data-anchor-id="worked-example-3---glmm-binomial-mixed-models">
+<span class="header-section-number">25.17</span> Worked Example 3 - GLMM Binomial Mixed models</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">summary</span>(mixed_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<a href="https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/egg_hatch_mixed.csv">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download Egg Hatching data</button>
+</a>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<p>Fit a Binomial GLM</p>
+</div>
+<div class="task-container">
+<ul>
+<li><p>Read in this csv and assign it to an R object <code>egg_hatch_data</code></p></li>
+<li><p>Fit a Binomial model to analyse the hatch rate by treatment for the <code>egg_hatch_data</code></p></li>
+</ul>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>egg_hatch_data <span class="ot">&lt;-</span> egg_hatch_data <span class="sc">|&gt;</span> </span>
+<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">mutate</span>(<span class="at">unhatched_eggs =</span> (number_of_eggs<span class="sc">-</span>number_of_larvae))</span>
+<span id="cb47-3"><a href="#cb47-3"></a></span>
+<span id="cb47-4"><a href="#cb47-4"></a>binomial_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(number_of_larvae,unhatched_eggs) <span class="sc">~</span> cross, <span class="at">family =</span> binomial, <span class="at">data =</span> egg_hatch_data) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ul>
+<li>
+<p>Look at the coefficients and run a model check on the data</p>
+<pre><code>- Are there any issues with the model?</code></pre>
+</li>
+</ul>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">summary</span>(binomial_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
-lmerModLmerTest]
-Formula: detox_exp ~ benzo_um + (1 | group)
-   Data: benzo_data
+<pre><code>
+Call:
+glm(formula = cbind(number_of_larvae, unhatched_eggs) ~ cross, 
+    family = binomial, data = egg_hatch_data)
 
-REML criterion at convergence: 3224.4
-
-Scaled residuals: 
-     Min       1Q   Median       3Q      Max 
--2.61968 -0.63654 -0.03584  0.66113  3.13597 
-
-Random effects:
- Groups   Name        Variance Std.Dev.
- group    (Intercept) 205      14.32   
- Residual             101      10.05   
-Number of obs: 430, groups:  group, 5
-
-Fixed effects:
-            Estimate Std. Error       df t value Pr(&gt;|t|)    
-(Intercept)  23.2692     6.4818   4.1570    3.59   0.0215 *  
-benzo_um      2.0271     0.1703 424.0815   11.90   &lt;2e-16 ***
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  1.05143    0.04658  22.573  &lt; 2e-16 ***
+crossB       0.38815    0.09124   4.254  2.1e-05 ***
+crossC       1.29224    0.11812  10.940  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Correlation of Fixed Effects:
-         (Intr)
-benzo_um -0.131</code></pre>
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1307.6  on 54  degrees of freedom
+Residual deviance: 1157.3  on 52  degrees of freedom
+AIC: 1363.6
+
+Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note that the t values only appear with df and a p value when using the lmerTest version of lmer(). This is because the degrees of freedom in a mixed-effects model are not well-defined. Often people will treat them as Wald z- values, i.e., as observations from the standard normal distribution. Because the t-distribution asymptotes the standard normal distribution as the number of observations goes to infinity, this “t-as-z” practice is legitimate if you have a large enough set of observations.</p>
-<p>The lmerTest function produces estimated degrees of freedom with a satterthwaite approximation (another common method is the “kenward approximation”), which will have the effect of widening confidence intervals. It is important to know what method you are using, and to be consistent across your presentation/write-up</p>
-</div>
-</div>
-<p>We can also produce an <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> type summary of our fixed effects</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">anova</span>(mixed_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(binomial_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There are several issues with outliers, the distribution of quantiles, under-prediction of high values.</p>
+<p>If we run a <code><a href="https://easystats.github.io/performance/reference/check_overdispersion.html">performance::check_overdispersion()</a></code> we have high overdispersion</p>
+</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<p>Fit a Binomial GLMM</p>
+</div>
+<div class="task-container">
+<p>Mixed models can be very helpful for dealing with apparent overdispersion in fixed dispersion models.</p>
+<p>If variance can be accounted for by random intercepts that align with the structure in our data.</p>
+<ul>
+<li><p>Which variables could be used to build random intercepts?</p></li>
+<li><p>Do we need crossed or nested effects?</p></li>
+<li><p>Use the <code>glmer()</code> to fit a binomial model with random effects</p></li>
+</ul>
+<p><code>glmer(cbind(win,loss) ~ x + (1|random), family = binomial)</code></p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>binomial_mixed_rep <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(number_of_larvae,unhatched_eggs) <span class="sc">~</span> cross <span class="sc">+</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>                              (<span class="dv">1</span><span class="sc">|</span>replicate), </span>
+<span id="cb52-3"><a href="#cb52-3"></a>                            <span class="at">family =</span> binomial, </span>
+<span id="cb52-4"><a href="#cb52-4"></a>                            <span class="at">data =</span> egg_hatch_data) </span>
+<span id="cb52-5"><a href="#cb52-5"></a></span>
+<span id="cb52-6"><a href="#cb52-6"></a>binomial_mixed_rep_fem <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(number_of_larvae,unhatched_eggs) <span class="sc">~</span> cross <span class="sc">+</span></span>
+<span id="cb52-7"><a href="#cb52-7"></a>                              (<span class="dv">1</span><span class="sc">|</span>replicate<span class="sc">/</span>female_num), </span>
+<span id="cb52-8"><a href="#cb52-8"></a>                            <span class="at">family =</span> binomial, </span>
+<span id="cb52-9"><a href="#cb52-9"></a>                            <span class="at">data =</span> egg_hatch_data) </span>
+<span id="cb52-10"><a href="#cb52-10"></a></span>
+<span id="cb52-11"><a href="#cb52-11"></a><span class="fu">AIC</span>(binomial_model, binomial_mixed_rep, binomial_mixed_rep_fem)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;"></th>
-<th style="text-align: right;">Sum Sq</th>
-<th style="text-align: right;">Mean Sq</th>
-<th style="text-align: right;">NumDF</th>
-<th style="text-align: right;">DenDF</th>
-<th style="text-align: right;">F value</th>
-<th style="text-align: right;">Pr(&gt;F)</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">AIC</th>
 </tr></thead>
-<tbody><tr class="odd">
-<td style="text-align: left;">benzo_um</td>
-<td style="text-align: right;">14303.23</td>
-<td style="text-align: right;">14303.23</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">424.0815</td>
-<td style="text-align: right;">141.6089</td>
-<td style="text-align: right;">0</td>
-</tr></tbody>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">binomial_model</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1363.551</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">binomial_mixed_rep</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1263.221</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">binomial_mixed_rep_fem</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">644.059</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
 </div>
-<p>We may also wish to report <span class="math inline">\(R^2\)</span> values from our model fit. This requires the <code>MuMIn</code> package.</p>
+<div class="{panel.tabset}">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">library</span>(MuMIn)</span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="fu">r.squaredGLMM</span>(mixed_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            R2m       R2c
-[1,] 0.09949133 0.7027654</code></pre>
-</div>
-</div>
-<p>This calculates two values the first <span class="math inline">\(R^2_{m}\)</span> is the marginal <span class="math inline">\(R^2\)</span> value, representing the proportion of variance explained by our fixed effects. The second <span class="math inline">\(R^2_{c}\)</span> is the conditional <span class="math inline">\(R^2\)</span>, which is the proportion of variance explained by the full model, with both fixed and random effects.</p>
-<section id="tables" class="level2" data-number="29.1"><h2 data-number="29.1" class="anchored" data-anchor-id="tables">
-<span class="header-section-number">29.1</span> Tables</h2>
-<p>There are a few packages for producing beautiful summary tables from regression models, but not all of them can handle mixed-effects models, the <code>sjPlot</code> <span class="citation" data-cites="R-sjPlot">Lüdecke (<a href="references.html#ref-R-sjPlot" role="doc-biblioref">2025b</a>)</span> package is one of the most robust and produces a simple HTML table detailing fixed and random effects, produces 95% confidence intervals for fixed effects and calculates those <span class="math inline">\(R^2\)</span> values for you:</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(mixed_model, </span>
-<span id="cb52-2"><a href="#cb52-2"></a>                  <span class="at">df.method =</span> <span class="st">"satterthwaite"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<table style="border-collapse:collapse; border:none;">
-<tbody><tr>
-<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
-<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">detox exp</th>
-</tr>
-<tr>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">23.27</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">5.54&nbsp;–&nbsp;41.00</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.022</strong></td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">benzo um</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.03</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.69&nbsp;–&nbsp;2.36</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
-</tr>
-<tr>
-<td colspan="4" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">101.01</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub><sub>group</sub>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">205.00</td>
-
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.67</td>
-
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>group</sub>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">5</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">430</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.099 / 0.703</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-</section><section id="figures" class="level2" data-number="29.2"><h2 data-number="29.2" class="anchored" data-anchor-id="figures">
-<span class="header-section-number">29.2</span> Figures</h2>
-<p>We have covered some of the packages that allow us to easily produce marginal and conditional fits, along with 95% confidence or prediction intervals: these will output <code>ggplot2</code> figures, allowing plenty of customisation for presentation</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="co"># Custom colors</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a></span>
-<span id="cb53-3"><a href="#cb53-3"></a></span>
-<span id="cb53-4"><a href="#cb53-4"></a></span>
-<span id="cb53-5"><a href="#cb53-5"></a><span class="fu">ggpredict</span>(mixed_model, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"benzo_um"</span>, <span class="st">"group"</span> ), </span>
-<span id="cb53-6"><a href="#cb53-6"></a>          <span class="at">type =</span> <span class="st">"random"</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb53-7"><a href="#cb53-7"></a><span class="fu">plot</span>(<span class="at">x =</span> _, <span class="at">show_data =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
-<span id="cb53-8"><a href="#cb53-8"></a>  <span class="fu">scale_colour_discrete</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)<span class="sc">+</span></span>
-<span id="cb53-9"><a href="#cb53-9"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)<span class="sc">+</span></span>
-<span id="cb53-10"><a href="#cb53-10"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(binomial_mixed_rep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="write-ups" class="level2" data-number="29.3"><h2 data-number="29.3" class="anchored" data-anchor-id="write-ups">
-<span class="header-section-number">29.3</span> Write-ups</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(binomial_mixed_rep_fem)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="mixed-model_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In this example - our main source of variance was <em>between</em> different females - allowing for a random intercept here stabilised dispersion to within acceptable tolerances for a binomial model.</p>
+<p>Variance <em>between</em> replicate experiments is actually extremely low - <strong>but</strong> female ids are nested within replicate experiments so this must be reflected in our random intercept structure.</p>
 <blockquote class="blockquote">
-<p>We fitted a linear mixed model (estimated using REML) to estimate the effect of “benzo_um” on “detox_exp”. The model included a random intercept design to allow for the repeated experiment design. The model’s total explanatory power is substantial (conditional R^2 = 0.7), and the part related to the fixed effects alone (marginal R2) is 0.099. The effect of x on y was a steady increase of 2.03 per unit of x ([1.69 - 2.36], t(424.1) = 11.9, p &lt; 0.001). These 95% Confidence Intervals (CIs) and p-values were computed using a satterthwaite approximation of the degrees of freedom and a t-distribution approximation.</p>
+<p>Tip: Check the number of obs, and groups in the random effect summary - does it match your experimental design?</p>
 </blockquote>
-</section></section><section id="summary-1" class="level1" data-number="30"><h1 data-number="30">
-<span class="header-section-number">30</span> Summary</h1>
-<p>Here is a suggested workflow:</p>
+</div>
+</div>
+</section><section id="summary" class="level2" data-number="25.18"><h2 data-number="25.18" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">25.18</span> Summary</h2>
+<section id="checklist-for-pooling-vs.-fixed-vs.-random-effects" class="level3" data-number="25.18.1"><h3 data-number="25.18.1" class="anchored" data-anchor-id="checklist-for-pooling-vs.-fixed-vs.-random-effects">
+<span class="header-section-number">25.18.1</span> Checklist for Pooling vs.&nbsp;Fixed vs.&nbsp;Random Effects</h3>
 <ol type="1">
-<li><p>Start with a model containing only fixed effects: Begin by fitting a model with the fixed effects that are relevant to your research question. Include the main predictors and any potential interactions you hypothesize might exist. For example, if you have predictors A and B, you might start with a model like response ~ A + B + A:B.</p></li>
-<li><p>Assess fixed effects and interactions: Evaluate the significance, direction, and magnitude of the fixed effects coefficients. Look for interactions that show significant effects and consider their interpretation in the context of your research question. This step allows you to identify the key variables and interactions that are important in explaining the variation in the response variable.</p></li>
-<li><p>Model evaluation and refinement: Assess the goodness of fit of the fixed effects model using appropriate measures like AIC, BIC, or model deviance. Consider conducting model comparison to evaluate different models with alternative fixed effects structures. This process helps you refine the model and select the most appropriate combination of variables and interactions. <em>However - this should be no substitution for carefully considered hypotheses and experimental design</em>.</p></li>
-<li><p>Incorporate random effects: Once you have identified the significant fixed effects and relevant interactions, you can then consider the inclusion of random effects. Random effects capture the variation at different levels and can account for individual differences or clustering within groups. Evaluate the need for random intercepts, random slopes, or crossed random effects based on your research design and the nature of the data.</p></li>
-<li><p>Assess and compare models with random effects: Fit models with random effects and compare their fit to the fixed effects model. Consider appropriate measures such as likelihood ratio tests, AIC, or BIC for model comparison. Evaluate the contribution of the random effects to the model.<em>However - this should be no substitution for carefully considered hypotheses and experimental design</em>. And we have seen examples where we leave random effects in place despite LRT tests.</p></li>
-<li><p>Validate and interpret the final model: Validate the final model by assessing assumptions, checking for influential observations, and performing sensitivity analysis. Interpret the estimated coefficients, including fixed effects and random effects, in the context of your research question. Report the results with figures, summary tables and carefully considered text summarising the analysis.</p></li>
+<li>
+<p><strong>Are the groups or replicates intentionally different (experimental manipulation)?</strong></p>
+<ul>
+<li><p>Yes → Fixed effect.<br>
+You want explicit estimates for each level (treatment A vs B, genotype 1 vs 2).</p></li>
+<li><p>No → Go to 2.</p></li>
+</ul>
+</li>
+<li>
+<p><strong>Are the groups/replicates randomly sampled from a broader population you want to generalize over?</strong></p>
+<ul>
+<li><p>Yes → Random effect.<br>
+Each level (e.g., plate, batch, cage) is a random draw; you want to estimate variance among levels, not each level’s mean.<br>
+Efficient when many levels; saves degrees of freedom.</p></li>
+<li><p>No → Go to 3.</p></li>
+</ul>
+</li>
+<li>
+<p><strong>Are the groups technically identical and under identical conditions?</strong></p>
+<ul>
+<li>Yes → Pool results.<br>
+If variation among replicates is trivial or purely measurement error, averaging is acceptable.<br>
+Always verify that between-replicate variance is negligible before pooling.<br>
+</li>
+<li>No → Go to 4.</li>
+</ul>
+</li>
+<li>
+<p><strong>Do group differences represent a nuisance (not of direct interest but possibly confounding)?</strong></p>
+<ul>
+<li><p>Yes → Random effect (if ≥ 5 levels).<br>
+If only 2–3 levels → safer to model as Fixed, or combine with other factors.</p></li>
+<li><p>No → Go to 5.</p></li>
+</ul>
+</li>
+<li>
+<p><strong>Are there only a few levels (≤ 3)?</strong></p>
+<ul>
+<li><p>Yes → Fixed effect.<br>
+Variance estimation is unreliable with so few groups.</p></li>
+<li><p>No → Random effect (if sampled at random from a larger population).</p></li>
+</ul>
+</li>
+<li>
+<p><strong>Are you uncertain about which specification is appropriate?</strong></p>
+<ul>
+<li>Fit both fixed and random models: compare AIC/BIC and model checks</li>
+</ul>
+</li>
 </ol>
-<p>By initially focusing on the fixed effects, you can establish the foundation of your model and identify the significant predictors and interactions. This step allows you to better understand the relationships in your data and guide the subsequent inclusion of random effects if appropriate.</p>
-<section id="mixed-model-extensions" class="level2" data-number="30.1"><h2 data-number="30.1" class="anchored" data-anchor-id="mixed-model-extensions">
-<span class="header-section-number">30.1</span> Mixed Model extensions</h2>
-</section><section id="practical-problems" class="level2" data-number="30.2"><h2 data-number="30.2" class="anchored" data-anchor-id="practical-problems">
-<span class="header-section-number">30.2</span> Practical problems</h2>
+<section id="final-check" class="level4" data-number="25.18.1.1"><h4 data-number="25.18.1.1" class="anchored" data-anchor-id="final-check">
+<span class="header-section-number">25.18.1.1</span> Final Check</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 37%">
+<col style="width: 40%">
+</colgroup>
+<thead><tr class="header">
+<th>Situation</th>
+<th>Reasoning</th>
+<th>Recommended Handling</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Designed treatment differences</td>
+<td>Specific levels of interest</td>
+<td>Fixed effect</td>
+</tr>
+<tr class="even">
+<td>Randomly sampled groups (many levels)</td>
+<td>Interested in variance, not per-level means</td>
+<td>Random effect</td>
+</tr>
+<tr class="odd">
+<td>Identical replicates, same conditions</td>
+<td>No real grouping variance</td>
+<td>Pool (average)</td>
+</tr>
+<tr class="even">
+<td>Few nuisance groups (≤ 3)</td>
+<td>Random variance unidentifiable</td>
+<td>Fixed effect</td>
+</tr>
+<tr class="odd">
+<td>Unknown influence</td>
+<td>Test both structures</td>
+<td>Model comparison</td>
+</tr>
+</tbody>
+</table></section></section><section id="practical-problems" class="level3" data-number="25.18.2"><h3 data-number="25.18.2" class="anchored" data-anchor-id="practical-problems">
+<span class="header-section-number">25.18.2</span> Practical problems</h3>
 <p>Below are two common issues or warnings you will likely encounter when fitting linear models:</p>
 <ul>
 <li><p><code>boundary (singular) fit: see help('isSingular')</code>: Your model did fit, but it generated that warning because some of your random effects are very small, common with complex mixed-effect models. You can read more about this in <a href="https://rdrr.io/cran/lme4/man/isSingular.html">help page</a></p></li>
@@ -2188,20 +2387,18 @@ Note
 <li>Finally, although it pains me to admit it, you should try running the model using a different package - each has their own unique and slightly different optimisation protocols.</li>
 </ul>
 </li>
-</ul></section><section id="further-reading" class="level2" data-number="30.3"><h2 data-number="30.3" class="anchored" data-anchor-id="further-reading">
-<span class="header-section-number">30.3</span> Further Reading</h2>
+</ul></section></section><section id="further-reading" class="level2" data-number="25.19"><h2 data-number="25.19" class="anchored" data-anchor-id="further-reading">
+<span class="header-section-number">25.19</span> Further Reading</h2>
 <p>Some essential reading to continue your mixed-model journey!</p>
 <ul>
-<li><p><a href="https://peerj.com/articles/4794/">A brief introduction to mixed effects modelling and multi-model inference in ecology</a> <span class="citation" data-cites="xav_2018">(<a href="references.html#ref-xav_2018" role="doc-biblioref"><strong>xav_2018?</strong></a>)</span></p></li>
-<li><p><a href="https://link.springer.com/book/10.1007/978-0-387-87458-6">Mixed Effects Models and Extensions in Ecology with R</a> <span class="citation" data-cites="zuur_2009">(<a href="references.html#ref-zuur_2009" role="doc-biblioref"><strong>zuur_2009?</strong></a>)</span></p></li>
-<li><p><a href="https://peerj.com/articles/9522/">Perils and pitfalls of mixed-effects regression models in biology</a> <span class="citation" data-cites="silk_2020">(<a href="references.html#ref-silk_2020" role="doc-biblioref"><strong>silk_2020?</strong></a>)</span></p></li>
+<li><p><a href="https://peerj.com/articles/4794/">A brief introduction to mixed effects modelling and multi-model inference in ecology</a></p></li>
+<li><p><a href="https://link.springer.com/book/10.1007/978-0-387-87458-6">Mixed Effects Models and Extensions in Ecology with R</a></p></li>
+<li><p><a href="https://peerj.com/articles/9522/">Perils and pitfalls of mixed-effects regression models in biology</a></p></li>
+<li><p><a href="https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/">Fixed or Random effect</a></p></li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-R-lme4" class="csl-entry" role="listitem">
-Bates, D., Maechler, M., Bolker, B., &amp; Walker, S. (2025). <em>lme4: Linear mixed-effects models using eigen and S4</em>. <a href="https://github.com/lme4/lme4/">https://github.com/lme4/lme4/</a>
-</div>
 <div id="ref-R-DHARMa" class="csl-entry" role="listitem">
 Hartig, F. (2024). <em>DHARMa: Residual diagnostics for hierarchical (multi-level / mixed) regression models</em>. <a href="http://florianhartig.github.io/DHARMa/">http://florianhartig.github.io/DHARMa/</a>
 </div>
@@ -2214,11 +2411,8 @@ Lüdecke, D. (2025a). <em>Ggeffects: Create tidy data frames of marginal effects
 <div id="ref-R-sjPlot" class="csl-entry" role="listitem">
 Lüdecke, D. (2025b). <em>sjPlot: Data visualization for statistics in social science</em>. <a href="https://strengejacke.github.io/sjPlot/">https://strengejacke.github.io/sjPlot/</a>
 </div>
-<div id="ref-R-nlme" class="csl-entry" role="listitem">
-Pinheiro, J., Bates, D., &amp; R Core Team. (2025). <em>Nlme: Linear and nonlinear mixed effects models</em>. <a href="https://svn.r-project.org/R-packages/trunk/nlme/">https://svn.r-project.org/R-packages/trunk/nlme/</a>
 </div>
-</div>
-</section></section></main><!-- /main --><script>
+</section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {

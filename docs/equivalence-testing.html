@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><script src="site_libs/font-awesome-6.7.2/js/script.js"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -588,14 +588,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#what-we-can-do-with-this" id="toc-what-we-can-do-with-this" class="nav-link" data-scroll-target="#what-we-can-do-with-this"><span class="header-section-number">24.2.1</span> What we can do with this</a></li>
   </ul>
 </li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">24.3</span> Example:</a></li>
   <li>
-<a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">24.3</span> Example:</a>
+<a href="#equivalence-testing-1" id="toc-equivalence-testing-1" class="nav-link" data-scroll-target="#equivalence-testing-1"><span class="header-section-number">24.4</span> Equivalence testing</a>
   <ul class="collapse">
-<li><a href="#visualize-your-equivalence-results" id="toc-visualize-your-equivalence-results" class="nav-link" data-scroll-target="#visualize-your-equivalence-results"><span class="header-section-number">24.3.1</span> Visualize your equivalence results</a></li>
+<li><a href="#set-a-standard" id="toc-set-a-standard" class="nav-link" data-scroll-target="#set-a-standard"><span class="header-section-number">24.4.1</span> Set a standard</a></li>
+  <li><a href="#visualize-your-equivalence-results" id="toc-visualize-your-equivalence-results" class="nav-link" data-scroll-target="#visualize-your-equivalence-results"><span class="header-section-number">24.4.2</span> Visualize your equivalence results</a></li>
   </ul>
 </li>
-  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">24.4</span> Reporting</a></li>
-  <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary"><span class="header-section-number">24.5</span> Glossary</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">24.5</span> Reporting</a></li>
+  <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary"><span class="header-section-number">24.6</span> Glossary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -684,15 +686,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Design experiments for “sufficient evidence of sameness” (safeguard power or TOST power), not just “evidence of difference.”</p></li>
 </ul></section></section><section id="example" class="level2" data-number="24.3"><h2 data-number="24.3" class="anchored" data-anchor-id="example">
 <span class="header-section-number">24.3</span> Example:</h2>
+<p>We want to know if a new set of diet conditions effects the adult body mass of a set of insects:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<a href="https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/body_mass.RDS">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download body mass data as RDS</button>
+</a>
+</div>
+</div>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>body_mass_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"body_mass.RDS"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>m_main <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass <span class="sc">~</span> treatment <span class="sc">+</span> sex, <span class="at">data =</span> body_mass_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>m_main <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass <span class="sc">~</span> treatment <span class="sc">+</span> sex, <span class="at">data =</span> body_mass_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Let’s say a difference smaller than 40 g is biologically negligible. We define a ROPE (Region of Practical Equivalence) as ±40 g.</p>
-<p>equivalence_test(m, range = c(-40, 0))</p>
-<p>Output example:</p>
+<div class="task">
+<div class="task-header">
+<p>Confidence Intervals</p>
+</div>
+<div class="task-container">
+<ul>
+<li>Fit 95% Confidence to your models</li>
+</ul>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_main)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_main, <span class="at">con.fint =</span> T)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#confint(m_main)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -730,6 +752,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</div>
+<p>We can use our calculated confidence intervals <em>of the difference</em> to make a statement about the likely true difference in body mass for insects between treatment A and B.</p>
+</div>
+</div>
+</section><section id="equivalence-testing-1" class="level2" data-number="24.4"><h2 data-number="24.4" class="anchored" data-anchor-id="equivalence-testing-1">
+<span class="header-section-number">24.4</span> Equivalence testing</h2>
+<p>In equivalence testing, we’re not checking whether two means are different, but whether their difference is small enough to be considered practically the same — that is, within some limits (say between −Δ and +Δ).</p>
+<p>To do this, we run two one-sided tests:</p>
+<ul>
+<li><p>Test if the difference is <strong>greater</strong> than the lower limit (−Δ).</p></li>
+<li><p>Test if the difference is <strong>less</strong> than the upper limit (+Δ).</p></li>
+</ul>
+<p>Each of those tests is done at significance level α (for example, α = 0.05). For both conditions to hold, we need <strong>both</strong> one-sided tests to be significant.</p>
+<p>Now, when we express this as a single confidence interval, we must account for the fact that we used two one-sided tests — one for each tail. Because α is “spent” on both sides, the combined confidence level becomes (1 – 2α).</p>
+<p>So if α = 0.05, we get a 90% confidence interval, not 95%.</p>
+<section id="set-a-standard" class="level3" data-number="24.4.1"><h3 data-number="24.4.1" class="anchored" data-anchor-id="set-a-standard">
+<span class="header-section-number">24.4.1</span> Set a standard</h3>
+<p>Let’s say a difference <em>smaller than 40 g</em> is acceptable.</p>
+<p>This could be because we think its biologically negligible <em>or</em></p>
+<p>it could be that Diet B saves us a lot of money and we are willing to make the tradeoff within certain bounds</p>
+<p>For this data we define a ROPE (Region of Practical Equivalence) as between 0-40 g weight lost.</p>
+<section id="output-example" class="level4" data-number="24.4.1.1"><h4 data-number="24.4.1.1" class="anchored" data-anchor-id="output-example">
+<span class="header-section-number">24.4.1.1</span> Output example:</h4>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(effectsize)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">equivalence_test</span>(m_main, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="sc">-</span><span class="dv">40</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -802,39 +847,111 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Interpretation:</p>
+</section><section id="interpretation" class="level4" data-number="24.4.1.2"><h4 data-number="24.4.1.2" class="anchored" data-anchor-id="interpretation">
+<span class="header-section-number">24.4.1.2</span> Interpretation:</h4>
 <ul>
 <li><p>The treatment effect (−21.8 g) lies completely within the ROPE of ±40 g → practically equivalent.</p></li>
 <li><p>The sex effect (−203 g) lies far outside the ROPE → meaningful biological difference.</p></li>
-<li><p>The SGPV (Second-Generation p-value) quantifies how much of the CI overlaps the ROPE (1 = fully inside, 0 = outside).</p></li>
+<li><p>The <strong>SGPV (Second-Generation p-value)</strong> quantifies how much of the CI overlaps the ROPE (1 = fully inside, 0 = outside).</p></li>
 </ul>
 <p>So:</p>
 <ul>
-<li>Even though the treatment effect was “statistically significant” (p = 0.04), the equivalence test says it’s practically negligible in biological terms.</li>
-</ul>
-<section id="visualize-your-equivalence-results" class="level3" data-number="24.3.1"><h3 data-number="24.3.1" class="anchored" data-anchor-id="visualize-your-equivalence-results">
-<span class="header-section-number">24.3.1</span> Visualize your equivalence results</h3>
+<li>Even though the treatment effect was “statistically significant” (p = 0.04), the equivalence test says it’s practically negligible for our margins.</li>
+</ul></section></section><section id="visualize-your-equivalence-results" class="level3" data-number="24.4.2"><h3 data-number="24.4.2" class="anchored" data-anchor-id="visualize-your-equivalence-results">
+<span class="header-section-number">24.4.2</span> Visualize your equivalence results</h3>
 <p>You can use the see package to visualize the CI and ROPE region.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(see)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">plot</span>(<span class="fu">equivalence_test</span>(m_main, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="sc">-</span><span class="dv">40</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="equivalence-testing_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="equivalence-testing_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>This shows:</p>
 <ul>
-<li><p>Each coefficient and its 90% CI</p></li>
+<li>Each coefficient and its 90% CI</li>
+</ul>
+<div class="webex-solution">
+<button>
+90% CI
+</button>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_main, <span class="at">con.fint =</span> T, <span class="at">level =</span> .<span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">402.79293</td>
+<td style="text-align: right;">9.185739</td>
+<td style="text-align: right;">43.849811</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">treatmentB</td>
+<td style="text-align: right;">-21.81918</td>
+<td style="text-align: right;">10.606778</td>
+<td style="text-align: right;">-2.057098</td>
+<td style="text-align: right;">0.0423608</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sexMale</td>
+<td style="text-align: right;">-202.88252</td>
+<td style="text-align: right;">10.606778</td>
+<td style="text-align: right;">-19.127629</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<ul>
 <li><p>The ROPE zone (here, ±40 g)</p></li>
 <li><p>A colour-coded decision (“Accepted”, “Rejected”, “Undecided”)</p></li>
-</ul></section></section><section id="reporting" class="level2" data-number="24.4"><h2 data-number="24.4" class="anchored" data-anchor-id="reporting">
-<span class="header-section-number">24.4</span> Reporting</h2>
-<p>A linear model predicting insect body mass revealed a small treatment effect (−21.8 g, 90% CI [−39.4, −4.2]), and a strong effect of sex (−202.9 g, 90% CI [−220.5, −185.3]). Equivalence testing using a ROPE of ±40g (A 10% difference in mass) indicated that the treatment difference was practically equivalent to zero, whereas the sex difference was meaningful.</p>
-</section><section id="glossary" class="level2" data-number="24.5"><h2 data-number="24.5" class="anchored" data-anchor-id="glossary">
-<span class="header-section-number">24.5</span> Glossary</h2>
+</ul>
+<div class="task">
+<div class="task-header">
+<p>Try a different equivalence margin</p>
+</div>
+<div class="task-container">
+<ul>
+<li>Are the diets equivalent at 0-20g?</li>
+</ul>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">plot</span>(<span class="fu">equivalence_test</span>(m_main, <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="sc">-</span><span class="dv">20</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="equivalence-testing_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="reporting" class="level2" data-number="24.5"><h2 data-number="24.5" class="anchored" data-anchor-id="reporting">
+<span class="header-section-number">24.5</span> Reporting</h2>
+<p>A linear model predicting insect body mass revealed a small treatment effect (−21.8 g, 90% CI [−39.4, −4.2]), and a strong effect of sex (−202.9 g, 90% CI [−220.5, −185.3]).</p>
+<p>Equivalence testing using a ROPE of ±40g (A 10% difference in mass) indicated that the treatment difference was practically equivalent to zero, whereas the sex difference was meaningful.</p>
+</section><section id="glossary" class="level2" data-number="24.6"><h2 data-number="24.6" class="anchored" data-anchor-id="glossary">
+<span class="header-section-number">24.6</span> Glossary</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 14%">

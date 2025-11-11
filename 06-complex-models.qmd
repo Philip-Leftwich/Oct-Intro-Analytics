@@ -8,12 +8,11 @@ library(here)
 dros_clean <- read_csv(here("files", "fruitfly.csv"))
 library(GGally)
 library(skimr)
-library(GGally)
+library(colorspace)
 library(ggridges)
 library(performance)
 library(patchwork)
 
-colours <- c("cyan", "darkorange", "purple")
 ```
 
 
@@ -23,7 +22,7 @@ library(here)
 library(tidyverse)
 library(GGally)
 library(skimr)
-library(GGally)
+library(colorspace)
 library(ggridges)
 library(performance)
 library(patchwork)
@@ -31,7 +30,7 @@ library(patchwork)
 ```
 
 
-## Designing a Model
+## The data
 
 We are introduced to the fruitfly dataset (Partridge and Farquhar (1981))[https://nature.com/articles/294580a0]. From our understanding of sexual selection and reproductive biology in fruit flies, we know there is a well established 'cost' to reproduction in terms of reduced longevity for female fruitflies. The data from this experiment is designed to test whether increased sexual activity affects the lifespan of male fruitflies.
 
@@ -45,6 +44,41 @@ The flies used were an outbred stock, sexual activity was manipulated by supplyi
 
 * **sleep**: percentage of the day spent sleeping
 
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/fruitfly.csv",
+  button_label = "Download Drosophila data as csv",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+:::{.callout-note}
+## Factors
+
+What order will R organise the three `type` categories?
+
+`r mcq(c("control, virgin, inseminated", answer = "control, inseminated, virgin", "virgin, inseminated, control"))`
+
+`r hide("Factors")`
+
+In linear models, when we test groups one group will always be the Intercept (reference group). By default this will be alphabetical *unless* the levels have an order specified by making them a factor
+
+```{r, eval = FALSE}
+dros_clean |> mutate(type = factor(type, 
+                                   levels = c("Control", 
+                                              "Inseminated", 
+                                              "Virgin")))
+
+```
+
+`r unhide()`
+
+:::
 
 ### Hypotheses
 
@@ -89,12 +123,11 @@ Your turn
 
 ```{r, message = FALSE, eval = TRUE}
 
-colours <- c("cyan", "darkorange", "purple")
 
 dros_clean |> 
   ggplot(aes(x = longevity, y = type, fill = type))+
   geom_density_ridges(alpha = 0.5)+
-  scale_fill_manual(values = colours)+
+  scale_fill_discrete_qualitative() +
   theme_minimal()+
   theme(legend.position = "none")
 
@@ -106,12 +139,11 @@ dros_clean |>
 
 ```{r, message = FALSE, eval = TRUE}
 
-colours <- c("cyan", "darkorange", "purple")
 
 dros_clean |> 
   ggplot(aes(x = type, y = longevity, fill = type))+
   geom_boxplot()+
-  scale_fill_manual(values = colours)+
+  scale_fill_discrete_qualitative() +
   theme_minimal()+
   theme(legend.position = "none")
 
@@ -239,7 +271,38 @@ GGally::ggcoef_model(flyls1)
 `r unhide()`
 
 
-## Add a covariate
+:::{.task}
+::::{.task-header}
+Regression analysis
+::::
+::::{.task-container}
+
+* [ ] Change the model to analyse `longevity ~ thorax`
+
+This will produce a *regression* analysis - how does this change the way we interpret the coefficients?
+
+`r hide("Solution")`
+
+```{r}
+# a linear model
+flyls_regression <- lm(longevity ~ thorax, data = dros_clean)
+
+summary(flyls_regression)
+
+```
+
+Unlike a test of difference - when we include a *continuous predictor* it changes our intercept and coefficient
+
+- Intercept - value of y when x = 0. The average longevity when thorax = 0.
+
+- Coefficient - how much longevity increases **for every** unit increase in thorax.
+
+
+`r unhide()`
+
+
+
+## Analysis of Covariance
 
 In a basic linear model, we often start by comparing group means — for example:
 
@@ -508,13 +571,95 @@ For continuous variables (sleep and thorax) - `emmeans` has set these to the mea
 
 ```{r}
 
-emmeans::emmeans(flyls2, 
+continuous_means <- emmeans::emmeans(flyls2, 
                  specs = ~ type + thorax,
                  at = list(thorax = seq(0.64,0.94, .1)))
+
+continuous_means
 
 ```
 
 :::
+
+
+## Model visualisation
+
+We can make visualisations of our models with `ggplot()`
+
+```{r}
+
+# convert an emmeans object to tibble
+continuous_means <- continuous_means |> 
+  as_tibble()
+
+# use the final model to produce model predictions set to the new constant sleep dataframe
+
+
+ggplot(continuous_means, 
+       aes(x=thorax, 
+           y = emmean, 
+           colour = type, 
+           fill = type))+
+  geom_ribbon(aes(ymin=lower.CL, 
+                  ymax=upper.CL), 
+              alpha = 0.2)+
+    geom_line(linetype = "dashed", 
+              show.legend = FALSE)+
+  geom_point(data = dros_clean, 
+             aes(x = thorax, 
+                 y = longevity),
+             show.legend = FALSE)+
+scale_fill_discrete_qualitative() +
+scale_colour_discrete_qualitative() +
+  labs(y = "Lifespan in days",
+       x = "Thorax length (mm)",
+       fill = "Type of female exposure")+
+  guides(colour = "none")+
+  theme_classic()+
+  theme(legend.position = "bottom")
+
+```
+
+:::{.callout-warning collapse = "true"}
+
+## Dangers of geom_smooth
+
+Look at this figure made using `geom_smooth`
+
+```{r}
+
+ggplot(dros_clean, 
+       aes(x=thorax, 
+           y = longevity, 
+           colour = type, 
+           fill = type))+
+  geom_smooth(method = "lm",
+              alpha = .2)+
+  geom_point()+
+scale_fill_discrete_qualitative() +
+scale_colour_discrete_qualitative() +
+  labs(y = "Lifespan in days",
+       x = "Thorax length (mm)",
+       fill = "Type of female exposure")+
+  guides(colour = "none")+
+  theme_classic()+
+  theme(legend.position = "bottom")
+
+```
+
+**Question** - Why is it different - and is this a problem?
+
+`r hide("Solution")`
+
+This example also produces regression lines - but unlike our calcuated model plot where lines ran in parallel - here it is subtle but the regression lines aren't quite parallel (The virgin line starts lower but is on a trend to crossover the other groups)
+
+- Why? When we use `geom_smooth()` it will by default calculate *independent regressions* for each group. 
+
+`r unhide()`
+
+
+:::
+
 
 ## Model reporting
 

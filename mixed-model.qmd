@@ -67,26 +67,21 @@ The key difference with a linear mixed-effects model is the inclusion of **rando
 
 ### Fixed and Random effects
 
-- Fixed effects: are parameters associated with specific, non-random levels of a factor. You estimate a separate coefficient for each level (or contrast) and make inferences about those specific levels. They’re treated as systematic, not varying by chance.
+- **Fixed effects**: are parameters associated with specific, non-random levels of a factor. You estimate a separate coefficient for each level (or contrast) and make inferences about those specific levels. They’re treated as systematic, not varying by chance.
 
-We can consider this in terms of a very simple linear model, here the estimated intercept is the expected value of the outcome $y$ when the predictor $x$ has a value of 0. The estimated slope is the expected change in $y$ for a single unit change in $x$. These parameters are "fixed", meaning that each individual in the population has the same expected value for the intercept and slope. 
 
-The difference between the expected value and true value is called "residual error".
+- **Random effects**: are modeled as draws from a probability distribution, typically assumed to be Normal with mean zero and an estimated variance component. Instead of estimating a separate coefficient for each group, the model estimates the variance of the distribution from which those group effects are drawn. You’re not interested in the specific group effects per se, but in how much they vary around a population mean.
 
-$$Y_i = \beta_0 + \beta_1X_i + \epsilon_i$$
+::: {.callout-note collapse = "true"}
 
-- Random effects: are modeled as draws from a probability distribution, typically assumed to be Normal with mean zero and an estimated variance component. Instead of estimating a separate coefficient for each group, the model estimates the variance of the distribution from which those group effects are drawn. You’re not interested in the specific group effects per se, but in how much they vary around a population mean.
+## Random effects
 
 The random effect $U_i$ is often assumed to follow a normal distribution with a mean of zero and a variance estimated during the model fitting process.
 
 $$Y_i = β_0 + U_j + ε_i$$
 Defining what a random effect actually *is* is tricky. The key practical distinction is how they are treated in mixed models.
 
-::: {.callout-note collapse = "true"}
-
-## Random effects
-
-In the book "Data analysis using regression and multilevel/hierarchical models" (@gelman_hill_2006). The authors examined five definitions of fixed and random effects and found no consistent agreement. 
+In the book "Data analysis using regression and multilevel/hierarchical models" By Gelman Hill 2006. The authors examined five definitions of fixed and random effects and found no consistent agreement. 
 
 (1) Fixed effects are constant across individuals, and random effects vary. For example, in a growth study, a model with random intercepts a_i and fixed slope b corresponds to parallel lines for different individuals i, or the model y_it = a_i + b t thus distinguish between fixed and random coefficients.
 
@@ -106,35 +101,34 @@ Thus it turns out fixed and random effects are not born but made. We must make t
 
 ## > 5 levels for random effects
 
-Note that the golden rule is that you generally want your random effect to have at least five levels. So, for instance, if we wanted to control for the effects of fish sex on body length, we would fit sex (a two level factor: male or female) as a fixed, not random, effect.
+Note that the golden rule is that you generally want your random effect to have **at least five levels**. So, for instance, if we wanted to control for the effects of fish sex on body length, we would fit sex (a two level factor: male or female) as a fixed, not random, effect.
 
-This is, put simply, because estimating variance on few data points is very imprecise. Mathematically you could, but you wouldn’t have a lot of confidence in it. If you only have two or three levels, the model will struggle to partition the variance - it will give you an output, but not necessarily one you can trust.
+This is because estimating variance on few data points is very imprecise. Mathematically you could, but you wouldn’t have a lot of confidence in it. If you only have two or three levels, the model will struggle to partition the variance - it will give you an output, but not necessarily one you can trust.
 
-Finally, keep in mind that the name random doesn’t have much to do with mathematical randomness. Yes, it’s confusing. Just think about them as the grouping variables for now. Strictly speaking it’s all about making our models representative of our questions and getting better estimates. Hopefully, our next few examples will help you make sense of how and why they’re used.
-
- There’s no firm rule as to what the minimum number of factor levels should be for random effect and really you can use any factor that has two or more levels. However it is commonly reported that you may want five or more factor levels for a random effect in order to really benefit from what the random effect can do (though some argue for even more, 10 levels). Another case in which you may not want to random effect is when you don’t want your factor levels to inform each other or you don’t assume that your factor levels come from a common distribution. As noted above, male and female is not only a factor with only two levels but oftentimes we want male and female information estimated separately and we’re not necessarily assuming that males and females come from a population of sexes in which there is an infinite number and we’re interested in an average.
-
+There’s no firm rule as to what the minimum number of factor levels should be for random effect. It is commonly reported that you may want **five or more factor levels** for a random effect in order to really benefit from what the random effect can do (*though some argue for even more, 10 levels*). 
 :::
 
 
 ## Using random effects
 
-So random effects are usually grouping **factors** for which we are trying to control. *They are always categorical*, as you can’t force R to treat a continuous variable as a random effect. A lot of the time we are not specifically interested in their impact on the response variable, but we know that they might be influencing the patterns we see.
+Random effects are usually grouping **factors** for which we are trying to control. **They are always categorical**, as you can’t force R to treat a continuous variable as a random effect. A lot of the time we are not specifically interested in their impact on the response variable, but we know that they might be influencing the patterns we see.
 
 The mixed-effects model can be used in many situations instead of one of our more straightforward tests when this structure may be important. The main advantages of this approach are: 
 
 i) mixed-effects models account for more of the variance 
+
 ii) mixed-effects models incorporate group and even individual-level differences
+
 iii) mixed-effects models cope well with missing data, unequal group sizes and repeated measurements
 
 :::{.callout-note}
 ## Overdispersion
 
-One application of mixed models is to account for overdispersion in fixed-dipsersion models (Poisson and Binomial). If a random effect is included to account for individual-level variation we may find our models have a better fit.
+Another application of mixed models is to account for overdispersion in fixed-dipsersion models (Poisson and Binomial). If a random effect is included to account for individual-level variation we may find our models have a better fit.
 :::
 
 
-## Why use mixed models?
+## Making a mixed models
 
 ```{r, eval = TRUE, echo = FALSE}
 
@@ -187,14 +181,25 @@ benzo_data <- benzo_data |>
 
 ### The data
 
-This dataset represents results from replicate feeding experiments investigating how *Spodoptera frugiperda* larvae respond to increasing concentrations of a plant defensive compound. The explanatory variable is the concentration of the benzoxazinoid DIMBOA incorporated into the larval diet (mM), while the response variable y is a composite detoxification index combining cytochrome P450 and glutathione S-transferase activity together with expression of a marker detoxification gene.
+This dataset represents results from replicate feeding experiments investigating how *Spodoptera frugiperda* larvae respond to increasing concentrations of a plant defensive compound. 
 
-Each group corresponds to an independent experimental replicate—separate batches of larvae reared and assayed under identical conditions on different days—to capture between-replicate variation in baseline activity and toxin responsiveness. 
+- The explanatory variable is the concentration of the benzoxazinoid DIMBOA incorporated into the larval diet (mM)
+
+- The response variable y is a composite detoxification index combining cytochrome P450 and glutathione S-transferase activity together with expression of a marker detoxification gene.
+
+- Each group corresponds to an independent experimental replicate—separate batches of larvae reared and assayed under identical conditions on different days—to capture between-replicate variation in baseline activity and toxin responsiveness. 
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "Fall Army Worm"}
+
+knitr::include_graphics("images/Spodoptera_frugiperda.jpg")
+```
+
+
 
 ```{r, eval = TRUE, echo = FALSE}
 downloadthis::download_link(
   
-  link = "https://github.com/UEABIO/5023B/blob/dev/files/benzo.csv",
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/benzo.csv",
   button_label = "Download benzoxazinoid data as csv",
   button_type = "success",
   has_icon = TRUE,
@@ -205,7 +210,7 @@ downloadthis::download_link(
 
 ### All in one model
 
-We will begin by highlighting the importance of considering data structure and hierarchy when building linear models. To illustrate this, we will delve into an example that showcases the consequences of ignoring the underlying data structure. We might naively construct a single linear model that ignores the group-level variation and treats all observations as independent. This oversimplified approach fails to account for the fact that observations within groups are more similar to each other due to shared characteristics.
+We will begin by highlighting the importance of considering data structure and hierarchy when building linear models. To illustrate this, we will delve into an example that showcases the consequences of ignoring the underlying data structure. We might naively construct a single linear model that ignores the group-level variation and treats all observations as independent. This oversimplified approach fails to account for the fact that observations within groups may be more similar to each other.
 
 $$Y_i = \beta_0 + \beta_1X_i + \epsilon_i$$
 
@@ -224,7 +229,7 @@ plot(benzo_data$benzo_um, benzo_data$detox_exp)
 
 ```      
 
-Here if we use the function `geom_smooth()` on the scatter plot, the plot also includes a fitted regression line obtained using the "lm" method. This allows us to examine the overall trend and potential linear association between the variables.
+Here if we use the function `geom_smooth()` on the scatter plot, the plot also includes a fitted regression line obtained using the `lm` method. This allows us to examine the overall trend and potential linear association between the variables.
 
 ```{r, fig.cap = "Scatter plot displaying the relationship between the independent variable and the dependent variable. The points represent the observed data, while the fitted regression line represents the linear relationship between the variables. The plot helps visualize the trend and potential association between the variables."}
 
@@ -239,9 +244,21 @@ ggplot(benzo_data, aes(x = benzo_um,
 
 Looking at the fit of our model we would be tempted to conclude that we have an accurate and robust model.
 
-However, when data is hierarchically structured, such as individuals nested within groups, there is typically correlation or similarity among observations within the same group. By not accounting for this clustering effect, estimates derived from a single model can be biased and inefficient. The assumption of independence among observations is violated, leading to incorrect standard errors and inflated significance levels. 
+However, when data is **structured**, such as individuals nested within groups, there is typically correlation or similarity among observations *within the same group*. By not accounting for this clustering effect, estimates derived from a single model can be biased and inefficient. The assumption of independence among observations is violated, leading to incorrect standard errors and inflated significance levels. 
 
-From the figure below we can see the difference in median and range of x values within each of our groups: 
+From the figures below we can see the difference in median and range of x values within each of our groups: 
+
+:::{.task}
+::::{.task-header}
+Visualise the groups
+::::
+::::{.task-container}
+
+- Make a simple ggplot that highlights the differences between the groups.
+
+> Hint try boxplots for average difference between groups or colour the original scatterplot by group
+
+`r hide("Solution")`
 
 :::{.panel-tabset}
 
@@ -279,11 +296,17 @@ plot_group
 
 :::
 
+`r unhide()`
+
 From the above plots, it confirms that our observations from within each of the ranges aren’t independent. We can’t ignore that: as it might make our estimates biased.
+
+::::
+:::
+
 
 ### Multiple analyses approach
 
-Running separate linear models per group, also known as stratified analysis, can be a feasible approach in certain situations. However, there are several drawbacks including
+Running separate linear models per group, also known as **stratified analysis**, could a feasible approach in certain situations. However, there are several drawbacks including
 
 - Increased complexity
 
@@ -310,10 +333,11 @@ ggplot(benzo_data, aes(x = benzo_um, y = detox_exp, color = group, group = group
 
 ```
 
-`r hide("report_p function")`
+`r hide("Code")`
 
 ```{r, eval = FALSE}
 
+## Custom function to make pretty p-reporting
  report_p <- function(p, digits = 3) {
      reported <- if_else(p < 0.001,
              "p < 0.001",
@@ -322,12 +346,6 @@ ggplot(benzo_data, aes(x = benzo_um, y = detox_exp, color = group, group = group
      return(reported)
  }
 
-```
-
-`r unhide()`
-
-
-```{r}
 
 # Creating nested benzo_data by grouping the benzo_data by 'group'
 nested_data <- benzo_data |> 
@@ -356,16 +374,53 @@ final_models <- group_indexed_models |>
 final_models
 
 ```
+
+`r unhide()`
+
+```{r, echo = FALSE}
+
+# Creating nested benzo_data by grouping the benzo_data by 'group'
+nested_data <- benzo_data |> 
+  group_by(group) |> 
+  nest()
+
+# Fitting linear regression models to each nested data group
+models <- map(nested_data$data, ~ lm(detox_exp ~ benzo_um, data = .)) |>  
+          map(broom::tidy)
+
+# Combining the model results into a single data frame
+combined_models <- bind_rows(models)
+
+# Filtering the rows to include only the 'x' predictor
+filtered_models <- combined_models |> 
+                   filter(term == "benzo_um")
+
+# Adding a column for the group index using rowid_to_column function
+group_indexed_models <- filtered_models |> 
+                        rowid_to_column("group")
+
+# Modifying the p-values using a custom function report_p
+final_models <- group_indexed_models |> 
+                mutate(p.value = report_p(p.value))
+
+final_models
+
+```
+
 > Each analysis has produced a different estimate - and in some cases we did not find a statistically significant association.
 
 ### Fixed effects model
 
-Using a group level term with an effect on x as a fixed effect means explicitly including the terms x and the group as a predictors in the model equation. This approach assumes that the relationship between x and the outcome variable differs across groups and that these differences are constant and fixed. 
+Using a group level term with an effect on x as a **fixed effect** means explicitly including the terms `benzo_um` and the `group` as a predictors in the model equation. This approach assumes that the relationship between x and the outcome variable differs across groups and that these differences are constant and fixed. 
 
 It implies that each group has a unique intercept (baseline level) for the relationship between x and the outcome variable. By treating the group level term as a fixed effect, the model estimates *specific parameter values for each group*.
 
 
 $$Y_i = \beta_0 + \beta_1X_i + \beta_2.group_i+\beta_3(X_i.group_i)+\epsilon_i$$
+
+#### Include group as a fixed effect in your model
+
+
 
 ```{r}
 additive_model <- lm(detox_exp ~ benzo_um + group, data = benzo_data)
@@ -384,7 +439,7 @@ If each group has
 
 - when you have few groups (<5)
 
-Then the difference between a fixed-effect model and a mixed-effect model will be *small*. 
+Then the difference between a fixed-effect model and a mixed-effect model will be *small*. And this may be the preferred option. 
 
 **BUT**
 
@@ -396,7 +451,7 @@ Then the difference between a fixed-effect model and a mixed-effect model will b
 
 - When you have incomplete groups or timepoints
 
-Then mixed models can be much more powerful. 
+*Then mixed models can be much more powerful*. 
 
 ## Our first mixed model
 
@@ -407,13 +462,13 @@ We can now join our random effect $U_j$ to the full dataset and define our y val
 $$Y_{ij} = β_0 + β_1*X_{ij} + U_j + ε_{ij}$$.
 
 
-We have a response variable, and we are attempting to explain part of the variation in test score through fitting an independent variable as a fixed effect. But the response variable has some residual variation (i.e. unexplained variation) associated with group. By using random effects, we are modeling that unexplained variation through variance.
+We have a response variable, and we are attempting to explain *part of the variation through fitting an independent variable as a fixed effect*. But the response variable has some residual variation (i.e. unexplained variation) associated with group. By using random effects, we are modeling that unexplained variation through variance.
 
-We now want to know if an association between `y ~ x` exists after controlling for the variation in group.
+**We now want to know if an association between `y ~ x` exists after controlling for the variation in group.**
 
 ### Running mixed effects models with lmerTest
 
-This section will detail how to run mixed models with the `lmer` function in the R package `lmerTest` (@R-lmerTest). This builds on the older `lme4` (@R-lme4) package, and in particular add p-values that were not previously included. There are other R packages that can be used to run mixed-effects models including the `nlme` package (@R-nlme) and the `glmmTMB` package (@R-glmmTMB). Outside of R there are also other packages and software capable of running mixed-effects models, though arguably none is better supported than R software.
+This section will detail how to run mixed models with the `lmer` function in the R package `lmerTest` (@R-lmerTest). There are other R packages that can be used to run mixed-effects models such as the `glmmTMB` package. 
 
 `r hide("Plotting random intercepts")`
 
@@ -469,6 +524,7 @@ plot_function2(mixed_model, benzo_data, "Random intercept")
 ```
 
 
+Here we fit our random intercepts with `(1|random_effect_variable)`.
 
 ```{r}
 # random intercept model
@@ -499,47 +555,28 @@ Below we can take a look at the estimates and standard errors for three of our p
 pooled <- basic_model |>  
   broom::tidy() |>  
   mutate(Approach = "Pooled", .before = 1) |>  
-  select(term, estimate, std.error, Approach)
+  dplyr::select(term, estimate, std.error, Approach)
 
 no_pool <- additive_model |>  
   broom::tidy() |>  
-  mutate(Approach = "No Pooling", .before = 1) |>  
-  select(term, estimate, std.error, Approach)
+  mutate(Approach = "Fixed Effect", .before = 1) |>  
+  dplyr::select(term, estimate, std.error, Approach)
 
 partial_pool <- mixed_model |>  
   broom.mixed::tidy() |>  
-  mutate(Approach = "Mixed Model/Partial Pool", .before = 1) |>  
-  select(Approach, term, estimate, std.error)
+  mutate(Approach = "Mixed Model", .before = 1) |>  
+  dplyr::select(Approach, term, estimate, std.error)
 
-bind_rows(pooled, no_pool, partial_pool) |>  
-  filter(term %in% c("x" , "(Intercept)") )
-
-```
-
-Pooling helps to improve the precision of the estimates by borrowing strength from the entire dataset. However, this can also lead to differences in the estimates and standard errors compared to models without pooling. 
-
-- Pooled: in the pooled model the averaged estimates may not accurately reflect the true values within each group. As a result, the estimates in pooled models can be biased towards the average behavior across all groups. We can see this in the **too small** standard error of the intercept, underestimating the variance in our dataset. At the same time if there is substantial variability in the relationships between groups, the pooled estimates can be less precise. This increased variability across groups can contribute to larger standard errors of the difference (SED) for fixed effects in pooled models.
-
-- No pooling: This model is extremely precise with the smallest errors, however these estimates reflect conditions only for the **first group in the model**. 
-
-- Partial pooling/Mixed models: this model reflects the greater uncertainty of the Mean and SE of the intercept. However, the SED in a partial pooling model accounts for both the variability within groups and the uncertainty between groups. Compared to a no pooling approach, the SED in a partial pooling model tends to be smaller because it incorporates the pooled information, which reduces the overall uncertainty. This adjusted SED provides a more accurate measure of the uncertainty associated with the estimated differences between groups or fixed effects.
-
-## Summary
-
-The `summary()` function has already provided the estimates of the fixed effects, but they can also be extracted with the `fixef()` function. 
-
-```{r}
-fixef(mixed_model)
+bind_rows(pooled, no_pool, partial_pool) |>
+  filter(term %in% c("(Intercept)", "benzo_um"))
 
 ```
 
-We can also apply `anova()` to a single model to get an F-test for the fixed effect
+- **Pooled**: in the pooled model the averaged estimates may not accurately reflect the true values within each group. As a result, the estimates in pooled models can be biased towards the average behavior across all groups. We can see this in the **too small** standard error of the intercept, underestimating the variance in our dataset. At the same time if there is substantial variability in the relationships between groups, the pooled estimates can be less precise. This increased variability across groups can contribute to larger standard errors of the difference (SED) for fixed effects in pooled models.
 
-```{r}
+- **Fixed effect**: This model is extremely precise with the smallest errors, however these estimates reflect conditions only for the **first group in the model**. 
 
-anova(mixed_model)
-
-```
+- **Mixed models**: this model reflects the greater uncertainty of the Mean and SE of the intercept. However, the SED in a partial pooling model accounts for both the variability within groups and the uncertainty between groups. This adjusted SED provides a more accurate measure of the uncertainty associated with the estimated differences between groups or fixed effects.
 
 
 ## Predictions
@@ -550,52 +587,51 @@ It's not always easy/straightforward to make prediciton or confidence intervals 
 
 The argument `type = random` in the `ggpredict` function (from the ggeffects package @R-ggeffects) is used to specify the type of predictions to be generated in the context of mixed effects models. The main difference between using `ggpredict` with and without `type = random` lies in the type of predictions produced:
 
-Without `type = random`: `ggpredict` will generate **fixed-effects predictions**. These estimates are based solely on the fixed effects of the model, ignoring any variability associated with the random effects. The resulting estimate represent the average or expected values of the response variable for specific combinations of predictor values, considering only the fixed components of the model.
+`type = fixed`: `ggpredict` will generate **fixed-effects predictions**. These estimates are based solely on the fixed effects of the model, ignoring any variability associated with the random effects. The resulting estimate represent the average or expected values of the response variable for specific combinations of predictor values, considering only the fixed components of the model.
 
-Estimated mean fixed effects provide a comprehensive view of the average effect of dependent variables on the response variable. By plotting the estimated mean fixed effects using ggpredict, you can visualize how the response variable changes across different levels or values of the predictors while considering the effects of other variables in the model.
+:::{.panel-tabset}
 
-```{r}
+## Fixed effect predictions
+
+```{r, message = FALSE, warning = FALSE}
 
 library(ggeffects)
 
-ggpredict(mixed_model, terms = "benzo_um") |>  
+ggpredict(mixed_model, 
+          terms = "benzo_um", 
+          type = "fixed") |>  
 plot(x = _, show_data = TRUE)
 
 ```
+
+## Random effect predictions
 
 With `type = random`: ggpredict will generate **predictions** that **incorporate both fixed and random effects**. These predictions take into account the variability introduced by the random effects in the model. The resulting predictions reflect not only the average trend captured by the fixed effects but also the additional variability associated with the random effects at different levels of the grouping factor(s). 
 
-By default the figure now produces **prediction intervals**
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 
-ggpredict(mixed_model, terms = c("benzo_um", "group"), type = "random") |>  
-plot(x = _, show_data = TRUE)
-
-```
-
-Furthermore, `ggpredict()` enables you to explore group-level predictions, which provide a deeper understanding of how the response variable varies across different levels of the grouping variable. By specifying the desired grouping variable in ggpredict when `type = random`, you can generate plots that depict the predicted values for each group separately, allowing for a comparative analysis of group-level effects.
-
-```{r}
-
-ggpredict(mixed_model, terms = c("benzo_um", "group"), type = "random") |>  
+ggpredict(mixed_model, 
+          terms = c("benzo_um", "group"), 
+          type = "random") |>  
 plot(x = _, show_data = TRUE) + 
-  facet_wrap(~group)+
-  theme(legend.position = "none")
+  facet_wrap(~group)
 
 ```
 
+:::
 
 ### `sjPlot`
 
 Another way to visualise mixed model results is with the package `sjPlot`(@R-sjPlot), and if you are interested in showing the variation among levels of your random effects, you can plot the departure from the overall model estimate for intercepts - *and slopes, if you have a random slope model*:
 
-```{r}
+```{r, warning = FALSE}
 
 library(sjPlot)
+library(patchwork)
 
 plot_model(mixed_model, terms = c("benzo_um", "group"), type = "re")/
-  (plot_model(mixed_model, terms = c("benzo_um", "group"), type = "est")+ggtitle("Fixed Effects"))
+(plot_model(mixed_model, terms = c("benzo_um", "group"), type = "est")+ggtitle("Fixed Effects"))
 
 ```
 
@@ -609,7 +645,7 @@ The values you see are NOT actual values, but rather the difference between the 
 
 `sjPlot` is also capable of producing prediction plots in the same way as `ggeffects`:
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 plot_model(mixed_model,type="pred",
            terms=c("benzo_um", "group"),
            pred.type="re",
@@ -620,14 +656,19 @@ plot_model(mixed_model,type="pred",
 
 ### `emmeans`
 
+Emmeans will only produce predictions based on fixed effects: 
+
 ```{r}
 
-emmeans::emmeans(mixed_model, specs = "benzo_um", at = list(x = seq(0,10,2)))
+emmeans::emmeans(mixed_model, 
+                 specs = "benzo_um", 
+                 at = list("benzo_um" = seq(0,10,2)))
 
 ```
 
-:::
+:::{.callout-note collapse = "true"}
 
+## Degrees of freedom
 
 In mixed models, **df are not straightforward because of**:
 
@@ -645,6 +686,7 @@ In mixed models, **df are not straightforward because of**:
 
 When df is assumed to be essentially infinite (∞) - we default to the z-distribution, which will produce the narrowest confidence intervals.
 
+:::
 
 ### Interval types
 
@@ -654,7 +696,9 @@ A confidence interval is used to estimate the range of plausible values for a po
 
 ```{r}
 
-ggpredict(mixed_model, terms = "benzo_um", interval = "confidence")
+ggpredict(mixed_model, 
+          terms = "benzo_um", 
+          interval = "confidence")
 
 
 ```
@@ -664,7 +708,9 @@ ggpredict(mixed_model, terms = "benzo_um", interval = "confidence")
 On the other hand, a prediction interval is used to estimate the range of plausible values for an individual observation or a future observation from the population. It takes into account both the uncertainty in the estimated model parameters and the inherent variability within the data. A 95% prediction interval provides a range **within which a specific observed or predicted value is likely to fall with a certain level of confidence**. The wider the prediction interval, the greater the uncertainty around the specific value being predicted.
 
 ```{r}
-ggpredict(mixed_model, terms = "benzo_um", interval = "prediction")
+ggpredict(mixed_model, 
+          terms = "benzo_um", 
+          interval = "prediction")
 
 ```
 
@@ -681,29 +727,69 @@ check_model(mixed_model,
 
 ```
 
-### DHARma
+> Note this package requires @R-DHARMa to work with simulated residuals for mixed model checking
 
-Simulation-based methods, like those available with DHARMa (@R-DHARMa), are often preferred for model validation and assumption checking because they offer flexibility and do not rely on specific assumptions. Simulation is particularly useful for evaluating complex models with multiple levels of variability, non-linearity, or complex hierarchical structures. Such models may not be adequately evaluated by solely examining residuals, and simulation provides a more robust approach to assess their assumptions and performance.
+## Reporting Mixed Model Results
 
-Read the authors summary [here](https://theoreticalecology.wordpress.com/2016/08/28/dharma-an-r-package-for-residual-diagnostics-of-glmms/)
+Once you get your model, you have to **present** it in an accurate, clear and attractive form.
+
+The `summary()` function provides us with some useful numbers such as the amount of variance left over after fitting our fixed effects that can be assigned to each of our random effects. It also provides information on how correlated our random effects are, which may be of interest in understanding the structure of our data as well.
+
+We can use it to check that the modelled random effect structure matches our data.
+
+It includes the coefficient estimates, t-statistics and p-values of our fixed effects
 
 ```{r}
 
-library(DHARMa)
+summary(mixed_model)
 
-resid.mm <- simulateResiduals(mixed_model)
+```
 
-plot(resid.mm)
+We may also wish to report $R^2$ values from our model fit. This requires the `MuMIn` package. 
+
+```{r}
+library(MuMIn)
+r.squaredGLMM(mixed_model)
+```
+
+This calculates two values the first $R^2_{m}$ is the marginal $R^2$ value, representing the proportion of variance explained by our fixed effects. The second $R^2_{c}$ is the conditional $R^2$, which is the proportion of variance explained by the full model, with both fixed and random effects. 
+
+## Tables
+
+There are a few packages for producing beautiful summary tables from regression models, but not all of them can handle mixed-effects models, the `sjPlot` @R-sjPlot package is one of the most robust and produces a simple HTML table detailing fixed and random effects, produces 95% confidence intervals for fixed effects and calculates those $R^2$ values for you:
+
+```{r}
+
+sjPlot::tab_model(mixed_model, 
+                  df.method = "satterthwaite")
+
+```
+
+## Figures
+
+We have covered some of the packages that allow us to easily produce marginal and conditional fits, along with 95% confidence or prediction intervals: these will output `ggplot2` figures, allowing plenty of customisation for presentation
+
+```{r}
+
+# Custom colors
+
+ggpredict(mixed_model, terms = c("benzo_um", "group" ), 
+          type = "random") |>  
+plot(x = _, show_data = TRUE) + 
+  scale_colour_discrete(palette = "Dark2")+
+  scale_fill_discrete(palette = "Dark2")+
+  facet_wrap(~group)+theme(legend.position = "none")
 
 ```
 
 
-:::{.callout-warning}
 
-When you have a lot of data, even minimal deviations from the expected distribution will become significant (this is discussed in the help/vignette for the DHARMa package). You will need to assess the distribution and decide if it is important for yourself.
+## Write-ups
 
-:::
-
+> We fitted a linear mixed model (estimated using REML) to estimate the effect of "benzo_um" on "detox_exp". The
+model included a random intercept design to allow for the repeated experiment design. The model's total explanatory power is substantial (conditional R^2 = 0.7), and the part related to the fixed effects alone (marginal R2) is 0.099. 
+The effect of x on y was a steady increase of 2.03 per unit of x ([1.69 - 2.36], t(424.1) = 11.9, p < 0.001). 
+These 95% Confidence Intervals (CIs) and p-values were computed using a satterthwaite approximation of the degrees of freedom and a t-distribution approximation.
 
 
 ## Practice Questions
@@ -725,10 +811,9 @@ When you have a lot of data, even minimal deviations from the expected distribut
 `r longmcq(c(answer = "They can still estimate parameters even when some observations are missing", "They delete observations with missing data", "They set all values to 0"))`
 
 
-# Worked Example 1 - Dolphins
+## Worked Example 1 - Dolphins
 
-
-## How do I decide if it is a fixed or random effect?
+### How do I decide if it is a fixed or random effect?
 
 One of the most common questions in mixed-effects modelling is how to decide if an effect should be considered as fixed or random. This can be quite a complicated question, as we have touched upon briefly before the definition of a random effect is not universal. It is a considered process that can include the hypothesis or question you are asking. 
 
@@ -845,7 +930,7 @@ We found that for every 1kg increase in bodymass, ($V_T$) increased by 0.02 litr
 
 
 
-# Multiple random effects
+## Multiple random effects
 
 Previously we used `(1|group)` to fit our random effect. Whatever is on the right side of the `|` operator is a factor and referred to as a “grouping factor” for the term. 
 
@@ -880,12 +965,7 @@ digraph boxes_and_circles {
 
 ```
 
-> Example 1: Let's consider a study examining the academic performance of students from different schools and different cities. The grouping variables are "School" and "City". Each school can be located in multiple cities, and each city can have multiple schools. The random effects of "School" and "City" are crossed since the levels of these variables are independent of each other.
-
-`lmer(y ~ x + (1 | School) + (1 | City), data = dataset)`
-
-
-> Example 2: Imagine there is a long-term study on breeding success in passerine birds across multiple woodlands, and the researcher returns every year for five  years to carry out measurements. Here  "Year" is a  crossed  random  effect with "Woodland" as each Woodland can appear in multiple years of study.
+> Example: Imagine there is a long-term study on breeding success in passerine birds across multiple woodlands, and the researcher returns every year for five  years to carry out measurements. Here  "Year" is a  crossed  random  effect with "Woodland" as each Woodland can appear in multiple years of study.
 Imagine a researcher was interested in understanding  the factors affecting the clutch mass of a passerine bird. They have a study population  spread across five separate woodlands, each containing 30 nest boxes. Every week during  breeding they measure the foraging rate of females at feeders, and measure their  subsequent clutch mass. Some females have multiple clutches in a season and contribute multiple data points. 
 
 `lmer(y ~ x + (1 | Year) + (1 | Woodland), data = dataset)`
@@ -914,11 +994,7 @@ digraph boxes_and_circles {
 
 ```
 
-> Example 1. Consider a study on the job performance of employees within different departments of an organization. The grouping variables are "Employee" and "Department". Each employee belongs to one specific department, and no employee can be part of multiple departments. The random effects of "Employee" are nested within the random effects of "Department" since each employee is uniquely associated with a specific department.
-
-`lmer(y ~ x + (1 | Department/Employee), data = dataset)`
-
-> Example 2: In the same bird study female ID is said to be  nested within woodland : each woodland  contains multiple females unique to that woodland (that never move among woodlands).  The nested random effect controls for the fact that (i) clutches from the same female  are not independent, and (ii) females from the same woodland may have clutch masses  more similar to one another than to females from other woodlands 
+> Example: In the same bird study female ID is said to be  nested within woodland : each woodland  contains multiple females unique to that woodland (that never move among woodlands).  The nested random effect controls for the fact that (i) clutches from the same female  are not independent, and (ii) females from the same woodland may have clutch masses  more similar to one another than to females from other woodlands 
 
 `lmer(y ~ x + (1 | Woodland/Female ID), data = dataset)`
 
@@ -927,10 +1003,10 @@ digraph boxes_and_circles {
 `lmer(y ~ x + (1 | Woodland/Female ID) + (1|Year), data = dataset)`
 
 
-For more on designing models around crossed and nested designs check out [this amazing nature paper](https://www.nature.com/articles/nmeth.3137) @krzywinski_2014
+For more on designing models around crossed and nested designs check out [this amazing nature paper](https://www.nature.com/articles/nmeth.3137) 
 
 
-# Worked Example 2 - Nested design
+## Worked Example 2 - Nested design
 
 This experiment involved a simple one-way anova with 3 treatments given to 6 rats, the researchers the measured glycogen levels in their liver. The analysis was complicated by the fact that three preparations were taken from the liver of each rat, and two readings of glycogen content were taken from each preparation. This generated 6 pseudoreplicates per rat to give a total of 36 readings in all.
 
@@ -1061,109 +1137,205 @@ plot(ggpredict(rats_lmer.2,
 ```
 
 
-# Reporting Mixed Model Results
+## Worked Example 3 - GLMM Binomial Mixed models
 
-Once you get your model, you have to **present** it in an accurate, clear and attractive form.
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/egg_hatch_mixed.csv",
+  button_label = "Download Egg Hatching data",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
 
-The `summary()` function provides us with some useful numbers such as the amount of variance left over after fitting our fixed effects that can be assigned to each of our random effects. It also provides information on how correlated our random effects are, which may be of interest in understanding the structure of our data as well.
+```{r, echo = FALSE}
 
-We can use it to check that the modelled random effect structure matches our data.
-
-It includes the coefficient estimates, t-statistics and p-values of our fixed effects
-
-```{r}
-
-summary(mixed_model)
+egg_hatch_data <- read_csv("files/egg_hatch_mixed.csv")
 
 ```
 
-:::{.callout-note}
+:::{.task}
+::::{.task-header}
+Fit a Binomial GLM
+::::
+::::{.task-container}
 
-Note that the t values only appear with df and a p value when using the lmerTest version of lmer(). This is because the degrees of freedom in a mixed-effects model are not well-defined. Often people will treat them as Wald z- values, i.e., as observations from the standard normal distribution. Because the t-distribution asymptotes the standard normal distribution as the number of observations goes to infinity, this "t-as-z" practice is legitimate if you have a large enough set of observations.
+- Read in this csv and assign it to an R object `egg_hatch_data`
 
-The lmerTest function produces estimated degrees of freedom with a satterthwaite approximation (another common method is the "kenward approximation"), which will have the effect of widening confidence intervals. It is important to know what method you are using, and to be consistent across your presentation/write-up 
+- Fit a Binomial model to analyse the hatch rate by treatment for the `egg_hatch_data`
+
+`r hide("Solution")`
+
+```{r}
+
+egg_hatch_data <- egg_hatch_data |> 
+  mutate(unhatched_eggs = (number_of_eggs-number_of_larvae))
+
+binomial_model <- glm(cbind(number_of_larvae,unhatched_eggs) ~ cross, family = binomial, data = egg_hatch_data) 
+
+
+```
+
+`r unhide()`
+
+- Look at the coefficients and run a model check on the data
+    
+      - Are there any issues with the model?
+      
+`r hide("Solution")`
+
+```{r}
+
+summary(binomial_model)
+
+```
+
+```{r}
+
+performance::check_model(binomial_model)
+
+```
+
+There are several issues with outliers, the distribution of quantiles, under-prediction of high values.
+
+If we run a `performance::check_overdispersion()` we have high overdispersion
+
+`r unhide()`     
+
+::::
+:::
+
+
+
+:::{.task}
+::::{.task-header}
+Fit a Binomial GLMM
+::::
+::::{.task-container}
+
+Mixed models can be very helpful for dealing with apparent overdispersion in fixed dispersion models.
+
+If variance can be accounted for by random intercepts that align with the structure in our data.
+
+- Which variables could be used to build random intercepts?
+
+- Do we need crossed or nested effects?
+
+- Use the `glmer()` to fit a binomial model with random effects
+
+`glmer(cbind(win,loss) ~ x + (1|random), family = binomial)`
+
+`r hide("Solution")`
+
+```{r}
+
+binomial_mixed_rep <- glmer(cbind(number_of_larvae,unhatched_eggs) ~ cross +
+                              (1|replicate), 
+                            family = binomial, 
+                            data = egg_hatch_data) 
+
+binomial_mixed_rep_fem <- glmer(cbind(number_of_larvae,unhatched_eggs) ~ cross +
+                              (1|replicate/female_num), 
+                            family = binomial, 
+                            data = egg_hatch_data) 
+
+AIC(binomial_model, binomial_mixed_rep, binomial_mixed_rep_fem)
+
+```
+
+
+:::{panel.tabset}
+
+```{r}
+
+performance::check_model(binomial_mixed_rep)
+
+```
+
+```{r}
+
+performance::check_model(binomial_mixed_rep_fem)
+
+```
 
 :::
 
-We can also produce an `anova()` type summary of our fixed effects
+`r unhide()`
 
-```{r}
-anova(mixed_model)
-```
 
-We may also wish to report $R^2$ values from our model fit. This requires the `MuMIn` package. 
+In this example - our main source of variance was *between* different females - allowing for a random intercept here stabilised dispersion to within acceptable tolerances for a binomial model.
 
-```{r}
-library(MuMIn)
-r.squaredGLMM(mixed_model)
-```
+Variance *between* replicate experiments is actually extremely low - **but** female ids are nested within replicate experiments so this must be reflected in our random intercept structure. 
 
-This calculates two values the first $R^2_{m}$ is the marginal $R^2$ value, representing the proportion of variance explained by our fixed effects. The second $R^2_{c}$ is the conditional $R^2$, which is the proportion of variance explained by the full model, with both fixed and random effects. 
+> Tip: Check the number of obs, and groups in the random effect summary - does it match your experimental design?
 
-## Tables
-
-There are a few packages for producing beautiful summary tables from regression models, but not all of them can handle mixed-effects models, the `sjPlot` @R-sjPlot package is one of the most robust and produces a simple HTML table detailing fixed and random effects, produces 95% confidence intervals for fixed effects and calculates those $R^2$ values for you:
-
-```{r}
-
-sjPlot::tab_model(mixed_model, 
-                  df.method = "satterthwaite")
-
-```
-
-## Figures
-
-We have covered some of the packages that allow us to easily produce marginal and conditional fits, along with 95% confidence or prediction intervals: these will output `ggplot2` figures, allowing plenty of customisation for presentation
-
-```{r}
-
-# Custom colors
+::::
+:::
 
 
 
-ggpredict(mixed_model, terms = c("benzo_um", "group" ), 
-          type = "random") |>  
-plot(x = _, show_data = TRUE) + 
-  scale_colour_discrete(palette = "Dark2")+
-  scale_fill_discrete(palette = "Dark2")+
-  facet_wrap(~group)+theme(legend.position = "none")
+## Summary
 
-```
+### Checklist for Pooling vs. Fixed vs. Random Effects 
+
+1. **Are the groups or replicates intentionally different (experimental manipulation)?**  
+  
+   - Yes → Fixed effect.  
+     You want explicit estimates for each level (treatment A vs B, genotype 1 vs 2).  
+    
+   - No → Go to 2.
+
+2. **Are the groups/replicates randomly sampled from a broader population you want to generalize over?**  
+  
+   - Yes → Random effect.  
+     Each level (e.g., plate, batch, cage) is a random draw; you want to estimate variance among levels, not each level’s mean.  
+     Efficient when many levels; saves degrees of freedom.  
+   
+   - No → Go to 3.
+
+3. **Are the groups technically identical and under identical conditions?**  
+   
+   - Yes → Pool results.  
+     If variation among replicates is trivial or purely measurement error, averaging is acceptable.  
+     Always verify that between-replicate variance is negligible before pooling.  
+   - No → Go to 4.
+
+4. **Do group differences represent a nuisance (not of direct interest but possibly confounding)?**  
+   
+   - Yes → Random effect (if ≥ 5 levels).  
+     If only 2–3 levels → safer to model as Fixed, or combine with other factors.  
+
+   - No → Go to 5.
+
+5. **Are there only a few levels (≤ 3)?**  
+
+   - Yes → Fixed effect.  
+     Variance estimation is unreliable with so few groups.  
+
+   - No → Random effect (if sampled at random from a larger population).
+
+6. **Are you uncertain about which specification is appropriate?** 
+
+   - Fit both fixed and random models: compare AIC/BIC and model checks
+   
+
+
+#### Final Check
+
+| Situation | Reasoning | Recommended Handling |
+|------------|--------------------|----------------------|
+| Designed treatment differences | Specific levels of interest | Fixed effect |
+| Randomly sampled groups (many levels) | Interested in variance, not per-level means | Random effect |
+| Identical replicates, same conditions | No real grouping variance | Pool (average) |
+| Few nuisance groups (≤ 3) | Random variance unidentifiable | Fixed effect |
+| Unknown influence | Test both structures | Model comparison |
 
 
 
-## Write-ups
 
-> We fitted a linear mixed model (estimated using REML) to estimate the effect of "benzo_um" on "detox_exp". The
-model included a random intercept design to allow for the repeated experiment design. The model's total explanatory power is substantial (conditional R^2 = 0.7), and the part related to the fixed effects alone (marginal R2) is 0.099. 
-The effect of x on y was a steady increase of 2.03 per unit of x ([1.69 - 2.36], t(424.1) = 11.9, p < 0.001). 
-These 95% Confidence Intervals (CIs) and p-values were computed using a satterthwaite approximation of the degrees of freedom and a t-distribution approximation.
-
-
-
-# Summary
-
-Here is a suggested workflow:
-
-1. Start with a model containing only fixed effects: Begin by fitting a model with the fixed effects that are relevant to your research question. Include the main predictors and any potential interactions you hypothesize might exist. For example, if you have predictors A and B, you might start with a model like response ~ A + B + A:B.
-
-2. Assess fixed effects and interactions: Evaluate the significance, direction, and magnitude of the fixed effects coefficients. Look for interactions that show significant effects and consider their interpretation in the context of your research question. This step allows you to identify the key variables and interactions that are important in explaining the variation in the response variable.
-
-3. Model evaluation and refinement: Assess the goodness of fit of the fixed effects model using appropriate measures like AIC, BIC, or model deviance. Consider conducting model comparison to evaluate different models with alternative fixed effects structures. This process helps you refine the model and select the most appropriate combination of variables and interactions. *However - this should be no substitution for carefully considered hypotheses and experimental design*. 
-
-4. Incorporate random effects: Once you have identified the significant fixed effects and relevant interactions, you can then consider the inclusion of random effects. Random effects capture the variation at different levels and can account for individual differences or clustering within groups. Evaluate the need for random intercepts, random slopes, or crossed random effects based on your research design and the nature of the data.
-
-5. Assess and compare models with random effects: Fit models with random effects and compare their fit to the fixed effects model. Consider appropriate measures such as likelihood ratio tests, AIC, or BIC for model comparison. Evaluate the contribution of the random effects to the model.*However - this should be no substitution for carefully considered hypotheses and experimental design*. And we have seen examples where we leave random effects in place despite LRT tests.
-
-6. Validate and interpret the final model: Validate the final model by assessing assumptions, checking for influential observations, and performing sensitivity analysis. Interpret the estimated coefficients, including fixed effects and random effects, in the context of your research question. Report the results with figures, summary tables and carefully considered text summarising the analysis.
-
-By initially focusing on the fixed effects, you can establish the foundation of your model and identify the significant predictors and interactions. This step allows you to better understand the relationships in your data and guide the subsequent inclusion of random effects if appropriate.
-
-
-## Mixed Model extensions
-
-
-## Practical problems
+### Practical problems
 
 Below are two common issues or warnings you will likely encounter when fitting linear models:
 
@@ -1184,8 +1356,10 @@ Below are two common issues or warnings you will likely encounter when fitting l
 
 Some essential reading to continue your mixed-model journey! 
 
-- [A brief introduction to mixed effects modelling and multi-model inference in ecology](https://peerj.com/articles/4794/) @xav_2018
+- [A brief introduction to mixed effects modelling and multi-model inference in ecology](https://peerj.com/articles/4794/) 
 
-- [Mixed Effects Models and Extensions in Ecology with R](https://link.springer.com/book/10.1007/978-0-387-87458-6) @zuur_2009
+- [Mixed Effects Models and Extensions in Ecology with R](https://link.springer.com/book/10.1007/978-0-387-87458-6) 
 
-- [Perils and pitfalls of mixed-effects regression models in biology](https://peerj.com/articles/9522/) @silk_2020
+- [Perils and pitfalls of mixed-effects regression models in biology](https://peerj.com/articles/9522/) 
+
+- [Fixed or Random effect](https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/)

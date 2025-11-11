@@ -459,11 +459,23 @@ Count data often violate the strict Poisson assumption of equal mean and varianc
 
 If there is **residual deviance that is bigger than the residual degrees of freedom** then there is *more* variance than we expect from the prediction of the mean by our model. 
 
-Overdispersion in Poisson models can be diagnosed by $\frac{residual~deviance}{residual~degrees~of~freedom}$ which from our example here 'summary()' is $\frac{436}{47} = 9.3$
+Overdispersion in Poisson models can be diagnosed by:
+
+$$
+\hat{\phi} = \frac{\text{Residual Deviance}}{\text{Residual Degrees of Freedom}}
+
+$$
 
 Overdispersion statistic values **> 1 = Overdispersed**
 
 Overdispersion is a result of larger than expected variance for that mean under a Poisson distribution, this is clearly an issue with our model!
+
+| Value of 𝜙̂      | Interpretation                                                                |
+| ----------------- | ----------------------------------------------------------------------------- |
+| ≈ 1               | Good fit — variance consistent with Poisson assumption.                       |
+| 2 to 4            | Moderate overdispersion — Quasipoisson.      |
+| > 4 (e.g., 6–8.7) | Severe overdispersion — observed variability far exceeds Poisson expectation - Negative Binomial. |
+
 
 Model checks that helped indicate this would be an issue was the "Misspecified dispersion" plot. We can also check whether this misspecified dispersion meets a formal threshold for overdispersion with a function: 
 
@@ -473,7 +485,7 @@ check_overdispersion(cuckoo_glm1)
 
 ```
 
-### Minor overdispersion
+### Minor overdispersion 2-4
 
 Luckily a simple fix is to fit a *quasi-likelihood* model which accounts for this, think of "quasi" as "sort of but not completely" Poisson. 
 
@@ -493,7 +505,7 @@ Because we are now estimating the variance again, the test statistics have rever
 :::
 
 
-### Severe overdispersion
+### Severe overdispersion > 4
 
 The initial Poisson model likely showed evidence of overdispersion (variance much greater than the mean). Using a **negative binomial (glm.nb)** allows the dispersion parameter to be estimated from the data rather than fixed at 1, providing a better fit when count variability is high.
 
@@ -533,6 +545,8 @@ Look at the negative binomial model checks - in particular the Posterior Predict
 `r hide("Solution")`
 
 ```{r}
+# We have more zeroes than expected under our model
+# this is known as zero-inflation
 check_zeroinflation(cuckoo_negbin)
 ```
 
@@ -540,6 +554,8 @@ check_zeroinflation(cuckoo_negbin)
 
 
 The zero-inflated Poisson (ZIP) allows some zeros to arise from a separate “structural zero” process. `ziformula = ~1` specifies a constant zero-inflation probability across observations.
+
+This can be an alternate source of overdispersion:
 
 ```{r}
 library(glmmTMB)
@@ -571,7 +587,11 @@ If overdispersion persists even with ZIP, it may reflect unmodeled heterogeneity
 
 :::{.task}
 ::::{.task-header}
-Make and compare a zero-inflated negative binomial
+
+- Make and compare a zero-inflated negative binomial
+
+- Swap family = `poisson` for `nbinom`
+
 ::::
 ::::{.task-container}
 
@@ -647,3 +667,14 @@ check_model(cuckoo_zinb2)
 
 ::::
 :::
+
+
+## Summary 
+
+- Begin by fitting a Poisson GLM to model count data (e.g., begging calls) using a log link, then inspect diagnostic plots to assess residuals, variance homogeneity, and dispersion.
+
+- If the model shows overdispersion (variance > mean), refit using a quasipoisson or negative binomial model to account for excess variability.
+
+- Examine model adequacy with `check_model()` and test for zero inflation; if extra zeros exist, fit zero-inflated Poisson or zero-inflated negative binomial models with `glmmTMB`.
+
+- Compare model fits using AIC and, if needed, include predictors in the zero-inflation component to capture structured patterns in zero counts.
