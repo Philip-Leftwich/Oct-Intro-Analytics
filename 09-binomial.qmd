@@ -23,9 +23,6 @@ library(scales)
 ```
 
 
-
-
-
 When our response variable is binary, we can use a glm with a **binomial** error distribution
 
 So far we have only considered continuous and discrete data as response variables. What if our response is a categorical variable (e.g passing or failing an exam, voting yes or no in a referendum, whether an egg has successfully fledged or been predated, infected/uninfected, alive/dead)? 
@@ -123,7 +120,7 @@ beetles <- read_csv(here::here("files" , "beetles.csv"))
 
 ```{r, eval = TRUE, echo = FALSE}
 downloadthis::download_link(
-  link = "https://github.com/UEABIO/5023B/blob/dev/files/beetles.csv",
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/beetles.csv",
   button_label = "Download Beetle data as csv",
   button_type = "success",
   has_icon = TRUE,
@@ -181,6 +178,7 @@ beetles <- beetles |>
 :::
 
 :::{.callout-note collapse = "true"}
+
 ## A linear model
 
 Here we can fit a standard linear model to calculated proportions.
@@ -346,36 +344,19 @@ emmeans::emmeans(binomial_model,
 
 ```
 
-
-:::
-
-:::{.task}
-::::{.task-header}
-Prediction
-::::
-::::{.task-container}
-
-Can you edit your code to produce a prediction of the mortality rate at a pesticide dose of 0mg? 
-
-::::
-:::
-
-
-
 :::{.task}
 ::::{.task-header}
 Make a ggplot of the change in probability 
 ::::
 ::::{.task-container}
 
+- Take one of your model predictions 
 
-- Add this to a ggplot
+- If emmeans convert to `as_tibble()` first
 
-- Include 95% confidence intervals
+- Plot this on a ggplot
 
-::::
-:::
-
+- Include 95% confidence intervals (if possible)
 
 `r hide("Solution")`
 
@@ -383,7 +364,7 @@ Make a ggplot of the change in probability
 
 ## Broom
 
-```{r, eval = F}
+```{r, eval = T}
 
 binomial_model |> 
    broom::augment(data = beetles, 
@@ -398,7 +379,7 @@ binomial_model |>
 
 ## Emmeans
 
-```{r, echo = F}
+```{r, eval = T}
 emmeans::emmeans(binomial_model, 
                  specs = ~ dose, 
                  at=list(dose=c(40:80)), 
@@ -414,6 +395,35 @@ emmeans::emmeans(binomial_model,
 :::
 
 `r unhide()`
+
+::::
+:::
+
+
+:::{.task}
+::::{.task-header}
+Prediction
+::::
+::::{.task-container}
+
+Can you edit your code to produce a prediction of the mortality rate at a pesticide dose of 0mg? 
+
+`r hide("Solution")`
+
+```{r}
+emmeans::emmeans(binomial_model, 
+                 specs = ~ dose, 
+                 at=list(dose=0), 
+                 type='response') 
+```
+
+`r unhide()`
+
+::::
+:::
+
+
+
 
 
 ## Assumptions
@@ -479,10 +489,14 @@ report(binomial_model)
 
 `r unhide()`
 
+
+:::{.panel-tabset collapse = "true"}
+
 ## Comparison to linear model
 
+A comparison of linear vs binomial model shows better explanatory power (R-squared) for our correctly fitted model:
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 DescTools::PseudoR2(binomial_model)
 summary(model)$r.squared
 ```
@@ -495,7 +509,7 @@ Unless the number of trials is identical in every row of data - then binomial mo
 power_df <- readRDS("files/power_df.RDS")
 
 ggplot(power_df, aes(x = p1, y = power, color = method)) +
-    geom_line(size = 1.2) +
+    geom_line(linewidth = 1.2) +
     geom_point(size = 2) +
     facet_grid(scenario ~ n_rows, labeller = labeller(
         scenario = label_value,
@@ -517,3 +531,5 @@ coord_cartesian(ylim = c(.5,1))+
   geom_hline(yintercept = .8, linetype = "dashed")
 
 ```
+
+:::

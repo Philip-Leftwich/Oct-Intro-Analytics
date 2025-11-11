@@ -133,7 +133,7 @@ gg_rope <- ggplot(df2, aes(x2, y2)) +
   annotate("text", x = 0, y = 0.18, label = "ROPE\n(negligible range)", color = "orange3") +
   labs(
     title = "Equivalence Testing (ROPE principle)",
-    subtitle = "Most of the effect distribution lies within the ROPE → evidence for practical equivalence",
+    subtitle = "Most of the effect distribution lies within the ROPE \n→ evidence for practical equivalence",
     x = "Effect size",
     y = "Density"
   ) +
@@ -159,24 +159,87 @@ Equivalence testing allows us to:
 
 ## Example:
 
-```{r}
-body_mass_data <- readRDS("body_mass.RDS")
+We want to know if a new set of diet conditions effects the adult body mass of a set of insects: 
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/body_mass.RDS",
+  button_label = "Download body mass data as RDS",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo = FALSE}
+body_mass_data <- readRDS("files/body_mass.RDS")
+
 m_main <- lm(body_mass ~ treatment + sex, data = body_mass_data)
 ```
 
-Let’s say a difference smaller than 40 g is biologically negligible.
-We define a ROPE (Region of Practical Equivalence) as ±40 g.
+```{r, eval = FALSE}
+body_mass_data <- readRDS("body_mass.RDS")
 
-equivalence_test(m, range = c(-40, 0))
+m_main <- lm(body_mass ~ treatment + sex, data = body_mass_data)
+```
 
+:::{.task}
+::::{.task-header}
+Confidence Intervals
+::::
+::::{.task-container}
 
-Output example:
+- Fit 95% Confidence to your models
+
+`r hide("Solution")`
 
 ```{r}
 
-broom::tidy(m_main)
+broom::tidy(m_main, con.fint = T)
+
+#confint(m_main)
 
 ```
+
+`r unhide()`
+
+We can use our calculated confidence intervals *of the difference* to make a statement about the likely true difference in body mass for insects between treatment A and B.
+
+::::
+:::
+
+## Equivalence testing
+
+In equivalence testing, we’re not checking whether two means are different, but whether their difference is small enough to be considered practically the same — that is, within some limits (say between −Δ and +Δ).
+
+To do this, we run two one-sided tests:
+
+- Test if the difference is **greater** than the lower limit (−Δ).
+
+- Test if the difference is **less** than the upper limit (+Δ).
+
+Each of those tests is done at significance level α (for example, α = 0.05).
+For both conditions to hold, we need **both** one-sided tests to be significant.
+
+Now, when we express this as a single confidence interval, we must account for the fact that we used two one-sided tests — one for each tail. Because α is “spent” on both sides, the combined confidence level becomes (1 – 2α).
+
+So if α = 0.05, we get a 90% confidence interval, not 95%.
+
+### Set a standard
+
+Let’s say a difference *smaller than 40 g* is acceptable.
+
+This could be because we think its biologically negligible *or*
+
+it could be that Diet B saves us a lot of money and we are willing to make the tradeoff within certain bounds
+
+For this data we  define a ROPE (Region of Practical Equivalence) as between 0-40 g weight lost.
+
+
+#### Output example:
 
 ```{r}
 library(effectsize)
@@ -184,17 +247,17 @@ equivalence_test(m_main, range = c(0,-40))
 
 ```
 
-Interpretation:
+#### Interpretation:
 
 - The treatment effect (−21.8 g) lies completely within the ROPE of ±40 g → practically equivalent.
 
 - The sex effect (−203 g) lies far outside the ROPE → meaningful biological difference.
 
-- The SGPV (Second-Generation p-value) quantifies how much of the CI overlaps the ROPE (1 = fully inside, 0 = outside).
+- The **SGPV (Second-Generation p-value)** quantifies how much of the CI overlaps the ROPE (1 = fully inside, 0 = outside).
 
 So:
 
-- Even though the treatment effect was “statistically significant” (p = 0.04), the equivalence test says it’s practically negligible in biological terms.
+- Even though the treatment effect was “statistically significant” (p = 0.04), the equivalence test says it’s practically negligible for our margins.
 
 ###  Visualize your equivalence results
 
@@ -209,13 +272,44 @@ This shows:
 
 - Each coefficient and its 90% CI
 
+`r hide("90% CI")`
+
+```{r}
+
+broom::tidy(m_main, con.fint = T, level = .9)
+
+```
+
+`r unhide()`
+
 - The ROPE zone (here, ±40 g)
 
 - A colour-coded decision (“Accepted”, “Rejected”, “Undecided”)
 
+:::{.task}
+::::{.task-header}
+Try a different equivalence margin
+::::
+::::{.task-container}
+
+- Are the diets equivalent at 0-20g?
+
+`r hide("Solution")`
+
+```{r}
+plot(equivalence_test(m_main, range = c(0,-20)))
+
+```
+
+`r unhide()`
+
+::::
+:::
+
 ## Reporting
 
 A linear model predicting insect body mass revealed a small treatment effect (−21.8 g, 90% CI [−39.4, −4.2]), and a strong effect of sex (−202.9 g, 90% CI [−220.5, −185.3]).
+
 Equivalence testing using a ROPE of ±40g (A 10% difference in mass) indicated that the treatment difference was practically equivalent to zero, whereas the sex difference was meaningful.
 
 

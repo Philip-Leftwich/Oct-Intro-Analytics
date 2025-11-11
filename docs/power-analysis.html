@@ -648,7 +648,7 @@ Note
 <p>Note that the <code>rnorm</code> function takes the standard deviation (not the variance).</p>
 </div>
 </div>
-<p>We set a <code>seed</code> so that the generated random numbers are reproducible:</p>
+<p>We set a <code>seed</code> so that the generated random numbers are reproducible - and then make a dataset according to our understanding of the experiment:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">38596</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
@@ -680,6 +680,24 @@ Note
 <span id="cb1-28"><a href="#cb1-28"></a></span>
 <span id="cb1-29"><a href="#cb1-29"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(body_mass, treatment, sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Our simulated data must include:</p>
+<ul>
+<li><p>All expected values/ranges of our predictors</p></li>
+<li><p>An estimate of the mean effect of each predictor on our dependent variable</p></li>
+<li><p>An estimate of variance (noise) in our data</p></li>
+</ul>
+</div>
+</div>
 <section id="variance" class="level3" data-number="21.2.1"><h3 data-number="21.2.1" class="anchored" data-anchor-id="variance">
 <span class="header-section-number">21.2.1</span> Variance</h3>
 <p>For sensible measures of variance we really <em>need</em> some ground truthing data - pilot studies or measures from non-treatment populations</p>
@@ -703,7 +721,7 @@ Note
 </div>
 </div>
 </div>
-<p>Let’s assume that we collected and analyzed this specific sample – what would have been the results?</p>
+<p>Let’s assume that we collected and analyzed this specific sample from our population – what would have been the results?</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Fit models</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>m_main <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass <span class="sc">~</span> treatment <span class="sc">+</span> sex, <span class="at">data =</span> dat)   <span class="co"># main effects only</span></span>
@@ -734,11 +752,13 @@ F-statistic:   185 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>As you can see, in this simulated sample (based on a specific seed), the treatment effect is marginally significant (p &lt; .05). But how likely are we to detect an effect with a sample of this size?</p>
 </section></section><section id="doing-the-power-analysis" class="level2" data-number="21.3"><h2 data-number="21.3" class="anchored" data-anchor-id="doing-the-power-analysis">
 <span class="header-section-number">21.3</span> Doing the power analysis</h2>
-<p>Now we need to repeatedly draw many samples and see how many of the analyses would have detected the existing effect. To do this, we put the code from above into a function called <code>sim1</code>. We coded the function to either return the focal p-value (as default) or to print a model summary (helpful for debugging and testing the function). This function takes two parameters:</p>
+<p>Now we need to repeatedly draw many samples and see how many of the analyses would have detected the existing effect. To do this, we put the code from above into a function called <code>sim1</code>.</p>
+<p>We coded the function to return the focal p-value (as default):</p>
 <ul>
-<li><p><code>n</code> defines the required sample size treatment_effect defines the treatment effect in the raw scale (i.e., reduction in body mass)</p></li>
-<li><p>We then use the <code>replicate</code> function to repeatedly call the <code>sim</code> function for 1000 iterations.</p></li>
+<li><p><code>n</code> defines the required sample size</p></li>
+<li><p><code>treatment_effect</code> defines the treatment effect in the raw scale (i.e., reduction in body mass)</p></li>
 </ul>
+<p>This is an example of “function building” - we have taken the code expressed early and repackaged it so we can make new datasets (from the same parameters) quickly:</p>
 <div class="webex-solution">
 <button>
 Simulation function
@@ -780,9 +800,32 @@ Simulation function
 <span id="cb5-34"><a href="#cb5-34"></a>  <span class="co"># to analyse your real data set</span></span>
 <span id="cb5-35"><a href="#cb5-35"></a>  p_value <span class="ot">&lt;-</span> <span class="fu">summary</span>(m_main)<span class="sc">$</span>coefficients[<span class="st">"treatmentB"</span>, <span class="st">"Pr(&gt;|t|)"</span>]</span>
 <span id="cb5-36"><a href="#cb5-36"></a>  </span>
-<span id="cb5-37"><a href="#cb5-37"></a>  <span class="cf">if</span> (print<span class="sc">==</span><span class="cn">TRUE</span>) <span class="fu">print</span>(<span class="fu">summary</span>(res))</span>
-<span id="cb5-38"><a href="#cb5-38"></a>  <span class="cf">else</span> <span class="fu">return</span>(p_value)</span>
-<span id="cb5-39"><a href="#cb5-39"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-37"><a href="#cb5-37"></a>  <span class="co"># Can print all models if desired</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a>  <span class="cf">if</span> (print<span class="sc">==</span><span class="cn">TRUE</span>) <span class="fu">print</span>(<span class="fu">summary</span>(res))</span>
+<span id="cb5-39"><a href="#cb5-39"></a>  <span class="cf">else</span> <span class="fu">return</span>(p_value)</span>
+<span id="cb5-40"><a href="#cb5-40"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ul>
+<li>We then use the <code>replicate</code> function to repeatedly call the <code>sim</code> function for 1000 iterations.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why 1000?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We are carrying out Monte Carlo Simulations (repeated random sampling to predict the probability of different outcomes in uncertain systems)</p>
+<p>Because each draw will be slightly different, to get a robust power analysis we need to do enough simulations that it stabilises.</p>
+<p>The number required may be different for different simulations (smaller variance more consistent results)</p>
+<p>So it might be that you can start with a lower number (100) while checking your simulation works and increase until it stabilises</p>
+</div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -815,16 +858,15 @@ FALSE  TRUE
 <p>Only <strong>52%</strong> of samples with the same size of n=100 result in a significant p-value.</p>
 </section><section id="sample-size-planning" class="level2" data-number="21.4"><h2 data-number="21.4" class="anchored" data-anchor-id="sample-size-planning">
 <span class="header-section-number">21.4</span> Sample size planning</h2>
-<p>Now we know that a sample size of 100 does not lead to a sufficient power. But what sample size would we need to achieve a power of at least 80%? In the simulation approach you need to test different n until you find the necessary sample size. We do this by wrapping the simulation code into a loop that continuously increases the n.&nbsp;We then store the computed power for each n.</p>
+<p>Now we know that a sample size of 100 does not lead to a sufficient power. But what sample size would we need to achieve a power of at least 80%? (A standard threshold). In the simulation approach you need to test different n until you find the necessary sample size. We do this by wrapping the simulation code into a loop that continuously increases the n.&nbsp;We then store the computed power for each n.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">set.seed</span>(<span class="dv">38596</span>)</span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co"># define all predictor and simulation variables.</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>iterations <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>ns <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">300</span>, <span class="at">by=</span><span class="dv">20</span>) <span class="co"># test ns between 100 and 300</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># define all predictor and simulation variables.</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>iterations <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>ns <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">300</span>, <span class="at">by=</span><span class="dv">20</span>) <span class="co"># test ns between 100 and 300</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>n this simulation-based power analysis, we estimate the probability of detecting a true treatment effect across different sample sizes. Because the data are simulated, we can specify the “true” effect size and variance directly, allowing us to obtain clean, interpretable power estimates.</p>
-<p>However, in real data analysis, this is rarely the case. The parameters that drive the simulation—particularly the effect size and residual variance—would have to be estimated from preliminary or pilot data. Such estimates are inherently fragile: they depend on the specific sample, measurement precision, and underlying model assumptions.</p>
+<p>In this simulation-based power analysis, we estimate the probability of detecting a true treatment effect <strong>across different sample sizes</strong>. Because the data are simulated, we can specify the “true” effect size and variance directly, allowing us to obtain clean, interpretable power estimates.</p>
+<p>However, in real data analysis, this is rarely the case. The parameters that drive the simulation—particularly the effect size and residual variance—would have to be estimated from preliminary or pilot data. Such estimates are <strong>inherently fragile</strong>: they depend on the specific sample, measurement precision, and underlying model assumptions.</p>
+<p>Compare our two estimates of power below:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Fragile power</a></li>
@@ -833,19 +875,21 @@ FALSE  TRUE
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>result <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(ns, <span class="sc">~</span>{</span>
-<span id="cb11-2"><a href="#cb11-2"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">replicate</span>(iterations, <span class="fu">sim1</span>(<span class="at">n =</span> .x, <span class="at">treatment_effect=</span><span class="sc">-</span><span class="fl">21.82</span>))</span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">tibble</span>(</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="at">n =</span> .x,</span>
-<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">power =</span> <span class="fu">mean</span>(p_values <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
-<span id="cb11-6"><a href="#cb11-6"></a>  )</span>
-<span id="cb11-7"><a href="#cb11-7"></a>})</span>
-<span id="cb11-8"><a href="#cb11-8"></a></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="fu">ggplot</span>(result, </span>
-<span id="cb11-10"><a href="#cb11-10"></a>       <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>power)) <span class="sc">+</span> </span>
-<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">set.seed</span>(<span class="dv">38596</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>result <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(ns, <span class="sc">~</span>{</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">replicate</span>(iterations, <span class="fu">sim1</span>(<span class="at">n =</span> .x, <span class="at">treatment_effect=</span><span class="sc">-</span><span class="fl">21.82</span>))</span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">n =</span> .x,</span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="at">power =</span> <span class="fu">mean</span>(p_values <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb11-8"><a href="#cb11-8"></a>  )</span>
+<span id="cb11-9"><a href="#cb11-9"></a>})</span>
+<span id="cb11-10"><a href="#cb11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="fu">ggplot</span>(result, </span>
+<span id="cb11-12"><a href="#cb11-12"></a>       <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>power)) <span class="sc">+</span> </span>
+<span id="cb11-13"><a href="#cb11-13"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb11-14"><a href="#cb11-14"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="power-analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -877,7 +921,7 @@ FALSE  TRUE
 </div>
 </div>
 </div>
-<p>We don’t actually have sufficient power until n = 200, (100 in each group), we have an 80% chance to detect the effect</p>
+<p><strong>We don’t actually have sufficient power until n = 200, (100 in each group), we have an 80% chance to detect the effect</strong></p>
 </div>
 </div>
 </div>
@@ -897,8 +941,8 @@ Warning
 </section><section id="safeguard-power-analysis" class="level2" data-number="21.5"><h2 data-number="21.5" class="anchored" data-anchor-id="safeguard-power-analysis">
 <span class="header-section-number">21.5</span> Safeguard power analysis</h2>
 <p>Our estimate of the population effect size is an educated guess based on the best information available to us (much like the written hypotheses we have for a study). It’s accuracy can have critical implications for the sample size required to attain a certain level of power. For this reason, researchers should routinely consider varying their effect size estimate and assessing the impact this has on their power analysis. If we are using sample effect sizes reported in the literature to estimate the population effect size, one excellent recommendation is to formally consider the uncertainty of sample effect sizes. That is, take into account the 95% CI on these reported effects.</p>
-<p>(<a href="https://doi.org/10.1177/1745691614528519">Perugini et al., 2014</a>) suggest we take into account the uncertainty of the sample effect size. To do so, they suggest for the researcher to compute the lower absolute limit of a 60% CI on the sample effect. This value would then be used as a safeguard effect size and inputted into a power analysis. Why 60%? Well, the lower limit of a 60% CI corresponds to a one-sided 80% CI. As Perugini, Gallucci, and Costantini (2014) describe, this implies a 20% risk that that the true population effect size is lower than this limit, and correspondingly, 80% assurance that the population effect size is equal to or greater than this limit. We focus on the lower boundary because of the asymmetry of overestimating compared to underestimating the population effect size in a power analysis.</p>
-<p>As sensitivity analysis, we will apply a safeguard power analysis that aims for the lower end of a two-sided 60% CI around the parameter of the treatment effect (the intercept is irrelevant). (Of course you can use any other value than 60%, but this is the value (tentatively) mentioned by the inventors of the safeguard power analysis.)</p>
+<p>(<a href="https://doi.org/10.1177/1745691614528519">Perugini et al., 2014</a>) suggest we take into account the uncertainty of the sample effect size. To do so, they suggest for the researcher to <strong>compute the lower absolute limit of a 60% CI on the sample effect</strong>. This value would then be used as a safeguard effect size and inputted into a power analysis. Why 60%? Well, the lower limit of a 60% CI corresponds to a one-sided 80% CI. As Perugini, Gallucci, and Costantini (2014) describe, this implies a 20% risk that that the true population effect size is lower than this limit, and correspondingly, 80% assurance that the population effect size is equal to or greater than this limit. We focus on the lower boundary because of the asymmetry of overestimating compared to underestimating the population effect size in a power analysis.</p>
+<p>We will apply a <strong>safeguard power analysis</strong> that aims for the lower end of a two-sided 60% CI around the parameter of the treatment effect (the intercept is irrelevant). (Of course you can use any other value than 60%, but this is the value (tentatively) mentioned by the inventors of the safeguard power analysis.)</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">21.819</span>      <span class="co"># estimate</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>se <span class="ot">&lt;-</span> <span class="fl">10.607</span>            <span class="co"># standard error from model</span></span>

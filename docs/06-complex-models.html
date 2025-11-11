@@ -124,7 +124,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="site_libs/font-awesome-6.7.2/js/script.js"></script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -621,13 +621,13 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#designing-a-model" id="toc-designing-a-model" class="nav-link active" data-scroll-target="#designing-a-model"><span class="header-section-number">20.1</span> Designing a Model</a>
+<a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data"><span class="header-section-number">20.1</span> The data</a>
   <ul class="collapse">
 <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">20.1.1</span> Hypotheses</a></li>
   </ul>
 </li>
   <li><a href="#checking-the-data" id="toc-checking-the-data" class="nav-link" data-scroll-target="#checking-the-data"><span class="header-section-number">20.2</span> Checking the data</a></li>
-  <li><a href="#designing-a-model-1" id="toc-designing-a-model-1" class="nav-link" data-scroll-target="#designing-a-model-1"><span class="header-section-number">20.3</span> Designing a model</a></li>
+  <li><a href="#designing-a-model" id="toc-designing-a-model" class="nav-link" data-scroll-target="#designing-a-model"><span class="header-section-number">20.3</span> Designing a model</a></li>
   <li>
 <a href="#interpreting-a-model" id="toc-interpreting-a-model" class="nav-link" data-scroll-target="#interpreting-a-model"><span class="header-section-number">20.4</span> Interpreting a model</a>
   <ul class="collapse">
@@ -638,31 +638,6 @@ window.Quarto = {
   </ul>
 </li>
   <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">20.5</span> Confidence intervals</a></li>
-  <li>
-<a href="#add-a-covariate" id="toc-add-a-covariate" class="nav-link" data-scroll-target="#add-a-covariate"><span class="header-section-number">20.6</span> Add a covariate</a>
-  <ul class="collapse">
-<li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">20.6.1</span> Interpretation</a></li>
-  </ul>
-</li>
-  <li><a href="#compare-the-models" id="toc-compare-the-models" class="nav-link" data-scroll-target="#compare-the-models"><span class="header-section-number">20.7</span> Compare the models</a></li>
-  <li><a href="#test-for-interaction" id="toc-test-for-interaction" class="nav-link" data-scroll-target="#test-for-interaction"><span class="header-section-number">20.8</span> Test for interaction</a></li>
-  <li>
-<a href="#model-checking" id="toc-model-checking" class="nav-link" data-scroll-target="#model-checking"><span class="header-section-number">20.9</span> Model checking</a>
-  <ul class="collapse">
-<li><a href="#homogeneity-of-variance" id="toc-homogeneity-of-variance" class="nav-link" data-scroll-target="#homogeneity-of-variance"><span class="header-section-number">20.9.1</span> Homogeneity of variance</a></li>
-  <li><a href="#normality-of-residuals" id="toc-normality-of-residuals" class="nav-link" data-scroll-target="#normality-of-residuals"><span class="header-section-number">20.9.2</span> Normality of residuals</a></li>
-  <li><a href="#collinearity" id="toc-collinearity" class="nav-link" data-scroll-target="#collinearity"><span class="header-section-number">20.9.3</span> Collinearity</a></li>
-  </ul>
-</li>
-  <li><a href="#estimating-means-and-comparisons" id="toc-estimating-means-and-comparisons" class="nav-link" data-scroll-target="#estimating-means-and-comparisons"><span class="header-section-number">20.10</span> Estimating means and comparisons</a></li>
-  <li><a href="#model-reporting" id="toc-model-reporting" class="nav-link" data-scroll-target="#model-reporting"><span class="header-section-number">20.11</span> Model reporting</a></li>
-  <li>
-<a href="#causal-inference" id="toc-causal-inference" class="nav-link" data-scroll-target="#causal-inference"><span class="header-section-number">20.12</span> Causal inference</a>
-  <ul class="collapse">
-<li><a href="#experimental-design" id="toc-experimental-design" class="nav-link" data-scroll-target="#experimental-design"><span class="header-section-number">20.12.1</span> Experimental design</a></li>
-  <li><a href="#causality-terms" id="toc-causality-terms" class="nav-link" data-scroll-target="#causality-terms"><span class="header-section-number">20.12.2</span> Causality terms</a></li>
-  </ul>
-</li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -689,13 +664,13 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(GGally)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(skimr)</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(colorspace)</span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(ggridges)</span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(performance)</span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="fu">library</span>(patchwork)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="designing-a-model" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="designing-a-model">
-<span class="header-section-number">20.1</span> Designing a Model</h2>
+<section id="the-data" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="the-data">
+<span class="header-section-number">20.1</span> The data</h2>
 <p>We are introduced to the fruitfly dataset (Partridge and Farquhar (1981))[https://nature.com/articles/294580a0]. From our understanding of sexual selection and reproductive biology in fruit flies, we know there is a well established ‘cost’ to reproduction in terms of reduced longevity for female fruitflies. The data from this experiment is designed to test whether increased sexual activity affects the lifespan of male fruitflies.</p>
 <p>The flies used were an outbred stock, sexual activity was manipulated by supplying males with either new virgin females each day, previously mated females ( Inseminated, so remating rates are lower), or provide no females at all (Control). All groups were otherwise treated identically.</p>
 <ul>
@@ -704,6 +679,42 @@ window.Quarto = {
 <li><p><strong>thorax</strong>: length of thorax in micrometres (a proxy for body size)</p></li>
 <li><p><strong>sleep</strong>: percentage of the day spent sleeping</p></li>
 </ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<a href="https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/fruitfly.csv">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download Drosophila data as csv</button>
+</a>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Factors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What order will R organise the three <code>type</code> categories?</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">control, virgin, inseminated</option>
+<option value="answer">control, inseminated, virgin</option>
+<option value="">virgin, inseminated, control</option></select></p>
+<div class="webex-solution">
+<button>
+Factors
+</button>
+<p>In linear models, when we test groups one group will always be the Intercept (reference group). By default this will be alphabetical <em>unless</em> the levels have an order specified by making them a factor</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dros_clean <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, </span>
+<span id="cb2-2"><a href="#cb2-2"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, </span>
+<span id="cb2-3"><a href="#cb2-3"></a>                                              <span class="st">"Inseminated"</span>, </span>
+<span id="cb2-4"><a href="#cb2-4"></a>                                              <span class="st">"Virgin"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 <section id="hypotheses" class="level3" data-number="20.1.1"><h3 data-number="20.1.1" class="anchored" data-anchor-id="hypotheses">
 <span class="header-section-number">20.1.1</span> Hypotheses</h3>
 <ul>
@@ -717,10 +728,10 @@ lm(longevity ~ type, data = dros_clean)
 <p>A quick intro to a general overview</p>
 <p>This is a full two-by-two plot of the entire dataset, but you should try and follow this up with some specific plots.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>GGally<span class="sc">::</span><span class="fu">ggpairs</span>(dros_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>GGally<span class="sc">::</span><span class="fu">ggpairs</span>(dros_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -747,17 +758,15 @@ Solution
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>colours <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cyan"</span>, <span class="st">"darkorange"</span>, <span class="st">"purple"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>dros_clean <span class="sc">|&gt;</span> </span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> longevity, <span class="at">y =</span> type, <span class="at">fill =</span> type))<span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">geom_density_ridges</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> colours)<span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>dros_clean <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> longevity, <span class="at">y =</span> type, <span class="at">fill =</span> type))<span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_density_ridges</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">scale_fill_discrete_qualitative</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -765,17 +774,15 @@ Solution
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>colours <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cyan"</span>, <span class="st">"darkorange"</span>, <span class="st">"purple"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a>dros_clean <span class="sc">|&gt;</span> </span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> longevity, <span class="at">fill =</span> type))<span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> colours)<span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>dros_clean <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> longevity, <span class="at">fill =</span> type))<span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">scale_fill_discrete_qualitative</span>() <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -784,13 +791,13 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="designing-a-model-1" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="designing-a-model-1">
+</section><section id="designing-a-model" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="designing-a-model">
 <span class="header-section-number">20.3</span> Designing a model</h2>
 <p>In this section, we explore how to construct a statistical model to analyse biological data. Specifically, we will build a linear model to examine the effects of mating type on longevity in Drosophila melanogaster. .</p>
 <p>Using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function in R, we fit a model to our cleaned dataset, and generate a summary of the results. This approach allows us to assess the significance of each predictor and interpret how these factors influence longevity. By the end of this section, you will understand how to structure a model, choose appropriate variables, and interpret statistical outputs.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># a linear model</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>flyls1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type, <span class="at">data =</span> dros_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># a linear model</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>flyls1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type, <span class="at">data =</span> dros_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -800,7 +807,7 @@ Solution
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">summary</span>(flyls1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">summary</span>(flyls1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -826,7 +833,7 @@ F-statistic: 15.74 on 2 and 122 DF,  p-value: 8.305e-07</code></pre>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(flyls1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(flyls1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -958,7 +965,7 @@ F-statistic: 15.74 on 2 and 122 DF, p-value: 8.31e-07</code></pre>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(flyls1, <span class="at">conf.int =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(flyls1, <span class="at">conf.int =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1016,10 +1023,10 @@ F-statistic: 15.74 on 2 and 122 DF, p-value: 8.31e-07</code></pre>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>GGally<span class="sc">::</span><span class="fu">ggcoef_model</span>(flyls1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>GGally<span class="sc">::</span><span class="fu">ggcoef_model</span>(flyls1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1067,8 +1074,53 @@ Interpretation
 </tbody>
 </table>
 </div>
-</section><section id="add-a-covariate" class="level2" data-number="20.6"><h2 data-number="20.6" class="anchored" data-anchor-id="add-a-covariate">
-<span class="header-section-number">20.6</span> Add a covariate</h2>
+<div class="task">
+<div class="task-header">
+<p>Regression analysis</p>
+</div>
+<div class="task-container">
+<ul class="task-list">
+<li><label><input type="checkbox">Change the model to analyse <code>longevity ~ thorax</code></label></li>
+</ul>
+<p>This will produce a <em>regression</em> analysis - how does this change the way we interpret the coefficients?</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># a linear model</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>flyls_regression <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> thorax, <span class="at">data =</span> dros_clean)</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="fu">summary</span>(flyls_regression)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = longevity ~ thorax, data = dros_clean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-28.415  -9.961   1.132   9.265  36.812 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   -61.05      13.00  -4.695  7.0e-06 ***
+thorax        144.33      15.77   9.152  1.5e-15 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.6 on 123 degrees of freedom
+Multiple R-squared:  0.4051,    Adjusted R-squared:  0.4003 
+F-statistic: 83.76 on 1 and 123 DF,  p-value: 1.497e-15</code></pre>
+</div>
+</div>
+<p>Unlike a test of difference - when we include a <em>continuous predictor</em> it changes our intercept and coefficient</p>
+<ul>
+<li><p>Intercept - value of y when x = 0. The average longevity when thorax = 0.</p></li>
+<li><p>Coefficient - how much longevity increases <strong>for every</strong> unit increase in thorax.</p></li>
+</ul>
+</div>
+<section id="analysis-of-covariance" class="level2" data-number="20.6"><h2 data-number="20.6" class="anchored" data-anchor-id="analysis-of-covariance">
+<span class="header-section-number">20.6</span> Analysis of Covariance</h2>
 <p>In a basic linear model, we often start by comparing group means — for example:</p>
 <p><span class="math display">\[
 \text{longevity}_i = \beta_0 + \beta_1 \, \text{type}_i + \varepsilon_i
@@ -1088,7 +1140,7 @@ Interpretation
 <li><p>Including covariates often reduces residual variation and improves model fit.</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>flyls2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> thorax, <span class="at">data =</span> dros_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>flyls2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> thorax, <span class="at">data =</span> dros_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1105,7 +1157,7 @@ Interpretation
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">summary</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">summary</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1137,11 +1189,11 @@ Mean centering
 <p>When we use continuous predictors, the intercept becomes the expected value of our outcome (longevity), when all predictors are 0. This can make the intercept an unrealistic value.</p>
 <p>One way around this is to “center” the continuous predictors - so that 0 now becomes the mean value of the predictor</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>dros_clean<span class="sc">$</span>thorax_c <span class="ot">&lt;-</span> <span class="fu">scale</span>(dros_clean<span class="sc">$</span>thorax, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-2"><a href="#cb19-2"></a></span>
-<span id="cb19-3"><a href="#cb19-3"></a>flyls2_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> thorax_c, <span class="at">data =</span> dros_clean)</span>
-<span id="cb19-4"><a href="#cb19-4"></a></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="fu">summary</span>(flyls2_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>dros_clean<span class="sc">$</span>thorax_c <span class="ot">&lt;-</span> <span class="fu">scale</span>(dros_clean<span class="sc">$</span>thorax, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a>flyls2_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> thorax_c, <span class="at">data =</span> dros_clean)</span>
+<span id="cb22-4"><a href="#cb22-4"></a></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="fu">summary</span>(flyls2_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1172,7 +1224,7 @@ F-statistic:  61.1 on 3 and 121 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span class="header-section-number">20.7</span> Compare the models</h2>
 <p>Compare to the simpler model:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">anova</span>(flyls1, flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">anova</span>(flyls1, flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1216,12 +1268,12 @@ F-statistic:  61.1 on 3 and 121 DF,  p-value: &lt; 2.2e-16</code></pre>
 \]</span></p>
 <p>This allows the <strong>slope of body size to vary by type</strong> — in other words, the effect of size depends on mating partner.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>flyls3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> </span>
-<span id="cb22-2"><a href="#cb22-2"></a>               thorax <span class="sc">+</span> </span>
-<span id="cb22-3"><a href="#cb22-3"></a>               type<span class="sc">:</span>thorax, <span class="co"># specifies the interaction effect</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>             <span class="at">data =</span> dros_clean)</span>
-<span id="cb22-5"><a href="#cb22-5"></a></span>
-<span id="cb22-6"><a href="#cb22-6"></a><span class="fu">summary</span>(flyls3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>flyls3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="#cb25-2"></a>               thorax <span class="sc">+</span> </span>
+<span id="cb25-3"><a href="#cb25-3"></a>               type<span class="sc">:</span>thorax, <span class="co"># specifies the interaction effect</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>             <span class="at">data =</span> dros_clean)</span>
+<span id="cb25-5"><a href="#cb25-5"></a></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="fu">summary</span>(flyls3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1252,7 +1304,7 @@ F-statistic: 36.19 on 5 and 119 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul>
 <p>Compare to the simpler model:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">anova</span>(flyls2, flyls3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">anova</span>(flyls2, flyls3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1309,14 +1361,14 @@ F-statistic: 36.19 on 5 and 119 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Set plotting area to 2x2 (four panels)</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb25-3"><a href="#cb25-3"></a></span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="co"># Plot diagnostic plots</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="fu">plot</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Set plotting area to 2x2 (four panels)</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb28-3"><a href="#cb28-3"></a></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="co"># Plot diagnostic plots</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="fu">plot</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1324,11 +1376,11 @@ F-statistic: 36.19 on 5 and 119 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(flyls2,</span>
-<span id="cb26-2"><a href="#cb26-2"></a>                         <span class="at">detrend =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(flyls2,</span>
+<span id="cb29-2"><a href="#cb29-2"></a>                         <span class="at">detrend =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1360,9 +1412,9 @@ Solution
 <p>VERDICT, pretty much ok, should be fine for making inferences.</p>
 <p>With a slight curvature this could indicate that you <em>might</em> get a better fit with a transformation, or perhaps that there is a missing variable that if included in the model would improve the residuals. In this instance I wouldn’t be overly concerned. See here for a great explainer on intepreting residuals<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Runs a Breusch-Pagan Test for heteroscedasticity</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># Sensitive to outliers, non-normality and sample size</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>performance<span class="sc">::</span><span class="fu">check_heteroscedasticity</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Runs a Breusch-Pagan Test for heteroscedasticity</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="co"># Sensitive to outliers, non-normality and sample size</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>performance<span class="sc">::</span><span class="fu">check_heteroscedasticity</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OK: Error variance appears to be homoscedastic (p = 0.122).</code></pre>
 </div>
@@ -1380,9 +1432,9 @@ Solution
 <p>Yes - the QQplot looks pretty good, a very minor indication of a right skew, but nothing to worry about.</p>
 <p>[Interpreting QQ plots][What is a Quantile-Quantile (QQ) plot?]</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Runs a Shapiro Wilk test of normality</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="co"># Sensitive to outliers, sample size</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Runs a Shapiro Wilk test of normality</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="co"># Sensitive to outliers, sample size</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OK: residuals appear as normally distributed (p = 0.081).</code></pre>
 </div>
@@ -1409,7 +1461,7 @@ Tip
 <p>While there are many discussions about what can be done with multicollinearity - I subscribed to the views outlined <a href="https://janhove.github.io/posts/2019-09-11-collinearity/">here</a>.</p>
 <p>It should be reported - but that’s it - it represents genuine uncertainty around the contributions of your predictors.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           GVIF Df GVIF^(1/(2*Df))
 type   1.009945  2        1.002477
@@ -1422,10 +1474,10 @@ thorax 1.009945  1        1.004960</code></pre>
 <span class="header-section-number">20.10</span> Estimating means and comparisons</h2>
 <p>Using the <a href="https://aosmith.rbind.io/2019/03/25/getting-started-with-emmeans/">emmeans</a> package is a very easy way to produce the estimate mean values (rather than mean differences) for different categories <code>emmeans</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>means <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(flyls2, <span class="at">specs =</span> </span>
-<span id="cb33-2"><a href="#cb33-2"></a>                   <span class="sc">~</span> type <span class="sc">+</span> thorax)</span>
-<span id="cb33-3"><a href="#cb33-3"></a></span>
-<span id="cb33-4"><a href="#cb33-4"></a>means</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>means <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(flyls2, <span class="at">specs =</span> </span>
+<span id="cb36-2"><a href="#cb36-2"></a>                   <span class="sc">~</span> type <span class="sc">+</span> thorax)</span>
+<span id="cb36-3"><a href="#cb36-3"></a></span>
+<span id="cb36-4"><a href="#cb36-4"></a>means</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> type        thorax emmean   SE  df lower.CL upper.CL
  Control      0.821   61.4 2.25 121     56.9     65.9
@@ -1437,7 +1489,7 @@ Confidence level used: 0.95 </code></pre>
 </div>
 <p>If the term <code><a href="https://rdrr.io/r/graphics/pairs.html">pairs()</a></code> is included then it will also include post-hoc pairwise comparisons between all levels with a tukey test (adjustment for multiple comparisons) <code>contrasts</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">pairs</span>(means)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">pairs</span>(means)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast                                          estimate   SE  df t.ratio
  Control thorax0.82096 - Inseminated thorax0.82096    -3.45 2.76 121  -1.250
@@ -1452,7 +1504,7 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1461,13 +1513,15 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For continuous variables (sleep and thorax) - <code>emmeans</code> has set these to the mean value within the dataset, so comparisons are constant between categories at the average value of all continuous variables. If we wish to model continuous predictions we need to specify these:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(flyls2, </span>
-<span id="cb37-2"><a href="#cb37-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> type <span class="sc">+</span> thorax,</span>
-<span id="cb37-3"><a href="#cb37-3"></a>                 <span class="at">at =</span> <span class="fu">list</span>(<span class="at">thorax =</span> <span class="fu">seq</span>(<span class="fl">0.64</span>,<span class="fl">0.94</span>, .<span class="dv">1</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>continuous_means <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(flyls2, </span>
+<span id="cb40-2"><a href="#cb40-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> type <span class="sc">+</span> thorax,</span>
+<span id="cb40-3"><a href="#cb40-3"></a>                 <span class="at">at =</span> <span class="fu">list</span>(<span class="at">thorax =</span> <span class="fu">seq</span>(<span class="fl">0.64</span>,<span class="fl">0.94</span>, .<span class="dv">1</span>)))</span>
+<span id="cb40-4"><a href="#cb40-4"></a></span>
+<span id="cb40-5"><a href="#cb40-5"></a>continuous_means</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> type        thorax emmean   SE  df lower.CL upper.CL
  Control       0.64   35.4 3.40 121     28.7     42.1
@@ -1489,8 +1543,98 @@ Confidence level used: 0.95 </code></pre>
 </div>
 </div>
 </div>
-</section><section id="model-reporting" class="level2" data-number="20.11"><h2 data-number="20.11" class="anchored" data-anchor-id="model-reporting">
-<span class="header-section-number">20.11</span> Model reporting</h2>
+</section><section id="model-visualisation" class="level2" data-number="20.11"><h2 data-number="20.11" class="anchored" data-anchor-id="model-visualisation">
+<span class="header-section-number">20.11</span> Model visualisation</h2>
+<p>We can make visualisations of our models with <code>ggplot()</code></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># convert an emmeans object to tibble</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>continuous_means <span class="ot">&lt;-</span> continuous_means <span class="sc">|&gt;</span> </span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb42-4"><a href="#cb42-4"></a></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="co"># use the final model to produce model predictions set to the new constant sleep dataframe</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a></span>
+<span id="cb42-7"><a href="#cb42-7"></a></span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="fu">ggplot</span>(continuous_means, </span>
+<span id="cb42-9"><a href="#cb42-9"></a>       <span class="fu">aes</span>(<span class="at">x=</span>thorax, </span>
+<span id="cb42-10"><a href="#cb42-10"></a>           <span class="at">y =</span> emmean, </span>
+<span id="cb42-11"><a href="#cb42-11"></a>           <span class="at">colour =</span> type, </span>
+<span id="cb42-12"><a href="#cb42-12"></a>           <span class="at">fill =</span> type))<span class="sc">+</span></span>
+<span id="cb42-13"><a href="#cb42-13"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>lower.CL, </span>
+<span id="cb42-14"><a href="#cb42-14"></a>                  <span class="at">ymax=</span>upper.CL), </span>
+<span id="cb42-15"><a href="#cb42-15"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>)<span class="sc">+</span></span>
+<span id="cb42-16"><a href="#cb42-16"></a>    <span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>, </span>
+<span id="cb42-17"><a href="#cb42-17"></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb42-18"><a href="#cb42-18"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dros_clean, </span>
+<span id="cb42-19"><a href="#cb42-19"></a>             <span class="fu">aes</span>(<span class="at">x =</span> thorax, </span>
+<span id="cb42-20"><a href="#cb42-20"></a>                 <span class="at">y =</span> longevity),</span>
+<span id="cb42-21"><a href="#cb42-21"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb42-22"><a href="#cb42-22"></a><span class="fu">scale_fill_discrete_qualitative</span>() <span class="sc">+</span></span>
+<span id="cb42-23"><a href="#cb42-23"></a><span class="fu">scale_colour_discrete_qualitative</span>() <span class="sc">+</span></span>
+<span id="cb42-24"><a href="#cb42-24"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Lifespan in days"</span>,</span>
+<span id="cb42-25"><a href="#cb42-25"></a>       <span class="at">x =</span> <span class="st">"Thorax length (mm)"</span>,</span>
+<span id="cb42-26"><a href="#cb42-26"></a>       <span class="at">fill =</span> <span class="st">"Type of female exposure"</span>)<span class="sc">+</span></span>
+<span id="cb42-27"><a href="#cb42-27"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb42-28"><a href="#cb42-28"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb42-29"><a href="#cb42-29"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Dangers of geom_smooth
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Look at this figure made using <code>geom_smooth</code></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">ggplot</span>(dros_clean, </span>
+<span id="cb43-2"><a href="#cb43-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span>thorax, </span>
+<span id="cb43-3"><a href="#cb43-3"></a>           <span class="at">y =</span> longevity, </span>
+<span id="cb43-4"><a href="#cb43-4"></a>           <span class="at">colour =</span> type, </span>
+<span id="cb43-5"><a href="#cb43-5"></a>           <span class="at">fill =</span> type))<span class="sc">+</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb43-7"><a href="#cb43-7"></a>              <span class="at">alpha =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb43-8"><a href="#cb43-8"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb43-9"><a href="#cb43-9"></a><span class="fu">scale_fill_discrete_qualitative</span>() <span class="sc">+</span></span>
+<span id="cb43-10"><a href="#cb43-10"></a><span class="fu">scale_colour_discrete_qualitative</span>() <span class="sc">+</span></span>
+<span id="cb43-11"><a href="#cb43-11"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Lifespan in days"</span>,</span>
+<span id="cb43-12"><a href="#cb43-12"></a>       <span class="at">x =</span> <span class="st">"Thorax length (mm)"</span>,</span>
+<span id="cb43-13"><a href="#cb43-13"></a>       <span class="at">fill =</span> <span class="st">"Type of female exposure"</span>)<span class="sc">+</span></span>
+<span id="cb43-14"><a href="#cb43-14"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb43-15"><a href="#cb43-15"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb43-16"><a href="#cb43-16"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="06-complex-models_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question</strong> - Why is it different - and is this a problem?</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>This example also produces regression lines - but unlike our calcuated model plot where lines ran in parallel - here it is subtle but the regression lines aren’t quite parallel (The virgin line starts lower but is on a trend to crossover the other groups)</p>
+<ul>
+<li>Why? When we use <code>geom_smooth()</code> it will by default calculate <em>independent regressions</em> for each group.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section><section id="model-reporting" class="level2" data-number="20.12"><h2 data-number="20.12" class="anchored" data-anchor-id="model-reporting">
+<span class="header-section-number">20.12</span> Model reporting</h2>
 <p>We have now generated a lot of information from our models - using confidence intervals we can make statements about measured differences and levels of uncertainty around our inferences.</p>
 <div class="webex-solution">
 <button>
@@ -1504,12 +1648,12 @@ Solution
 <li><p>Overall the model explained 59% of the observed variance in lifespan (Adjusted R2 = 0.59).</p></li>
 </ul>
 </div>
-</section><section id="causal-inference" class="level2" data-number="20.12"><h2 data-number="20.12" class="anchored" data-anchor-id="causal-inference">
-<span class="header-section-number">20.12</span> Causal inference</h2>
+</section><section id="causal-inference" class="level2" data-number="20.13"><h2 data-number="20.13" class="anchored" data-anchor-id="causal-inference">
+<span class="header-section-number">20.13</span> Causal inference</h2>
 <p>A regression model can be used for prediction or for causal inference.</p>
 <p>If your goal is to estimate the effect of a variable (e.g., the effect of mating partner on longevity), you must think carefully about which variables to control for and which to exclude.</p>
-<section id="experimental-design" class="level3" data-number="20.12.1"><h3 data-number="20.12.1" class="anchored" data-anchor-id="experimental-design">
-<span class="header-section-number">20.12.1</span> Experimental design</h3>
+<section id="experimental-design" class="level3" data-number="20.13.1"><h3 data-number="20.13.1" class="anchored" data-anchor-id="experimental-design">
+<span class="header-section-number">20.13.1</span> Experimental design</h3>
 <p>Your experimental design is the foundation.</p>
 <ul>
 <li><p>If you randomly assign treatments (e.g., mating partner type), randomization already balances other factors on average — you don’t need to adjust for everything.</p></li>
@@ -1537,9 +1681,9 @@ Solution
 </div>
 <p>If we did include sleep in our models it might <strong>block</strong> part of the causal effect of type on longevity that flows <em>through sleep</em>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>flyls4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> thorax <span class="sc">+</span> sleep, <span class="at">data =</span> dros_clean)</span>
-<span id="cb39-2"><a href="#cb39-2"></a></span>
-<span id="cb39-3"><a href="#cb39-3"></a><span class="fu">summary</span>(flyls4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>flyls4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> thorax <span class="sc">+</span> sleep, <span class="at">data =</span> dros_clean)</span>
+<span id="cb44-2"><a href="#cb44-2"></a></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="fu">summary</span>(flyls4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1566,8 +1710,8 @@ F-statistic: 45.88 on 4 and 120 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>In this case we can see that the estimate of the effect of type on longevity has <em>changed</em>.</p>
 <p>Our model now only estimates the effect of type on longevity that isn’t <em>mediated by sleep</em>.</p>
-</section><section id="causality-terms" class="level3" data-number="20.12.2"><h3 data-number="20.12.2" class="anchored" data-anchor-id="causality-terms">
-<span class="header-section-number">20.12.2</span> Causality terms</h3>
+</section><section id="causality-terms" class="level3" data-number="20.13.2"><h3 data-number="20.13.2" class="anchored" data-anchor-id="causality-terms">
+<span class="header-section-number">20.13.2</span> Causality terms</h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 7%">
@@ -1617,12 +1761,15 @@ F-statistic: 45.88 on 4 and 120 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Choosing which variables to include in a model requires careful thought because each term represents an assumption about the causal structure of the system. Confounders must be included to remove bias, mediators excluded if we want the total effect, and moderators or precision covariates added only when theory or design supports their relevance. In short, a good model reflects not just the data we have, but the experiment we designed and the biological relationships we believe exist.</p>
 
 
+</section></section>
+</div>
+</div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-R-performance" class="csl-entry" role="listitem">
 Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., Wiernik, B. M., &amp; Thériault, R. (2025). <em>Performance: Assessment of regression models performance</em>. <a href="https://easystats.github.io/performance/">https://easystats.github.io/performance/</a>
 </div>
 </div>
-</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>https://www.qualtrics.com/support/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script>

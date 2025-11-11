@@ -613,8 +613,8 @@ window.Quarto = {
   <li>
 <a href="#overdispersion" id="toc-overdispersion" class="nav-link" data-scroll-target="#overdispersion"><span class="header-section-number">23.4</span> Overdispersion</a>
   <ul class="collapse">
-<li><a href="#minor-overdispersion" id="toc-minor-overdispersion" class="nav-link" data-scroll-target="#minor-overdispersion"><span class="header-section-number">23.4.1</span> Minor overdispersion</a></li>
-  <li><a href="#severe-overdispersion" id="toc-severe-overdispersion" class="nav-link" data-scroll-target="#severe-overdispersion"><span class="header-section-number">23.4.2</span> Severe overdispersion</a></li>
+<li><a href="#minor-overdispersion-2-4" id="toc-minor-overdispersion-2-4" class="nav-link" data-scroll-target="#minor-overdispersion-2-4"><span class="header-section-number">23.4.1</span> Minor overdispersion 2-4</a></li>
+  <li><a href="#severe-overdispersion-4" id="toc-severe-overdispersion-4" class="nav-link" data-scroll-target="#severe-overdispersion-4"><span class="header-section-number">23.4.2</span> Severe overdispersion &gt; 4</a></li>
   </ul>
 </li>
   <li>
@@ -624,6 +624,7 @@ window.Quarto = {
   <li><a href="#modelling-a-pattern-in-the-zeroes" id="toc-modelling-a-pattern-in-the-zeroes" class="nav-link" data-scroll-target="#modelling-a-pattern-in-the-zeroes"><span class="header-section-number">23.5.2</span> Modelling a pattern in the zeroes</a></li>
   </ul>
 </li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">23.6</span> Summary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -1233,9 +1234,35 @@ Intervals are back-transformed from the log scale </code></pre>
 <p>Poisson (and binomial models) assume that the variance is <em>equal to the mean.</em></p>
 <p>Count data often violate the strict Poisson assumption of equal mean and variance. The negative binomial model allows extra variability (“overdispersion”) via an additional dispersion parameter.</p>
 <p>If there is <strong>residual deviance that is bigger than the residual degrees of freedom</strong> then there is <em>more</em> variance than we expect from the prediction of the mean by our model.</p>
-<p>Overdispersion in Poisson models can be diagnosed by <span class="math inline">\(\frac{residual~deviance}{residual~degrees~of~freedom}\)</span> which from our example here ‘summary()’ is <span class="math inline">\(\frac{436}{47} = 9.3\)</span></p>
+<p>Overdispersion in Poisson models can be diagnosed by:</p>
+<p>$$ = </p>
+<p>$$</p>
 <p>Overdispersion statistic values <strong>&gt; 1 = Overdispersed</strong></p>
 <p>Overdispersion is a result of larger than expected variance for that mean under a Poisson distribution, this is clearly an issue with our model!</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 81%">
+</colgroup>
+<thead><tr class="header">
+<th>Value of 𝜙̂</th>
+<th>Interpretation</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>≈ 1</td>
+<td>Good fit — variance consistent with Poisson assumption.</td>
+</tr>
+<tr class="even">
+<td>2 to 4</td>
+<td>Moderate overdispersion — Quasipoisson.</td>
+</tr>
+<tr class="odd">
+<td>&gt; 4 (e.g., 6–8.7)</td>
+<td>Severe overdispersion — observed variability far exceeds Poisson expectation - Negative Binomial.</td>
+</tr>
+</tbody>
+</table>
 <p>Model checks that helped indicate this would be an issue was the “Misspecified dispersion” plot. We can also check whether this misspecified dispersion meets a formal threshold for overdispersion with a function:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Formal test of overdispersion</span></span>
@@ -1248,8 +1275,8 @@ Intervals are back-transformed from the log scale </code></pre>
                 p-value = &lt; 0.001</code></pre>
 </div>
 </div>
-<section id="minor-overdispersion" class="level3" data-number="23.4.1"><h3 data-number="23.4.1" class="anchored" data-anchor-id="minor-overdispersion">
-<span class="header-section-number">23.4.1</span> Minor overdispersion</h3>
+<section id="minor-overdispersion-2-4" class="level3" data-number="23.4.1"><h3 data-number="23.4.1" class="anchored" data-anchor-id="minor-overdispersion-2-4">
+<span class="header-section-number">23.4.1</span> Minor overdispersion 2-4</h3>
 <p>Luckily a simple fix is to fit a <em>quasi-likelihood</em> model which accounts for this, think of “quasi” as “sort of but not completely” Poisson.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>cuckoo_quasi <span class="ot">&lt;-</span> <span class="fu">glm</span>(Beg <span class="sc">~</span> Mass<span class="sc">+</span>Species<span class="sc">+</span>Mass<span class="sc">:</span>Species, <span class="at">data=</span>cuckoo, <span class="at">family=</span><span class="fu">quasipoisson</span>(<span class="at">link=</span><span class="st">"log"</span>))</span>
@@ -1296,8 +1323,8 @@ Warning
 <p>Because we are now estimating the variance again, the test statistics have reverted to <em>t</em> distributions and anova and drop1 functions should specify the F-test again.</p>
 </div>
 </div>
-</section><section id="severe-overdispersion" class="level3" data-number="23.4.2"><h3 data-number="23.4.2" class="anchored" data-anchor-id="severe-overdispersion">
-<span class="header-section-number">23.4.2</span> Severe overdispersion</h3>
+</section><section id="severe-overdispersion-4" class="level3" data-number="23.4.2"><h3 data-number="23.4.2" class="anchored" data-anchor-id="severe-overdispersion-4">
+<span class="header-section-number">23.4.2</span> Severe overdispersion &gt; 4</h3>
 <p>The initial Poisson model likely showed evidence of overdispersion (variance much greater than the mean). Using a <strong>negative binomial (glm.nb)</strong> allows the dispersion parameter to be estimated from the data rather than fixed at 1, providing a better fit when count variability is high.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>cuckoo_negbin <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">glm.nb</span>(Beg <span class="sc">~</span> Mass<span class="sc">+</span>Species<span class="sc">+</span>Mass<span class="sc">:</span>Species, <span class="at">data=</span>cuckoo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1332,7 +1359,9 @@ Solution
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">check_zeroinflation</span>(cuckoo_negbin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># We have more zeroes than expected under our model</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co"># this is known as zero-inflation</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="fu">check_zeroinflation</span>(cuckoo_negbin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Check for zero-inflation
 
@@ -1343,6 +1372,7 @@ Solution
 </div>
 </div>
 <p>The zero-inflated Poisson (ZIP) allows some zeros to arise from a separate “structural zero” process. <code>ziformula = ~1</code> specifies a constant zero-inflation probability across observations.</p>
+<p>This can be an alternate source of overdispersion:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">library</span>(glmmTMB)</span>
 <span id="cb23-2"><a href="#cb23-2"></a>cuckoo_zip <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Beg <span class="sc">~</span> Mass<span class="sc">+</span>Species<span class="sc">+</span>Mass<span class="sc">:</span>Species, </span>
@@ -1391,7 +1421,10 @@ Solution
 <p>If overdispersion persists even with ZIP, it may reflect unmodeled heterogeneity rather than purely excess zeros and we can try a <em>zero-inflated negative binomial model</em></p>
 <div class="task">
 <div class="task-header">
-<p>Make and compare a zero-inflated negative binomial</p>
+<ul>
+<li><p>Make and compare a zero-inflated negative binomial</p></li>
+<li><p>Swap family = <code>poisson</code> for <code>nbinom</code></p></li>
+</ul>
 </div>
 <div class="task-container">
 <div class="cell" data-layout-align="center">
@@ -1514,9 +1547,17 @@ Solution
 </div>
 </div>
 </div>
+</section></section><section id="summary" class="level2" data-number="23.6"><h2 data-number="23.6" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">23.6</span> Summary</h2>
+<ul>
+<li><p>Begin by fitting a Poisson GLM to model count data (e.g., begging calls) using a log link, then inspect diagnostic plots to assess residuals, variance homogeneity, and dispersion.</p></li>
+<li><p>If the model shows overdispersion (variance &gt; mean), refit using a quasipoisson or negative binomial model to account for excess variability.</p></li>
+<li><p>Examine model adequacy with <code>check_model()</code> and test for zero inflation; if extra zeros exist, fit zero-inflated Poisson or zero-inflated negative binomial models with <code>glmmTMB</code>.</p></li>
+<li><p>Compare model fits using AIC and, if needed, include predictors in the zero-inflation component to capture structured patterns in zero counts.</p></li>
+</ul>
 
 
-</section></section></main><!-- /main --><script>
+</section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
