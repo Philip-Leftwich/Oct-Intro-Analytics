@@ -712,18 +712,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_main, <span class="at">con.fint =</span> T)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_main, <span class="at">conf.int =</span> T)</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co">#confint(m_main)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 16%">
+</colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">term</th>
 <th style="text-align: right;">estimate</th>
 <th style="text-align: right;">std.error</th>
 <th style="text-align: right;">statistic</th>
 <th style="text-align: right;">p.value</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -732,6 +743,8 @@ Solution
 <td style="text-align: right;">9.185739</td>
 <td style="text-align: right;">43.849811</td>
 <td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">384.5618</td>
+<td style="text-align: right;">421.0240814</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatmentB</td>
@@ -739,6 +752,8 @@ Solution
 <td style="text-align: right;">10.606778</td>
 <td style="text-align: right;">-2.057098</td>
 <td style="text-align: right;">0.0423608</td>
+<td style="text-align: right;">-42.8707</td>
+<td style="text-align: right;">-0.7676627</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">sexMale</td>
@@ -746,6 +761,8 @@ Solution
 <td style="text-align: right;">10.606778</td>
 <td style="text-align: right;">-19.127629</td>
 <td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">-223.9340</td>
+<td style="text-align: right;">-181.8309976</td>
 </tr>
 </tbody>
 </table>
@@ -879,16 +896,29 @@ Solution
 90% CI
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_main, <span class="at">con.fint =</span> T, <span class="at">level =</span> .<span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_main, </span>
+<span id="cb5-2"><a href="#cb5-2"></a>            <span class="at">conf.int =</span> T, </span>
+<span id="cb5-3"><a href="#cb5-3"></a>            <span class="at">conf.level =</span> <span class="fl">0.9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">term</th>
 <th style="text-align: right;">estimate</th>
 <th style="text-align: right;">std.error</th>
 <th style="text-align: right;">statistic</th>
 <th style="text-align: right;">p.value</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -897,6 +927,8 @@ Solution
 <td style="text-align: right;">9.185739</td>
 <td style="text-align: right;">43.849811</td>
 <td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">387.53804</td>
+<td style="text-align: right;">418.04782</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatmentB</td>
@@ -904,6 +936,8 @@ Solution
 <td style="text-align: right;">10.606778</td>
 <td style="text-align: right;">-2.057098</td>
 <td style="text-align: right;">0.0423608</td>
+<td style="text-align: right;">-39.43401</td>
+<td style="text-align: right;">-4.20435</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">sexMale</td>
@@ -911,6 +945,8 @@ Solution
 <td style="text-align: right;">10.606778</td>
 <td style="text-align: right;">-19.127629</td>
 <td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">-220.49735</td>
+<td style="text-align: right;">-185.26768</td>
 </tr>
 </tbody>
 </table>
