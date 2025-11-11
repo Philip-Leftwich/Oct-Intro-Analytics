@@ -56,6 +56,12 @@ downloadthis::download_link(
 )
 ```
 
+```{r, eval = FALSE}
+
+dros_clean <- read_csv(here::here("data","clean", "fruitfly.csv"))
+
+```
+
 
 :::{.callout-note}
 ## Factors
@@ -83,6 +89,8 @@ dros_clean |> mutate(type = factor(type,
 ### Hypotheses
 
 - Flies paired with non-virgin females do not live as long, they expend more energy trying to mate with previously mated females.
+
+We can test that hypothesis with our data by expressing a linear model analysis as follows: `dependent variable ~ predictor`
 
 ```
 
@@ -191,18 +199,18 @@ broom::tidy(flyls1)
 
 ## Interpreting a model
 
-### Call : What model was fitted
+- **Call**: What model was fitted
       
       - `lm(formula = longevity ~ type, data = dros_clean)`
       
-###  Residuals: How well the model fits
+- **Residuals**: How well the model fits
 
 ```
    Min     1Q Median     3Q    Max 
 -31.74 -13.74   0.26  11.44  33.26 
 ```
 
-### Coefficients: 
+- **Coefficients**: 
 
 ```
                 Estimate Std. Error t value Pr(>|t|)    
@@ -217,7 +225,7 @@ typeVirgin       -15.820      3.867  -4.091 7.75e-05 ***
 | **typeInseminated** | Difference from baseline: ≈ **+0.5 days** (ns, *p* = 0.893)                                             |
 | **typeVirgin**      | Difference from baseline: ≈ **−15.8 days** (**p** < 0.001) → Virgins live ~16 days shorter              |
 
-###  Model fit
+- **Model fit**
 
 ```
 Residual SE: 15.79 on 122 DF
@@ -300,6 +308,8 @@ Unlike a test of difference - when we include a *continuous predictor* it change
 
 `r unhide()`
 
+::::
+:::
 
 
 ## Analysis of Covariance

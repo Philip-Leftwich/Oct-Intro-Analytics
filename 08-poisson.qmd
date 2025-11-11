@@ -462,8 +462,7 @@ If there is **residual deviance that is bigger than the residual degrees of free
 Overdispersion in Poisson models can be diagnosed by:
 
 $$
-\hat{\phi} = \frac{\text{Residual Deviance}}{\text{Residual Degrees of Freedom}}
-
+\hat\phi = \frac{\text{Residual Deviance}}{\text{Residual Degrees of Freedom}}
 $$
 
 Overdispersion statistic values **> 1 = Overdispersed**
@@ -621,6 +620,16 @@ AIC(cuckoo_zip, cuckoo_negbin, cuckoo_zinb)
 Suppose inspection of residuals or exploratory plots suggests that zeros occur more often in some species or at particular mass ranges.
 
 So far a zinb model has produced the best model fit and AIC values. But we have assumed a constant and equal probability of generating zeroes throughout our data. 
+
+`r hide("AIC")`
+
+- **What it is**: A statistical method for model selection that estimates the prediction error and relative quality of different statistical models for a given dataset. 
+
+- **How it works**: It provides a single numerical score that estimates the amount of information lost by a model. It balances the goodness of fit (how well the model fits the data) with the model's complexity (number of parameters). 
+
+- **How to use it**: When comparing multiple models **on the same data and with the same dependent variable**, the one with the lowest AIC score is preferred because it is considered the best relative fit for the data
+
+`r unhide()`
 
 What if zeroes are related to our predictors?
 

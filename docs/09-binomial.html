@@ -614,6 +614,9 @@ window.Quarto = {
 <li><a href="#making-predictions" id="toc-making-predictions" class="nav-link" data-scroll-target="#making-predictions"><span class="header-section-number">22.4.1</span> Making predictions</a></li>
   </ul>
 </li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">22.5</span> Assumptions</a></li>
+  <li><a href="#write-ups" id="toc-write-ups" class="nav-link" data-scroll-target="#write-ups"><span class="header-section-number">22.6</span> Write-ups</a></li>
+  <li><a href="#binomial-vs-linear-model" id="toc-binomial-vs-linear-model" class="nav-link" data-scroll-target="#binomial-vs-linear-model"><span class="header-section-number">22.7</span> Binomial vs Linear Model</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -998,13 +1001,11 @@ Y \sim Bern(p)
 <span class="header-section-number">22.4.1</span> Making predictions</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Augment</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Emmeans</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false" href="">Assumptions</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-4" role="tab" aria-controls="tabset-4-4" aria-selected="false" href="">Write-ups</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Augment</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Emmeans</a></li>
 </ul>
 <div class="tab-content">
-<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>binomial_model <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2"></a>   broom<span class="sc">::</span><span class="fu">augment</span>(<span class="at">data =</span> beetles, </span>
@@ -1149,7 +1150,7 @@ Y \sim Bern(p)
 </div>
 </div>
 </div>
-<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(binomial_model, </span>
 <span id="cb12-2"><a href="#cb12-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> dose, </span>
@@ -1191,6 +1192,9 @@ Confidence level used: 0.95
 Intervals are back-transformed from the logit scale </code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 <div class="task">
 <div class="task-header">
 <p>Make a ggplot of the change in probability</p>
@@ -1208,11 +1212,11 @@ Solution
 </button>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Broom</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Emmeans</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Broom</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Emmeans</a></li>
 </ul>
 <div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>binomial_model <span class="sc">|&gt;</span> </span>
 <span id="cb14-2"><a href="#cb14-2"></a>   broom<span class="sc">::</span><span class="fu">augment</span>(<span class="at">data =</span> beetles, </span>
@@ -1230,7 +1234,7 @@ Solution
 </div>
 </div>
 </div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(binomial_model, </span>
 <span id="cb15-2"><a href="#cb15-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> dose, </span>
@@ -1280,8 +1284,8 @@ Intervals are back-transformed from the logit scale </code></pre>
 </div>
 </div>
 </div>
-</div>
-<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+</section></section><section id="assumptions" class="level2" data-number="22.5"><h2 data-number="22.5" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">22.5</span> Assumptions</h2>
 <p>The <code>performance</code> package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood fit). In this case there is likely not enough data for robust checks - we could consider a quasi-likelihood model in order to have more conservative confidence intervals.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(binomial_model,</span>
@@ -1320,8 +1324,8 @@ Intervals are back-transformed from the logit scale </code></pre>
 </ul>
 </div>
 </div>
-</div>
-<div id="tabset-4-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-4-tab">
+</section><section id="write-ups" class="level2" data-number="22.6"><h2 data-number="22.6" class="anchored" data-anchor-id="write-ups">
+<span class="header-section-number">22.6</span> Write-ups</h2>
 <div class="task">
 <div class="task-header">
 <p>Write up the results</p>
@@ -1330,8 +1334,6 @@ Intervals are back-transformed from the logit scale </code></pre>
 <ul>
 <li>How would you write up for findings from this analysis?</li>
 </ul>
-</div>
-</div>
 <div class="webex-solution">
 <button>
 Report
@@ -1360,10 +1362,14 @@ computed using a Wald z-distribution approximation.</code></pre>
 </div>
 </div>
 </div>
+</div>
+</div>
+</section><section id="binomial-vs-linear-model" class="level2" data-number="22.7"><h2 data-number="22.7" class="anchored" data-anchor-id="binomial-vs-linear-model">
+<span class="header-section-number">22.7</span> Binomial vs Linear Model</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-collapse="true">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Comparison to linear model</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Comparison of R-squared</a></li></ul>
 <div class="tab-content" data-collapse="true">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <p>A comparison of linear vs binomial model shows better explanatory power (R-squared) for our correctly fitted model:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(binomial_model)</span>
@@ -1374,8 +1380,8 @@ computed using a Wald z-distribution approximation.</code></pre>
 [1] 0.9435801</code></pre>
 </div>
 </div>
-<section id="power-comparisons" class="level3" data-number="22.4.2"><h3 data-number="22.4.2" class="anchored" data-anchor-id="power-comparisons">
-<span class="header-section-number">22.4.2</span> Power comparisons</h3>
+<section id="power-comparisons" class="level3" data-number="22.7.1"><h3 data-number="22.7.1" class="anchored" data-anchor-id="power-comparisons">
+<span class="header-section-number">22.7.1</span> Power comparisons</h3>
 <p>Unless the number of trials is identical in every row of data - then binomial models will always have greater power than the equivalent t-tests:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1391,10 +1397,7 @@ computed using a Wald z-distribution approximation.</code></pre>
 </div>
 
 
-</div>
-</div>
-</div>
-</section></section></main><!-- /main --><script>
+</section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {

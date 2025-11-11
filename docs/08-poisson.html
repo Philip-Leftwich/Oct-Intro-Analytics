@@ -1235,8 +1235,9 @@ Intervals are back-transformed from the log scale </code></pre>
 <p>Count data often violate the strict Poisson assumption of equal mean and variance. The negative binomial model allows extra variability (“overdispersion”) via an additional dispersion parameter.</p>
 <p>If there is <strong>residual deviance that is bigger than the residual degrees of freedom</strong> then there is <em>more</em> variance than we expect from the prediction of the mean by our model.</p>
 <p>Overdispersion in Poisson models can be diagnosed by:</p>
-<p>$$ = </p>
-<p>$$</p>
+<p><span class="math display">\[
+\hat\phi = \frac{\text{Residual Deviance}}{\text{Residual Degrees of Freedom}}
+\]</span></p>
 <p>Overdispersion statistic values <strong>&gt; 1 = Overdispersed</strong></p>
 <p>Overdispersion is a result of larger than expected variance for that mean under a Poisson distribution, this is clearly an issue with our model!</p>
 <table class="caption-top table">
@@ -1471,6 +1472,16 @@ Solution
 <span class="header-section-number">23.5.2</span> Modelling a pattern in the zeroes</h3>
 <p>Suppose inspection of residuals or exploratory plots suggests that zeros occur more often in some species or at particular mass ranges.</p>
 <p>So far a zinb model has produced the best model fit and AIC values. But we have assumed a constant and equal probability of generating zeroes throughout our data.</p>
+<div class="webex-solution">
+<button>
+AIC
+</button>
+<ul>
+<li><p><strong>What it is</strong>: A statistical method for model selection that estimates the prediction error and relative quality of different statistical models for a given dataset.</p></li>
+<li><p><strong>How it works</strong>: It provides a single numerical score that estimates the amount of information lost by a model. It balances the goodness of fit (how well the model fits the data) with the model’s complexity (number of parameters).</p></li>
+<li><p><strong>How to use it</strong>: When comparing multiple models <strong>on the same data and with the same dependent variable</strong>, the one with the lowest AIC score is preferred because it is considered the best relative fit for the data</p></li>
+</ul>
+</div>
 <p>What if zeroes are related to our predictors?</p>
 <div class="task">
 <div class="task-header">
